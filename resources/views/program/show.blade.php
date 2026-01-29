@@ -1,431 +1,318 @@
 @extends('layouts.app')
 
-@section('title', $program->title . ' - Program HASMI')
+@section('title', $program->title . ' - HASMI')
 
 @section('content')
 
-{{-- Breadcrumb --}}
-<section class="bg-light py-3">
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('program.index') }}">Program</a></li>
-                <li class="breadcrumb-item">
-                    <a href="{{ route('program.category', $program->category->slug) }}">
-                        {{ $program->category->name }}
-                    </a>
-                </li>
-                @if($program->subcategory)
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('program.subcategory', [$program->category->slug, $program->subcategory->slug]) }}">
-                            {{ $program->subcategory->name }}
-                        </a>
-                    </li>
-                @endif
-                <li class="breadcrumb-item active">{{ $program->title }}</li>
-            </ol>
+<style>
+    .prose {
+        color: #374151;
+        line-height: 1.75;
+    }
+    .prose h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: #1f2937;
+    }
+    .prose p {
+        margin-bottom: 1.25rem;
+    }
+    .prose ul {
+        list-style-type: disc;
+        margin-left: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+    .prose img {
+        border-radius: 0.5rem;
+        margin: 1.5rem 0;
+    }
+</style>
+
+<div class="container mx-auto px-6 py-12">
+    <!-- Breadcrumb -->
+    <div class="mb-8">
+        <nav class="flex items-center gap-2 text-sm text-gray-600">
+            <a href="{{ route('program.index') }}" class="hover:text-blue-600">Program</a>
+            <i class="fas fa-chevron-right text-xs"></i>
+            <a href="{{ route('program.category', $program->category->slug) }}" class="hover:text-blue-600">
+                {{ $program->category->name }}
+            </a>
+            @if($program->subcategory)
+            <i class="fas fa-chevron-right text-xs"></i>
+            <a href="{{ route('program.subcategory', [$program->category->slug, $program->subcategory->slug]) }}" class="hover:text-blue-600">
+                {{ $program->subcategory->name }}
+            </a>
+            @endif
+            <i class="fas fa-chevron-right text-xs"></i>
+            <span class="text-gray-800 font-semibold">{{ Str::limit($program->title, 30) }}</span>
         </nav>
     </div>
-</section>
 
-{{-- Hero Section --}}
-<section class="py-5 bg-gradient-to-br from-blue-50 to-white">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-{{ $program->thumbnail && $program->media_position === 'top' ? '12' : '7' }}">
-                
-                {{-- Title --}}
-                <h1 class="display-4 fw-bold mb-3">{{ $program->title }}</h1>
-
-                {{-- Badges --}}
-                <div class="mb-3">
-                    <span class="badge bg-primary me-2 px-3 py-2">
-                        <i class="fas fa-folder me-1"></i>
+    <!-- Content -->
+    <div class="max-w-4xl mx-auto">
+        <article class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="p-8 md:p-12">
+                <!-- Badges -->
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <a href="{{ route('program.category', $program->category->slug) }}" 
+                       class="inline-block bg-blue-100 text-blue-600 px-4 py-1 rounded-full text-sm font-semibold hover:bg-blue-200 transition-colors">
                         {{ $program->category->name }}
-                    </span>
-
+                    </a>
+                    
                     @if($program->subcategory)
-                        <span class="badge bg-purple me-2 px-3 py-2">
-                            <i class="fas fa-folder-open me-1"></i>
-                            {{ $program->subcategory->name }}
-                        </span>
-                    @endif
-
-                    @if($program->isVideo())
-                        <span class="badge bg-danger px-3 py-2">
-                            <i class="fas fa-video me-1"></i> Video
-                        </span>
-                    @else
-                        <span class="badge bg-success px-3 py-2">
-                            <i class="fas fa-image me-1"></i> Galeri Foto
-                        </span>
+                    <a href="{{ route('program.subcategory', [$program->category->slug, $program->subcategory->slug]) }}" 
+                       class="inline-block bg-green-100 text-green-600 px-4 py-1 rounded-full text-sm font-semibold hover:bg-green-200 transition-colors">
+                        {{ $program->subcategory->name }}
+                    </a>
                     @endif
                 </div>
 
-                {{-- Description --}}
-                <p class="lead text-muted mb-4">{{ $program->description }}</p>
+                <!-- Title -->
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+                    {{ $program->title }}
+                </h1>
+
+                <!-- Media (Image/Video) -->
+                <div class="mb-8 rounded-xl overflow-hidden shadow-md">
+                    @if($program->media_type == 'video' && $program->video_url)
+                        <div class="aspect-w-16 aspect-h-9">
+                            @if(Str::contains($program->video_url, 'youtube.com') || Str::contains($program->video_url, 'youtu.be'))
+                                <iframe src="{{ str_replace('watch?v=', 'embed/', $program->video_url) }}" 
+                                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen class="w-full h-96"></iframe>
+                            @else
+                                <video controls class="w-full">
+                                    <source src="{{ asset('storage/' . $program->video_url) }}" type="video/mp4">
+                                    Browser anda tidak mendukung tag video.
+                                </video>
+                            @endif
+                        </div>
+                    @elseif($program->thumbnail)
+                        <img src="{{ asset('storage/' . $program->thumbnail) }}" 
+                             alt="{{ $program->title }}" 
+                             class="w-full h-auto object-cover">
+                    @endif
+                </div>
+
+                <!-- Description/Excerpt -->
+                <div class="mb-8 pb-8 border-b border-gray-200">
+                    <p class="text-lg text-gray-600 leading-relaxed italic">{{ $program->description }}</p>
+                </div>
+
+                <!-- Full Content -->
+                <div class="prose prose-lg max-w-none mb-8 whitespace-pre-wrap">{!! nl2br(e($program->content)) !!}</div>
+
+                <!-- Photo Gallery (if exists) -->
+                @if($program->photos && count($program->photos) > 0)
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Galeri Foto</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        @foreach($program->photos as $photo)
+                        <div class="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <img src="{{ asset('storage/' . $photo) }}" alt="Gallery" class="w-full h-40 object-cover cursor-pointer" onclick="window.open(this.src, '_blank')">
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+                
+                <!-- Share Buttons -->
+                <div class="pt-8 mt-8 border-t border-gray-200">
+                    <div class="flex items-center justify-between flex-wrap gap-4">
+                        <div>
+                            <p class="text-sm text-gray-600 mb-2">Bagikan program ini:</p>
+                            <div class="flex gap-3">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" 
+                                   target="_blank" class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($program->title) }}" 
+                                   target="_blank" class="w-10 h-10 bg-blue-400 text-white rounded-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://api.whatsapp.com/send?text={{ urlencode($program->title . ' - ' . url()->current()) }}" 
+                                   target="_blank" class="w-10 h-10 bg-green-600 text-white rounded-lg flex items-center justify-center hover:bg-green-700 transition-colors">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <a href="{{ route('program.category', $program->category->slug) }}" 
+                           class="text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-2">
+                            <i class="fas fa-arrow-left"></i> Program Lainnya
+                        </a>
+                    </div>
+                </div>
             </div>
+        </article>
 
-            {{-- Thumbnail (if position is left or right) --}}
-            @if($program->thumbnail && in_array($program->media_position, ['left', 'right']))
-                <div class="col-lg-5 mt-4 mt-lg-0 {{ $program->media_position === 'left' ? 'order-first' : '' }}">
-                    <img src="{{ $program->getThumbnailUrl() }}"
-                         class="img-fluid rounded-3 shadow-lg"
-                         alt="{{ $program->title }}"
-                         style="object-fit: cover; max-height: 400px; width: 100%;">
-                </div>
-            @endif
+        <!-- Related Programs -->
+        @if(isset($relatedPrograms) && $relatedPrograms->count() > 0)
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Program Terkait</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                @foreach($relatedPrograms as $related)
+                <a href="{{ route('program.show', $related->slug) }}" 
+                   class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover block">
+                    <div class="h-40 relative overflow-hidden">
+                        @if($related->thumbnail)
+                            <img src="{{ asset('storage/' . $related->thumbnail) }}" 
+                                 alt="{{ $related->title }}" 
+                                 class="w-full h-full object-cover">
+                        @else
+                            <div class="w-full h-full hero-gradient flex items-center justify-center">
+                                <i class="fas fa-hand-holding-heart text-white text-3xl"></i>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-800 line-clamp-2 mb-2">{{ $related->title }}</h3>
+                        <p class="text-sm text-gray-500 line-clamp-2">{{ $related->description }}</p>
+                    </div>
+                </a>
+                @endforeach
+            </div>
         </div>
-
-        {{-- Thumbnail (if position is top) --}}
-        @if($program->thumbnail && $program->media_position === 'top')
-            <div class="row mt-4">
-                <div class="col-12">
-                    <img src="{{ $program->getThumbnailUrl() }}"
-                         class="img-fluid rounded-3 shadow-lg w-100"
-                         alt="{{ $program->title }}"
-                         style="object-fit: cover; max-height: 500px;">
-                </div>
-            </div>
         @endif
-    </div>
-</section>
 
-{{-- Content Section --}}
-@if($program->content)
-<section class="py-5 bg-white">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body p-4 p-lg-5">
-                        <h3 class="h4 fw-bold mb-4">
-                            <i class="fas fa-info-circle text-primary me-2"></i>
-                            Tentang Program
-                        </h3>
-                        <div class="content-text" style="line-height: 1.8; font-size: 1.05rem;">
-                            {!! nl2br(e($program->content)) !!}
+        <!-- KOMENTAR SECTION -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                <i class="far fa-comments text-blue-600 mr-2"></i>
+                Komentar ({{ $program->comments->count() }})
+            </h2>
+
+            <!-- List Komentar -->
+            <div class="space-y-6 mb-8">
+                @forelse($program->comments as $comment)
+                <div class="bg-white rounded-2xl shadow-lg p-6 flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 hero-gradient rounded-full flex items-center justify-center text-white font-bold text-lg">
+                            {{ $comment->initials }}
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-@endif
 
-{{-- Video Section --}}
-@if($program->isVideo() && $program->video_url)
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="text-center mb-4">
-                    <h3 class="h4 fw-bold">
-                        <i class="fas fa-video text-danger me-2"></i>
-                        Video Program
-                    </h3>
-                </div>
-                
-                <div class="ratio ratio-16x9 rounded-3 overflow-hidden shadow-lg">
-                    @if(filter_var($program->video_url, FILTER_VALIDATE_URL))
-                        {{-- External video URL (YouTube, Vimeo, etc) --}}
-                        <iframe src="{{ $program->video_url }}" 
-                                allowfullscreen
-                                frameborder="0"></iframe>
-                    @else
-                        {{-- Video file uploaded --}}
-                        <video controls class="w-100">
-                            <source src="{{ Storage::url($program->video_url) }}" type="video/mp4">
-                            Browser Anda tidak mendukung video.
-                        </video>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-@endif
-
-{{-- Photo Gallery --}}
-@if($program->isImage() && $program->hasPhotos())
-<section class="py-5 {{ $program->video_url ? 'bg-white' : 'bg-light' }}">
-    <div class="container">
-        <div class="text-center mb-4">
-            <h3 class="h4 fw-bold">
-                <i class="fas fa-images text-primary me-2"></i>
-                Galeri Foto
-            </h3>
-        </div>
-
-        <div class="row g-3">
-            @foreach($program->getPhotosUrls() as $photo)
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="position-relative overflow-hidden rounded-3 shadow-sm hover-zoom-container">
-                        <img src="{{ $photo }}"
-                             class="img-fluid hover-zoom-img"
-                             alt="Foto {{ $program->title }}"
-                             style="height: 200px; width: 100%; object-fit: cover; cursor: pointer;"
-                             onclick="openPhotoModal('{{ $photo }}')">
-                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-0 hover-overlay transition-all"></div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-bold text-gray-800">{{ $comment->name }}</h4>
+                            <span class="text-xs text-gray-500">
+                                <i class="far fa-clock mr-1"></i>
+                                {{ $comment->created_at->locale('id')->diffForHumans() }}
+                            </span>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed whitespace-pre-wrap">{{ $comment->comment }}</p>
                     </div>
                 </div>
-            @endforeach
-        </div>
-    </div>
-</section>
+                @empty
+                <div class="text-center py-12 bg-gray-50 rounded-2xl">
+                    <i class="far fa-comment-dots text-gray-300 text-5xl mb-4"></i>
+                    <p class="text-gray-500">Belum ada komentar. Jadilah yang pertama!</p>
+                </div>
+                @endforelse
+            </div>
 
-{{-- Photo Modal (Simple Lightbox) --}}
-<div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content bg-transparent border-0">
-            <div class="modal-body p-0 position-relative">
-                <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" 
-                        data-bs-dismiss="modal" aria-label="Close" style="z-index: 10;"></button>
-                <img id="modalPhoto" src="" class="img-fluid rounded-3" alt="Foto">
+            <!-- Form Komentar -->
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Tulis Komentar</h3>
+                
+                @if(session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6 flex items-center gap-2">
+                    <i class="fas fa-check-circle"></i>
+                    <span>{{ session('success') }}</span>
+                </div>
+                @endif
+
+                <form action="{{ route('comment.store') }}" method="POST" class="space-y-4">
+                    @csrf
+                    
+                    <input type="hidden" name="commentable_type" value="App\Models\Program">
+                    <input type="hidden" name="commentable_id" value="{{ $program->id }}">
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Nama <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="name" name="name" value="{{ old('name') }}" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('name') border-red-500 @enderror"
+                                   placeholder="Nama Anda">
+                            @error('name')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Email <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('email') border-red-500 @enderror"
+                                   placeholder="email@example.com">
+                            @error('email')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="comment" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Komentar <span class="text-red-500">*</span>
+                        </label>
+                        <textarea id="comment" name="comment" rows="4" required maxlength="1000"
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('comment') border-red-500 @enderror"
+                                  placeholder="Tulis komentar Anda...">{{ old('comment') }}</textarea>
+                        @error('comment')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                        <p class="text-gray-500 text-xs mt-1">Maksimal 1000 karakter</p>
+                    </div>
+
+                    <button type="submit" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all flex items-center gap-2">
+                        <i class="fas fa-paper-plane"></i> Kirim Komentar
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </div>
-@endif
 
-{{-- Thumbnail at Bottom (if position is bottom) --}}
-@if($program->thumbnail && $program->media_position === 'bottom')
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <img src="{{ $program->getThumbnailUrl() }}"
-                     class="img-fluid rounded-3 shadow-lg w-100"
-                     alt="{{ $program->title }}"
-                     style="object-fit: cover; max-height: 500px;">
-            </div>
-        </div>
-    </div>
-</section>
-@endif
-
-{{-- Comment Section --}}
-<section class="py-5 bg-white">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                
-                {{-- Comment Header --}}
-                <div class="mb-4">
-                    <h3 class="h4 fw-bold mb-2">
-                        <i class="fas fa-comments text-primary me-2"></i>
-                        Komentar ({{ $program->comments->where('is_approved', true)->count() }})
-                    </h3>
-                    <p class="text-muted">Bagikan pendapat Anda tentang program ini</p>
-                </div>
-
-                {{-- Comment Form --}}
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold mb-3">Tulis Komentar</h5>
-                        
-                        <form action="{{ route('comment.store') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="commentable_type" value="App\Models\Program">
-                            <input type="hidden" name="commentable_id" value="{{ $program->id }}">
-
-                            <div class="mb-3">
-                                <label for="name" class="form-label fw-semibold">Nama <span class="text-danger">*</span></label>
-                                <input type="text" 
-                                       class="form-control @error('name') is-invalid @enderror" 
-                                       id="name" 
-                                       name="name" 
-                                       value="{{ old('name', Auth::check() ? Auth::user()->name : '') }}"
-                                       placeholder="Masukkan nama Anda" 
-                                       required>
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="email" class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
-                                <input type="email" 
-                                       class="form-control @error('email') is-invalid @enderror" 
-                                       id="email" 
-                                       name="email" 
-                                       value="{{ old('email', Auth::check() ? Auth::user()->email : '') }}"
-                                       placeholder="email@example.com" 
-                                       required>
-                                @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                <small class="text-muted">Email tidak akan dipublikasikan</small>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="comment" class="form-label fw-semibold">Komentar <span class="text-danger">*</span></label>
-                                <textarea class="form-control @error('comment') is-invalid @enderror" 
-                                          id="comment" 
-                                          name="comment" 
-                                          rows="4" 
-                                          placeholder="Tulis komentar Anda di sini..." 
-                                          required>{{ old('comment') }}</textarea>
-                                @error('comment')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-paper-plane me-2"></i>
-                                Kirim Komentar
-                            </button>
-                        </form>
-                    </div>
-                </div>
-
-                {{-- Success Message --}}
-                @if(session('comment_success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="fas fa-check-circle me-2"></i>
-                        {{ session('comment_success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-
-                {{-- Comments List --}}
-                <div class="comments-list">
-                    @forelse($program->comments->where('is_approved', true)->sortByDesc('created_at') as $comment)
-                        <div class="card border-0 shadow-sm mb-3">
-                            <div class="card-body p-4">
-                                <div class="d-flex align-items-start">
-                                    <div class="flex-shrink-0">
-                                        <div class="d-flex align-items-center justify-content-center rounded-circle bg-primary text-white"
-                                             style="width: 50px; height: 50px;">
-                                            <i class="fas fa-user fa-lg"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h6 class="fw-bold mb-1">{{ $comment->name }}</h6>
-                                        <p class="text-muted small mb-2">
-                                            <i class="fas fa-clock me-1"></i>
-                                            {{ $comment->created_at->diffForHumans() }}
-                                        </p>
-                                        <p class="mb-0">{{ $comment->comment }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @empty
-                        <div class="text-center py-5">
-                            <i class="fas fa-comments fa-3x text-muted mb-3"></i>
-                            <p class="text-muted">Belum ada komentar. Jadilah yang pertama berkomentar!</p>
-                        </div>
-                    @endforelse
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-{{-- Related Programs Section --}}
-@if(isset($relatedPrograms) && $relatedPrograms->count() > 0)
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h3 class="h4 fw-bold">Program Terkait</h3>
-            <p class="text-muted">Program lainnya yang mungkin Anda minati</p>
-        </div>
-
-        <div class="row g-4">
-            @foreach($relatedPrograms as $related)
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-sm hover-lift">
-                        
-                        @if($related->thumbnail)
-                            <img src="{{ $related->getThumbnailUrl() }}"
-                                 class="card-img-top"
-                                 alt="{{ $related->title }}"
-                                 style="height: 180px; object-fit: cover;">
-                        @endif
-
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">{{ $related->title }}</h5>
-                            <p class="card-text text-muted">
-                                {{ Str::limit($related->description, 100) }}
-                            </p>
-
-                            <a href="{{ route('program.show', $related->slug) }}"
-                               class="btn btn-outline-primary">
-                                Lihat Detail <i class="fas fa-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
-
-<style>
-/* Hover Effects */
-.hover-lift {
-    transition: all 0.3s ease;
-}
-
-.hover-lift:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15) !important;
-}
-
-.hover-zoom-container {
-    transition: all 0.3s ease;
-}
-
-.hover-zoom-container:hover .hover-zoom-img {
-    transform: scale(1.1);
-}
-
-.hover-zoom-img {
-    transition: transform 0.5s ease;
-}
-
-.hover-zoom-container:hover .hover-overlay {
-    background-color: rgba(0,0,0,0.3) !important;
-}
-
-.hover-overlay {
-    transition: background-color 0.3s ease;
-}
-
-/* Custom Badge Color */
-.bg-purple {
-    background-color: #9333ea !important;
-}
-
-/* Gradient Background */
-.bg-gradient-to-br {
-    background: linear-gradient(to bottom right, #eff6ff, #ffffff);
-}
-
-/* Comment Styles */
-.comments-list .card {
-    transition: all 0.2s ease;
-}
-
-.comments-list .card:hover {
-    transform: translateX(5px);
-}
-</style>
-
-@endsection
-
-@if($program->hasPhotos())
-@push('scripts')
 <script>
-function openPhotoModal(photoUrl) {
-    document.getElementById('modalPhoto').src = photoUrl;
-    var photoModal = new bootstrap.Modal(document.getElementById('photoModal'));
-    photoModal.show();
+function copyToClipboard(text) {
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+            showToast('Link berhasil disalin!');
+        }).catch(function(err) {
+            showToast('Gagal menyalin link', 'error');
+        });
+    } else {
+        const tempInput = document.createElement('input');
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        showToast('Link berhasil disalin!');
+    }
+}
+
+function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `fixed bottom-8 right-8 px-6 py-3 rounded-lg shadow-lg text-white transform transition-all duration-300 z-50 ${type === 'success' ? 'bg-green-600' : 'bg-red-600'}`;
+    toast.innerHTML = `
+        <div class="flex items-center gap-2">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
 }
 </script>
-@endpush
-@endif
+
+@endsection

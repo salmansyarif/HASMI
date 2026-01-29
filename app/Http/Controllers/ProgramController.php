@@ -11,13 +11,27 @@ class ProgramController extends Controller
     /**
      * Halaman index semua programs
      */
+    /**
+     * Halaman index semua programs
+     */
     public function index()
     {
-        $categories = ProgramCategory::with('subcategories')
+        // Ambil semua program yang kategorinya is_creatable = true
+        $programs = Program::whereHas('category', function($q) {
+                                $q->where('is_creatable', true);
+                            })
+                            ->where('is_active', true)
+                            ->with(['category', 'subcategory'])
+                            ->orderBy('position')
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(9);
+
+        // Ambil list kategori untuk filter buttons
+        $categories = ProgramCategory::where('is_creatable', true)
                                     ->orderBy('sort_order')
                                     ->get();
 
-        return view('program.index', compact('categories'));
+        return view('program.index', compact('programs', 'categories'));
     }
 
     /**
@@ -32,19 +46,18 @@ class ProgramController extends Controller
             return redirect()->away($category->getRedirectUrl());
         }
 
-        // Jika punya subcategories, tampilkan list subcategories
-        if ($category->has_subcategories) {
-            $subcategories = $category->subcategories;
-            return view('program.category-with-subs', compact('category', 'subcategories'));
-        }
+        // Ambil subcategories
+        $subcategories = $category->subcategories;
 
-        // Jika tidak punya subcategories, langsung tampilkan programs
+        // Ambil programs
         $programs = $category->programs()
                             ->where('is_active', true)
+                            ->with(['subcategory'])
                             ->orderBy('position')
-                            ->paginate(12);
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(9);
 
-        return view('program.category', compact('category', 'programs'));
+        return view('program.category', compact('category', 'subcategories', 'programs'));
     }
 
     /**
@@ -60,7 +73,8 @@ class ProgramController extends Controller
         $programs = $subcategory->programs()
                                ->where('is_active', true)
                                ->orderBy('position')
-                               ->paginate(12);
+                               ->orderBy('created_at', 'desc')
+                               ->paginate(9);
 
         return view('program.subcategory', compact('category', 'subcategory', 'programs'));
     }
@@ -72,7 +86,9 @@ class ProgramController extends Controller
     {
         $program = Program::where('slug', $slug)
                          ->where('is_active', true)
-                         ->with(['category', 'subcategory'])
+                         ->with(['category', 'subcategory', 'comments' => function($query) {
+                            $query->where('status', 'approved')->latest();
+                         }])
                          ->firstOrFail();
 
         // Get related programs (same category or subcategory)

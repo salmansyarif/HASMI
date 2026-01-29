@@ -58,6 +58,14 @@ class Program extends Model
         return $this->hasMany(Program::class, 'program_category_id', 'program_category_id');
     }
 
+    /**
+     * Program has many Comments (Polymorphic)
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
     // ================= QUERY SCOPES =================
 
     /**

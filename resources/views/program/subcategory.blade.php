@@ -1,29 +1,42 @@
 @extends('layouts.app')
 
-@section('title', 'Semua Program - HASMI')
+@section('title', $subcategory->name . ' - ' . $category->name . ' - HASMI')
 
 @section('content')
 
 <div class="container mx-auto px-6 py-12">
-    <!-- Header -->
-    <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">Program Unggulan</h1>
-        <p class="text-gray-600 text-lg">Berbagai program kebaikan untuk umat dan dakwah</p>
-        <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-4"></div>
+    <!-- Breadcrumb -->
+    <div class="mb-8">
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="{{ route('program.index') }}" class="text-gray-600 hover:text-blue-600">
+                        <i class="fas fa-hand-holding-heart mr-2"></i> Program
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                        <a href="{{ route('program.category', $category->slug) }}" class="text-gray-600 hover:text-blue-600">
+                            {{ $category->name }}
+                        </a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                        <span class="text-gray-800 font-semibold">{{ $subcategory->name }}</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
     </div>
 
-    <!-- Filter Buttons (Optional, based on categories) -->
-    <div class="flex flex-wrap justify-center gap-4 mb-12">
-        <a href="{{ route('program.index') }}" 
-           class="px-6 py-2 rounded-full bg-blue-600 text-white font-semibold shadow-md">
-            Semua
-        </a>
-        @foreach($categories as $cat)
-        <a href="{{ route('program.category', $cat->slug) }}" 
-           class="px-6 py-2 rounded-full bg-white text-gray-600 hover:bg-gray-100 font-semibold shadow-sm border border-gray-200 transition-colors">
-            {{ $cat->name }}
-        </a>
-        @endforeach
+    <!-- Header -->
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">{{ $subcategory->name }}</h1>
+        <p class="text-gray-600 text-lg">Program {{ $category->name }}</p>
+        <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-4"></div>
     </div>
 
     <!-- Program Grid -->
@@ -42,23 +55,15 @@
                             <i class="fas fa-hand-holding-heart text-white text-5xl"></i>
                         </div>
                     @endif
-                    
-                    <!-- Category Badge -->
-                    <div class="absolute top-4 left-4 flex flex-col gap-2">
-                        <span class="px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full inline-block w-fit">
-                            {{ $program->category->name }}
-                        </span>
-                        
-                        @if($program->subcategory)
-                        <span class="px-3 py-1 bg-green-600 text-white text-xs font-semibold rounded-full inline-block w-fit">
-                            {{ $program->subcategory->name }}
-                        </span>
-                        @endif
-                    </div>
                 </div>
 
                 <!-- Content -->
                 <div class="p-6 flex flex-col flex-grow">
+                    <!-- Meta Info -->
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                        <span><i class="far fa-calendar mr-1"></i> {{ $program->created_at->format('d M Y') }}</span>
+                    </div>
+
                     <!-- Title -->
                     <h3 class="text-xl font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
                         {{ $program->title }}
@@ -87,23 +92,29 @@
 
     @else
         <!-- Empty State -->
-        <div class="text-center py-16">
+        <div class="text-center py-16 bg-white rounded-2xl shadow-lg">
             <i class="fas fa-inbox text-gray-300 text-6xl mb-4"></i>
             <h3 class="text-xl font-semibold text-gray-600 mb-2">Belum Ada Program</h3>
-            <p class="text-gray-500">Program akan segera hadir.</p>
+            <p class="text-gray-500">Kategori ini belum memiliki program aktif.</p>
+            <a href="{{ route('program.category', $category->slug) }}" class="inline-block mt-6 px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i> Kembali ke {{ $category->name }}
+            </a>
         </div>
     @endif
 </div>
 
 <style>
-.card-hover:hover {
-    transform: translateY(-5px);
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
-.card-hover {
-    transition: transform 0.3s ease;
-}
-.hero-gradient {
-    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 </style>
 

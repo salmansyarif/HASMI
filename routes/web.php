@@ -143,11 +143,16 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     | PROGRAMS
     |--------------------------------------------------------------------------
     */
-    Route::resource('programs', AdminProgramController::class);
-    
     // AJAX: Get Subcategories by Category ID
     Route::get('programs/subcategories', [AdminProgramController::class, 'getSubcategories'])
         ->name('programs.subcategories');
+
+    /*
+    |--------------------------------------------------------------------------
+    | PROGRAMS
+    |--------------------------------------------------------------------------
+    */
+    Route::resource('programs', AdminProgramController::class);
     
     // Delete Photo
     Route::post('programs/{program}/photo/delete', [AdminProgramController::class, 'deletePhoto'])
