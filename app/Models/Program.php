@@ -50,6 +50,24 @@ class Program extends Model
         return $this->belongsTo(SubProgramCategory::class, 'program_subcategory_id');
     }
 
+    /**
+     * Program has many children (related programs in same category)
+     */
+    public function children()
+    {
+        return $this->hasMany(Program::class, 'program_category_id', 'program_category_id');
+    }
+
+    // ================= QUERY SCOPES =================
+
+    /**
+     * Get parent programs (programs without a parent, ordered by sort_order)
+     */
+    public function scopeParents($query)
+    {
+        return $query->whereNull('program_subcategory_id');
+    }
+
     // ================= HELPERS =================
 
     /**

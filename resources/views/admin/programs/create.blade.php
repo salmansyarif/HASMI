@@ -32,16 +32,16 @@
             </div>
 
             <!-- SUB KATEGORI PROGRAM (Conditional) -->
-            <div id="subcategory-wrapper" style="display: none;">
+            <div id="subcategory-wrapper" class="hidden">
                 <label for="program_subcategory_id" class="block text-sm font-semibold text-gray-700 mb-2">
-                    <i class="fas fa-folder-open text-blue-600 mr-1"></i> Sub Kategori Program
+                    <i class="fas fa-folder-open text-blue-600 mr-1"></i> Sub Kategori Program <span id="subcategory-required" class="text-red-500"></span>
                 </label>
                 <select id="program_subcategory_id" name="program_subcategory_id"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('program_subcategory_id') border-red-500 @enderror">
                     <option value="">-- Pilih Sub Kategori --</option>
                 </select>
                 <p class="text-gray-500 text-xs mt-1">
-                    <i class="fas fa-info-circle"></i> Pilih sub kategori jika kategori memiliki sub kategori
+                    <i class="fas fa-info-circle"></i> Pilih sub kategori program (mirip seperti filter di Materi)
                 </p>
                 @error('program_subcategory_id')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -213,20 +213,8 @@
                 @enderror
             </div>
 
-            <!-- URUTAN TAMPILAN -->
-            <div>
-                <label for="position" class="block text-sm font-semibold text-gray-700 mb-2">
-                    <i class="fas fa-sort-numeric-down text-blue-600 mr-1"></i> Urutan Tampilan
-                </label>
-                <input type="number" id="position" name="position" value="{{ old('position', 0) }}" min="0"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('position') border-red-500 @enderror">
-                <p class="text-gray-500 text-xs mt-1">
-                    Nomor urutan tampilan (semakin kecil akan ditampilkan lebih dulu). Default: 0
-                </p>
-                @error('position')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+            <!-- URUTAN TAMPILAN - REMOVED, AUTO GENERATE -->
+            <!-- This field has been removed. Urutan tampilan will be auto-generated based on the order items are created -->
 
             <!-- STATUS AKTIF -->
             <div class="border-t border-gray-200 pt-6">
@@ -264,32 +252,57 @@
 
 @section('scripts')
 <script>
+    // Get all categories data from backend
+    const categoriesData = {!! json_encode($categories->mapWithKeys(function($cat) { return [$cat->id => ['has_subcategories' => $cat->has_subcategories]]; })) !!};
+    
     // Load subcategories based on selected category
     document.getElementById('program_category_id').addEventListener('change', function() {
         const categoryId = this.value;
         const subcategoryWrapper = document.getElementById('subcategory-wrapper');
         const subcategorySelect = document.getElementById('program_subcategory_id');
+        const subcategoryRequired = document.getElementById('subcategory-required');
         
         // Reset subcategory
         subcategorySelect.innerHTML = '<option value="">-- Pilih Sub Kategori --</option>';
-        subcategoryWrapper.style.display = 'none';
+        subcategorySelect.removeAttribute('required');
+        subcategoryRequired.textContent = '';
         
-        if (categoryId) {
-            // Fetch subcategories via AJAX
-            fetch(`/admin/programs/subcategories?category_id=${categoryId}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length > 0) {
-                        subcategoryWrapper.style.display = 'block';
-                        data.forEach(sub => {
-                            const option = document.createElement('option');
-                            option.value = sub.id;
-                            option.textContent = sub.name;
-                            subcategorySelect.appendChild(option);
-                        });
-                    }
-                });
+        if (!categoryId) {
+            subcategoryWrapper.classList.add('hidden');
+            return;
         }
+        
+        const categoryInfo = categoriesData[categoryId];
+        const hasSubcategories = categoryInfo && categoryInfo.has_subcategories;
+        
+        // Fetch subcategories via AJAX
+        fetch(`/admin/programs/subcategories?category_id=${categoryId}`)
+            .then(response => response.json())
+            .then(data => {
+                subcategorySelect.innerHTML = '<option value="">-- Pilih Sub Kategori --</option>';
+                
+                if (data.length > 0) {
+                    // Set required if this category has subcategories
+                    if (hasSubcategories) {
+                        subcategorySelect.setAttribute('required', 'required');
+                        subcategoryRequired.textContent = '*';
+                    }
+                    
+                    data.forEach(sub => {
+                        const option = document.createElement('option');
+                        option.value = sub.id;
+                        option.textContent = sub.name;
+                        subcategorySelect.appendChild(option);
+                    });
+                    subcategoryWrapper.classList.remove('hidden');
+                } else {
+                    subcategoryWrapper.classList.add('hidden');
+                }
+            })
+            .catch(error => {
+                console.error('Error loading subcategories:', error);
+                subcategoryWrapper.classList.add('hidden');
+            });
     });
 
     // Toggle media type sections

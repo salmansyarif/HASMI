@@ -64,9 +64,14 @@ class ProgramController extends Controller
 
     public function store(Request $request)
     {
+        // Check if category requires subcategory
+        $category = ProgramCategory::find($request->program_category_id);
+        
         $validated = $request->validate([
             'program_category_id' => 'required|exists:program_categories,id',
-            'program_subcategory_id' => 'nullable|exists:program_subcategories,id',
+            'program_subcategory_id' => $category && $category->has_subcategories 
+                ? 'required|exists:program_subcategories,id' 
+                : 'nullable|exists:program_subcategories,id',
             'title' => 'required|max:255',
             'description' => 'required',
             'content' => 'nullable',
@@ -76,11 +81,10 @@ class ProgramController extends Controller
             'video_file' => 'nullable|file|mimes:mp4,mov,avi,wmv,webm|max:102400',
             'video_url' => 'nullable|url',
             'media_position' => 'required|in:top,left,right,bottom',
-            'position' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
         ]);
 
-        // Generate unique slug
+        // Auto-generate slug from title
         $validated['slug'] = Str::slug($validated['title']);
         $count = 1;
         $originalSlug = $validated['slug'];
@@ -89,6 +93,8 @@ class ProgramController extends Controller
             $validated['slug'] = $originalSlug . '-' . $count++;
         }
 
+        // Auto set position to 0 (will be handled by model boot)
+        $validated['position'] = 0;
         $validated['is_active'] = $request->has('is_active') ? true : false;
 
         // Upload thumbnail
@@ -145,9 +151,14 @@ class ProgramController extends Controller
 
     public function update(Request $request, Program $program)
     {
+        // Check if category requires subcategory
+        $category = ProgramCategory::find($request->program_category_id);
+        
         $validated = $request->validate([
             'program_category_id' => 'required|exists:program_categories,id',
-            'program_subcategory_id' => 'nullable|exists:program_subcategories,id',
+            'program_subcategory_id' => $category && $category->has_subcategories 
+                ? 'required|exists:program_subcategories,id' 
+                : 'nullable|exists:program_subcategories,id',
             'title' => 'required|max:255',
             'description' => 'required',
             'content' => 'nullable',
@@ -157,7 +168,6 @@ class ProgramController extends Controller
             'video_file' => 'nullable|file|mimes:mp4,mov,avi,wmv,webm|max:102400',
             'video_url' => 'nullable|url',
             'media_position' => 'required|in:top,left,right,bottom',
-            'position' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
         ]);
 
