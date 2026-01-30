@@ -1,136 +1,215 @@
 @extends('layouts.app')
 
-@section('title', 'Kegiatan - HASMI')
+@section('title', 'Dokumentasi Kegiatan - HASMI')
 
 @section('content')
-
-<div class="bg-slate-950 min-h-screen">
-    <div class="bg-gradient-to-b from-slate-900 via-blue-950 to-slate-950 pt-24 pb-16 text-center px-6">
-        <span class="inline-block py-1 px-4 rounded-full bg-blue-600/20 text-blue-400 text-xs font-bold tracking-widest uppercase mb-6 border border-blue-500/30">
-            Arsip Dokumentasi
-        </span>
-        <h1 class="text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter uppercase">
-            Kegiatan <span class="text-blue-500">HASMI</span>
-        </h1>
-        <div class="w-24 h-1.5 bg-blue-600 mx-auto rounded-full mb-8"></div>
-        <p class="text-gray-400 text-lg max-w-2xl mx-auto font-light leading-relaxed">
-            Dokumentasi berbagai aktivitas dakwah, pendidikan, dan aksi sosial kemanusiaan yang telah kami laksanakan untuk umat.
-        </p>
-    </div>
-
-    <div class="container mx-auto px-6 pb-24">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-            @forelse($kegiatans as $kegiatan)
-            <a href="{{ route('kegiatan.show', $kegiatan->slug) }}" 
-               class="group bg-slate-900 rounded-[2rem] overflow-hidden border border-slate-800 shadow-2xl transition-all duration-500 hover:border-blue-500/50 hover:-translate-y-2 block">
-                
-                <div class="h-64 relative overflow-hidden">
-                    @if($kegiatan->show_thumbnail_in_list && $kegiatan->thumbnail)
-                        <img src="{{ asset($kegiatan->thumbnail) }}" 
-                             alt="{{ $kegiatan->title }}" 
-                             class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-110 transition-transform duration-700"
-                             loading="lazy">
-                    @else
-                        <div class="w-full h-full bg-slate-800 flex flex-col items-center justify-center">
-                            <i class="fas fa-mosque text-slate-700 text-6xl mb-3"></i>
-                            <span class="text-slate-600 text-xs font-bold tracking-[0.3em] uppercase">HASMI MEDIA</span>
-                        </div>
-                    @endif
-                    
-                    @if($kegiatan->photos && count($kegiatan->photos) > 1)
-                    <div class="absolute top-4 right-4 bg-blue-600/90 backdrop-blur-md text-white text-[10px] px-3 py-1.5 rounded-lg font-bold shadow-xl flex items-center gap-2">
-                        <i class="fas fa-images"></i>
-                        <span>{{ count($kegiatan->photos) }} FOTO</span>
-                    </div>
-                    @endif
-
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
-                </div>
-                
-                <div class="p-8">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="w-8 h-[2px] bg-blue-600"></span>
-                        <span class="text-blue-500 text-xs font-bold uppercase tracking-widest">
-                             @if($kegiatan->event_date)
-                                {{ $kegiatan->event_date->locale('id')->isoFormat('MMMM Y') }}
-                             @endif
-                        </span>
-                    </div>
-
-                    <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2 mb-4 leading-snug">
-                        {{ $kegiatan->title }}
-                    </h3>
-                    
-                    <p class="text-slate-400 line-clamp-3 text-sm leading-relaxed mb-6 font-light">
-                        {{ $kegiatan->description }}
-                    </p>
-                    
-                    <div class="pt-6 border-t border-slate-800 flex items-center justify-between text-[11px] font-bold uppercase tracking-tighter">
-                        <div class="flex items-center gap-4 text-slate-500">
-                            @if($kegiatan->event_date)
-                            <div class="flex items-center gap-1.5">
-                                <i class="far fa-calendar-alt text-blue-500"></i>
-                                <span>{{ $kegiatan->event_date->locale('id')->isoFormat('D MMM') }}</span>
-                            </div>
-                            @endif
-
-                            @if($kegiatan->location)
-                            <div class="flex items-center gap-1.5">
-                                <i class="fas fa-map-marker-alt text-blue-500"></i>
-                                <span class="truncate max-w-[100px]">{{ $kegiatan->location }}</span>
-                            </div>
-                            @endif
-                        </div>
-                        
-                        <div class="text-blue-500 group-hover:translate-x-2 transition-transform duration-300">
-                            DETAIL <i class="fas fa-arrow-right ml-1"></i>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            @empty
-            <div class="col-span-full text-center py-32 bg-slate-900/50 rounded-[3rem] border border-slate-800 border-dashed">
-                <div class="inline-block p-10 bg-slate-800 rounded-full mb-8">
-                    <i class="fas fa-archive text-slate-700 text-7xl"></i>
-                </div>
-                <h3 class="text-3xl font-bold text-white mb-4">Belum Ada Dokumentasi</h3>
-                <p class="text-slate-500 max-w-sm mx-auto mb-10 font-light italic">Mohon maaf, saat ini kami belum mempublikasikan laporan kegiatan terbaru.</p>
-                <a href="{{ route('home') }}" class="inline-flex items-center gap-3 bg-blue-900/20 hover:bg-blue-600 text-blue-400 hover:text-white px-10 py-4 rounded-full font-bold border border-blue-900/50 transition-all">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Kembali ke Beranda</span>
-                </a>
-            </div>
-            @endforelse
-        </div>
-
-        @if($kegiatans->hasPages())
-        <div class="mt-20 flex justify-center">
-            <div class="inline-flex p-2 bg-slate-900 rounded-2xl border border-slate-800 shadow-xl">
-                {{ $kegiatans->links() }}
-            </div>
-        </div>
-        @endif
-    </div>
-</div>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
 <style>
-    /* Pagination Styling for Dark Mode */
-    .pagination { @apply flex list-none rounded-xl overflow-hidden; }
-    .page-item .page-link { @apply bg-transparent border-none text-slate-500 px-4 py-2 hover:text-white; }
-    .page-item.active .page-link { @apply bg-blue-600 text-white rounded-lg shadow-lg shadow-blue-900/40; }
-    
-    .line-clamp-2 {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+    :root {
+        --deep-blue: #1e3a8a;
+        --bright-blue: #2563eb;
+        --bg-shade: #f8fafc; /* Abu-abu ultra cerah untuk base */
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: var(--bg-shade);
+    }
+
+    /* HERO SECTION REPAIR */
+    .hero-kegiatan {
+        background: linear-gradient(135deg, #172554 0%, #1e40af 50%, #2563eb 100%);
+        position: relative;
+        overflow: hidden;
+        min-height: 500px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Tambahkan Overlay Gelap agar Teks Putih Terbaca */
+    .hero-kegiatan::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.2); /* Gelap tipis */
+        z-index: 1;
+    }
+
+    .hero-pattern {
+        position: absolute;
+        inset: 0;
+        opacity: 0.15;
+        z-index: 2;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Perbaikan Typografi Hero */
+    .hero-title {
+        font-size: 3.5rem;
+        line-height: 1.1;
+        font-weight: 800;
+        color: #ffffff;
+        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-description {
+        color: #f1f5f9 !important; /* Putih keabu-abuan cerah */
+        font-size: 1.25rem;
+        line-height: 1.8;
+        font-weight: 500;
+        max-width: 800px;
+        margin: 0 auto;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Shadow lebih kuat */
+    }
+
+    /* KARTU KEGIATAN */
+    .activity-card {
+        background: #ffffff;
+        border-radius: 30px;
+        border: 1px solid #e2e8f0;
+        transition: all 0.4s ease;
+    }
+
+    .activity-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px -12px rgba(30, 58, 138, 0.15);
+        border-color: #3b82f6;
+    }
+
+    .img-frame {
+        border-radius: 24px;
         overflow: hidden;
     }
-    .line-clamp-3 {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+
+    /* Wave Divider fix */
+    .wave-bottom {
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        line-height: 0;
+        z-index: 5;
+    }
+
+    .wave-bottom svg {
+        fill: var(--bg-shade);
     }
 </style>
 
+{{-- HERO SECTION --}}
+<section class="hero-kegiatan">
+    <div class="hero-pattern"></div>
+    
+    <div class="container mx-auto px-6 hero-content text-center">
+        <div class="inline-block mb-6" data-aos="fade-down">
+            <span class="px-5 py-2 bg-blue-500/20 backdrop-blur-md border border-white/30 text-blue-100 rounded-full text-xs font-black uppercase tracking-[0.2em]">
+                <i class="fas fa-archive mr-2"></i> Arsip Dokumentasi
+            </span>
+        </div>
+        
+        <h1 class="hero-title mb-8" data-aos="zoom-in">
+            Laporan <span class="text-blue-200">Kegiatan</span>
+        </h1>
+        
+        <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
+            "Jejak langkah dakwah, sosial, dan pendidikan HASMI dalam melayani umat di berbagai penjuru Indonesia."
+        </p>
+    </div>
+
+    {{-- Wave Divider --}}
+    <div class="wave-bottom">
+        <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+        </svg>
+    </div>
+</section>
+
+{{-- LIST SECTION --}}
+<section class="py-20">
+    <div class="container mx-auto px-6 lg:px-12">
+        @forelse($kegiatans as $index => $kegiatan)
+            @if($loop->first)
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            @endif
+
+            <a href="{{ route('kegiatan.show', $kegiatan->slug) }}" class="activity-card group p-5" data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
+                {{-- Foto --}}
+                <div class="img-frame h-60 mb-6 relative">
+                    @if($kegiatan->thumbnail)
+                        <img src="{{ asset($kegiatan->thumbnail) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    @else
+                        <div class="w-full h-full bg-slate-100 flex items-center justify-center">
+                            <i class="fas fa-camera text-slate-300 text-4xl"></i>
+                        </div>
+                    @endif
+                    
+                    {{-- Badge di atas foto --}}
+                    <div class="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg">
+                        <i class="far fa-calendar-alt mr-1"></i> {{ $kegiatan->event_date ? $kegiatan->event_date->format('M Y') : 'Baru' }}
+                    </div>
+                </div>
+
+                {{-- Detail --}}
+                <div class="px-2">
+                    <div class="text-blue-600 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">
+                        <span class="w-6 h-[2px] bg-blue-600"></span>
+                        {{ $kegiatan->location ?? 'NASIONAL' }}
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
+                        {{ $kegiatan->title }}
+                    </h3>
+
+                    <p class="text-slate-500 text-sm mb-6 line-clamp-2 leading-relaxed">
+                        {{ $kegiatan->description }}
+                    </p>
+
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <span class="text-xs font-bold text-slate-400 group-hover:text-blue-600 transition-colors">BACA DETAIL</span>
+                        <i class="fas fa-arrow-right text-slate-300 group-hover:text-blue-600 group-hover:translate-x-2 transition-all"></i>
+                    </div>
+                </div>
+            </a>
+
+            @if($loop->last)
+                </div>
+            @endif
+        @empty
+            {{-- Empty State --}}
+            <div class="max-w-2xl mx-auto text-center py-20 bg-white rounded-[40px] shadow-sm border border-slate-100" data-aos="zoom-in">
+                <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-200 text-4xl">
+                    <i class="fas fa-cloud-moon"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-800 mb-2">Belum Ada Dokumentasi</h3>
+                <p class="text-slate-500">Kami akan segera mengupdate laporan kegiatan terbaru dalam waktu dekat.</p>
+            </div>
+        @endforelse
+
+        {{-- Pagination --}}
+        @if($kegiatans->hasPages())
+            <div class="mt-20 flex justify-center">
+                {{ $kegiatans->links() }}
+            </div>
+        @endif
+    </div>
+</section>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({ 
+            duration: 800, 
+            once: true,
+            offset: 50 
+        });
+    });
+</script>
 @endsection
