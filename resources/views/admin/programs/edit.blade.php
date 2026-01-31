@@ -231,14 +231,10 @@
                                     </p>
                                 @endif
                             </div>
-                            <form action="{{ route('admin.programs.video.delete', $program->id) }}" method="POST"
-                                  onsubmit="return confirm('Yakin ingin menghapus video ini?')" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg text-sm font-semibold">
-                                    <i class="fas fa-trash mr-1"></i> Hapus
-                                </button>
-                            </form>
+                            <button type="button" onclick="if(confirm('Yakin ingin menghapus video ini?')) document.getElementById('form-delete-video').submit();" 
+                                    class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg text-sm font-semibold">
+                                <i class="fas fa-trash mr-1"></i> Hapus
+                            </button>
                         </div>
                     </div>
                     @endif
@@ -335,6 +331,11 @@
         </div>
     </form>
 </div>
+
+    <form id="form-delete-video" action="{{ route('admin.programs.video.delete', $program->id) }}" method="POST" class="hidden">
+        @csrf
+        @method('DELETE')
+    </form>
 
 @endsection
 

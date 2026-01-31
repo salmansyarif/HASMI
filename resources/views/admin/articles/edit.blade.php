@@ -113,13 +113,9 @@
                 @if($article->thumbnail)
                 <div class="mb-4 flex items-center gap-4">
                     <img src="{{ asset($article->thumbnail) }}" alt="Current thumbnail" class="w-32 h-32 object-cover rounded-lg border border-gray-300">
-                    <form action="{{ route('admin.articles.thumbnail.destroy', $article->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus thumbnail?')" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-red-600 hover:text-red-700 text-sm flex items-center gap-1">
-                            <i class="fas fa-trash"></i> Hapus Thumbnail
-                        </button>
-                    </form>
+                    <button type="button" onclick="document.getElementById('form-delete-thumbnail').submit();" class="text-red-600 hover:text-red-700 text-sm flex items-center gap-1">
+                        <i class="fas fa-trash"></i> Hapus Thumbnail
+                    </button>
                 </div>
                 @endif
 
@@ -169,6 +165,11 @@
         </div>
     </form>
 </div>
+
+    <form id="form-delete-thumbnail" action="{{ route('admin.articles.thumbnail.destroy', $article->id) }}" method="POST" class="hidden" onsubmit="return confirm('Yakin ingin menghapus thumbnail?')">
+        @csrf
+        @method('DELETE')
+    </form>
 
 @endsection
 

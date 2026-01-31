@@ -21,9 +21,9 @@
         
         /* Custom Scrollbar Premium */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; } /* slate-100 */
         ::-webkit-scrollbar-thumb {
-            background: #1e3a8a; /* blue-900 */
+            background: #3b82f6; /* blue-500 */
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
@@ -42,7 +42,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body class="bg-[#020617] text-slate-200 selection:bg-blue-500 selection:text-white">
+<body class="bg-slate-50 text-slate-800 selection:bg-blue-500 selection:text-white">
     
     @include('layouts.navbar')
     
