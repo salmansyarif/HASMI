@@ -159,7 +159,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
         transition: left 0.5s ease;
     }
     
@@ -180,6 +180,7 @@
     .article-card {
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         border: 2px solid rgba(59, 130, 246, 0.2);
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
     }
     
     .article-card:hover {
@@ -263,7 +264,7 @@
         <!-- Header Category -->
         <div class="text-center mb-16 animate-fade-in-up">
             <div class="category-icon-wrapper inline-block mb-6 animate-pulse-custom">
-                <div class="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-500/40 border-4 border-white/20 relative z-10">
+                <div class="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-500/40 border-4 border-blue-400/30 relative z-10">
                     <i class="fas {{ $category->icon }} text-white text-5xl animate-float"></i>
                 </div>
             </div>
@@ -293,12 +294,12 @@
                 </h3>
                 <div class="flex flex-wrap gap-4">
                     <a href="{{ route('materi.show', $category->slug) }}" 
-                       class="filter-btn {{ !request()->has('sub') ? 'filter-btn-active text-white' : 'bg-blue-900/50 text-blue-200 hover:bg-blue-700/50 hover:text-white' }} px-6 py-3 rounded-full font-bold border-2 border-white/20 shadow-lg">
+                       class="filter-btn {{ !request()->has('sub') ? 'filter-btn-active text-white' : 'bg-blue-900/50 text-blue-200 hover:bg-blue-700/50 hover:text-white' }} px-6 py-3 rounded-full font-bold border-2 border-blue-400/20 shadow-lg">
                         <i class="fas fa-list mr-2"></i> Semua
                     </a>
                     @foreach($category->subCategories as $sub)
                     <a href="{{ route('materi.sub-category', [$category->slug, $sub->slug]) }}" 
-                       class="filter-btn bg-blue-900/50 text-blue-200 hover:bg-purple-600/30 hover:text-purple-300 px-6 py-3 rounded-full font-bold border-2 border-blue-400/20 shadow-lg">
+                       class="filter-btn bg-blue-900/50 text-blue-200 hover:bg-blue-600/50 hover:text-white px-6 py-3 rounded-full font-bold border-2 border-blue-400/20 shadow-lg">
                         <i class="fas {{ $sub->icon }} mr-2"></i> {{ $sub->name }}
                     </a>
                     @endforeach
@@ -311,7 +312,7 @@
         @if($articles->count() > 0)
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($articles as $index => $article)
-                <article class="article-card bg-blue-800/50 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden group animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
+                <article class="article-card backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden group animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
                     <!-- Thumbnail -->
                     <div class="article-card-image relative h-56 overflow-hidden">
                         @if($article->thumbnail)
@@ -329,7 +330,7 @@
                         <!-- Sub-Category Badge (if exists) -->
                         @if($article->subCategory)
                         <div class="absolute top-4 left-4">
-                            <span class="badge-sub px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-700 text-white text-xs font-bold rounded-full shadow-lg shadow-purple-500/40 border-2 border-white/30 backdrop-blur-sm">
+                            <span class="badge-sub px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-xs font-bold rounded-full shadow-lg shadow-blue-500/40 border-2 border-blue-300/30 backdrop-blur-sm">
                                 <i class="fas {{ $article->subCategory->icon }} mr-1"></i>
                                 {{ $article->subCategory->name }}
                             </span>
@@ -352,7 +353,7 @@
                         </div>
 
                         <!-- Title -->
-                        <h3 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-300 transition-colors leading-snug">
+                        <h3 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-200 transition-colors leading-snug">
                             {{ $article->title }}
                         </h3>
 
@@ -361,7 +362,7 @@
 
                         <!-- Read More Button -->
                         <a href="{{ route('materi.detail', [$category->slug, $article->slug]) }}" 
-                           class="read-more-btn inline-flex items-center text-blue-400 font-bold hover:text-white transition-all group">
+                           class="read-more-btn inline-flex items-center text-blue-300 font-bold hover:text-white transition-all group">
                             Baca Selengkapnya 
                             <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
                         </a>
@@ -379,16 +380,16 @@
             <!-- Empty State -->
             <div class="text-center py-20 bg-blue-800/50 backdrop-blur-xl rounded-[3rem] shadow-2xl border-2 border-blue-500/20 animate-scale-in">
                 <div class="category-icon-wrapper inline-block mb-8">
-                    <div class="w-28 h-28 bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-500/40 border-4 border-white/20 relative z-10">
+                    <div class="w-28 h-28 bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-500/40 border-4 border-blue-400/30 relative z-10">
                         <i class="fas {{ $category->icon }} text-white text-6xl animate-float"></i>
                     </div>
                 </div>
                 <h3 class="text-3xl font-black text-white mb-4">Belum Ada Artikel</h3>
                 <p class="text-blue-200 mb-8 text-lg">
-                    Kategori <strong class="text-blue-400">{{ $category->name }}</strong> belum memiliki artikel yang dipublikasikan.
+                    Kategori <strong class="text-blue-300">{{ $category->name }}</strong> belum memiliki artikel yang dipublikasikan.
                 </p>
                 <a href="{{ route('materi.index') }}" 
-                   class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-black rounded-2xl hover:from-blue-600 hover:to-blue-800 transition-all shadow-xl shadow-blue-500/40 border-2 border-white/20 hover:scale-105">
+                   class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-black rounded-2xl hover:from-blue-600 hover:to-blue-800 transition-all shadow-xl shadow-blue-500/40 border-2 border-blue-400/30 hover:scale-105">
                     <i class="fas fa-arrow-left"></i> 
                     <span>Lihat Semua Materi</span>
                 </a>
@@ -432,7 +433,7 @@
     
     .pagination .active {
         background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        border-color: rgba(255, 255, 255, 0.3);
+        border-color: rgba(59, 130, 246, 0.5);
         color: white;
         box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
     }
@@ -474,4 +475,4 @@
     });
 </script>
 
-@endsection
+@endsection 

@@ -179,7 +179,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
         transition: left 0.5s ease;
     }
     
@@ -193,13 +193,13 @@
     }
     
     .badge-subcategory {
-        background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
         transition: all 0.3s ease;
     }
     
     .badge-subcategory:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4);
+        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
     }
     
     .share-btn {
@@ -225,7 +225,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
         transition: left 0.5s ease;
     }
     
@@ -241,6 +241,7 @@
     .comment-card {
         transition: all 0.3s ease;
         border: 1px solid rgba(59, 130, 246, 0.1);
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
     }
     
     .comment-card:hover {
@@ -256,6 +257,7 @@
     .related-card {
         transition: all 0.4s ease;
         border: 2px solid rgba(59, 130, 246, 0.1);
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
     }
     
     .related-card:hover {
@@ -291,7 +293,7 @@
     }
 </style>
 
-<div class="bg-gradient-to-br from-slate-950 via-blue-950/20 to-slate-950 min-h-screen pb-20">
+<div class="bg-gradient-to-br from-blue-800 via-blue-900 to-blue-800 min-h-screen pb-20">
     <div class="container mx-auto px-6 py-12">
         <!-- Breadcrumb -->
         <div class="mb-10 animate-slide-in-left">
@@ -314,19 +316,19 @@
 
         <!-- Article Content -->
         <div class="max-w-4xl mx-auto">
-            <article class="bg-slate-900/50 backdrop-blur-xl rounded-[3rem] shadow-2xl overflow-hidden border-2 border-blue-500/20 animate-fade-in-up">
+            <article class="bg-blue-800/50 backdrop-blur-xl rounded-[3rem] shadow-2xl overflow-hidden border-2 border-blue-500/20 animate-fade-in-up">
                 <div class="p-8 md:p-12">
                     <!-- Category & Sub-Category Badges -->
                     <div class="flex flex-wrap gap-3 mb-6 animate-slide-in-left">
                         <a href="{{ route('materi.show', $article->category->slug) }}" 
-                           class="badge-category inline-flex items-center gap-2 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-blue-500/30 border-2 border-white/20">
+                           class="badge-category inline-flex items-center gap-2 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-blue-500/30 border-2 border-blue-400/20">
                             <i class="fas {{ $article->category->icon }}"></i>
                             {{ $article->category->name }}
                         </a>
                         
                         @if($article->subCategory)
                         <a href="{{ route('materi.sub-category', [$article->category->slug, $article->subCategory->slug]) }}" 
-                           class="badge-subcategory inline-flex items-center gap-2 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-purple-500/30 border-2 border-white/20">
+                           class="badge-subcategory inline-flex items-center gap-2 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-blue-500/30 border-2 border-blue-400/20">
                             <i class="fas {{ $article->subCategory->icon }}"></i>
                             {{ $article->subCategory->name }}
                         </a>
@@ -357,7 +359,7 @@
                             <span>{{ $article->published_at->locale('id')->isoFormat('dddd, D MMMM YYYY') }}</span>
                         </div>
                         @if($article->author)
-                        <div class="flex items-center gap-3 bg-slate-800 px-5 py-3 rounded-full text-blue-200 font-semibold">
+                        <div class="flex items-center gap-3 bg-blue-700/40 px-5 py-3 rounded-full text-blue-200 font-semibold">
                             <i class="far fa-user text-blue-400 text-lg"></i>
                             <span>{{ $article->author->name }}</span>
                         </div>
@@ -377,33 +379,33 @@
                             <div class="flex gap-4">
                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" 
                                    target="_blank" rel="noopener noreferrer"
-                                   class="share-btn w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg shadow-blue-600/40 border-2 border-white/20"
+                                   class="share-btn w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg shadow-blue-600/40 border-2 border-blue-400/20"
                                    title="Bagikan ke Facebook">
                                     <i class="fab fa-facebook-f text-xl"></i>
                                 </a>
                                 
                                 <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($article->title) }}" 
                                    target="_blank" rel="noopener noreferrer"
-                                   class="share-btn w-14 h-14 bg-sky-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-sky-500/40 border-2 border-white/20"
+                                   class="share-btn w-14 h-14 bg-sky-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-sky-500/40 border-2 border-blue-400/20"
                                    title="Bagikan ke Twitter">
                                     <i class="fab fa-twitter text-xl"></i>
                                 </a>
                                 
                                 <a href="https://api.whatsapp.com/send?text={{ urlencode($article->title . ' - ' . url()->current()) }}" 
                                    target="_blank" rel="noopener noreferrer"
-                                   class="share-btn w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-green-500/40 border-2 border-white/20"
+                                   class="share-btn w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-green-500/40 border-2 border-blue-400/20"
                                    title="Bagikan ke WhatsApp">
                                     <i class="fab fa-whatsapp text-2xl"></i>
                                 </a>
 
                                 <button onclick="copyToClipboard('{{ url()->current() }}')" 
-                                        class="share-btn w-14 h-14 bg-white text-blue-600 rounded-full flex items-center justify-center shadow-lg shadow-white/20 border-2 border-blue-400/30"
+                                        class="share-btn w-14 h-14 bg-blue-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 border-2 border-blue-400/30"
                                         title="Copy Link">
                                     <i class="fas fa-link text-xl"></i>
                                 </button>
                             </div>
                             <a href="{{ route('materi.show', $article->category->slug) }}" 
-                               class="btn-gradient text-white font-bold px-6 py-3 rounded-xl flex items-center gap-2 shadow-lg border-2 border-white/20">
+                               class="btn-gradient text-white font-bold px-6 py-3 rounded-xl flex items-center gap-2 shadow-lg border-2 border-blue-400/20">
                                 <i class="fas fa-arrow-left"></i> Artikel Lainnya
                             </a>
                         </div>
@@ -421,7 +423,7 @@
                 <div class="grid md:grid-cols-3 gap-8">
                     @foreach($relatedArticles as $index => $related)
                     <a href="{{ route('materi.detail', [$related->category->slug, $related->slug]) }}" 
-                       class="related-card bg-slate-900/50 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl block"
+                       class="related-card backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl block"
                        style="animation-delay: {{ $index * 0.1 }}s">
                         <div class="h-48 relative overflow-hidden">
                             @if($related->thumbnail)
@@ -433,7 +435,7 @@
                                     <i class="fas fa-book-open text-white text-5xl animate-float"></i>
                                 </div>
                             @endif
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-blue-900 to-transparent"></div>
                         </div>
                         <div class="p-6">
                             <h3 class="font-bold text-white text-lg line-clamp-2 mb-3">{{ $related->title }}</h3>
@@ -458,14 +460,14 @@
                 <div class="grid lg:grid-cols-12 gap-10">
                     <!-- Form Komentar -->
                     <div class="lg:col-span-5 order-2 lg:order-1">
-                        <div class="bg-gradient-to-br from-slate-900 to-blue-950/30 rounded-[2rem] p-8 border-2 border-blue-400/30 sticky top-10 shadow-2xl backdrop-blur-xl animate-fade-in-up">
+                        <div class="bg-gradient-to-br from-blue-800 to-blue-900 rounded-[2rem] p-8 border-2 border-blue-400/30 sticky top-10 shadow-2xl backdrop-blur-xl animate-fade-in-up">
                             <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
                                 <i class="fas fa-pen text-blue-400"></i>
                                 Tulis Komentar
                             </h3>
                             
                             @if(session('success'))
-                            <div class="bg-gradient-to-r from-green-500 to-green-600 border-2 border-white/20 text-white px-5 py-4 rounded-xl mb-6 flex items-center gap-3 shadow-lg animate-scale-in">
+                            <div class="bg-gradient-to-r from-green-500 to-green-600 border-2 border-blue-400/20 text-white px-5 py-4 rounded-xl mb-6 flex items-center gap-3 shadow-lg animate-scale-in">
                                 <i class="fas fa-check-circle text-2xl"></i>
                                 <span class="font-semibold">{{ session('success') }}</span>
                             </div>
@@ -483,7 +485,7 @@
                                             Nama <span class="text-red-400">*</span>
                                         </label>
                                         <input type="text" id="name" name="name" value="{{ old('name') }}" required
-                                               class="input-glow w-full px-5 py-4 bg-slate-950/50 border-2 border-blue-400/30 rounded-xl text-white placeholder-blue-200/50 focus:ring-2 focus:ring-blue-400 outline-none transition-all backdrop-blur-sm @error('name') border-red-500 @enderror"
+                                               class="input-glow w-full px-5 py-4 bg-blue-950/50 border-2 border-blue-400/30 rounded-xl text-white placeholder-blue-200/50 focus:ring-2 focus:ring-blue-400 outline-none transition-all backdrop-blur-sm @error('name') border-red-500 @enderror"
                                                placeholder="Nama Lengkap">
                                         @error('name')
                                         <p class="text-red-400 text-sm mt-2 flex items-center gap-1">
@@ -497,7 +499,7 @@
                                             Email <span class="text-red-400">*</span>
                                         </label>
                                         <input type="email" id="email" name="email" value="{{ old('email') }}" required
-                                               class="input-glow w-full px-5 py-4 bg-slate-950/50 border-2 border-blue-400/30 rounded-xl text-white placeholder-blue-200/50 focus:ring-2 focus:ring-blue-400 outline-none transition-all backdrop-blur-sm @error('email') border-red-500 @enderror"
+                                               class="input-glow w-full px-5 py-4 bg-blue-950/50 border-2 border-blue-400/30 rounded-xl text-white placeholder-blue-200/50 focus:ring-2 focus:ring-blue-400 outline-none transition-all backdrop-blur-sm @error('email') border-red-500 @enderror"
                                                placeholder="email@example.com">
                                         @error('email')
                                         <p class="text-red-400 text-sm mt-2 flex items-center gap-1">
@@ -511,7 +513,7 @@
                                             Komentar <span class="text-red-400">*</span>
                                         </label>
                                         <textarea id="comment" name="comment" rows="4" required maxlength="1000"
-                                                  class="input-glow w-full px-5 py-4 bg-slate-950/50 border-2 border-blue-400/30 rounded-xl text-white placeholder-blue-200/50 focus:ring-2 focus:ring-blue-400 outline-none transition-all backdrop-blur-sm @error('comment') border-red-500 @enderror"
+                                                  class="input-glow w-full px-5 py-4 bg-blue-950/50 border-2 border-blue-400/30 rounded-xl text-white placeholder-blue-200/50 focus:ring-2 focus:ring-blue-400 outline-none transition-all backdrop-blur-sm @error('comment') border-red-500 @enderror"
                                                   placeholder="Tulis komentar Anda...">{{ old('comment') }}</textarea>
                                         @error('comment')
                                         <p class="text-red-400 text-sm mt-2 flex items-center gap-1">
@@ -523,7 +525,7 @@
                                 </div>
 
                                 <button type="submit" 
-                                        class="btn-gradient w-full text-white font-black py-4 rounded-xl transition-all shadow-lg shadow-blue-500/40 uppercase tracking-widest text-sm border-2 border-white/20">
+                                        class="btn-gradient w-full text-white font-black py-4 rounded-xl transition-all shadow-lg shadow-blue-500/40 uppercase tracking-widest text-sm border-2 border-blue-400/20">
                                     <span class="flex items-center justify-center gap-2">
                                         <i class="fas fa-paper-plane"></i>
                                         Kirim Respon
@@ -540,9 +542,9 @@
                         @endphp
 
                         @forelse($comments as $index => $comment)
-                        <div class="comment-card bg-slate-900/50 backdrop-blur-sm rounded-3xl p-8 flex gap-6 animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
+                        <div class="comment-card backdrop-blur-sm rounded-3xl p-8 flex gap-6 animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
                             <div class="flex-shrink-0">
-                                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-blue-500/40 border-2 border-white/20">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-blue-500/40 border-2 border-blue-400/20">
                                     {{ $comment->initials }}
                                 </div>
                             </div>
@@ -559,7 +561,7 @@
                             </div>
                         </div>
                         @empty
-                        <div class="text-center py-20 bg-slate-900/30 backdrop-blur-sm rounded-[2rem] border-2 border-blue-500/20 border-dashed animate-fade-in-up">
+                        <div class="text-center py-20 bg-blue-800/30 backdrop-blur-sm rounded-[2rem] border-2 border-blue-500/20 border-dashed animate-fade-in-up">
                             <i class="far fa-comment-dots text-blue-400/40 text-6xl mb-6 animate-float"></i>
                             <p class="text-blue-300 italic font-light text-lg">Jadilah yang pertama memberikan respon...</p>
                         </div>
@@ -592,7 +594,7 @@ function copyToClipboard(text) {
 
 function showToast(message, type = 'success') {
     const toast = document.createElement('div');
-    toast.className = `fixed bottom-10 right-10 px-8 py-5 rounded-2xl ${type === 'success' ? 'bg-gradient-to-r from-blue-500 to-blue-600' : 'bg-gradient-to-r from-red-500 to-red-600'} text-white font-bold shadow-2xl z-50 border-2 border-white/30 backdrop-blur-sm`;
+    toast.className = `fixed bottom-10 right-10 px-8 py-5 rounded-2xl ${type === 'success' ? 'bg-gradient-to-r from-blue-500 to-blue-600' : 'bg-gradient-to-r from-red-500 to-red-600'} text-white font-bold shadow-2xl z-50 border-2 border-blue-400/30 backdrop-blur-sm`;
     toast.innerHTML = `
         <div class="flex items-center gap-3">
             <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} text-2xl"></i>
