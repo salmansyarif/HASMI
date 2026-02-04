@@ -11,7 +11,7 @@
 
     /* Custom Gradient Hero */
     .hero-animate {
-        background: linear-gradient(-45deg, #1e3a8a, #1e40af, #1e3a8a, #0f172a);
+        background: linear-gradient(-45deg, #1e3a8a, #1e40af, #1e3a8a, #1e40af);
         background-size: 400% 400%;
         animation: gradientBG 15s ease infinite;
     }
@@ -24,11 +24,14 @@
     /* Program Card Enhancements */
     .program-card {
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 1px solid rgba(226, 232, 240, 0.8);
+        border: 2px solid rgba(59, 130, 246, 0.3);
+        background: rgba(30, 58, 138, 0.4);
+        backdrop-filter: blur(12px);
     }
     .program-card:hover {
         transform: translateY(-12px) scale(1.02);
-        box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.15);
+        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.4);
+        border-color: rgba(59, 130, 246, 0.6);
     }
 
     /* Floating Shape Animation */
@@ -84,22 +87,22 @@
     {{-- Wave Divider --}}
     <div class="absolute bottom-0 left-0 right-0">
         <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
-            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#f8fafc"/>
+            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#1e3a8a"/>
         </svg>
     </div>
 </section>
 
 {{-- FILTER SECTION --}}
-<section class="py-12 bg-slate-50 border-b border-slate-100">
+<section class="py-12 bg-blue-800 border-b border-blue-700">
     <div class="container mx-auto px-6">
         <div class="flex flex-wrap justify-center gap-3 lg:gap-6" data-aos="fade-up">
             <a href="{{ route('program.index') }}" 
-               class="filter-btn active px-8 py-3 rounded-2xl border-2 border-slate-200 font-bold transition-all flex items-center gap-2">
+               class="filter-btn active px-8 py-3 rounded-2xl border-2 border-blue-400/30 font-bold transition-all flex items-center gap-2">
                <i class="fas fa-grid-2"></i> Semua Program
             </a>
             @foreach($categories as $cat)
             <a href="{{ route('program.category', $cat->slug) }}" 
-               class="filter-btn px-8 py-3 bg-white rounded-2xl border-2 border-slate-200 text-slate-600 hover:border-blue-400 hover:text-blue-600 font-bold transition-all group shadow-sm">
+               class="filter-btn px-8 py-3 bg-blue-900/50 rounded-2xl border-2 border-blue-400/30 text-blue-200 hover:border-blue-400 hover:text-white hover:bg-blue-700/50 font-bold transition-all group shadow-sm">
                <i class="fas {{ $cat->icon ?? 'fa-heart' }} mr-2 group-hover:animate-bounce"></i>
                {{ $cat->name }}
             </a>
@@ -109,16 +112,16 @@
 </section>
 
 {{-- MAIN CONTENT --}}
-<section class="py-20 bg-slate-50 relative overflow-hidden">
+<section class="py-20 bg-gradient-to-br from-blue-900 to-blue-800 relative overflow-hidden">
     {{-- Decorative Background Elements --}}
-    <div class="absolute top-1/4 -right-20 w-96 h-96 bg-blue-100 rounded-full blur-[100px] opacity-50"></div>
-    <div class="absolute bottom-1/4 -left-20 w-96 h-96 bg-cyan-100 rounded-full blur-[100px] opacity-50"></div>
+    <div class="absolute top-1/4 -right-20 w-96 h-96 bg-blue-600/30 rounded-full blur-[100px] opacity-50"></div>
+    <div class="absolute bottom-1/4 -left-20 w-96 h-96 bg-cyan-600/30 rounded-full blur-[100px] opacity-50"></div>
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         @if($programs->count() > 0)
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                 @foreach($programs as $index => $program)
-                <article class="program-card group bg-white rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                <article class="program-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
                          data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
                     
                     {{-- Thumbnail with Glow --}}
@@ -134,7 +137,7 @@
                         @endif
                         
                         {{-- Overlay Info --}}
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
                             <p class="text-white text-xs leading-relaxed italic">
                                 "Klik untuk melihat kontribusi nyata kami dalam program ini."
                             </p>
@@ -150,31 +153,31 @@
 
                     {{-- Card Content --}}
                     <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-bold text-slate-800 mb-4 line-clamp-2 group-hover:text-blue-600 transition-colors leading-tight">
+                        <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-300 transition-colors leading-tight">
                             {{ $program->title }}
                         </h3>
                         
-                        <p class="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
+                        <p class="text-blue-100 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
                             {{ $program->description }}
                         </p>
                         
                         {{-- Stats/Features --}}
                         <div class="grid grid-cols-2 gap-4 mb-8">
-                            <div class="p-3 bg-blue-50 rounded-2xl border border-blue-100">
-                                <span class="block text-[10px] uppercase text-blue-500 font-bold mb-1">Status</span>
-                                <span class="text-xs font-bold text-slate-700 flex items-center gap-1">
+                            <div class="p-3 bg-blue-700/40 rounded-2xl border border-blue-400/30">
+                                <span class="block text-[10px] uppercase text-blue-300 font-bold mb-1">Status</span>
+                                <span class="text-xs font-bold text-white flex items-center gap-1">
                                     <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Aktif
                                 </span>
                             </div>
-                            <div class="p-3 bg-cyan-50 rounded-2xl border border-cyan-100">
-                                <span class="block text-[10px] uppercase text-cyan-500 font-bold mb-1">Target</span>
-                                <span class="text-xs font-bold text-slate-700">Nasional</span>
+                            <div class="p-3 bg-cyan-700/40 rounded-2xl border border-cyan-400/30">
+                                <span class="block text-[10px] uppercase text-cyan-300 font-bold mb-1">Target</span>
+                                <span class="text-xs font-bold text-white">Nasional</span>
                             </div>
                         </div>
 
                         <div class="mt-auto">
                             <a href="{{ route('program.show', $program->slug) }}" 
-                               class="w-full py-4 bg-slate-900 group-hover:bg-blue-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-slate-200">
+                               class="w-full py-4 bg-blue-700 group-hover:bg-blue-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/30 border-2 border-blue-400/30">
                                 <span>Detail Program</span>
                                 <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
                             </a>
@@ -187,7 +190,7 @@
             {{-- Pagination --}}
             @if($programs->hasPages())
             <div class="mt-20" data-aos="fade-up">
-                <div class="flex justify-center bg-white p-4 rounded-3xl shadow-sm border border-slate-100 w-fit mx-auto">
+                <div class="flex justify-center bg-blue-800/50 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-blue-400/30 w-fit mx-auto">
                     {{ $programs->links('vendor.pagination.tailwind') }}
                 </div>
             </div>
@@ -196,13 +199,13 @@
         @else
             <div class="text-center py-20" data-aos="zoom-in">
                 <div class="relative w-48 h-48 mx-auto mb-10">
-                    <div class="absolute inset-0 bg-blue-100 rounded-full animate-ping opacity-20"></div>
-                    <div class="relative w-48 h-48 bg-white rounded-full flex items-center justify-center shadow-2xl border border-slate-100">
+                    <div class="absolute inset-0 bg-blue-600/30 rounded-full animate-ping opacity-20"></div>
+                    <div class="relative w-48 h-48 bg-blue-800/50 backdrop-blur-md rounded-full flex items-center justify-center shadow-2xl border-2 border-blue-400/30">
                         <i class="fas fa-heart-circle-exclamation text-blue-400 text-7xl"></i>
                     </div>
                 </div>
-                <h3 class="text-3xl font-bold text-slate-800 mb-4">Belum Ada Program Aktif</h3>
-                <p class="text-slate-500 max-w-md mx-auto mb-10">Maaf, kategori program yang Anda cari belum tersedia saat ini. Silakan cek kembali nanti.</p>
+                <h3 class="text-3xl font-bold text-white mb-4">Belum Ada Program Aktif</h3>
+                <p class="text-blue-200 max-w-md mx-auto mb-10">Maaf, kategori program yang Anda cari belum tersedia saat ini. Silakan cek kembali nanti.</p>
                 <a href="{{ route('program.index') }}" class="px-10 py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl hover:bg-blue-700 transition-all">Lihat Semua Program</a>
             </div>
         @endif

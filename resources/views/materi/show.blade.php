@@ -179,13 +179,13 @@
     
     .article-card {
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 2px solid rgba(59, 130, 246, 0.1);
+        border: 2px solid rgba(59, 130, 246, 0.2);
     }
     
     .article-card:hover {
         transform: translateY(-12px);
-        border-color: rgba(59, 130, 246, 0.4);
-        box-shadow: 0 25px 50px rgba(59, 130, 246, 0.25);
+        border-color: rgba(59, 130, 246, 0.5);
+        box-shadow: 0 25px 50px rgba(59, 130, 246, 0.3);
     }
     
     .article-card-image {
@@ -258,7 +258,7 @@
     }
 </style>
 
-<div class="bg-gradient-to-br from-slate-950 via-blue-950/20 to-slate-950 min-h-screen pb-20">
+<div class="bg-gradient-to-br from-blue-800 via-blue-900 to-blue-800 min-h-screen pb-20">
     <div class="container mx-auto px-6 py-12">
         <!-- Header Category -->
         <div class="text-center mb-16 animate-fade-in-up">
@@ -286,19 +286,19 @@
         <!-- Sub-Categories Filter (if exists) -->
         @if($category->hasSubCategories())
         <div class="mb-12 animate-scale-in">
-            <div class="bg-slate-900/50 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border-2 border-blue-400/30">
+            <div class="bg-blue-800/50 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border-2 border-blue-400/30">
                 <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
                     <i class="fas fa-filter text-blue-400 animate-float"></i> 
                     <span>Filter Sub Kategori</span>
                 </h3>
                 <div class="flex flex-wrap gap-4">
                     <a href="{{ route('materi.show', $category->slug) }}" 
-                       class="filter-btn {{ !request()->has('sub') ? 'filter-btn-active text-white' : 'bg-slate-800 text-blue-200 hover:bg-blue-500/20 hover:text-white' }} px-6 py-3 rounded-full font-bold border-2 border-white/20 shadow-lg">
+                       class="filter-btn {{ !request()->has('sub') ? 'filter-btn-active text-white' : 'bg-blue-900/50 text-blue-200 hover:bg-blue-700/50 hover:text-white' }} px-6 py-3 rounded-full font-bold border-2 border-white/20 shadow-lg">
                         <i class="fas fa-list mr-2"></i> Semua
                     </a>
                     @foreach($category->subCategories as $sub)
                     <a href="{{ route('materi.sub-category', [$category->slug, $sub->slug]) }}" 
-                       class="filter-btn bg-slate-800 text-blue-200 hover:bg-purple-500/20 hover:text-purple-300 px-6 py-3 rounded-full font-bold border-2 border-blue-400/20 shadow-lg">
+                       class="filter-btn bg-blue-900/50 text-blue-200 hover:bg-purple-600/30 hover:text-purple-300 px-6 py-3 rounded-full font-bold border-2 border-blue-400/20 shadow-lg">
                         <i class="fas {{ $sub->icon }} mr-2"></i> {{ $sub->name }}
                     </a>
                     @endforeach
@@ -311,7 +311,7 @@
         @if($articles->count() > 0)
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($articles as $index => $article)
-                <article class="article-card bg-slate-900/50 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden group animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
+                <article class="article-card bg-blue-800/50 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden group animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
                     <!-- Thumbnail -->
                     <div class="article-card-image relative h-56 overflow-hidden">
                         @if($article->thumbnail)
@@ -324,7 +324,7 @@
                             </div>
                         @endif
                         
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900 via-blue-900/50 to-transparent"></div>
 
                         <!-- Sub-Category Badge (if exists) -->
                         @if($article->subCategory)
@@ -341,18 +341,18 @@
                     <div class="p-6">
                         <!-- Meta Info -->
                         <div class="flex items-center gap-4 text-xs text-blue-300 mb-4 font-semibold">
-                            <span class="flex items-center gap-2 bg-blue-500/20 px-3 py-1 rounded-full">
+                            <span class="flex items-center gap-2 bg-blue-600/30 px-3 py-1 rounded-full">
                                 <i class="far fa-calendar"></i> 
                                 {{ $article->published_at->format('d M Y') }}
                             </span>
-                            <span class="flex items-center gap-2 bg-slate-800 px-3 py-1 rounded-full">
+                            <span class="flex items-center gap-2 bg-blue-700/40 px-3 py-1 rounded-full">
                                 <i class="far fa-user"></i> 
                                 {{ $article->author->name }}
                             </span>
                         </div>
 
                         <!-- Title -->
-                        <h3 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-400 transition-colors leading-snug">
+                        <h3 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-300 transition-colors leading-snug">
                             {{ $article->title }}
                         </h3>
 
@@ -377,7 +377,7 @@
 
         @else
             <!-- Empty State -->
-            <div class="text-center py-20 bg-slate-900/50 backdrop-blur-xl rounded-[3rem] shadow-2xl border-2 border-blue-500/20 animate-scale-in">
+            <div class="text-center py-20 bg-blue-800/50 backdrop-blur-xl rounded-[3rem] shadow-2xl border-2 border-blue-500/20 animate-scale-in">
                 <div class="category-icon-wrapper inline-block mb-8">
                     <div class="w-28 h-28 bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-500/40 border-4 border-white/20 relative z-10">
                         <i class="fas {{ $category->icon }} text-white text-6xl animate-float"></i>
@@ -413,9 +413,9 @@
         min-width: 3rem;
         height: 3rem;
         padding: 0 1rem;
-        background: rgba(15, 23, 42, 0.5);
+        background: rgba(30, 58, 138, 0.5);
         backdrop-filter: blur(12px);
-        border: 2px solid rgba(59, 130, 246, 0.2);
+        border: 2px solid rgba(59, 130, 246, 0.3);
         border-radius: 1rem;
         color: #93c5fd;
         font-weight: 700;
@@ -423,8 +423,8 @@
     }
     
     .pagination > *:hover {
-        background: rgba(59, 130, 246, 0.2);
-        border-color: rgba(59, 130, 246, 0.4);
+        background: rgba(59, 130, 246, 0.3);
+        border-color: rgba(59, 130, 246, 0.5);
         color: white;
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
@@ -443,8 +443,8 @@
     }
     
     .pagination .disabled:hover {
-        background: rgba(15, 23, 42, 0.5);
-        border-color: rgba(59, 130, 246, 0.2);
+        background: rgba(30, 58, 138, 0.5);
+        border-color: rgba(59, 130, 246, 0.3);
         color: #93c5fd;
         transform: none;
         box-shadow: none;

@@ -9,9 +9,9 @@
 <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
-    /* Hero Gradient Animation - Disamakan dengan Program */
+    /* Hero Gradient Animation */
     .hero-animate {
-        background: linear-gradient(-45deg, #1e3a8a, #1e40af, #1e3a8a, #0f172a);
+        background: linear-gradient(-45deg, #1e40af, #1e3a8a, #1e40af, #1e3a8a);
         background-size: 400% 400%;
         animation: gradientBG 15s ease infinite;
     }
@@ -24,11 +24,13 @@
     /* Article Card Enhancements */
     .article-card {
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 1px solid rgba(226, 232, 240, 0.8);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
     }
     .article-card:hover {
         transform: translateY(-12px) scale(1.02);
-        box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.15);
+        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
+        border-color: rgba(96, 165, 250, 0.6);
     }
 
     /* Floating Shape Animation */
@@ -82,22 +84,22 @@
     {{-- Wave Divider --}}
     <div class="absolute bottom-0 left-0 right-0">
         <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
-            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#f8fafc"/>
+            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#1e3a8a"/>
         </svg>
     </div>
 </section>
 
-{{-- MAIN CONTENT --}}
-<section class="py-20 bg-slate-50 relative overflow-hidden">
+{{-- MAIN CONTENT - BACKGROUND BIRU --}}
+<section class="py-20 bg-gradient-to-b from-blue-900 to-blue-800 relative overflow-hidden">
     {{-- Decorative Background Elements --}}
-    <div class="absolute top-1/4 -right-20 w-96 h-96 bg-blue-100 rounded-full blur-[100px] opacity-50"></div>
-    <div class="absolute bottom-1/4 -left-20 w-96 h-96 bg-cyan-100 rounded-full blur-[100px] opacity-50"></div>
+    <div class="absolute top-1/4 -right-20 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px]"></div>
+    <div class="absolute bottom-1/4 -left-20 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]"></div>
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         @if($intisaris->count() > 0)
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                 @foreach($intisaris as $index => $intisari)
-                <article class="article-card group bg-white rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
                          data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
                     
                     {{-- Thumbnail with Glow --}}
@@ -131,23 +133,23 @@
                     {{-- Card Content --}}
                     <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
                         <div class="flex items-center gap-2 mb-3">
-                            <i class="far fa-calendar-alt text-blue-500 text-xs"></i>
-                            <span class="text-slate-400 text-[11px] font-bold uppercase tracking-wider">
+                            <i class="far fa-calendar-alt text-blue-300 text-xs"></i>
+                            <span class="text-blue-200 text-[11px] font-bold uppercase tracking-wider">
                                 {{ $intisari->published_at ? $intisari->published_at->locale('id')->isoFormat('D MMMM Y') : 'Baru' }}
                             </span>
                         </div>
 
-                        <h3 class="text-2xl font-bold text-slate-800 mb-4 line-clamp-2 group-hover:text-blue-600 transition-colors leading-tight">
+                        <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight">
                             {{ $intisari->title }}
                         </h3>
                         
-                        <p class="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
+                        <p class="text-blue-100 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
                             {{ $intisari->excerpt }}
                         </p>
                         
                         <div class="mt-auto">
                             <a href="{{ route('intisari.show', $intisari->slug) }}" 
-                               class="w-full py-4 bg-slate-900 group-hover:bg-blue-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-slate-200">
+                               class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
                                 <span>Baca Selengkapnya</span>
                                 <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
                             </a>
@@ -160,7 +162,7 @@
             {{-- Pagination --}}
             @if($intisaris->hasPages())
             <div class="mt-20" data-aos="fade-up">
-                <div class="flex justify-center bg-white p-4 rounded-3xl shadow-sm border border-slate-100 w-fit mx-auto">
+                <div class="flex justify-center bg-blue-900/50 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-blue-400/30 w-fit mx-auto">
                     {{ $intisaris->links('vendor.pagination.tailwind') }}
                 </div>
             </div>
@@ -169,14 +171,14 @@
         @else
             <div class="text-center py-20" data-aos="zoom-in">
                 <div class="relative w-48 h-48 mx-auto mb-10">
-                    <div class="absolute inset-0 bg-blue-100 rounded-full animate-ping opacity-20"></div>
-                    <div class="relative w-48 h-48 bg-white rounded-full flex items-center justify-center shadow-2xl border border-slate-100">
+                    <div class="absolute inset-0 bg-blue-600/30 rounded-full animate-ping opacity-20"></div>
+                    <div class="relative w-48 h-48 bg-blue-800 rounded-full flex items-center justify-center shadow-2xl border border-blue-600">
                         <i class="fas fa-book-reader text-blue-400 text-7xl"></i>
                     </div>
                 </div>
-                <h3 class="text-3xl font-bold text-slate-800 mb-4">Intisari Belum Tersedia</h3>
-                <p class="text-slate-500 max-w-md mx-auto mb-10">Tim redaksi sedang menyiapkan konten bermanfaat untuk mencerahkan hari Anda. Silakan kembali lagi nanti.</p>
-                <a href="{{ route('home') }}" class="px-10 py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl hover:bg-blue-700 transition-all">Kembali ke Beranda</a>
+                <h3 class="text-3xl font-bold text-white mb-4">Intisari Belum Tersedia</h3>
+                <p class="text-blue-200 max-w-md mx-auto mb-10">Tim redaksi sedang menyiapkan konten bermanfaat untuk mencerahkan hari Anda. Silakan kembali lagi nanti.</p>
+                <a href="{{ route('home') }}" class="px-10 py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl hover:bg-blue-500 transition-all">Kembali ke Beranda</a>
             </div>
         @endif
     </div>
@@ -192,7 +194,7 @@
             once: true
         });
 
-        // Magnetic effect (Persis seperti di Program)
+        // Magnetic effect
         const magneticElements = document.querySelectorAll('.article-card, a.bg-blue-600');
         magneticElements.forEach(el => {
             el.addEventListener('mousemove', (e) => {

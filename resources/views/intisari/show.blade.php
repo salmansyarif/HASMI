@@ -139,7 +139,7 @@
     @endfor
 </div>
 
-<div class="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 min-h-screen pb-32 relative">
+<div class="bg-gradient-to-br from-blue-800 via-blue-900 to-blue-800 min-h-screen pb-32 relative">
     {{-- Animated Background Orbs --}}
     <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
         <div class="absolute top-0 left-0 w-[600px] h-[600px] bg-blue-500 rounded-full blur-[150px] animate-float-gentle"></div>

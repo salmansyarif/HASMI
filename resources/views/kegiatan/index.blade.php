@@ -8,20 +8,14 @@
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
 <style>
-    :root {
-        --deep-blue: #1e3a8a;
-        --bright-blue: #2563eb;
-        --bg-shade: #f8fafc; /* Abu-abu ultra cerah untuk base */
-    }
-
     body {
         font-family: 'Plus Jakarta Sans', sans-serif;
-        background-color: var(--bg-shade);
+        background: linear-gradient(to bottom, #1e3a8a, #1e40af);
     }
 
-    /* HERO SECTION REPAIR */
+    /* HERO SECTION */
     .hero-kegiatan {
-        background: linear-gradient(135deg, #172554 0%, #1e40af 50%, #2563eb 100%);
+        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1e40af 100%);
         position: relative;
         overflow: hidden;
         min-height: 500px;
@@ -29,12 +23,11 @@
         align-items: center;
     }
 
-    /* Tambahkan Overlay Gelap agar Teks Putih Terbaca */
     .hero-kegiatan::before {
         content: '';
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.2); /* Gelap tipis */
+        background: rgba(0, 0, 0, 0.2);
         z-index: 1;
     }
 
@@ -51,7 +44,6 @@
         z-index: 10;
     }
 
-    /* Perbaikan Typografi Hero */
     .hero-title {
         font-size: 3.5rem;
         line-height: 1.1;
@@ -61,27 +53,27 @@
     }
 
     .hero-description {
-        color: #f1f5f9 !important; /* Putih keabu-abuan cerah */
+        color: #f1f5f9 !important;
         font-size: 1.25rem;
         line-height: 1.8;
         font-weight: 500;
         max-width: 800px;
         margin: 0 auto;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Shadow lebih kuat */
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     }
 
-    /* KARTU KEGIATAN */
+    /* KARTU KEGIATAN - FULL BIRU */
     .activity-card {
-        background: #ffffff;
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
         border-radius: 30px;
-        border: 1px solid #e2e8f0;
+        border: 1px solid rgba(59, 130, 246, 0.3);
         transition: all 0.4s ease;
     }
 
     .activity-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 25px 50px -12px rgba(30, 58, 138, 0.15);
-        border-color: #3b82f6;
+        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
+        border-color: rgba(96, 165, 250, 0.6);
     }
 
     .img-frame {
@@ -89,7 +81,7 @@
         overflow: hidden;
     }
 
-    /* Wave Divider fix */
+    /* Wave Divider */
     .wave-bottom {
         position: absolute;
         bottom: -1px;
@@ -100,7 +92,7 @@
     }
 
     .wave-bottom svg {
-        fill: var(--bg-shade);
+        fill: #1e3a8a;
     }
 </style>
 
@@ -132,8 +124,8 @@
     </div>
 </section>
 
-{{-- LIST SECTION --}}
-<section class="py-20">
+{{-- LIST SECTION - BACKGROUND BIRU --}}
+<section class="py-20 bg-gradient-to-b from-blue-900 to-blue-800">
     <div class="container mx-auto px-6 lg:px-12">
         @forelse($kegiatans as $index => $kegiatan)
             @if($loop->first)
@@ -146,8 +138,8 @@
                     @if($kegiatan->thumbnail)
                         <img src="{{ asset($kegiatan->thumbnail) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     @else
-                        <div class="w-full h-full bg-slate-100 flex items-center justify-center">
-                            <i class="fas fa-camera text-slate-300 text-4xl"></i>
+                        <div class="w-full h-full bg-blue-800 flex items-center justify-center">
+                            <i class="fas fa-camera text-blue-400 text-4xl"></i>
                         </div>
                     @endif
                     
@@ -159,22 +151,22 @@
 
                 {{-- Detail --}}
                 <div class="px-2">
-                    <div class="text-blue-600 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">
-                        <span class="w-6 h-[2px] bg-blue-600"></span>
+                    <div class="text-blue-200 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">
+                        <span class="w-6 h-[2px] bg-blue-300"></span>
                         {{ $kegiatan->location ?? 'NASIONAL' }}
                     </div>
                     
-                    <h3 class="text-xl font-bold text-slate-800 mb-4 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-blue-200 transition-colors line-clamp-2 leading-snug">
                         {{ $kegiatan->title }}
                     </h3>
 
-                    <p class="text-slate-500 text-sm mb-6 line-clamp-2 leading-relaxed">
+                    <p class="text-blue-100 text-sm mb-6 line-clamp-2 leading-relaxed">
                         {{ $kegiatan->description }}
                     </p>
 
-                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-                        <span class="text-xs font-bold text-slate-400 group-hover:text-blue-600 transition-colors">BACA DETAIL</span>
-                        <i class="fas fa-arrow-right text-slate-300 group-hover:text-blue-600 group-hover:translate-x-2 transition-all"></i>
+                    <div class="flex items-center justify-between pt-4 border-t border-blue-400/30">
+                        <span class="text-xs font-bold text-blue-200 group-hover:text-white transition-colors">BACA DETAIL</span>
+                        <i class="fas fa-arrow-right text-blue-300 group-hover:text-white group-hover:translate-x-2 transition-all"></i>
                     </div>
                 </div>
             </a>
@@ -184,12 +176,12 @@
             @endif
         @empty
             {{-- Empty State --}}
-            <div class="max-w-2xl mx-auto text-center py-20 bg-white rounded-[40px] shadow-sm border border-slate-100" data-aos="zoom-in">
-                <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-200 text-4xl">
+            <div class="max-w-2xl mx-auto text-center py-20 bg-blue-800 rounded-[40px] shadow-lg border border-blue-600" data-aos="zoom-in">
+                <div class="w-24 h-24 bg-blue-700 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-300 text-4xl">
                     <i class="fas fa-cloud-moon"></i>
                 </div>
-                <h3 class="text-2xl font-bold text-slate-800 mb-2">Belum Ada Dokumentasi</h3>
-                <p class="text-slate-500">Kami akan segera mengupdate laporan kegiatan terbaru dalam waktu dekat.</p>
+                <h3 class="text-2xl font-bold text-white mb-2">Belum Ada Dokumentasi</h3>
+                <p class="text-blue-200">Kami akan segera mengupdate laporan kegiatan terbaru dalam waktu dekat.</p>
             </div>
         @endforelse
 

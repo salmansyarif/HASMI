@@ -238,7 +238,7 @@
     }
 </style>
 
-<div class="bg-gradient-to-br from-slate-950 via-blue-950/20 to-slate-950 min-h-screen pb-20">
+<div class="bg-gradient-to-br from-blue-800 via-blue-900 to-blue-800 min-h-screen pb-20">
     <div class="container mx-auto px-6 pt-12 mb-8">
         <a href="{{ route('kegiatan.index') }}" 
            class="back-link inline-flex items-center gap-2 text-blue-400 hover:text-white font-bold transition-all group">
