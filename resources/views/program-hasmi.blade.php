@@ -28,7 +28,7 @@
             </h1>
             <div class="w-32 h-1.5 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 mx-auto rounded-full mb-8 animate-gradient" data-aos="fade" data-aos-delay="200"></div>
             <p class="text-xl md:text-2xl text-blue-100 leading-relaxed max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="300">
-                Berbagai program dakwah dan pemberdayaan umat untuk kemajuan Islam di Indonesia
+               Himpunan Ahlussunnah Untuk Masyarakat Islami (HASMI), sebuah Ormas Islam yang bergerak di bidang Dakwah, Pendidikan dan Sosial Kemasyarakatan memiliki berbagai program yang terus dilaksanakan secara rutin dan tertata secara rapih. Program-program tersebut diantaranya adalah:
             </p>
         </div>
     </div>
@@ -41,31 +41,7 @@
     </div>
 </section>
 
-{{-- INTRO SECTION --}}
-<section class="py-20 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800">
-    <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-            <div class="bg-blue-800/40 backdrop-blur-xl rounded-3xl border-2 border-blue-400/30 p-10 md:p-16 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-500" data-aos="fade-up">
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center shadow-xl">
-                        <i class="fas fa-info-circle text-white text-2xl"></i>
-                    </div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Tentang Program HASMI</h2>
-                </div>
-                <div class="space-y-5 text-blue-100 text-lg leading-relaxed">
-                    <p data-aos="fade-up" data-aos-delay="100">
-                        Program HASMI merupakan berbagai kegiatan dakwah dan pemberdayaan umat yang dilaksanakan 
-                        oleh Yayasan HASMI dalam rangka menyebarkan ajaran Islam yang rahmatan lil alamin.
-                    </p>
-                    <p data-aos="fade-up" data-aos-delay="200">
-                        Melalui program-program yang terstruktur dan berkelanjutan, kami berupaya memberikan 
-                        kontribusi nyata bagi kemajuan umat Islam di Indonesia.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 {{-- PROGRAM DAKWAH SECTION --}}
 <section class="py-20 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950 relative overflow-hidden">
@@ -80,7 +56,7 @@
         </div>
 
         {{-- Photo Gallery Grid --}}
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
             @php
             $dakwahPrograms = [
                 ['title' => 'TABLIGH AKBAR HASMI', 'desc' => 'Kegiatan dakwah akbar dengan menghadirkan para ustadz dan dai kondang untuk memberikan pencerahan kepada masyarakat luas'],
@@ -89,33 +65,34 @@
                 ['title' => 'SEBAR KARTU DAKWAH ATAU JAULAH DAKWAH', 'desc' => 'Menyebarkan kartu dakwah berupa materi-materi ilmu keIslaman yang sangat bermanfaat untuk kaum muslimin yang disebar secara gratis di tempat-tempat umum dan dilaksanakan oleh struktur, anggota dan simpatisan HASMI juga masyarakat pada umumnya.'],
                 ['title' => 'SAFARI DAKWAH (SAFDA)', 'desc' => 'Yaitu program yang bertujuan meningkatkan keimanan dan kepedulian struktur, anggota dan simpatisan HASMI serta masyarakat terhadap masjid-masjid melalui program membersihkan masjid, sebar kartu dakwah, tausiyah setiap ba\'da sholat dan ukhuwah Islamiyah yang diselenggarakan selama satu hari satu malam gratis dan terbuka untuk umum.'],
                 ['title' => 'SEMINAR', 'desc' => 'Sebuah program yang bertujuan untuk meningkatkan keilmuan, keimanan dan ketakwaan pelajar baik pelajar sekolah tingkat pertama maupun Mahasiswa. Program ini dilaksanakan bekerjasama dengan pihak-pihak sekolah ataupun kampus.'],
+                ['title' => 'DAKWAH DIGITAL', 'desc' => 'Pemanfaatan teknologi digital dan media sosial untuk menyebarkan konten dakwah yang inspiratif dan edukatif ke segmen masyarakat di jagat maya.'],
             ];
             @endphp
             
-            @foreach($dakwahPrograms as $index => $program)
-            <div onclick="openImageModal('{{ asset('dakwah_' . ($index + 1) . '.jpg') }}', '{{ $program['title'] }}', '{{ $program['desc'] }}', 'Dakwah')" 
-                 class="group relative aspect-[4/3] rounded-2xl overflow-hidden border-2 border-green-400/30 hover:border-green-300 shadow-xl hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-500 hover:-translate-y-2 cursor-pointer" 
+            @foreach($dakwahPrograms as $index => $item)
+            <div onclick="openImageModal('{{ asset('dakwah_' . ($index + 1) . '.jpg') }}', '{{ $item['title'] }}', '{{ $item['desc'] }}', 'Dakwah')" 
+                 class="group relative aspect-[4/3] rounded-2xl overflow-hidden border-2 border-white/10 hover:border-white/30 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer {{ $loop->last && $loop->count % 2 != 0 ? 'md:col-span-2 md:w-1/2 md:mx-auto' : '' }}" 
                  data-aos="zoom-in" data-aos-delay="{{ ($index + 1) * 100 }}">
                 <img src="{{ asset('dakwah_' . ($index + 1) . '.jpg') }}" 
-                     alt="{{ $program['title'] }}" 
+                     alt="{{ $item['title'] }}" 
                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                     onerror="this.src='https://via.placeholder.com/800x600/059669/ffffff?text={{ urlencode($program['title']) }}'">
+                     onerror="this.src='https://via.placeholder.com/800x600/333333/ffffff?text={{ urlencode($item['title']) }}'">
                 
                 {{-- Overlay --}}
-                <div class="absolute inset-0 bg-gradient-to-t from-green-950 via-green-900/60 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
                 
                 {{-- Content --}}
                 <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full uppercase">Dakwah</span>
+                        <span class="px-3 py-1 bg-white/20 backdrop-blur-md text-white border border-white/20 text-xs font-semibold rounded-full uppercase tracking-wider">Dakwah</span>
                     </div>
-                    <h3 class="text-white font-bold text-lg mb-2">{{ $program['title'] }}</h3>
-                    <p class="text-green-200 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">{{ $program['desc'] }}</p>
+                    <h3 class="text-white font-bold text-lg mb-2">{{ $item['title'] }}</h3>
+                    <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">{{ $item['desc'] }}</p>
                 </div>
 
                 {{-- Click to view indicator --}}
                 <div class="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-lg">
-                    <i class="fas fa-expand text-green-600"></i>
+                    <i class="fas fa-expand text-gray-800"></i>
                 </div>
             </div>
             @endforeach
@@ -164,7 +141,7 @@
         </div>
 
         {{-- Photo Gallery Grid --}}
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
             @php
             $pendidikanPrograms = [
                 ['title' => 'MAHAD HUDA ISLAMI', 'desc' => 'Lembaga pendidikan Islam terpadu di Bogor yang fokus pada pembentukan karakter dan keilmuan Islam yang mendalam'],
@@ -173,33 +150,34 @@
                 ['title' => 'MAHAD IMAM MUSLIM ', 'desc' => 'Bimbingan menghafal Al-Qur\'an di cirebon  dengan metode yang terstruktur dan didampingi oleh para pengajar yang berpengalaman'],
                 ['title' => 'MA HAD MAKKAH ', 'desc' => 'Pelatihan intensif di cianjur dan untuk mencetak para da\'i yang kompeten dalam menyebarkan ajaran Islam dengan baik dan benar'],
                 ['title' => 'MAHAD MUALIMAT AT TAUHID', 'desc' => 'Kajian Islam rutin di  bogor untuk berbagai kalangan dengan materi yang disesuaikan kebutuhan jamaah'],
+                ['title' => 'BEASISWA PENDIDIKAN', 'desc' => 'Pemberian beasiswa penuh bagi santri berprestasi dan kurang mampu untuk menempuh pendidikan di lembaga-lembaga pendidikan HASMI.'],
             ];
             @endphp
             
-            @foreach($pendidikanPrograms as $index => $program)
-            <div onclick="openImageModal('{{ asset('pendidikan_' . ($index + 1) . '.jpg') }}', '{{ $program['title'] }}', '{{ $program['desc'] }}', 'Pendidikan')" 
-                 class="group relative aspect-[4/3] rounded-2xl overflow-hidden border-2 border-blue-400/30 hover:border-blue-300 shadow-xl hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-500 hover:-translate-y-2 cursor-pointer" 
+            @foreach($pendidikanPrograms as $index => $item)
+            <div onclick="openImageModal('{{ asset('pendidikan_' . ($index + 1) . '.jpg') }}', '{{ $item['title'] }}', '{{ $item['desc'] }}', 'Pendidikan')" 
+                 class="group relative aspect-[4/3] rounded-2xl overflow-hidden border-2 border-white/10 hover:border-white/30 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer {{ $loop->last && $loop->count % 2 != 0 ? 'md:col-span-2 md:w-1/2 md:mx-auto' : '' }}" 
                  data-aos="zoom-in" data-aos-delay="{{ ($index + 1) * 100 }}">
                 <img src="{{ asset('pendidikan_' . ($index + 1) . '.jpg') }}" 
-                     alt="{{ $program['title'] }}" 
+                     alt="{{ $item['title'] }}" 
                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                     onerror="this.src='https://via.placeholder.com/800x600/1e40af/ffffff?text={{ urlencode($program['title']) }}'">
+                     onerror="this.src='https://via.placeholder.com/800x600/333333/ffffff?text={{ urlencode($item['title']) }}'">
                 
                 {{-- Overlay --}}
-                <div class="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-900/60 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
                 
                 {{-- Content --}}
                 <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="px-3 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full uppercase">Pendidikan</span>
+                        <span class="px-3 py-1 bg-white/20 backdrop-blur-md text-white border border-white/20 text-xs font-semibold rounded-full uppercase tracking-wider">Pendidikan</span>
                     </div>
-                    <h3 class="text-white font-bold text-lg mb-2">{{ $program['title'] }}</h3>
-                    <p class="text-blue-200 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">{{ $program['desc'] }}</p>
+                    <h3 class="text-white font-bold text-lg mb-2">{{ $item['title'] }}</h3>
+                    <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">{{ $item['desc'] }}</p>
                 </div>
 
                 {{-- Click to view indicator --}}
                 <div class="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-lg">
-                    <i class="fas fa-expand text-blue-600"></i>
+                    <i class="fas fa-expand text-gray-800"></i>
                 </div>
             </div>
             @endforeach
@@ -246,7 +224,7 @@
         </div>
 
         {{-- Photo Gallery Grid --}}
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
             @php
             $sosialPrograms = [
  ['title' => 'PEMBAGIAN SEMBAKO', 'desc' => 'Program distribusi sembako gratis kepada keluarga kurang mampu dan masyarakat yang membutuhkan untuk membantu memenuhi kebutuhan pangan sehari-hari'],
@@ -255,30 +233,32 @@
                 ['title' => 'BANTUAN BANJIR', 'desc' => 'Penggalangan dan penyaluran bantuan darurat berupa makanan, pakaian, dan kebutuhan pokok untuk korban banjir yang kehilangan tempat tinggal'],
                 ['title' => 'BANTUAN MUSIBAH GUNUNG BROMO', 'desc' => 'Program bantuan kemanusiaan untuk masyarakat terdampak erupsi Gunung Bromo berupa logistik, tempat tinggal sementara, dan bantuan pemulihan'],
                 ['title' => 'BANTUAN KEMANUSIAAN ROHINGYA', 'desc' => 'Penggalangan dana dan bantuan kemanusiaan untuk pengungsi Rohingya yang mengalami krisis kemanusiaan dan membutuhkan pertolongan'],
+                ['title' => 'LAYANAN AMBULANS GRATIS', 'desc' => 'Layanan antar jemput pasien dan jenazah gratis bagi masyarakat tidak mampu di wilayah operasional HASMI.'],
+                ['title' => 'KHITANAN MASSAL', 'desc' => 'Program khitanan massal gratis untuk anak-anak tidak mampu yang diselenggarakan secara berkala.'],
             ];
             @endphp
             
-            @foreach($sosialPrograms as $index => $program)
-            <div onclick="openImageModal('{{ asset('sosial_' . ($index + 1) . '.jpg') }}', '{{ $program['title'] }}', '{{ $program['desc'] }}', 'Sosial')" 
-                 class="group relative aspect-[4/3] rounded-2xl overflow-hidden border-2 border-red-400/30 hover:border-red-300 shadow-xl hover:shadow-2xl hover:shadow-red-500/50 transition-all duration-500 hover:-translate-y-2 cursor-pointer" 
+            @foreach($sosialPrograms as $index => $item)
+            <div onclick="openImageModal('{{ asset('sosial_' . ($index + 1) . '.jpg') }}', '{{ $item['title'] }}', '{{ $item['desc'] }}', 'Sosial')" 
+                 class="group relative aspect-[4/3] rounded-2xl overflow-hidden border-2 border-white/10 hover:border-white/30 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer" 
                  data-aos="zoom-in" data-aos-delay="{{ ($index + 1) * 100 }}">
                 <img src="{{ asset('sosial_' . ($index + 1) . '.jpg') }}" 
-                     alt="{{ $program['title'] }}" 
+                     alt="{{ $item['title'] }}" 
                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                     onerror="this.src='https://via.placeholder.com/800x600/dc2626/ffffff?text={{ urlencode($program['title']) }}'">
+                     onerror="this.src='https://via.placeholder.com/800x600/333333/ffffff?text={{ urlencode($item['title']) }}'">
                 
-                <div class="absolute inset-0 bg-gradient-to-t from-red-950 via-red-900/60 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
                 
                 <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                     <div class="flex items-center gap-2 mb-3">
-                        <span class="px-3 py-1 bg-red-500 text-white text-xs font-semibold rounded-full uppercase">Sosial</span>
+                        <span class="px-3 py-1 bg-white/20 backdrop-blur-md text-white border border-white/20 text-xs font-semibold rounded-full uppercase tracking-wider">Sosial</span>
                     </div>
-                    <h3 class="text-white font-bold text-lg mb-2">{{ $program['title'] }}</h3>
-                    <p class="text-red-200 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">{{ $program['desc'] }}</p>
+                    <h3 class="text-white font-bold text-lg mb-2">{{ $item['title'] }}</h3>
+                    <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">{{ $item['desc'] }}</p>
                 </div>
 
                 <div class="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-lg">
-                    <i class="fas fa-expand text-red-600"></i>
+                    <i class="fas fa-expand text-gray-800"></i>
                 </div>
             </div>
             @endforeach
@@ -347,6 +327,127 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- KOMENTAR SECTION --}}
+<section class="py-20 bg-blue-900 border-t border-blue-800">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-black text-white mb-10 flex items-center gap-4 uppercase tracking-tighter" data-aos="fade-right">
+            <i class="far fa-comments text-blue-400 animate-float"></i>
+            Respon Umat ({{ isset($comments) ? $comments->count() : 0 }})
+        </h2>
+
+        <div class="grid lg:grid-cols-12 gap-10">
+            <!-- Form Komentar -->
+            <div class="lg:col-span-5 order-2 lg:order-1" data-aos="fade-up">
+                <div class="bg-gradient-to-br from-blue-800 to-blue-900/60 rounded-[2rem] p-8 border-2 border-blue-400/30 sticky top-10 shadow-2xl backdrop-blur-xl">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                        <i class="fas fa-pen text-blue-400"></i>
+                        Tulis Komentar
+                    </h3>
+                    
+                    @if(session('success'))
+                    <div class="bg-gradient-to-r from-green-500 to-green-600 border-2 border-white/20 text-white px-5 py-4 rounded-xl mb-6 flex items-center gap-3 shadow-lg animate-scale-in">
+                        <i class="fas fa-check-circle text-2xl"></i>
+                        <span class="font-semibold">{{ session('success') }}</span>
+                    </div>
+                    @endif
+
+                    <form action="{{ route('comment.store') }}" method="POST" class="space-y-5">
+                        @csrf
+                        
+                        {{-- Hidden inputs for morph relationship --}}
+                        <input type="hidden" name="commentable_type" value="App\Models\Program">
+                        <input type="hidden" name="commentable_id" value="{{ isset($program) ? $program->id : '' }}">
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-bold text-blue-200 mb-2">
+                                    Nama <span class="text-red-400">*</span>
+                                </label>
+                                <input type="text" id="name" name="name" value="{{ old('name') }}" required
+                                       class="w-full px-5 py-4 bg-blue-950/50 border-2 border-blue-400/30 rounded-xl text-white placeholder-blue-200/50 focus:ring-2 focus:ring-blue-400 outline-none transition-all backdrop-blur-sm @error('name') border-red-500 @enderror"
+                                       placeholder="Nama Lengkap">
+                                @error('name')
+                                <p class="text-red-400 text-sm mt-2 flex items-center gap-1">
+                                    <i class="fas fa-exclamation-circle"></i>{{ $message }}
+                                </p>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-bold text-blue-200 mb-2">
+                                    Email <span class="text-red-400">*</span>
+                                </label>
+                                <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                                       class="w-full px-5 py-4 bg-blue-950/50 border-2 border-blue-400/30 rounded-xl text-white placeholder-blue-200/50 focus:ring-2 focus:ring-blue-400 outline-none transition-all backdrop-blur-sm @error('email') border-red-500 @enderror"
+                                       placeholder="email@example.com">
+                                @error('email')
+                                <p class="text-red-400 text-sm mt-2 flex items-center gap-1">
+                                    <i class="fas fa-exclamation-circle"></i>{{ $message }}
+                                </p>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label for="comment" class="block text-sm font-bold text-blue-200 mb-2">
+                                    Komentar <span class="text-red-400">*</span>
+                                </label>
+                                <textarea id="comment" name="comment" rows="4" required maxlength="1000"
+                                          class="w-full px-5 py-4 bg-blue-950/50 border-2 border-blue-400/30 rounded-xl text-white placeholder-blue-200/50 focus:ring-2 focus:ring-blue-400 outline-none transition-all backdrop-blur-sm @error('comment') border-red-500 @enderror"
+                                          placeholder="Tulis komentar Anda...">{{ old('comment') }}</textarea>
+                                @error('comment')
+                                <p class="text-red-400 text-sm mt-2 flex items-center gap-1">
+                                    <i class="fas fa-exclamation-circle"></i>{{ $message }}
+                                </p>
+                                @enderror
+                                <p class="text-blue-300/70 text-xs mt-2">Maksimal 1000 karakter</p>
+                            </div>
+                        </div>
+
+                        <button type="submit" 
+                                class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white font-black py-4 rounded-xl transition-all shadow-lg shadow-blue-500/40 uppercase tracking-widest text-sm border-2 border-white/20">
+                            <span class="flex items-center justify-center gap-2">
+                                <i class="fas fa-paper-plane"></i>
+                                Kirim Respon
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- List Komentar -->
+            <div class="lg:col-span-7 order-1 lg:order-2 space-y-6">
+                @if(isset($comments) && count($comments) > 0)
+                    @foreach($comments as $index => $comment)
+                    <div class="bg-blue-800/50 backdrop-blur-sm rounded-3xl p-8 flex gap-6 border border-blue-700 hover:border-blue-500 transition-all" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-blue-500/40 border-2 border-white/20">
+                                {{ $comment->initials }}
+                            </div>
+                        </div>
+
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-white text-lg">{{ $comment->name }}</h4>
+                                <span class="text-[10px] text-blue-300 uppercase font-bold tracking-widest bg-blue-600/30 px-3 py-1 rounded-full flex items-center gap-1">
+                                    <i class="far fa-clock"></i>
+                                    {{ $comment->created_at->locale('id')->diffForHumans() }}
+                                </span>
+                            </div>
+                            <p class="text-blue-100 leading-relaxed font-light whitespace-pre-wrap">{{ $comment->comment }}</p>
+                        </div>
+                    </div>
+                    @endforeach
+                @else
+                    <div class="text-center py-20 bg-blue-800/30 backdrop-blur-sm rounded-[2rem] border-2 border-blue-400/20 border-dashed" data-aos="fade-up">
+                        <i class="far fa-comment-dots text-blue-400/40 text-6xl mb-6 animate-float"></i>
+                        <p class="text-blue-300 italic font-light text-lg">Jadilah yang pertama memberikan respon...</p>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

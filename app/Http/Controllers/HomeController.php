@@ -28,6 +28,9 @@ class HomeController extends Controller
 
         // 2. Programs
         $programs = Program::with('category')
+            ->whereHas('category', function($q) {
+                $q->where('name', '!=', 'Program HASMI');
+            })
             ->where('is_active', true)
             ->latest('created_at')
             ->take(5)
@@ -74,10 +77,17 @@ class HomeController extends Controller
             ->take(10);
 
         // Data for Sections
-        $homePrograms = Program::with('category')->where('is_active', true)->orderBy('position')->take(4)->get();
-        $homeArticles = Article::with('category')->published()->latest('published_at')->take(4)->get();
-        $homeIntisari = Intisari::where('status', 'published')->latest('created_at')->take(4)->get();
-        $homeKegiatan = Kegiatan::where('status', 'published')->latest('event_date')->take(4)->get();
+        $homePrograms = Program::with('category')
+            ->whereHas('category', function($q) {
+                $q->where('name', '!=', 'Program HASMI');
+            })
+            ->where('is_active', true)
+            ->orderBy('position')
+            ->take(6)
+            ->get();
+        $homeArticles = Article::with('category')->published()->latest('published_at')->take(6)->get();
+        $homeIntisari = Intisari::where('status', 'published')->latest('created_at')->take(6)->get();
+        $homeKegiatan = Kegiatan::where('status', 'published')->latest('event_date')->take(6)->get();
 
         // Counts for statistics
         $materiCount = Article::published()->count();

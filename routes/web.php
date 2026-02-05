@@ -62,9 +62,7 @@ Route::prefix('program')->name('program.')->group(function () {
 Route::get('/program-detail/{slug}', [ProgramController::class, 'show'])->name('program.show');
 
 // Program HASMI (Static Page)
-Route::get('/program-hasmi', function () {
-    return view('program-hasmi');
-})->name('program-hasmi');
+Route::get('/program-hasmi', [ProgramController::class, 'programHasmi'])->name('program-hasmi');
 
 /*
 |--------------------------------------------------------------------------
@@ -181,6 +179,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('kegiatan', AdminKegiatanController::class);
     Route::post('kegiatan/{kegiatan}/photo/delete', [AdminKegiatanController::class, 'deletePhoto'])
         ->name('kegiatan.photo.delete');
+    Route::post('kegiatan/{kegiatan}/thumbnail', [AdminKegiatanController::class, 'setThumbnail'])
+        ->name('kegiatan.thumbnail.update');
 
     /*
     |--------------------------------------------------------------------------

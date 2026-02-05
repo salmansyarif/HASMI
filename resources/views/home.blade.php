@@ -191,7 +191,16 @@
                                 @if($update->thumbnail || (isset($update->cover) && $update->cover) || (isset($update->photos) && !empty($update->photos)))
                                     @php 
                                         $bgImage = $update->thumbnail ?? $update->cover ?? ($update->photos[0] ?? null);
-                                        $bgUrl = $bgImage ? asset($bgImage) : null;
+                                        $bgUrl = null;
+                                        if ($bgImage) {
+                                            if (filter_var($bgImage, FILTER_VALIDATE_URL)) {
+                                                $bgUrl = $bgImage;
+                                            } elseif (\Illuminate\Support\Str::startsWith($bgImage, 'storage/')) {
+                                                $bgUrl = asset($bgImage);
+                                            } else {
+                                                $bgUrl = asset('storage/' . $bgImage);
+                                            }
+                                        }
                                     @endphp
                                     @if($bgUrl)
                                         <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[12000ms] ease-linear scale-100 hover:scale-110" 
@@ -462,7 +471,7 @@
             <p class="text-blue-200 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Berbagai program terbaik untuk pembinaan generasi muslim Indonesia</p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             @foreach($homePrograms as $index => $p)
             <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
                      data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
@@ -470,7 +479,7 @@
                 {{-- Thumbnail --}}
                 <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
                     @if($p->thumbnail)
-                        <img src="{{ asset($p->thumbnail) }}" 
+                        <img src="{{ asset('storage/' . $p->thumbnail) }}" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                              alt="{{ $p->title }}"
                              loading="lazy">
@@ -533,7 +542,7 @@
             <p class="text-blue-200 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Artikel dan materi pembelajaran untuk pemahaman agama yang lebih baik</p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($homeArticles as $index => $article)
             <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
                      data-aos="fade-up" data-aos-delay="{{ $index * 150 }}">
@@ -609,7 +618,7 @@
             <p class="text-blue-200 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Kumpulan materi dan ringkasan pembelajaran dalam bentuk publikasi</p>
         </div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($homeIntisari as $index => $i)
             <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
                      data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
@@ -684,7 +693,7 @@
             <p class="text-blue-200 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Dokumentasi kegiatan dan agenda dakwah terbaru</p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($homeKegiatan as $index => $k)
             <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
                      data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">

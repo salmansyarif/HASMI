@@ -110,4 +110,28 @@ class ProgramController extends Controller
 
         return view('program.show', compact('program', 'relatedPrograms'));
     }
+    /**
+     * Show Program HASMI static page with comments
+     */
+    public function programHasmi()
+    {
+        // Cari atau buat program record dummy untuk menampung komentar
+        $program = Program::firstOrCreate(
+            ['slug' => 'program-hasmi-landing'],
+            [
+                'title' => 'Program HASMI',
+                'description' => 'Landing page Program HASMI',
+                // Ambil category pertama untuk foreign key constraint
+                'program_category_id' => ProgramCategory::first()->id ?? 1, 
+                'content' => 'Static Page Content',
+                'media_type' => 'image',
+                'is_active' => true
+            ]
+        );
+
+        // Load komentar yg approved
+        $comments = $program->comments()->where('status', 'approved')->latest()->get();
+
+        return view('program-hasmi', compact('program', 'comments'));
+    }
 }

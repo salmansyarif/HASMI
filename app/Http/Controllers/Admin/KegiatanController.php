@@ -35,13 +35,13 @@ class KegiatanController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:255',
-            'description' => 'required',
+            'description' => 'nullable',
             'content' => 'nullable',
             'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'show_thumbnail_in_list' => 'boolean',
             'photo_position' => 'required|in:top,bottom,none',
-            'event_date' => 'nullable|date',
-            'location' => 'nullable|max:255',
+            // 'event_date' => 'nullable|date', // Removed
+            // 'location' => 'nullable|max:255', // Removed
             'status' => 'required|in:draft,published',
         ]);
 
@@ -83,13 +83,13 @@ class KegiatanController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:255',
-            'description' => 'required',
+            'description' => 'nullable',
             'content' => 'nullable',
             'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'show_thumbnail_in_list' => 'boolean',
             'photo_position' => 'required|in:top,bottom,none',
-            'event_date' => 'nullable|date',
-            'location' => 'nullable|max:255',
+            // 'event_date' => 'nullable|date', // Removed
+            // 'location' => 'nullable|max:255', // Removed
             'status' => 'required|in:draft,published',
         ]);
 
@@ -170,6 +170,33 @@ class KegiatanController extends Controller
             ]);
 
             return response()->json(['success' => true, 'message' => 'Foto berhasil dihapus!']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Foto tidak ditemukan!'], 400);
+    }
+    public function setThumbnail(Request $request, Kegiatan $kegiatan)
+    {
+        $photoPath = $request->input('photo');
+        
+        if ($kegiatan->photos && in_array($photoPath, $kegiatan->photos)) {
+            // Reorder photos array: Move selected photo to index 0
+            $photos = $kegiatan->photos;
+            
+            // Remove from current position
+            $photos = array_filter($photos, function($p) use ($photoPath) {
+                return $p !== $photoPath;
+            });
+            
+            // Prepend to start
+            array_unshift($photos, $photoPath);
+            $photos = array_values($photos); // Reindex
+
+            $kegiatan->update([
+                'photos' => $photos,
+                'thumbnail' => $photoPath
+            ]);
+
+            return response()->json(['success' => true, 'message' => 'Thumbnail berhasil diupdate!']);
         }
 
         return response()->json(['success' => false, 'message' => 'Foto tidak ditemukan!'], 400);

@@ -24,9 +24,9 @@
             <!-- DESKRIPSI -->
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    Deskripsi Singkat *
+                    Deskripsi Singkat (Opsional)
                 </label>
-                <textarea name="description" rows="3" required
+                <textarea name="description" rows="3"
                     class="w-full px-4 py-3 border rounded-lg @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
                 @error('description') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
             </div>
@@ -43,30 +43,15 @@
             <!-- FOTO -->
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    Foto Kegiatan
+                    Foto Kegiatan 
+                    <span class="text-xs font-normal text-gray-500 ml-1">(Foto pertama yang dipilih akan menjadi thumbnail)</span>
                 </label>
                 <input type="file" name="photos[]" multiple
                     class="w-full px-4 py-3 border rounded-lg @error('photos.*') border-red-500 @enderror">
                 @error('photos.*') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
             </div>
 
-            <!-- TANGGAL -->
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    Tanggal Kegiatan
-                </label>
-                <input type="date" name="event_date" value="{{ old('event_date') }}"
-                    class="w-full px-4 py-3 border rounded-lg @error('event_date') border-red-500 @enderror">
-            </div>
-
-            <!-- LOKASI -->
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    Lokasi
-                </label>
-                <input type="text" name="location" value="{{ old('location') }}"
-                    class="w-full px-4 py-3 border rounded-lg @error('location') border-red-500 @enderror">
-            </div>
+            <!-- TANGGAL & LOKASI DIHAPUS -->
 
             <!-- STATUS -->
             <div>

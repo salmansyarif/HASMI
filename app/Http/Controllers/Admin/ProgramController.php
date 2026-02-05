@@ -73,7 +73,9 @@ class ProgramController extends Controller
                 ? 'required|exists:program_subcategories,id' 
                 : 'nullable|exists:program_subcategories,id',
             'title' => 'required|max:255',
-            'description' => 'required',
+            'title' => 'required|max:255',
+            'description' => 'nullable',
+            'content' => 'nullable',
             'content' => 'nullable',
             'media_type' => 'required|in:image,video',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
@@ -160,7 +162,9 @@ class ProgramController extends Controller
                 ? 'required|exists:program_subcategories,id' 
                 : 'nullable|exists:program_subcategories,id',
             'title' => 'required|max:255',
-            'description' => 'required',
+            'title' => 'required|max:255',
+            'description' => 'nullable',
+            'content' => 'nullable',
             'content' => 'nullable',
             'media_type' => 'required|in:image,video',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',

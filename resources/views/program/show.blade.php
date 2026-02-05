@@ -368,13 +368,13 @@
                     <!-- Media (Image/Video) -->
                     <div class="media-container mb-10 shadow-2xl animate-scale-in">
                         @if($program->media_type == 'video' && $program->video_url)
-                            <div class="aspect-w-16 aspect-h-9">
+                            <div class="aspect-video w-full relative overflow-hidden rounded-xl">
                                 @if(Str::contains($program->video_url, 'youtube.com') || Str::contains($program->video_url, 'youtu.be'))
                                     <iframe src="{{ str_replace('watch?v=', 'embed/', $program->video_url) }}" 
                                             frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                            allowfullscreen class="w-full h-96 rounded-xl"></iframe>
+                                            allowfullscreen class="absolute inset-0 w-full h-full text-center"></iframe>
                                 @else
-                                    <video controls class="w-full rounded-xl">
+                                    <video controls class="w-full h-full object-cover rounded-xl">
                                         <source src="{{ asset('storage/' . $program->video_url) }}" type="video/mp4">
                                         Browser anda tidak mendukung tag video.
                                     </video>

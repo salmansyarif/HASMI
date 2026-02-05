@@ -70,9 +70,9 @@
             <!-- DESKRIPSI -->
             <div>
                 <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">
-                    Deskripsi Singkat <span class="text-red-500">*</span>
+                    Deskripsi Singkat (Opsional)
                 </label>
-                <textarea id="description" name="description" rows="3" required
+                <textarea id="description" name="description" rows="3"
                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('description') border-red-500 @enderror"
                           placeholder="Deskripsi singkat program (1-2 kalimat)...">{{ old('description', $program->description) }}</textarea>
                 @error('description')
