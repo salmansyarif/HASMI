@@ -1,398 +1,312 @@
-<nav id="navbar" class="fixed w-full z-50 bg-white transition-all duration-300 shadow-sm">
-    <div class="container mx-auto px-6 py-4">
-        <div class="flex items-center justify-between">
+<nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-xl transition-all duration-300 shadow-sm border-b border-gray-100/50">
+    <div class="container mx-auto px-6 h-24 flex items-center justify-between">
 
-            <!-- Logo -->
-            <a href="{{ route('home') }}" class="flex items-center gap-3">
-                <div class="w-12 h-12 hero-gradient rounded-xl flex items-center justify-center">
-                    <span class="text-white font-bold text-xl">H</span>
-                </div>
-                <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+        <!-- LOGO BRANDING (Matches Home Hero) -->
+        <a href="{{ route('home') }}" class="flex items-center gap-3 group">
+            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.2)] border border-blue-100 group-hover:scale-110 transition-transform duration-300">
+                <img src="{{ asset('img/hasmilogo.png') }}" alt="HASMI Logo" class="w-8 h-8 object-contain">
+            </div>
+            <div class="flex flex-col">
+                <span class="text-2xl font-extrabold text-slate-800 tracking-tighter leading-none group-hover:text-blue-700 transition-colors">
                     HASMI
                 </span>
+                <span class="text-[10px] font-bold text-blue-600 tracking-widest uppercase">Himpunan Ahlussunnah</span>
+            </div>
+        </a>
+
+        <!-- ================= DESKTOP MENU ================= -->
+        <div class="hidden lg:flex items-center gap-1">
+
+            {{-- MENU ITEMS --}}
+            <a href="{{ route('home') }}"
+               class="nav-link px-4 py-2 rounded-full text-base font-bold text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 flex items-center gap-2 {{ request()->routeIs('home') ? 'bg-blue-50 text-blue-700' : '' }}">
+                Beranda
             </a>
 
-            <!-- ================= DESKTOP MENU ================= -->
-            <div class="hidden lg:flex items-center gap-2">
+            <a href="{{ route('tentang') }}"
+               class="nav-link px-4 py-2 rounded-full text-base font-bold text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 flex items-center gap-2 {{ request()->routeIs('tentang') ? 'bg-blue-50 text-blue-700' : '' }}">
+                Tentang Kami
+            </a>
 
-                <a href="{{ route('home') }}"
-                   class="nav-link text-gray-700 px-4 py-2 rounded-lg {{ request()->routeIs('home') ? 'active' : '' }}">
-                    Beranda
-                </a>
-
-                <a href="{{ route('tentang') }}"
-                   class="nav-link text-gray-700 px-4 py-2 rounded-lg {{ request()->routeIs('tentang') ? 'active' : '' }}">
-                    Tentang Kami
-                </a>
-
-                <!-- ===== DROPDOWN MATERI ===== -->
-                <div class="relative group">
-                    <a href="{{ route('materi.index') }}"
-                       class="nav-link text-gray-700 px-4 py-2 rounded-lg flex items-center gap-1 {{ request()->routeIs('materi.*') ? 'active' : '' }}">
-                        Materi
-                        <i class="fas fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
-                    </a>
-
-                    <div class="absolute left-0 mt-2 w-64 bg-white rounded-xl shadow-xl opacity-0 invisible
-                                group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100">
-
-                        @php
-                            $categories = \App\Models\Category::with('subCategories')
-                                ->orderBy('name')->get();
-                        @endphp
-
-                        @foreach($categories as $cat)
-                            @if($cat->hasSubCategories())
-                                <div class="relative nested-dropdown">
-                                    <a href="{{ route('materi.show', $cat->slug) }}"
-                                       class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600
-                                              transition-colors border-b border-gray-100 flex items-center justify-between">
-                                        <span>
-                                            <i class="fas {{ $cat->icon }} mr-2"></i> {{ $cat->name }}
-                                        </span>
-                                        <i class="fas fa-chevron-right text-xs"></i>
-                                    </a>
-
-                                    <div class="absolute left-full top-0 ml-1 w-64 bg-white rounded-xl shadow-xl
-                                                opacity-0 invisible nested-dropdown:hover:opacity-100
-                                                nested-dropdown:hover:visible transition-all duration-300 border border-gray-100">
-                                        @foreach($cat->subCategories as $sub)
-                                            <a href="{{ route('materi.sub-category', [$cat->slug, $sub->slug]) }}"
-                                               class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600
-                                                      transition-colors {{ $loop->last ? 'rounded-b-xl' : 'border-b border-gray-100' }}">
-                                                <i class="fas {{ $sub->icon }} mr-2 text-sm"></i> {{ $sub->name }}
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            @else
-                                <a href="{{ route('materi.show', $cat->slug) }}"
-                                   class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600
-                                          transition-colors {{ $loop->last ? 'rounded-b-xl' : 'border-b border-gray-100' }}">
-                                    <i class="fas {{ $cat->icon }} mr-2"></i> {{ $cat->name }}
-                                </a>
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
-
-                <!-- ===== DROPDOWN PROGRAM (NEW STRUCTURE) ===== -->
-                <div class="relative group">
-                    <a href="{{ route('program.index') }}"
-                       class="nav-link text-gray-700 px-4 py-2 rounded-lg flex items-center gap-1
-                              {{ request()->routeIs('program.*') ? 'active' : '' }}">
-                        Program
-                        <i class="fas fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
-                    </a>
-
-                    <div class="absolute left-0 mt-2 w-64 bg-white rounded-xl shadow-xl opacity-0 invisible
-                                group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100">
-
-                        @php
-                            $programCategories = \App\Models\ProgramCategory::with('subcategories')
-                                ->orderBy('sort_order')
-                                ->get();
-                        @endphp
-
-                        @foreach($programCategories as $category)
-                            @if($category->shouldRedirect())
-                                {{-- Untuk PROGRAM HASMI (static) dan HASMI TV (youtube) --}}
-                                <a href="{{ $category->getRedirectUrl() }}" 
-                                   @if($category->redirect_type === 'youtube') target="_blank" @endif
-                                   class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600
-                                          transition-colors {{ $loop->last ? 'rounded-b-xl' : 'border-b border-gray-100' }}">
-                                    {{ $category->name }}
-                                    @if($category->redirect_type === 'youtube')
-                                        <i class="fas fa-external-link-alt text-xs ml-1"></i>
-                                    @endif
-                                </a>
-                            @elseif($category->has_subcategories)
-                                {{-- Untuk HASMI PEDULI (punya subcategories) --}}
-                                <div class="relative nested-dropdown">
-                                    <a href="{{ route('program.category', $category->slug) }}"
-                                       class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600
-                                              transition-colors border-b border-gray-100 flex items-center justify-between">
-                                        <span>{{ $category->name }}</span>
-                                        <i class="fas fa-chevron-right text-xs"></i>
-                                    </a>
-
-                                    <div class="absolute left-full top-0 ml-1 w-64 bg-white rounded-xl shadow-xl
-                                                opacity-0 invisible nested-dropdown:hover:opacity-100
-                                                nested-dropdown:hover:visible transition-all duration-300 border border-gray-100">
-                                        @foreach($category->subcategories as $subcategory)
-                                            <a href="{{ route('program.subcategory', [$category->slug, $subcategory->slug]) }}"
-                                               class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600
-                                                      transition-colors {{ $loop->last ? 'rounded-b-xl' : 'border-b border-gray-100' }}">
-                                                {{ $subcategory->name }}
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            @else
-                                {{-- Untuk PROGRAM DAKWAH dan PROGRAM PENDIDIKAN (tanpa subcategories) --}}
-                                <a href="{{ route('program.category', $category->slug) }}"
-                                   class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600
-                                          transition-colors {{ $loop->last ? 'rounded-b-xl' : 'border-b border-gray-100' }}">
-                                    {{ $category->name }}
-                                </a>
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
-
-                <a href="{{ route('intisari.index') }}"
-                   class="nav-link text-gray-700 px-4 py-2 rounded-lg {{ request()->routeIs('intisari.*') ? 'active' : '' }}">
-                    Intisari HASMI
-                </a>
-
-                <a href="{{ route('kegiatan.index') }}"
-                   class="nav-link text-gray-700 px-4 py-2 rounded-lg {{ request()->routeIs('kegiatan.*') ? 'active' : '' }}">
-                    Kegiatan
-                </a>
-
-                <a href="https://donasi.hasmi.org/" target="_blank"
-                   class="nav-link text-gray-700 px-4 py-2 rounded-lg flex items-center gap-1">
-                    Donasi <i class="fas fa-external-link-alt text-xs"></i>
-                </a>
-
-                <a href="https://beasiswapendidikanislam.com/" target="_blank"
-                   class="nav-link text-gray-700 px-4 py-2 rounded-lg flex items-center gap-1">
-                    Beasiswa <i class="fas fa-external-link-alt text-xs"></i>
-                </a>
-
-                <a href="https://hasmi-islamicschool.com/" target="_blank"
-                   class="nav-link text-gray-700 px-4 py-2 rounded-lg flex items-center gap-1">
-                    Sekolah <i class="fas fa-external-link-alt text-xs"></i>
-                </a>
-
-                <!-- LOGIN/USER MENU -->
-                @auth
-                    <div class="relative group">
-                        <button class="nav-link text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2">
-                            <i class="fas fa-user-circle text-xl"></i>
-                            <span>{{ Auth::user()->name }}</span>
-                            <i class="fas fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
-                        </button>
-
-                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl opacity-0 invisible
-                                    group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100">
-                            @if(Auth::user()->is_admin)
-                                <a href="{{ route('admin.dashboard') }}"
-                                   class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600
-                                          transition-colors border-b border-gray-100">
-                                    <i class="fas fa-tachometer-alt mr-2"></i> Dashboard Admin
-                                </a>
-                            @endif
-                            
-                            <a href="{{ route('profile.edit') }}"
-                               class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600
-                                      transition-colors border-b border-gray-100">
-                                <i class="fas fa-user-cog mr-2"></i> Profil
-                            </a>
-
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit"
-                                        class="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50
-                                               transition-colors rounded-b-xl">
-                                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                @else
-                    <a href="{{ route('login') }}"
-                       class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-all">
-                        <i class="fas fa-sign-in-alt mr-2"></i> Login
-                    </a>
-                @endauth
-            </div>
-
-            <!-- ================= MOBILE BUTTON ================= -->
-            <button id="mobileMenuBtn" class="lg:hidden text-gray-700">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
-        </div>
-
-        <!-- ================= MOBILE MENU ================= -->
-        <div id="mobileMenu" class="hidden lg:hidden mt-4 pb-4 space-y-2">
-
-            <a href="{{ route('home') }}" class="block nav-link text-gray-700 px-4 py-2 rounded-lg">Beranda</a>
-            <a href="{{ route('tentang') }}" class="block nav-link text-gray-700 px-4 py-2 rounded-lg">Tentang Kami</a>
-
-            <!-- Mobile Materi -->
-            <div>
-                <button onclick="toggleMobileMateri()"
-                        class="w-full text-left nav-link text-gray-700 px-4 py-2 rounded-lg flex items-center justify-between">
+            <!-- ===== DROPDOWN MATERI ===== -->
+            <div class="relative group">
+                <a href="{{ route('materi.index') }}" 
+                   class="nav-link px-4 py-2 rounded-full text-base font-bold text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 flex items-center gap-2 {{ request()->routeIs('materi.*') ? 'bg-blue-50 text-blue-700' : '' }}">
                     Materi
-                    <i class="fas fa-chevron-down text-xs transition-transform" id="mobileMateriIcon"></i>
-                </button>
+                    <i class="fas fa-chevron-down text-[10px] transition-transform group-hover:rotate-180 opacity-60"></i>
+                </a>
 
-                <div id="mobileMateriDropdown" class="hidden pl-4 mt-2 space-y-1">
-                    @foreach($categories as $cat)
+                <div class="absolute top-full left-0 mt-4 w-72 bg-white/95 backdrop-blur-xl rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 border border-white/20 ring-1 ring-black/5 p-3 z-50">
+                    <div class="bg-blue-50/50 rounded-2xl p-1">
+                    @foreach(\App\Models\Category::with('subCategories')->orderBy('name')->get() as $cat)
                         @if($cat->hasSubCategories())
-                            <div>
-                                <button onclick="toggleMobileSubMateri({{ $cat->id }})"
-                                        class="w-full text-left text-gray-600 px-4 py-2 hover:bg-blue-50 rounded-lg
-                                               text-sm flex items-center justify-between">
-                                    <span>
-                                        <i class="fas {{ $cat->icon }} mr-2"></i> {{ $cat->name }}
+                            <div class="relative nested-dropdown group/sub">
+                                <a href="{{ route('materi.show', $cat->slug) }}"
+                                   class="flex items-center justify-between px-4 py-3 rounded-xl text-gray-700 hover:bg-blue-100 hover:text-blue-700 transition-all font-semibold text-sm">
+                                    <span class="flex items-center gap-3">
+                                        <span class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-blue-500 shadow-sm text-xs">
+                                            <i class="fas {{ $cat->icon }}"></i>
+                                        </span>
+                                        {{ $cat->name }}
                                     </span>
-                                    <i class="fas fa-chevron-down text-xs transition-transform"
-                                       id="mobileSubMateriIcon{{ $cat->id }}"></i>
-                                </button>
-
-                                <div id="mobileSubMateri{{ $cat->id }}" class="hidden pl-4 mt-1 space-y-1">
+                                    <i class="fas fa-chevron-right text-[10px] opacity-40"></i>
+                                </a>
+                                
+                                <div class="absolute left-full top-0 ml-3 w-64 bg-white/95 backdrop-blur-xl rounded-3xl shadow-xl opacity-0 invisible translate-x-2 group-hover/sub:opacity-100 group-hover/sub:visible group-hover/sub:translate-x-0 transition-all duration-300 border border-white/20 p-2 z-50">
                                     @foreach($cat->subCategories as $sub)
                                         <a href="{{ route('materi.sub-category', [$cat->slug, $sub->slug]) }}"
-                                           class="block text-gray-500 px-4 py-2 hover:bg-blue-50 rounded-lg text-xs">
-                                            <i class="fas {{ $sub->icon }} mr-2"></i> {{ $sub->name }}
+                                           class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-all text-sm font-semibold">
+                                            <i class="fas {{ $sub->icon }} text-blue-400"></i> {{ $sub->name }}
                                         </a>
                                     @endforeach
                                 </div>
                             </div>
                         @else
                             <a href="{{ route('materi.show', $cat->slug) }}"
-                               class="block text-gray-600 px-4 py-2 hover:bg-blue-50 rounded-lg text-sm">
-                                <i class="fas {{ $cat->icon }} mr-2"></i> {{ $cat->name }}
+                               class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-blue-100 hover:text-blue-700 transition-all font-semibold text-sm">
+                                <span class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-blue-500 shadow-sm text-xs">
+                                    <i class="fas {{ $cat->icon }}"></i>
+                                </span>
+                                {{ $cat->name }}
                             </a>
                         @endif
                     @endforeach
+                    </div>
                 </div>
             </div>
 
-            <!-- Mobile Program -->
-            <div>
-                <button onclick="toggleMobileProgram()"
-                        class="w-full text-left nav-link text-gray-700 px-4 py-2 rounded-lg flex items-center justify-between">
+            <!-- ===== DROPDOWN PROGRAM ===== -->
+            <div class="relative group">
+                <a href="{{ route('program.index') }}" 
+                   class="nav-link px-4 py-2 rounded-full text-base font-bold text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 flex items-center gap-2 {{ request()->routeIs('program.*') ? 'bg-blue-50 text-blue-700' : '' }}">
                     Program
-                    <i class="fas fa-chevron-down text-xs transition-transform" id="mobileProgramIcon"></i>
-                </button>
+                    <i class="fas fa-chevron-down text-[10px] transition-transform group-hover:rotate-180 opacity-60"></i>
+                </a>
 
-                <div id="mobileProgramDropdown" class="hidden pl-4 mt-2 space-y-1">
-                    @foreach($programCategories as $category)
+                <div class="absolute top-full left-0 mt-4 w-72 bg-white/95 backdrop-blur-xl rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 border border-white/20 ring-1 ring-black/5 p-3 z-50">
+                    <div class="bg-blue-50/50 rounded-2xl p-1">
+                    @foreach(\App\Models\ProgramCategory::with('subcategories')->orderBy('sort_order')->get() as $category)
                         @if($category->shouldRedirect())
                             <a href="{{ $category->getRedirectUrl() }}" 
                                @if($category->redirect_type === 'youtube') target="_blank" @endif
-                               class="block text-gray-600 px-4 py-2 hover:bg-blue-50 rounded-lg text-sm">
-                                {{ $category->name }}
+                               class="flex items-center justify-between px-4 py-3 rounded-xl text-gray-700 hover:bg-blue-100 hover:text-blue-700 transition-all font-semibold text-sm">
+                                <span class="flex items-center gap-3">
+                                    <span class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-blue-500 shadow-sm text-xs">
+                                        <i class="fas {{ $category->redirect_type === 'youtube' ? 'fa-play' : 'fa-star' }}"></i>
+                                    </span>
+                                    {{ $category->name }}
+                                </span>
                                 @if($category->redirect_type === 'youtube')
-                                    <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                                    <i class="fas fa-external-link-alt text-[10px] opacity-40"></i>
                                 @endif
                             </a>
                         @elseif($category->has_subcategories)
-                            <div>
-                                <button onclick="toggleMobileSubProgram({{ $category->id }})"
-                                        class="w-full text-left text-gray-600 px-4 py-2 hover:bg-blue-50 rounded-lg
-                                               text-sm flex items-center justify-between">
-                                    <span>{{ $category->name }}</span>
-                                    <i class="fas fa-chevron-down text-xs transition-transform"
-                                       id="mobileSubIcon{{ $category->id }}"></i>
-                                </button>
+                            <div class="relative nested-dropdown group/sub">
+                                <a href="{{ route('program.category', $category->slug) }}"
+                                   class="flex items-center justify-between px-4 py-3 rounded-xl text-gray-700 hover:bg-blue-100 hover:text-blue-700 transition-all font-semibold text-sm">
+                                    <span class="flex items-center gap-3">
+                                        <span class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-blue-500 shadow-sm text-xs">
+                                            <i class="fas fa-hand-holding-heart"></i>
+                                        </span>
+                                        {{ $category->name }}
+                                    </span>
+                                    <i class="fas fa-chevron-right text-[10px] opacity-40"></i>
+                                </a>
 
-                                <div id="mobileSubProgram{{ $category->id }}" class="hidden pl-4 mt-1 space-y-1">
+                                <div class="absolute left-full top-0 ml-3 w-64 bg-white/95 backdrop-blur-xl rounded-3xl shadow-xl opacity-0 invisible translate-x-2 group-hover/sub:opacity-100 group-hover/sub:visible group-hover/sub:translate-x-0 transition-all duration-300 border border-white/20 p-2 z-50">
                                     @foreach($category->subcategories as $subcategory)
                                         <a href="{{ route('program.subcategory', [$category->slug, $subcategory->slug]) }}"
-                                           class="block text-gray-500 px-4 py-2 hover:bg-blue-50 rounded-lg text-xs">
-                                            {{ $subcategory->name }}
+                                           class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-all text-sm font-semibold">
+                                            <i class="fas fa-dot-circle text-blue-400 text-[8px]"></i> {{ $subcategory->name }}
                                         </a>
                                     @endforeach
                                 </div>
                             </div>
                         @else
                             <a href="{{ route('program.category', $category->slug) }}"
-                               class="block text-gray-600 px-4 py-2 hover:bg-blue-50 rounded-lg text-sm">
+                               class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-blue-100 hover:text-blue-700 transition-all font-semibold text-sm">
+                                <span class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-blue-500 shadow-sm text-xs">
+                                    <i class="fas fa-bookmark"></i>
+                                </span>
                                 {{ $category->name }}
                             </a>
                         @endif
                     @endforeach
+                    </div>
                 </div>
             </div>
 
-            <a href="{{ route('intisari.index') }}" class="block nav-link text-gray-700 px-4 py-2 rounded-lg">
-                Intisari HASMI
+            <a href="{{ route('intisari.index') }}"
+               class="nav-link px-4 py-2 rounded-full text-base font-bold text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 flex items-center gap-2 {{ request()->routeIs('intisari.*') ? 'bg-blue-50 text-blue-700' : '' }}">
+                Intisari
             </a>
 
-            <a href="{{ route('kegiatan.index') }}" class="block nav-link text-gray-700 px-4 py-2 rounded-lg">
+            <a href="{{ route('kegiatan.index') }}"
+               class="nav-link px-4 py-2 rounded-full text-base font-bold text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 flex items-center gap-2 {{ request()->routeIs('kegiatan.*') ? 'bg-blue-50 text-blue-700' : '' }}">
                 Kegiatan
             </a>
 
-            <!-- Mobile Login/User -->
-            @auth
-                <div class="border-t border-gray-200 pt-2 mt-2">
-                    <div class="px-4 py-2 text-gray-600 font-semibold text-sm">
-                        <i class="fas fa-user-circle mr-2"></i> {{ Auth::user()->name }}
-                    </div>
-                    
-                    @if(Auth::user()->is_admin)
-                        <a href="{{ route('admin.dashboard') }}"
-                           class="block text-gray-600 px-4 py-2 hover:bg-blue-50 rounded-lg text-sm">
-                            <i class="fas fa-tachometer-alt mr-2"></i> Dashboard Admin
-                        </a>
-                    @endif
-                    
-                    <a href="{{ route('profile.edit') }}"
-                       class="block text-gray-600 px-4 py-2 hover:bg-blue-50 rounded-lg text-sm">
-                        <i class="fas fa-user-cog mr-2"></i> Profil
-                    </a>
+            <!-- EXTERNAL LINKS RESTORED -->
+            <div class="h-6 w-px bg-gray-200 mx-2"></div>
 
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit"
-                                class="w-full text-left text-red-600 px-4 py-2 hover:bg-red-50 rounded-lg text-sm">
-                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                        </button>
-                    </form>
+             <a href="https://donasi.hasmi.org/" target="_blank"
+               class="nav-link px-3 py-2 rounded-full text-sm font-bold text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 flex items-center gap-1">
+                Donasi <i class="fas fa-external-link-alt text-[10px] text-gray-400"></i>
+            </a>
+
+            <a href="https://beasiswapendidikanislam.com/" target="_blank"
+               class="nav-link px-3 py-2 rounded-full text-sm font-bold text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 flex items-center gap-1">
+                Beasiswa <i class="fas fa-external-link-alt text-[10px] text-gray-400"></i>
+            </a>
+
+            <a href="https://hasmi-islamicschool.com/" target="_blank"
+               class="nav-link px-3 py-2 rounded-full text-sm font-bold text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 flex items-center gap-1">
+                Sekolah <i class="fas fa-external-link-alt text-[10px] text-gray-400"></i>
+            </a>
+
+            <div class="h-6 w-px bg-gray-200 mx-2"></div>
+            
+            @auth
+                <!-- Profile Menu -->
+                <div class="relative group">
+                    <button class="flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all bg-white shadow-sm">
+                        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold">
+                            {{ substr(Auth::user()->name, 0, 1) }}
+                        </div>
+                        <span class="text-sm font-bold text-gray-700 max-w-[80px] truncate">{{ Auth::user()->name }}</span>
+                        <i class="fas fa-chevron-down text-[10px] text-gray-400"></i>
+                    </button>
+
+                    <div class="absolute right-0 mt-3 w-56 bg-white/95 backdrop-blur-xl rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 border border-white/20 p-2 transform origin-top-right">
+                        @if(Auth::user()->is_admin)
+                            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-blue-50 hover:text-blue-700 font-semibold text-sm">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        @endif
+                        <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-blue-50 hover:text-blue-700 font-semibold text-sm">
+                            <i class="fas fa-user-cog"></i> Edit Profil
+                        </a>
+                        <div class="h-px bg-gray-100 my-1"></div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 hover:text-red-700 font-semibold text-sm transition-colors">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </form>
+                    </div>
                 </div>
             @else
-                <div class="border-t border-gray-200 pt-2 mt-2">
-                    <a href="{{ route('login') }}"
-                       class="block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-center font-semibold">
-                        <i class="fas fa-sign-in-alt mr-2"></i> Login
-                    </a>
-                </div>
+                <a href="{{ route('login') }}"
+                   class="px-6 py-2.5 rounded-full bg-blue-600 text-white text-base font-bold shadow-lg shadow-blue-500/30 hover:bg-blue-700 hover:shadow-blue-600/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2">
+                    <i class="fas fa-sign-in-alt"></i> Masuk
+                </a>
             @endauth
+        </div>
+
+        <!-- ================= MOBILE BUTTON ================= -->
+        <button id="mobileMenuBtn" class="lg:hidden w-12 h-12 flex items-center justify-center rounded-2xl bg-gray-50 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- ================= MOBILE MENU ================= -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100/50 absolute w-full left-0 top-24 shadow-xl max-h-[85vh] overflow-y-auto">
+        <div class="p-4 space-y-2 pb-20">
+            <a href="{{ route('home') }}" class="block px-4 py-3 rounded-2xl font-bold text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all text-base">Beranda</a>
+            <a href="{{ route('tentang') }}" class="block px-4 py-3 rounded-2xl font-bold text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all text-base">Tentang Kami</a>
+
+            <!-- Mobile Materi -->
+            <div class="border-t border-gray-100 pt-2">
+                <p class="px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-widest">Materi</p>
+                @foreach(\App\Models\Category::with('subCategories')->orderBy('name')->get() as $cat)
+                <div x-data="{ open: false }">
+                    <div class="flex items-center justify-between px-4 py-2.5 rounded-xl text-gray-700 hover:bg-gray-50 transition-all">
+                        <a href="{{ route('materi.show', $cat->slug) }}" class="flex-grow font-semibold text-base flex items-center gap-3">
+                            <i class="fas {{ $cat->icon }} text-blue-500 w-5"></i> {{ $cat->name }}
+                        </a>
+                        @if($cat->hasSubCategories())
+                        <button onclick="document.getElementById('sub-mobil-{{ $cat->id }}').classList.toggle('hidden')" class="p-3 text-gray-400">
+                            <i class="fas fa-chevron-down text-sm"></i>
+                        </button>
+                        @endif
+                    </div>
+                    @if($cat->hasSubCategories())
+                    <div id="sub-mobil-{{ $cat->id }}" class="hidden pl-12 space-y-1 mb-2">
+                        @foreach($cat->subCategories as $sub)
+                        <a href="{{ route('materi.sub-category', [$cat->slug, $sub->slug]) }}" 
+                           class="block py-2 text-sm font-medium text-gray-500 hover:text-blue-600">
+                            {{ $sub->name }}
+                        </a>
+                        @endforeach
+                    </div>
+                    @endif
+                </div>
+                @endforeach
+            </div>
+
+            <!-- Mobile Program -->
+            <div class="border-t border-gray-100 pt-2">
+                <p class="px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-widest">Program</p>
+                @foreach(\App\Models\ProgramCategory::with('subcategories')->orderBy('sort_order')->get() as $cat)
+                    <div class="px-4 py-2.5">
+                        <a href="{{ route('program.category', $cat->slug) }}" class="flex items-center gap-3 font-semibold text-gray-700 text-base">
+                            <i class="fas fa-bookmark text-blue-500 w-5"></i> {{ $cat->name }}
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+
+            <a href="{{ route('intisari.index') }}" class="block px-4 py-3 rounded-2xl font-bold text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all text-base border-t border-gray-100 mt-2">Intisari</a>
+            <a href="{{ route('kegiatan.index') }}" class="block px-4 py-3 rounded-2xl font-bold text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all text-base">Kegiatan</a>
+
+            <!-- EXTERNAL MOBILE -->
+             <div class="border-t border-gray-100 pt-2 space-y-1">
+                <a href="https://donasi.hasmi.org/" target="_blank" class="block px-4 py-2.5 rounded-xl font-bold text-gray-600 hover:bg-blue-50 hover:text-blue-600 text-sm">
+                    <i class="fas fa-external-link-alt mr-2 text-xs"></i> Donasi
+                </a>
+                <a href="https://beasiswapendidikanislam.com/" target="_blank" class="block px-4 py-2.5 rounded-xl font-bold text-gray-600 hover:bg-blue-50 hover:text-blue-600 text-sm">
+                    <i class="fas fa-external-link-alt mr-2 text-xs"></i> Beasiswa
+                </a>
+                <a href="https://hasmi-islamicschool.com/" target="_blank" class="block px-4 py-2.5 rounded-xl font-bold text-gray-600 hover:bg-blue-50 hover:text-blue-600 text-sm">
+                    <i class="fas fa-external-link-alt mr-2 text-xs"></i> Sekolah
+                </a>
+            </div>
+
+            <div class="border-t border-gray-100 pt-4 mt-4 grid grid-cols-2 gap-3">
+                <a href="{{ route('login') }}" class="col-span-2 py-3 rounded-xl bg-blue-600 text-white font-bold text-center shadow-lg shadow-blue-500/30 text-lg">
+                    Masuk Akun
+                </a>
+            </div>
         </div>
     </div>
 </nav>
 
-<style>
-.nested-dropdown:hover > div {
-    opacity: 1;
-    visibility: visible;
-}
-</style>
-
 <script>
-document.getElementById('mobileMenuBtn').addEventListener('click', function () {
-    document.getElementById('mobileMenu').classList.toggle('hidden');
-});
+    // Blur on Scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+            navbar.classList.add('shadow-md', 'bg-white/95');
+            navbar.classList.remove('bg-white/90');
+        } else {
+            navbar.classList.remove('shadow-md', 'bg-white/95');
+            navbar.classList.add('bg-white/90');
+        }
+    });
 
-function toggleMobileMateri() {
-    const dropdown = document.getElementById('mobileMateriDropdown');
-    const icon = document.getElementById('mobileMateriIcon');
-    dropdown.classList.toggle('hidden');
-    icon.classList.toggle('rotate-180');
-}
-
-function toggleMobileSubMateri(id) {
-    const dropdown = document.getElementById('mobileSubMateri' + id);
-    const icon = document.getElementById('mobileSubMateriIcon' + id);
-    dropdown.classList.toggle('hidden');
-    icon.classList.toggle('rotate-180');
-}
-
-function toggleMobileProgram() {
-    const dropdown = document.getElementById('mobileProgramDropdown');
-    const icon = document.getElementById('mobileProgramIcon');
-    dropdown.classList.toggle('hidden');
-    icon.classList.toggle('rotate-180');
-}
-
-function toggleMobileSubProgram(id) {
-    const dropdown = document.getElementById('mobileSubProgram' + id);
-    const icon = document.getElementById('mobileSubIcon' + id);
-    dropdown.classList.toggle('hidden');
-    icon.classList.toggle('rotate-180');
-}
+    // Mobile Menu Toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    mobileBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        const icon = mobileBtn.querySelector('i');
+        if(mobileMenu.classList.contains('hidden')){
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        } else {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        }
+    });
 </script>

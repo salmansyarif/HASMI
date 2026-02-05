@@ -3,116 +3,205 @@
 @section('title', $category->name . ' - HASMI')
 
 @section('content')
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
-<div class="container mx-auto px-6 py-12">
-    <!-- Header Category -->
-    <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">{{ $category->name }}</h1>
-        <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-4"></div>
-    </div>
+<style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
-    <!-- Breadcrumb -->
-    <div class="mb-8">
-        <nav class="flex items-center gap-2 text-sm text-gray-600">
-            <a href="{{ route('home') }}" class="hover:text-blue-600">Beranda</a>
-            <i class="fas fa-chevron-right text-xs"></i>
-            <a href="{{ route('program.index') }}" class="hover:text-blue-600">Program</a>
-            <i class="fas fa-chevron-right text-xs"></i>
-            <span class="text-gray-800 font-semibold">{{ $category->name }}</span>
+    /* Hero Gradient Animation */
+    .hero-animate {
+        background: linear-gradient(-45deg, #1e40af, #1e3a8a, #1e40af, #1e3a8a);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+    }
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Article Card / Program Card Style */
+    .article-card {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    }
+    .article-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
+        border-color: rgba(96, 165, 250, 0.6);
+    }
+
+    /* Islamic Pattern */
+    .islamic-pattern {
+        background-image: url('https://www.transparenttextures.com/patterns/islamic-art.png');
+        opacity: 0.1;
+    }
+</style>
+
+{{-- HERO SECTION --}}
+<section class="relative min-h-[40vh] flex items-center overflow-hidden hero-animate">
+    <div class="absolute inset-0 islamic-pattern"></div>
+    
+    <div class="absolute top-10 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-10 right-10 w-48 h-48 bg-cyan-400/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s"></div>
+
+    <div class="container mx-auto px-6 relative z-10 py-16 text-center">
+        <!-- Breadcrumb -->
+        <nav class="flex justify-center mb-8" aria-label="Breadcrumb" data-aos="fade-down">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3 text-sm text-blue-200">
+                <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Beranda</a></li>
+                <li><i class="fas fa-chevron-right text-xs opacity-50 mx-2"></i></li>
+                <li><a href="{{ route('program.index') }}" class="hover:text-white transition-colors">Program</a></li>
+                <li><i class="fas fa-chevron-right text-xs opacity-50 mx-2"></i></li>
+                <li aria-current="page"><span class="font-semibold text-white">{{ $category->name }}</span></li>
+            </ol>
         </nav>
+
+        <h1 class="text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight" data-aos="fade-up">
+            {{ $category->name }}
+        </h1>
+        
+        <p class="text-xl text-blue-100/90 max-w-2xl mx-auto leading-relaxed font-light" data-aos="fade-up" data-aos-delay="200">
+            Program unggulan HASMI untuk umat dan kemanusiaan.
+        </p>
     </div>
 
-    <!-- Sub-Categories Filter (if exists) -->
-    @if($category->has_subcategories && $subcategories->count() > 0)
-    <div class="mb-8">
-        <div class="bg-white rounded-2xl shadow-lg p-6">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">
-                <i class="fas fa-filter mr-2"></i> Kategori {{ $category->name }}
-            </h3>
-            <div class="flex flex-wrap gap-3">
-                <a href="{{ route('program.category', $category->slug) }}" 
-                   class="px-4 py-2 rounded-full {{ !request()->route('subcategorySlug') ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300' }} transition-colors font-semibold">
-                    <i class="fas fa-list mr-1"></i> Semua
-                </a>
-                @foreach($subcategories as $sub)
-                <a href="{{ route('program.subcategory', [$category->slug, $sub->slug]) }}" 
-                   class="px-4 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-blue-700 transition-colors font-semibold">
-                    {{ $sub->name }}
-                </a>
+    {{-- Wave Divider --}}
+    <div class="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1440 120" fill="none" class="w-full">
+            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#1e3a8a"/>
+        </svg>
+    </div>
+</section>
+
+{{-- MAIN CONTENT --}}
+<section class="py-16 bg-gradient-to-b from-blue-900 to-blue-800 relative min-h-screen">
+    <div class="container mx-auto px-6 lg:px-12 relative z-10">
+
+        <!-- Filters -->
+        @if($category->has_subcategories && $subcategories->count() > 0)
+        <div class="mb-12" data-aos="fade-up">
+            <div class="bg-blue-900/40 backdrop-blur-md rounded-3xl p-6 border border-blue-500/20 shadow-lg">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+                    <i class="fas fa-filter mr-2 text-blue-400"></i> Folder Program
+                </h3>
+                <div class="flex flex-wrap gap-3">
+                    <a href="{{ route('program.category', $category->slug) }}" 
+                       class="px-5 py-2.5 rounded-xl font-bold transition-all shadow-md transform hover:scale-105 bg-blue-500 text-white shadow-blue-500/30">
+                        <i class="fas fa-grid-2 mr-2"></i> Semua
+                    </a>
+                    @foreach($subcategories as $sub)
+                    <a href="{{ route('program.subcategory', [$category->slug, $sub->slug]) }}" 
+                       class="px-5 py-2.5 rounded-xl font-bold transition-all shadow-sm bg-blue-800/50 text-blue-200 border border-blue-500/20 hover:bg-blue-700 hover:text-white hover:border-blue-400">
+                        {{ $sub->name }}
+                    </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        @endif
+
+        @if($programs->count() > 0)
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
+                @foreach($programs as $index => $program)
+                <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                         data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
+                    
+                    {{-- Thumbnail --}}
+                    <div class="h-80 relative overflow-hidden m-4 rounded-[2rem]">
+                        @if($program->thumbnail)
+                            <img src="{{ asset('storage/' . $program->thumbnail) }}" 
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                 alt="{{ $program->title }}"
+                                 loading="lazy">
+                        @else
+                            <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                                <i class="fas fa-hand-holding-heart text-white/20 text-6xl"></i>
+                            </div>
+                        @endif
+                        
+                        {{-- Overlay --}}
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                            <p class="text-white text-xs leading-relaxed italic">"Klik untuk detail."</p>
+                        </div>
+
+                        {{-- Subcategory Badge --}}
+                        @if($program->subcategory)
+                        <div class="absolute top-4 left-4">
+                            <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
+                                {{ $program->subcategory->name }}
+                            </span>
+                        </div>
+                        @endif
+                    </div>
+
+                    {{-- Content --}}
+                    <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="p-1 px-2 rounded-lg bg-green-500/20 border border-green-500/30 flex items-center gap-1">
+                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                <span class="text-green-300 text-[10px] font-bold uppercase">Program Aktif</span>
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight">
+                            {{ $program->title }}
+                        </h3>
+                        
+                        <p class="text-blue-100 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
+                            {{ \Illuminate\Support\Str::limit(strip_tags($program->description), 100) }}
+                        </p>
+                        
+                        <div class="mt-auto">
+                            <a href="{{ route('program.show', $program->slug) }}" 
+                               class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                                <span>Lihat Program</span>
+                                <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
                 @endforeach
             </div>
-        </div>
-    </div>
-    @endif
 
-    <!-- Program Grid -->
-    @if($programs->count() > 0)
-        <div class="grid md:grid-cols-3 gap-8">
-            @foreach($programs as $program)
-            <article class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover group h-full flex flex-col">
-                <!-- Thumbnail -->
-                <div class="relative h-48 overflow-hidden">
-                    @if($program->thumbnail)
-                        <img src="{{ asset('storage/' . $program->thumbnail) }}" 
-                             alt="{{ $program->title }}" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                    @else
-                        <div class="w-full h-full hero-gradient flex items-center justify-center">
-                            <i class="fas fa-hand-holding-heart text-white text-5xl"></i>
-                        </div>
-                    @endif
-
-                    <!-- Sub-Category Badge (if exists) -->
-                    @if($program->subcategory)
-                    <div class="absolute top-4 left-4">
-                        <span class="px-3 py-1 bg-green-600 text-white text-xs font-semibold rounded-full">
-                            {{ $program->subcategory->name }}
-                        </span>
-                    </div>
-                    @endif
+            {{-- Pagination --}}
+            <div class="mt-20 flex justify-center" data-aos="fade-up">
+                <div class="bg-blue-900/50 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-blue-400/30">
+                    {{ $programs->links('vendor.pagination.tailwind') }}
                 </div>
-
-                <!-- Content -->
-                <div class="p-6 flex flex-col flex-grow">
-                    <!-- Title -->
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        {{ $program->title }}
-                    </h3>
-
-                    <!-- Excerpt -->
-                    <p class="text-gray-600 mb-4 line-clamp-3">{{ $program->description }}</p>
-
-                    <!-- Read More Button -->
-                    <div class="mt-auto pt-4 border-t border-gray-100">
-                        <a href="{{ route('program.show', $program->slug) }}" 
-                           class="inline-flex items-center text-blue-600 font-semibold hover:gap-2 transition-all">
-                            Lihat Detail 
-                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-            </article>
-            @endforeach
-        </div>
-
-        <!-- Pagination -->
-        <div class="mt-12">
-            {{ $programs->links() }}
-        </div>
-
-    @else
-        <!-- Empty State -->
-        <div class="text-center py-16 bg-white rounded-2xl shadow-lg">
-            <div class="w-24 h-24 hero-gradient rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-folder-open text-white text-5xl"></i>
             </div>
-            <h3 class="text-2xl font-bold text-gray-800 mb-2">Belum Ada Program</h3>
-            <p class="text-gray-600 mb-6">Kategori <strong>{{ $category->name }}</strong> belum memiliki program aktif.</p>
-            <a href="{{ route('program.index') }}" class="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors">
-                <i class="fas fa-arrow-left mr-2"></i> Lihat Semua Program
-            </a>
-        </div>
-    @endif
-</div>
 
+        @else
+            <!-- Empty State -->
+            <div class="text-center py-20" data-aos="zoom-in">
+                <div class="relative w-48 h-48 mx-auto mb-10">
+                    <div class="absolute inset-0 bg-blue-600/30 rounded-full animate-ping opacity-20"></div>
+                    <div class="relative w-48 h-48 bg-blue-800 rounded-full flex items-center justify-center shadow-2xl border border-blue-600">
+                        <i class="fas fa-folder-open text-blue-400 text-7xl"></i>
+                    </div>
+                </div>
+                <h3 class="text-3xl font-bold text-white mb-4">Program Belum Tersedia</h3>
+                <p class="text-blue-200 max-w-md mx-auto mb-10">
+                    Kategori ini belum memiliki program aktif.
+                </p>
+                <a href="{{ route('program.index') }}" class="px-10 py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl hover:bg-blue-500 transition-all">
+                    Lihat Semua Program
+                </a>
+            </div>
+        @endif
+    </div>
+</section>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-out-back',
+            once: true
+        });
+    });
+</script>
 @endsection

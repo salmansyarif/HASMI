@@ -21,17 +21,16 @@
         100% { background-position: 0% 50%; }
     }
 
-    /* Program Card Enhancements */
-    .program-card {
+    /* Article Card Enhancements (Reused for Program) */
+    .article-card {
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 2px solid rgba(59, 130, 246, 0.3);
-        background: rgba(30, 58, 138, 0.4);
-        backdrop-filter: blur(12px);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
     }
-    .program-card:hover {
+    .article-card:hover {
         transform: translateY(-12px) scale(1.02);
-        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.4);
-        border-color: rgba(59, 130, 246, 0.6);
+        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
+        border-color: rgba(96, 165, 250, 0.6);
     }
 
     /* Floating Shape Animation */
@@ -119,17 +118,18 @@
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         @if($programs->count() > 0)
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
                 @foreach($programs as $index => $program)
-                <article class="program-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
                          data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
                     
                     {{-- Thumbnail with Glow --}}
-                    <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
+                    <div class="h-80 relative overflow-hidden m-4 rounded-[2rem]">
                         @if($program->thumbnail)
                             <img src="{{ asset('storage/' . $program->thumbnail) }}" 
                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                 alt="{{ $program->title }}">
+                                 alt="{{ $program->title }}"
+                                 loading="lazy">
                         @else
                             <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
                                 <i class="fas fa-hand-holding-heart text-white/20 text-6xl"></i>
@@ -137,47 +137,40 @@
                         @endif
                         
                         {{-- Overlay Info --}}
-                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
                             <p class="text-white text-xs leading-relaxed italic">
-                                "Klik untuk melihat kontribusi nyata kami dalam program ini."
+                                "Klik untuk melihat detail program ini."
                             </p>
                         </div>
 
                         {{-- Floating Badges --}}
                         <div class="absolute top-4 left-4 flex flex-col gap-2">
                             <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
-                                {{ $program->category->name }}
+                                {{ $program->category->name ?? 'Program' }}
                             </span>
                         </div>
                     </div>
 
                     {{-- Card Content --}}
                     <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-300 transition-colors leading-tight">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="p-1 px-2 rounded-lg bg-green-500/20 border border-green-500/30 flex items-center gap-1">
+                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                <span class="text-green-300 text-[10px] font-bold uppercase">Aktif</span>
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight">
                             {{ $program->title }}
                         </h3>
                         
                         <p class="text-blue-100 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
-                            {{ $program->description }}
+                            {{ \Illuminate\Support\Str::limit(strip_tags($program->description), 100) }}
                         </p>
                         
-                        {{-- Stats/Features --}}
-                        <div class="grid grid-cols-2 gap-4 mb-8">
-                            <div class="p-3 bg-blue-700/40 rounded-2xl border border-blue-400/30">
-                                <span class="block text-[10px] uppercase text-blue-300 font-bold mb-1">Status</span>
-                                <span class="text-xs font-bold text-white flex items-center gap-1">
-                                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Aktif
-                                </span>
-                            </div>
-                            <div class="p-3 bg-cyan-700/40 rounded-2xl border border-cyan-400/30">
-                                <span class="block text-[10px] uppercase text-cyan-300 font-bold mb-1">Target</span>
-                                <span class="text-xs font-bold text-white">Nasional</span>
-                            </div>
-                        </div>
-
                         <div class="mt-auto">
                             <a href="{{ route('program.show', $program->slug) }}" 
-                               class="w-full py-4 bg-blue-700 group-hover:bg-blue-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/30 border-2 border-blue-400/30">
+                               class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
                                 <span>Detail Program</span>
                                 <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
                             </a>

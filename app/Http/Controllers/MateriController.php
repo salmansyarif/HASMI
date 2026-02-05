@@ -15,7 +15,7 @@ class MateriController extends Controller
         $articles = Article::with(['category', 'subCategory', 'author'])
                           ->published()
                           ->orderBy('published_at', 'desc')
-                          ->paginate(12);
+                          ->paginate(10);
 
         return view('materi.index', compact('articles'));
     }
@@ -29,7 +29,7 @@ class MateriController extends Controller
                           ->where('category_id', $category->id)
                           ->published()
                           ->orderBy('published_at', 'desc')
-                          ->paginate(12);
+                          ->paginate(10);
 
         return view('materi.show', compact('category', 'articles'));
     }
@@ -47,7 +47,7 @@ class MateriController extends Controller
                           ->where('sub_category_id', $subCategory->id)
                           ->published()
                           ->orderBy('published_at', 'desc')
-                          ->paginate(12);
+                          ->paginate(10);
 
         return view('materi.sub-category', compact('category', 'subCategory', 'articles'));
     }

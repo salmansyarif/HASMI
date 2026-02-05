@@ -24,7 +24,7 @@ class ProgramController extends Controller
                             ->with(['category', 'subcategory'])
                             ->orderBy('position')
                             ->orderBy('created_at', 'desc')
-                            ->paginate(9);
+                            ->paginate(10);
 
         // Ambil list kategori untuk filter buttons
         $categories = ProgramCategory::where('is_creatable', true)
@@ -55,7 +55,7 @@ class ProgramController extends Controller
                             ->with(['subcategory'])
                             ->orderBy('position')
                             ->orderBy('created_at', 'desc')
-                            ->paginate(9);
+                            ->paginate(10);
 
         return view('program.category', compact('category', 'subcategories', 'programs'));
     }
@@ -74,7 +74,7 @@ class ProgramController extends Controller
                                ->where('is_active', true)
                                ->orderBy('position')
                                ->orderBy('created_at', 'desc')
-                               ->paginate(9);
+                               ->paginate(10);
 
         return view('program.subcategory', compact('category', 'subcategory', 'programs'));
     }

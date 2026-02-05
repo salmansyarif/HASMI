@@ -17,27 +17,22 @@
         border-radius: 5px;
     }
 
-    /* Glassmorphism Article Card */
-    .glass-card {
-        background: rgba(30, 58, 138, 0.4);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(96, 165, 250, 0.3);
+    /* Article Card Enhancements */
+    .article-card {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    }
+    .article-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
+        border-color: rgba(96, 165, 250, 0.6);
     }
 
-    /* Shimmer Effect for Loading */
-    .shimmer {
-        background: linear-gradient(90deg, #1e3a8a 25%, #1e40af 50%, #1e3a8a 75%);
-        background-size: 200% 100%;
-        animation: shimmer 1.5s infinite;
-    }
-    @keyframes shimmer {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-    }
-
-    /* Image Pan Animation */
-    .group:hover .pan-image {
-        transform: scale(1.1) translateX(10px);
+    /* Islamic Pattern Soft Overlay */
+    .islamic-pattern {
+        background-image: url('https://www.transparenttextures.com/patterns/islamic-art.png');
+        opacity: 0.1;
     }
 </style>
 
@@ -98,58 +93,62 @@
         </div>
 
         @if($articles->count() > 0)
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
                 @foreach($articles as $index => $article)
-                <article class="group relative flex flex-col h-full glass-card rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/30 hover:-translate-y-2 border-2 border-blue-400/30"
-                         data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 150 }}">
+                <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                         data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
                     
-                    {{-- Image Wrapper --}}
-                    <div class="relative h-64 overflow-hidden">
+                    {{-- Thumbnail with Glow --}}
+                    <div class="h-80 relative overflow-hidden m-4 rounded-[2rem]">
                         @if($article->thumbnail)
                             <img src="{{ asset($article->thumbnail) }}" 
-                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 pan-image"
-                                 alt="{{ $article->title }}">
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                 alt="{{ $article->title }}"
+                                 loading="lazy">
                         @else
-                            <div class="w-full h-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
-                                <i class="fas fa-book-open text-white/30 text-6xl"></i>
+                            <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                                <i class="fas fa-book-open text-white/20 text-6xl"></i>
                             </div>
                         @endif
                         
-                        {{-- Badge Category --}}
-                        <div class="absolute top-5 left-5">
-                            <span class="px-4 py-2 bg-white/90 backdrop-blur-md text-blue-700 text-xs font-bold rounded-lg shadow-sm flex items-center gap-2">
-                                <i class="fas {{ $article->category->icon ?? 'fa-tag' }}"></i>
+                        {{-- Overlay Info --}}
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                            <p class="text-white text-xs leading-relaxed italic">
+                                "Klik untuk membaca selengkapnya materi ini."
+                            </p>
+                        </div>
+
+                        {{-- Floating Badges --}}
+                        <div class="absolute top-4 left-4 flex flex-col gap-2">
+                            <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
                                 {{ $article->category->name }}
                             </span>
                         </div>
                     </div>
 
-                    {{-- Card Body --}}
-                    <div class="p-8 flex flex-col flex-grow">
-                        <div class="flex items-center gap-3 text-xs text-blue-300 mb-4 font-medium uppercase tracking-widest">
-                            <span class="flex items-center gap-1"><i class="far fa-calendar"></i> {{ $article->published_at->format('d M, Y') }}</span>
-                            <span class="w-1 h-1 bg-blue-400 rounded-full"></span>
-                            <span class="flex items-center gap-1"><i class="far fa-clock"></i> 5 Menit Baca</span>
+                    {{-- Card Content --}}
+                    <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="far fa-calendar-alt text-blue-300 text-xs"></i>
+                            <span class="text-blue-200 text-[11px] font-bold uppercase tracking-wider">
+                                {{ $article->published_at ? $article->published_at->locale('id')->isoFormat('D MMMM Y') : 'Baru' }}
+                            </span>
                         </div>
 
-                        <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-300 transition-colors">
+                        <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight">
                             {{ $article->title }}
                         </h3>
-
-                        <p class="text-blue-100 line-clamp-3 mb-8 flex-grow leading-relaxed">
+                        
+                        <p class="text-blue-100 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
                             {{ $article->excerpt }}
                         </p>
-
-                        <div class="pt-6 border-t border-blue-400/30 flex items-center justify-between">
+                        
+                        <div class="mt-auto">
                             <a href="{{ route('materi.detail', [$article->category->slug, $article->slug]) }}" 
-                               class="text-blue-300 font-bold flex items-center gap-2 group/btn hover:text-white transition-colors">
-                                Pelajari <i class="fas fa-arrow-right text-sm transition-transform group-hover/btn:translate-x-2"></i>
+                               class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                                <span>Baca Materi</span>
+                                <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
                             </a>
-                            <div class="flex -space-x-2">
-                                <div class="w-8 h-8 rounded-full border-2 border-blue-400 bg-blue-700 flex items-center justify-center text-[10px] font-bold text-white">
-                                    {{ substr($article->author->name, 0, 1) }}
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </article>

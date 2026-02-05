@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Kegiatan;
 use App\Models\Intisari;
+use App\Models\Program;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         // 1. Articles
-        $articles = \App\Models\Article::with('category')
+        $articles = Article::with('category')
             ->published()
             ->latest('published_at')
             ->take(5)
@@ -25,7 +27,7 @@ class HomeController extends Controller
             });
 
         // 2. Programs
-        $programs = \App\Models\Program::with('category')
+        $programs = Program::with('category')
             ->where('is_active', true)
             ->latest('created_at')
             ->take(5)
@@ -39,7 +41,7 @@ class HomeController extends Controller
             });
 
         // 3. Intisari
-        $intisari = \App\Models\Intisari::where('status', 'published') // Assuming status exists, or check model
+        $intisari = Intisari::where('status', 'published')
             ->latest('created_at')
             ->take(5)
             ->get()
@@ -52,8 +54,8 @@ class HomeController extends Controller
             });
 
         // 4. Kegiatan
-        $kegiatan = \App\Models\Kegiatan::where('status', 'published') // Assuming status exists
-            ->latest('event_date') // Or created_at
+        $kegiatan = Kegiatan::where('status', 'published')
+            ->latest('event_date')
             ->take(5)
             ->get()
             ->map(function ($item) {
@@ -72,12 +74,28 @@ class HomeController extends Controller
             ->take(10);
 
         // Data for Sections
-        $homePrograms = \App\Models\Program::with('category')->where('is_active', true)->orderBy('position')->take(4)->get(); // Limit 4 for grid consistency
-        $homeArticles = \App\Models\Article::with('category')->published()->latest('published_at')->take(4)->get();
-        $homeIntisari = \App\Models\Intisari::where('status', 'published')->latest('created_at')->take(4)->get();
-        $homeKegiatan = \App\Models\Kegiatan::where('status', 'published')->latest('event_date')->take(4)->get();
+        $homePrograms = Program::with('category')->where('is_active', true)->orderBy('position')->take(4)->get();
+        $homeArticles = Article::with('category')->published()->latest('published_at')->take(4)->get();
+        $homeIntisari = Intisari::where('status', 'published')->latest('created_at')->take(4)->get();
+        $homeKegiatan = Kegiatan::where('status', 'published')->latest('event_date')->take(4)->get();
 
-        return view('home', compact('latestUpdates', 'homePrograms', 'homeArticles', 'homeIntisari', 'homeKegiatan'));
+        // Counts for statistics
+        $materiCount = Article::published()->count();
+        $programCount = Program::where('is_active', true)->count();
+        $intisariCount = Intisari::where('status', 'published')->count();
+        $kegiatanCount = Kegiatan::where('status', 'published')->count();
+
+        return view('home', compact(
+            'latestUpdates',
+            'homePrograms',
+            'homeArticles',
+            'homeIntisari',
+            'homeKegiatan',
+            'materiCount',
+            'programCount',
+            'intisariCount',
+            'kegiatanCount'
+        ));
     }
 
     public function tentang()
@@ -85,7 +103,6 @@ class HomeController extends Controller
         return view('tentang');
     }
 
-    // Intisari index (list)
     public function intisari()
     {
         $intisaris = Intisari::where('status', 'published')
@@ -95,7 +112,6 @@ class HomeController extends Controller
         return view('intisari.index', compact('intisaris'));
     }
 
-    // Kegiatan index (list)
     public function kegiatan()
     {
         $kegiatans = Kegiatan::where('status', 'published')

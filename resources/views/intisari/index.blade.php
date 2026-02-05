@@ -97,13 +97,13 @@
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         @if($intisaris->count() > 0)
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
                 @foreach($intisaris as $index => $intisari)
                 <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
                          data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
                     
                     {{-- Thumbnail with Glow --}}
-                    <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
+                    <div class="h-80 relative overflow-hidden m-4 rounded-[2rem]">
                         @if($intisari->thumbnail)
                             <img src="{{ asset($intisari->thumbnail) }}" 
                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"

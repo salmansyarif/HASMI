@@ -3,304 +3,112 @@
 @section('title', $category->name . ' - HASMI')
 
 @section('content')
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
 <style>
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+
+    /* Hero Gradient Animation */
+    .hero-animate {
+        background: linear-gradient(-45deg, #1e40af, #1e3a8a, #1e40af, #1e3a8a);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
     }
-    
-    @keyframes slideInLeft {
-        from {
-            opacity: 0;
-            transform: translateX(-30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
-    
-    @keyframes slideInRight {
-        from {
-            opacity: 0;
-            transform: translateX(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(0px);
-        }
-        50% {
-            transform: translateY(-10px);
-        }
-    }
-    
-    @keyframes pulse {
-        0%, 100% {
-            opacity: 1;
-            transform: scale(1);
-        }
-        50% {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-    }
-    
-    @keyframes shimmer {
-        0% {
-            background-position: -1000px 0;
-        }
-        100% {
-            background-position: 1000px 0;
-        }
-    }
-    
-    @keyframes scaleIn {
-        from {
-            opacity: 0;
-            transform: scale(0.9);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-    
-    @keyframes rotate {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-    
-    .animate-fade-in-up {
-        animation: fadeInUp 0.6s ease-out forwards;
-    }
-    
-    .animate-slide-in-left {
-        animation: slideInLeft 0.5s ease-out forwards;
-    }
-    
-    .animate-slide-in-right {
-        animation: slideInRight 0.5s ease-out forwards;
-    }
-    
-    .animate-float {
-        animation: float 3s ease-in-out infinite;
-    }
-    
-    .animate-pulse-custom {
-        animation: pulse 2s ease-in-out infinite;
-    }
-    
-    .animate-scale-in {
-        animation: scaleIn 0.5s ease-out forwards;
-    }
-    
-    .category-icon-wrapper {
-        position: relative;
-    }
-    
-    .category-icon-wrapper::before {
-        content: '';
-        position: absolute;
-        inset: -10px;
-        background: linear-gradient(135deg, #3b82f6, #60a5fa, #3b82f6);
-        border-radius: 1.5rem;
-        opacity: 0.3;
-        filter: blur(20px);
-        animation: pulse 2s ease-in-out infinite;
-    }
-    
-    .breadcrumb-link {
-        transition: all 0.3s ease;
-        position: relative;
-    }
-    
-    .breadcrumb-link::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #3b82f6, #60a5fa);
-        transition: width 0.3s ease;
-    }
-    
-    .breadcrumb-link:hover::after {
-        width: 100%;
-    }
-    
-    .filter-btn {
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .filter-btn::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-        transition: left 0.5s ease;
-    }
-    
-    .filter-btn:hover::before {
-        left: 100%;
-    }
-    
-    .filter-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-    }
-    
-    .filter-btn-active {
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        animation: pulse 2s ease-in-out infinite;
-    }
-    
+
+    /* Article Card Enhancements */
     .article-card {
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 2px solid rgba(59, 130, 246, 0.2);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(59, 130, 246, 0.3);
         background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
     }
-    
     .article-card:hover {
-        transform: translateY(-12px);
-        border-color: rgba(59, 130, 246, 0.5);
-        box-shadow: 0 25px 50px rgba(59, 130, 246, 0.3);
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
+        border-color: rgba(96, 165, 250, 0.6);
     }
-    
-    .article-card-image {
-        transition: all 0.5s ease;
-        position: relative;
-        overflow: hidden;
+
+    /* Floating Shape Animation */
+    .shape-float {
+        animation: shapeFloat 6s ease-in-out infinite;
     }
-    
-    .article-card-image::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.4) 0%, transparent 100%);
-        opacity: 0;
-        transition: opacity 0.4s ease;
+    @keyframes shapeFloat {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(5deg); }
     }
-    
-    .article-card:hover .article-card-image::after {
-        opacity: 1;
-    }
-    
-    .article-card:hover .article-card-image img {
-        transform: scale(1.15);
-        filter: brightness(1.2);
-    }
-    
-    .badge-sub {
-        animation: scaleIn 0.5s ease-out forwards;
-        transition: all 0.3s ease;
-    }
-    
-    .badge-sub:hover {
-        transform: scale(1.1);
-    }
-    
-    .read-more-btn {
-        position: relative;
-        transition: all 0.3s ease;
-    }
-    
-    .read-more-btn::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #3b82f6, #60a5fa);
-        transition: width 0.3s ease;
-    }
-    
-    .read-more-btn:hover::after {
-        width: 100%;
-    }
-    
-    .shimmer-effect {
-        background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
-        background-size: 200% 100%;
-        animation: shimmer 2s infinite;
-    }
-    
-    .title-glow {
-        text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
-    }
-    
-    .divider-line {
-        background: linear-gradient(90deg, transparent, #3b82f6, transparent);
-        animation: shimmer 3s infinite;
-        background-size: 200% 100%;
+
+    /* Islamic Pattern */
+    .islamic-pattern {
+        background-image: url('https://www.transparenttextures.com/patterns/islamic-art.png');
+        opacity: 0.1;
     }
 </style>
 
-<div class="bg-gradient-to-br from-blue-800 via-blue-900 to-blue-800 min-h-screen pb-20">
-    <div class="container mx-auto px-6 py-12">
-        <!-- Header Category -->
-        <div class="text-center mb-16 animate-fade-in-up">
-            <div class="category-icon-wrapper inline-block mb-6 animate-pulse-custom">
-                <div class="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-500/40 border-4 border-blue-400/30 relative z-10">
-                    <i class="fas {{ $category->icon }} text-white text-5xl animate-float"></i>
-                </div>
-            </div>
-            <h1 class="title-glow text-5xl md:text-6xl font-black text-white mb-6 tracking-tight">{{ $category->name }}</h1>
-            <p class="text-blue-100 text-xl max-w-3xl mx-auto leading-relaxed font-light">{{ $category->description }}</p>
-            <div class="divider-line w-32 h-1 mx-auto mt-6 rounded-full"></div>
-        </div>
+{{-- HERO SECTION --}}
+<section class="relative min-h-[40vh] flex items-center overflow-hidden hero-animate">
+    <div class="absolute inset-0 islamic-pattern"></div>
+    
+    <div class="absolute top-10 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-10 right-10 w-48 h-48 bg-cyan-400/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s"></div>
 
+    <div class="container mx-auto px-6 relative z-10 py-16 text-center">
         <!-- Breadcrumb -->
-        <div class="mb-10 animate-slide-in-left">
-            <nav class="flex items-center gap-2 text-sm text-blue-200">
-                <a href="{{ route('home') }}" class="breadcrumb-link hover:text-white transition-colors">Beranda</a>
-                <i class="fas fa-chevron-right text-xs text-blue-400"></i>
-                <a href="{{ route('materi.index') }}" class="breadcrumb-link hover:text-white transition-colors">Materi</a>
-                <i class="fas fa-chevron-right text-xs text-blue-400"></i>
-                <span class="text-white font-semibold">{{ $category->name }}</span>
-            </nav>
-        </div>
+        <nav class="flex justify-center mb-8" aria-label="Breadcrumb" data-aos="fade-down">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3 text-sm text-blue-200">
+                <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Beranda</a></li>
+                <li><i class="fas fa-chevron-right text-xs opacity-50 mx-2"></i></li>
+                <li><a href="{{ route('materi.index') }}" class="hover:text-white transition-colors">Materi</a></li>
+                <li><i class="fas fa-chevron-right text-xs opacity-50 mx-2"></i></li>
+                <li aria-current="page"><span class="font-semibold text-white">{{ $category->name }}</span></li>
+            </ol>
+        </nav>
 
-        <!-- Sub-Categories Filter (if exists) -->
-        @if($category->hasSubCategories())
-        <div class="mb-12 animate-scale-in">
-            <div class="bg-blue-800/50 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border-2 border-blue-400/30">
-                <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                    <i class="fas fa-filter text-blue-400 animate-float"></i> 
-                    <span>Filter Sub Kategori</span>
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white mb-6 shadow-lg" data-aos="zoom-in">
+            <i class="fas {{ $category->icon ?? 'fa-book' }} text-3xl"></i>
+        </div>
+        
+        <h1 class="text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight" data-aos="fade-up" data-aos-delay="200">
+            {{ $category->name }}
+        </h1>
+        
+        <p class="text-xl text-blue-100/90 max-w-2xl mx-auto leading-relaxed font-light" data-aos="fade-up" data-aos-delay="300">
+            Kumpulan materi pilihan untuk kategori {{ $category->name }}.
+        </p>
+    </div>
+
+    {{-- Wave Divider --}}
+    <div class="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1440 120" fill="none" class="w-full">
+            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#1e3a8a"/>
+        </svg>
+    </div>
+</section>
+
+{{-- MAIN CONTENT --}}
+<section class="py-16 bg-gradient-to-b from-blue-900 to-blue-800 relative min-h-screen">
+    <div class="container mx-auto px-6 lg:px-12 relative z-10">
+
+        <!-- Filters (Subcategories) -->
+        @if($category->subCategories->count() > 0)
+        <div class="mb-12" data-aos="fade-up">
+            <div class="bg-blue-900/40 backdrop-blur-md rounded-3xl p-6 border border-blue-500/20 shadow-lg">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+                    <i class="fas fa-filter mr-2 text-blue-400"></i> Filter Topik
                 </h3>
-                <div class="flex flex-wrap gap-4">
+                <div class="flex flex-wrap gap-3">
                     <a href="{{ route('materi.show', $category->slug) }}" 
-                       class="filter-btn {{ !request()->has('sub') ? 'filter-btn-active text-white' : 'bg-blue-900/50 text-blue-200 hover:bg-blue-700/50 hover:text-white' }} px-6 py-3 rounded-full font-bold border-2 border-blue-400/20 shadow-lg">
-                        <i class="fas fa-list mr-2"></i> Semua
+                       class="px-5 py-2.5 rounded-xl font-bold transition-all shadow-md transform hover:scale-105 bg-blue-500 text-white shadow-blue-500/30">
+                        <i class="fas fa-grid-2 mr-2"></i> Semua
                     </a>
                     @foreach($category->subCategories as $sub)
                     <a href="{{ route('materi.sub-category', [$category->slug, $sub->slug]) }}" 
-                       class="filter-btn bg-blue-900/50 text-blue-200 hover:bg-blue-600/50 hover:text-white px-6 py-3 rounded-full font-bold border-2 border-blue-400/20 shadow-lg">
-                        <i class="fas {{ $sub->icon }} mr-2"></i> {{ $sub->name }}
+                       class="px-5 py-2.5 rounded-xl font-bold transition-all shadow-sm bg-blue-800/50 text-blue-200 border border-blue-500/20 hover:bg-blue-700 hover:text-white hover:border-blue-400">
+                        <i class="fas {{ $sub->icon ?? 'fa-tag' }} mr-2"></i> {{ $sub->name }}
                     </a>
                     @endforeach
                 </div>
@@ -308,171 +116,105 @@
         </div>
         @endif
 
-        <!-- Artikel Grid -->
         @if($articles->count() > 0)
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
                 @foreach($articles as $index => $article)
-                <article class="article-card backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden group animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
-                    <!-- Thumbnail -->
-                    <div class="article-card-image relative h-56 overflow-hidden">
+                <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                         data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
+                    
+                    {{-- Thumbnail --}}
+                    <div class="h-80 relative overflow-hidden m-4 rounded-[2rem]">
                         @if($article->thumbnail)
                             <img src="{{ asset($article->thumbnail) }}" 
-                                 alt="{{ $article->title }}" 
-                                 class="w-full h-full object-cover">
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                 alt="{{ $article->title }}"
+                                 loading="lazy">
                         @else
-                            <div class="w-full h-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
-                                <i class="fas {{ $category->icon }} text-white text-6xl animate-float"></i>
+                            <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                                <i class="fas fa-book-open text-white/20 text-6xl"></i>
                             </div>
                         @endif
                         
-                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900 via-blue-900/50 to-transparent"></div>
+                        {{-- Overlay --}}
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                            <p class="text-white text-xs leading-relaxed italic">"Klik untuk membaca."</p>
+                        </div>
 
-                        <!-- Sub-Category Badge (if exists) -->
+                        {{-- Subcategory Badge --}}
                         @if($article->subCategory)
                         <div class="absolute top-4 left-4">
-                            <span class="badge-sub px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-xs font-bold rounded-full shadow-lg shadow-blue-500/40 border-2 border-blue-300/30 backdrop-blur-sm">
-                                <i class="fas {{ $article->subCategory->icon }} mr-1"></i>
+                            <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
                                 {{ $article->subCategory->name }}
                             </span>
                         </div>
                         @endif
                     </div>
 
-                    <!-- Content -->
-                    <div class="p-6">
-                        <!-- Meta Info -->
-                        <div class="flex items-center gap-4 text-xs text-blue-300 mb-4 font-semibold">
-                            <span class="flex items-center gap-2 bg-blue-600/30 px-3 py-1 rounded-full">
-                                <i class="far fa-calendar"></i> 
-                                {{ $article->published_at->format('d M Y') }}
-                            </span>
-                            <span class="flex items-center gap-2 bg-blue-700/40 px-3 py-1 rounded-full">
-                                <i class="far fa-user"></i> 
-                                {{ $article->author->name }}
+                    {{-- Content --}}
+                    <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="far fa-calendar-alt text-blue-300 text-xs"></i>
+                            <span class="text-blue-200 text-[11px] font-bold uppercase tracking-wider">
+                                {{ $article->published_at ? $article->published_at->locale('id')->isoFormat('D MMMM Y') : 'Baru' }}
                             </span>
                         </div>
 
-                        <!-- Title -->
-                        <h3 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-200 transition-colors leading-snug">
+                        <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight">
                             {{ $article->title }}
                         </h3>
-
-                        <!-- Excerpt -->
-                        <p class="text-blue-100 mb-5 line-clamp-3 leading-relaxed font-light text-sm">{{ $article->excerpt }}</p>
-
-                        <!-- Read More Button -->
-                        <a href="{{ route('materi.detail', [$category->slug, $article->slug]) }}" 
-                           class="read-more-btn inline-flex items-center text-blue-300 font-bold hover:text-white transition-all group">
-                            Baca Selengkapnya 
-                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
-                        </a>
+                        
+                        <p class="text-blue-100 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
+                            {{ $article->excerpt }}
+                        </p>
+                        
+                        <div class="mt-auto">
+                            <a href="{{ route('materi.detail', [$category->slug, $article->slug]) }}" 
+                               class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                                <span>Baca Materi</span>
+                                <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
+                            </a>
+                        </div>
                     </div>
                 </article>
                 @endforeach
             </div>
 
-            <!-- Pagination -->
-            <div class="mt-16 animate-fade-in-up">
-                {{ $articles->links() }}
+            {{-- Pagination --}}
+            <div class="mt-20 flex justify-center" data-aos="fade-up">
+                <div class="bg-blue-900/50 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-blue-400/30">
+                    {{ $articles->links('vendor.pagination.tailwind') }}
+                </div>
             </div>
 
         @else
             <!-- Empty State -->
-            <div class="text-center py-20 bg-blue-800/50 backdrop-blur-xl rounded-[3rem] shadow-2xl border-2 border-blue-500/20 animate-scale-in">
-                <div class="category-icon-wrapper inline-block mb-8">
-                    <div class="w-28 h-28 bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-500/40 border-4 border-blue-400/30 relative z-10">
-                        <i class="fas {{ $category->icon }} text-white text-6xl animate-float"></i>
+            <div class="text-center py-20" data-aos="zoom-in">
+                <div class="relative w-48 h-48 mx-auto mb-10">
+                    <div class="absolute inset-0 bg-blue-600/30 rounded-full animate-ping opacity-20"></div>
+                    <div class="relative w-48 h-48 bg-blue-800 rounded-full flex items-center justify-center shadow-2xl border border-blue-600">
+                        <i class="fas fa-inbox text-blue-400 text-7xl"></i>
                     </div>
                 </div>
-                <h3 class="text-3xl font-black text-white mb-4">Belum Ada Artikel</h3>
-                <p class="text-blue-200 mb-8 text-lg">
-                    Kategori <strong class="text-blue-300">{{ $category->name }}</strong> belum memiliki artikel yang dipublikasikan.
+                <h3 class="text-3xl font-bold text-white mb-4">Belum Ada Artikel</h3>
+                <p class="text-blue-200 max-w-md mx-auto mb-10">
+                    Kategori ini belum memiliki artikel sat ini.
                 </p>
-                <a href="{{ route('materi.index') }}" 
-                   class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-black rounded-2xl hover:from-blue-600 hover:to-blue-800 transition-all shadow-xl shadow-blue-500/40 border-2 border-blue-400/30 hover:scale-105">
-                    <i class="fas fa-arrow-left"></i> 
-                    <span>Lihat Semua Materi</span>
+                <a href="{{ route('materi.index') }}" class="px-10 py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl hover:bg-blue-500 transition-all">
+                    Lihat Semua Materi
                 </a>
             </div>
         @endif
     </div>
-</div>
+</section>
 
-<style>
-    /* Custom Pagination Styling */
-    .pagination {
-        display: flex;
-        justify-content: center;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-    }
-    
-    .pagination > * {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 3rem;
-        height: 3rem;
-        padding: 0 1rem;
-        background: rgba(30, 58, 138, 0.5);
-        backdrop-filter: blur(12px);
-        border: 2px solid rgba(59, 130, 246, 0.3);
-        border-radius: 1rem;
-        color: #93c5fd;
-        font-weight: 700;
-        transition: all 0.3s ease;
-    }
-    
-    .pagination > *:hover {
-        background: rgba(59, 130, 246, 0.3);
-        border-color: rgba(59, 130, 246, 0.5);
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-    }
-    
-    .pagination .active {
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        border-color: rgba(59, 130, 246, 0.5);
-        color: white;
-        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
-    }
-    
-    .pagination .disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
-    }
-    
-    .pagination .disabled:hover {
-        background: rgba(30, 58, 138, 0.5);
-        border-color: rgba(59, 130, 246, 0.3);
-        color: #93c5fd;
-        transform: none;
-        box-shadow: none;
-    }
-</style>
-
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-    // Intersection Observer untuk animasi saat scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-out-back',
+            once: true
         });
-    }, observerOptions);
-    
-    document.querySelectorAll('.animate-fade-in-up, .animate-slide-in-left, .animate-scale-in').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        observer.observe(el);
     });
 </script>
-
-@endsection 
+@endsection

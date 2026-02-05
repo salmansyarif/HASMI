@@ -4,8 +4,8 @@
 
 @section('content')
 {{-- INTRO VIDEO OVERLAY --}}
-<div id="intro-overlay" class="fixed inset-0 z-[9999] bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 backdrop-blur-xl flex items-center justify-center p-4 transition-all duration-700">
-    <div class="relative w-full max-w-6xl aspect-video bg-gradient-to-br from-blue-950 to-blue-800 rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(59,130,246,0.5)] border-2 border-blue-400/30 ring-8 ring-blue-500/20 animate-border-pulse">
+<div id="intro-overlay" class="fixed inset-0 z-[9999] bg-gradient-to-br from-blue-800 to-blue-900 backdrop-blur-xl flex items-center justify-center p-4 transition-all duration-700">
+    <div class="relative w-full max-w-6xl aspect-video bg-gradient-to-br from-blue-800 to-blue-900 rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(59,130,246,0.5)] border-2 border-blue-400/30 ring-8 ring-blue-500/20 animate-border-pulse">
         <button onclick="closeIntro()" class="absolute top-6 right-6 z-50 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-3 rounded-full font-bold shadow-[0_0_30px_rgba(239,68,68,0.5)] transition-all duration-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(239,68,68,0.8)] flex items-center gap-3 group">
             <span class="text-base">Tutup Video</span>
             <i class="fas fa-times group-hover:rotate-180 transition-transform duration-500"></i>
@@ -105,15 +105,19 @@
                 {{-- Trust Indicators with Enhanced Animation --}}
                 <div class="flex items-center gap-10 pt-10" data-aos="fade-up" data-aos-delay="1400">
                     <div class="text-center group" data-aos="zoom-in" data-aos-delay="1600">
-                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] group-hover:scale-125 transition-transform duration-300" data-target="{{ \App\Models\Article::published()->count() }}">0</div>
-                        <div class="text-base text-blue-200 font-semibold mt-1">Artikel</div>
+                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] group-hover:scale-125 transition-transform duration-300" data-target="{{ $materiCount }}">0</div>
+                        <div class="text-base text-blue-200 font-semibold mt-1">Materi</div>
                     </div>
                     <div class="text-center group" data-aos="zoom-in" data-aos-delay="1800">
-                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] group-hover:scale-125 transition-transform duration-300" data-target="{{ \App\Models\Program::count() }}">0</div>
+                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] group-hover:scale-125 transition-transform duration-300" data-target="{{ $programCount }}">0</div>
                         <div class="text-base text-blue-200 font-semibold mt-1">Program</div>
                     </div>
                     <div class="text-center group" data-aos="zoom-in" data-aos-delay="2000">
-                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] group-hover:scale-125 transition-transform duration-300" data-target="{{ \App\Models\Kegiatan::count() }}">0</div>
+                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] group-hover:scale-125 transition-transform duration-300" data-target="{{ $intisariCount }}">0</div>
+                        <div class="text-base text-blue-200 font-semibold mt-1">Intisari</div>
+                    </div>
+                    <div class="text-center group" data-aos="zoom-in" data-aos-delay="2200">
+                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] group-hover:scale-125 transition-transform duration-300" data-target="{{ $kegiatanCount }}">0</div>
                         <div class="text-base text-blue-200 font-semibold mt-1">Kegiatan</div>
                     </div>
                 </div>
@@ -368,7 +372,7 @@
                 <div class="grid grid-cols-2 gap-5 pt-8">
                     <div class="flex items-start gap-4 bg-blue-800/40 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/30 hover:border-blue-300 hover:bg-blue-700/40 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.4)] group"
                          data-aos="fade-up" data-aos-delay="700">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.5)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                        <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.5)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
                             <i class="fas fa-check text-white text-xl"></i>
                         </div>
                         <div>
@@ -378,7 +382,7 @@
                     </div>
                     <div class="flex items-start gap-4 bg-blue-800/40 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/30 hover:border-blue-300 hover:bg-blue-700/40 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.4)] group"
                          data-aos="fade-up" data-aos-delay="800">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.5)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 animation-delay-1000">
+                        <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.5)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 animation-delay-1000">
                             <i class="fas fa-check text-white text-xl"></i>
                         </div>
                         <div>
@@ -400,7 +404,7 @@
 </section>
 
 {{-- VISI MISI SECTION --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-900 to-blue-800 relative overflow-hidden">
+<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-800 to-blue-900 relative overflow-hidden">
     <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 opacity-10 rounded-l-[100px] blur-[150px] animate-pulse-glow"></div>
     <div class="absolute bottom-0 left-0 w-1/2 h-full bg-blue-400 opacity-10 rounded-r-[100px] blur-[150px] animate-pulse-glow animation-delay-3000"></div>
     
@@ -414,7 +418,7 @@
         <div class="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
             {{-- Visi Card --}}
             <div class="group relative" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 animate-gradient-slow shadow-[0_0_60px_rgba(59,130,246,0.4)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-800 to-blue-900 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 shadow-[0_0_60px_rgba(59,130,246,0.4)]"></div>
                 <div class="relative bg-blue-900/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_80px_rgba(59,130,246,0.3)] border-2 border-blue-400/40 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-300 hover:shadow-[0_0_100px_rgba(59,130,246,0.5)]">
                     <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(255,255,255,0.4)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700">
                         <i class="fas fa-eye text-blue-600 text-3xl"></i>
@@ -423,14 +427,12 @@
                     <p class="text-blue-100 text-xl leading-relaxed drop-shadow-md">
                         Menjadi organisasi terdepan dalam pembinaan generasi muslim yang berakhlak mulia, berilmu, dan bermanfaat bagi umat dan bangsa.
                     </p>
-                    <div class="absolute top-5 right-5 w-20 h-20 rounded-tr-2xl group-hover:border-blue-200/60 transition-colors duration-700"></div>
-                    <div class="absolute bottom-5 left-5 w-20 h-20 rounded-bl-2xl group-hover:border-blue-200/60 transition-colors duration-700"></div>
                 </div>
             </div>
 
             {{-- Misi Card --}}
             <div class="group relative" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-700 to-blue-900 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 animate-gradient-slow animation-delay-3000 shadow-[0_0_60px_rgba(59,130,246,0.4)]"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-800 to-blue-900 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 shadow-[0_0_60px_rgba(59,130,246,0.4)]"></div>
                 <div class="relative bg-blue-900/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_80px_rgba(59,130,246,0.3)] border-2 border-blue-400/40 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-300 hover:shadow-[0_0_100px_rgba(59,130,246,0.5)]">
                     <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(255,255,255,0.4)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700">
                         <i class="fas fa-bullseye text-blue-600 text-3xl"></i>
@@ -439,8 +441,6 @@
                     <p class="text-blue-100 text-xl leading-relaxed drop-shadow-md">
                         Menyelenggarakan program pendidikan, dakwah, dan sosial secara komprehensif dan berkelanjutan untuk kemajuan peradaban Islam.
                     </p>
-                    <div class="absolute top-5 right-5 w-20 h-20 rounded-tr-2xl group-hover:border-blue-200/60 transition-colors duration-700"></div>
-                    <div class="absolute bottom-5 left-5 w-20 h-20 rounded-bl-2xl group-hover:border-blue-200/60 transition-colors duration-700"></div>
                 </div>
             </div>
         </div>
@@ -464,33 +464,54 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             @foreach($homePrograms as $index => $p)
-            <a href="{{ route('program.show', $p->slug) }}" 
-               class="group bg-blue-900/40 backdrop-blur-xl rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(59,130,246,0.2)] hover:shadow-[0_0_80px_rgba(59,130,246,0.5)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/30 hover:border-blue-300"
-               data-aos="fade-up" data-aos-delay="{{ $index * 100 }}" data-aos-duration="800">
-                <div class="h-56 overflow-hidden relative">
-                     @if($p->thumbnail)
-                        <img src="{{ asset($p->thumbnail) }}" alt="{{ $p->title }}" class="w-full h-full object-cover group-hover:scale-125 group-hover:rotate-2 transition-all duration-1000">
-                     @else
-                        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-700 to-blue-900">
-                            <i class="fas fa-hand-holding-heart text-white text-6xl opacity-50 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700"></i>
+            <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                     data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                
+                {{-- Thumbnail --}}
+                <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
+                    @if($p->thumbnail)
+                        <img src="{{ asset($p->thumbnail) }}" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                             alt="{{ $p->title }}"
+                             loading="lazy">
+                    @else
+                        <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                            <i class="fas fa-hand-holding-heart text-white/20 text-6xl"></i>
                         </div>
-                     @endif
-                     <div class="absolute inset-0 bg-gradient-to-t from-blue-900/95 via-blue-900/40 to-transparent"></div>
-                     <div class="absolute bottom-5 left-5">
-                        <span class="px-4 py-2 bg-blue-600/90 backdrop-blur-md rounded-xl text-sm font-bold text-white uppercase tracking-wider shadow-[0_0_30px_rgba(59,130,246,0.5)] border-2 border-blue-400/50">
+                    @endif
+                    
+                    {{-- Overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                        <p class="text-white text-xs leading-relaxed italic">"Klik untuk detail."</p>
+                    </div>
+
+                    {{-- Category Badge --}}
+                    <div class="absolute top-4 left-4">
+                        <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
                             {{ $p->category->name ?? 'Program' }}
                         </span>
-                     </div>
-                </div>
-                <div class="p-7">
-                    <h3 class="text-white text-xl font-bold mb-3 line-clamp-2 group-hover:text-blue-200 transition-colors drop-shadow-lg">{{ $p->title }}</h3>
-                    <p class="text-blue-200 text-base line-clamp-2 mb-5 drop-shadow-md">{{ \Illuminate\Support\Str::limit(strip_tags($p->description), 80) }}</p>
-                    <div class="flex items-center text-blue-300 text-base font-bold group-hover:gap-3 transition-all">
-                        <span>Lihat Program</span>
-                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                     </div>
                 </div>
-            </a>
+
+                {{-- Content --}}
+                <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight">
+                        {{ $p->title }}
+                    </h3>
+                    
+                    <p class="text-blue-100 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
+                        {{ \Illuminate\Support\Str::limit(strip_tags($p->description), 100) }}
+                    </p>
+                    
+                    <div class="mt-auto">
+                        <a href="{{ route('program.show', $p->slug) }}" 
+                           class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                            <span>Lihat Program</span>
+                            <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
             @endforeach
         </div>
 
@@ -504,7 +525,7 @@
 </section>
 
 {{-- MATERI PEMBELAJARAN --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-900 to-blue-800">
+<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-800 to-blue-900">
     <div class="container mx-auto px-6 lg:px-12">
         <div class="text-center mb-20" data-aos="fade-up">
             <span class="px-6 py-3 bg-blue-600/40 backdrop-blur-md text-blue-100 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-400/40 shadow-[0_0_30px_rgba(59,130,246,0.3)]" data-aos="zoom-in">Pembelajaran</span>
@@ -514,42 +535,52 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             @foreach($homeArticles as $index => $article)
-            <article class="group bg-blue-900/40 backdrop-blur-xl rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(59,130,246,0.2)] hover:shadow-[0_0_80px_rgba(59,130,246,0.5)] transition-all duration-700 hover:-translate-y-4 border-2 border-blue-400/30 hover:border-blue-300 hover:bg-blue-800/50"
-                     data-aos="fade-up" data-aos-delay="{{ $index * 150 }}" data-aos-duration="800">
-                <div class="h-64 overflow-hidden relative">
+            <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                     data-aos="fade-up" data-aos-delay="{{ $index * 150 }}">
+                
+                {{-- Thumbnail --}}
+                <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
                     @if($article->thumbnail)
-                        <img src="{{ asset($article->thumbnail) }}" class="w-full h-full object-cover group-hover:scale-125 group-hover:rotate-3 transition-all duration-1000" loading="lazy">
+                        <img src="{{ asset($article->thumbnail) }}" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                             alt="{{ $article->title }}"
+                             loading="lazy">
                     @else
-                        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-700 to-blue-900">
-                            <i class="fas fa-book-open text-white text-6xl opacity-50 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700"></i>
+                        <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                            <i class="fas fa-book-open text-white/20 text-6xl"></i>
                         </div>
                     @endif
-                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900 via-blue-900/30 to-transparent opacity-70"></div>
-                    <div class="absolute top-5 left-5" data-aos="fade-right" data-aos-delay="{{ ($index * 150) + 100 }}">
-                        <span class="px-4 py-2 bg-blue-600/90 backdrop-blur-md text-white text-sm font-bold rounded-full uppercase tracking-wider shadow-[0_0_30px_rgba(59,130,246,0.5)] border-2 border-blue-400/50 animate-pulse-subtle">
+                    
+                    {{-- Overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                        <p class="text-white text-xs leading-relaxed italic">"Klik untuk membaca."</p>
+                    </div>
+
+                    {{-- Category Badge --}}
+                    <div class="absolute top-4 left-4">
+                        <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
                             {{ $article->category->name }}
                         </span>
                     </div>
                 </div>
-                <div class="p-7">
-                    <h3 class="text-white font-bold text-xl mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight drop-shadow-lg"
-                        data-aos="fade-up" data-aos-delay="{{ ($index * 150) + 200 }}">
+
+                {{-- Content --}}
+                <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight">
                         {{ $article->title }}
                     </h3>
-                    <div class="flex items-center gap-2 text-blue-300 text-base mb-5" data-aos="fade-up" data-aos-delay="{{ ($index * 150) + 300 }}">
-                        <i class="far fa-clock"></i>
-                        <span>{{ $article->published_at ? $article->published_at->diffForHumans() : $article->created_at->diffForHumans() }}</span>
+                    
+                    <p class="text-blue-100 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
+                        {{ \Illuminate\Support\Str::limit(strip_tags($article->content ?? $article->excerpt), 100) }}
+                    </p>
+                    
+                    <div class="mt-auto">
+                        <a href="{{ route('materi.detail', [$article->category->slug, $article->slug]) }}" 
+                           class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                            <span>Baca Materi</span>
+                            <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
+                        </a>
                     </div>
-                    <a href="{{ route('materi.detail', [$article->category->slug, $article->slug]) }}" 
-                       class="inline-flex items-center gap-2 text-blue-300 font-bold hover:gap-4 transition-all group"
-                       data-aos="fade-up" data-aos-delay="{{ ($index * 150) + 400 }}">
-                        <span>Baca Selengkapnya</span>
-                        <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
-                    </a>
-                </div>
-                
-                <div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-blue-400/20 blur-xl"></div>
                 </div>
             </article>
             @endforeach
@@ -568,7 +599,7 @@
 {{-- INTISARI SECTION --}}
 <section class="py-32 lg:py-40 bg-gradient-to-br from-blue-800 to-blue-900 relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white via-blue-200 to-transparent animate-gradient-slow"></div>
+        <div class="absolute top-0 left-0 w-full h-full bg-blue-500 animate-pulse-glow"></div>
     </div>
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
@@ -580,30 +611,54 @@
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
             @foreach($homeIntisari as $index => $i)
-            <a href="{{ route('intisari.show', $i->slug) }}" 
-               class="group relative h-96 rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(59,130,246,0.3)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
-               data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+            <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                     data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                 
-                @if($i->thumbnail_url)
-                    <img src="{{ $i->thumbnail_url }}" alt="{{ $i->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-125 group-hover:rotate-2 transition-all duration-1000">
-                @else
-                    <div class="absolute inset-0 bg-gradient-to-br from-blue-800 to-blue-900 group-hover:scale-110 transition-transform duration-1000"></div>
-                @endif
-                
-                <div class="absolute inset-0 bg-gradient-to-t from-blue-900 via-blue-900/70 to-blue-900/30 opacity-90 group-hover:opacity-95 transition-opacity duration-700"></div>
-                
-                <div class="absolute bottom-0 left-0 right-0 p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                    <span class="inline-block px-4 py-2 rounded-xl bg-blue-600/80 backdrop-blur-md border-2 border-blue-400/50 text-blue-100 text-sm font-bold mb-4 shadow-[0_0_30px_rgba(59,130,246,0.5)]">
-                        Intisari
-                    </span>
-                    <h3 class="text-white text-xl font-bold leading-tight line-clamp-2 mb-3 group-hover:text-blue-200 transition-colors drop-shadow-lg">
+                {{-- Thumbnail --}}
+                <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
+                    @if($i->thumbnail_url)
+                        <img src="{{ $i->thumbnail_url }}" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                             alt="{{ $i->title }}"
+                             loading="lazy">
+                    @else
+                        <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                            <i class="fas fa-image text-white/20 text-6xl"></i>
+                        </div>
+                    @endif
+                    
+                    {{-- Overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                        <p class="text-white text-xs leading-relaxed italic">"Klik untuk membaca."</p>
+                    </div>
+
+                    {{-- Badge --}}
+                    <div class="absolute top-4 left-4">
+                        <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
+                            Intisari
+                        </span>
+                    </div>
+                </div>
+
+                {{-- Content --}}
+                <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight">
                         {{ $i->title }}
                     </h3>
-                    <p class="text-gray-200 text-base line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100 drop-shadow-md">
-                        {{ \Illuminate\Support\Str::limit(strip_tags($i->content), 80) }}
+                    
+                    <p class="text-blue-100 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
+                        {{ \Illuminate\Support\Str::limit(strip_tags($i->content), 100) }}
                     </p>
+                    
+                    <div class="mt-auto">
+                        <a href="{{ route('intisari.show', $i->slug) }}" 
+                           class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                            <span>Baca Intisari</span>
+                            <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
                 </div>
-            </a>
+            </article>
             @endforeach
         </div>
 
@@ -617,7 +672,7 @@
 </section>
 
 {{-- KEGIATAN SECTION --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-900 to-blue-800 relative overflow-hidden" id="kegiatan">
+<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-800 to-blue-900 relative overflow-hidden" id="kegiatan">
     <div class="absolute inset-0 opacity-5">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(59,130,246,0.3),transparent_50%)]"></div>
     </div>
@@ -631,33 +686,57 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             @foreach($homeKegiatan as $index => $k)
-            <a href="{{ route('kegiatan.show', $k->slug) }}" 
-               class="group bg-blue-900/40 backdrop-blur-xl rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(59,130,246,0.2)] hover:shadow-[0_0_80px_rgba(59,130,246,0.5)] transition-all duration-700 hover:-translate-y-4 border-2 border-blue-400/30 hover:border-blue-300"
-               data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                <div class="h-56 overflow-hidden relative">
+            <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                     data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                
+                {{-- Thumbnail --}}
+                <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
                     @if($k->thumbnail_url)
-                        <img src="{{ $k->thumbnail_url }}" alt="{{ $k->title }}" class="w-full h-full object-cover group-hover:scale-125 group-hover:rotate-2 transition-all duration-1000">
+                        <img src="{{ $k->thumbnail_url }}" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                             alt="{{ $k->title }}"
+                             loading="lazy">
                     @else
-                        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-700 to-blue-900">
-                            <i class="fas fa-images text-white text-6xl opacity-50 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700"></i>
+                        <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                            <i class="fas fa-camera text-white/20 text-6xl"></i>
                         </div>
                     @endif
-                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/30 to-transparent opacity-80"></div>
-                    <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                        <div class="bg-white/95 backdrop-blur-md px-4 py-2 rounded-xl text-sm font-bold text-blue-900 shadow-[0_4px_20px_rgba(59,130,246,0.3)] border border-blue-200">
-                            <i class="far fa-calendar-alt mr-1"></i>
+                    
+                    {{-- Overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                        <p class="text-white text-xs leading-relaxed italic">"Klik untuk dokumentasi."</p>
+                    </div>
+
+                    {{-- Badge --}}
+                    <div class="absolute top-4 left-4">
+                        <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
+                            Kegiatan
+                        </span>
+                    </div>
+                </div>
+
+                {{-- Content --}}
+                <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i class="far fa-calendar-alt text-blue-300 text-xs"></i>
+                        <span class="text-blue-200 text-[11px] font-bold uppercase tracking-wider">
                             {{ $k->event_date ? \Carbon\Carbon::parse($k->event_date)->isoFormat('D MMM Y') : \Carbon\Carbon::parse($k->created_at)->isoFormat('D MMM Y') }}
-                        </div>
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight">
+                        {{ $k->title }}
+                    </h3>
+                    
+                    <div class="mt-auto">
+                        <a href="{{ route('kegiatan.show', $k->slug) }}" 
+                           class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                            <span>Lihat Dokumentasi</span>
+                            <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="p-7">
-                    <h3 class="text-white text-xl font-bold mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight drop-shadow-lg">{{ $k->title }}</h3>
-                    <div class="flex items-center text-blue-300 text-base font-bold group-hover:text-blue-200 transition-colors">
-                        <span>Lihat Dokumentasi</span>
-                        <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-2 transition-transform"></i>
-                    </div>
-                </div>
-            </a>
+            </article>
             @endforeach
         </div>
 
@@ -685,39 +764,39 @@
                class="group relative overflow-hidden bg-blue-900/40 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.2)] hover:shadow-[0_0_80px_rgba(59,130,246,0.5)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/30 hover:border-blue-300"
                data-aos="fade-up" data-aos-delay="100">
                 <div class="relative z-10 text-center">
-                    <div class="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-700 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.4)]">
+                    <div class="w-24 h-24 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.4)]">
                         <i class="fas fa-hand-holding-heart text-4xl text-white"></i>
                     </div>
                     <h3 class="text-3xl font-bold mb-4 text-white">Donasi</h3>
                     <p class="text-blue-200 text-lg leading-relaxed">Salurkan donasi terbaik Anda untuk kemajuan dakwah dan pendidikan Islam</p>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-b from-blue-700/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div class="absolute inset-0 bg-blue-700/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             </a>
 
             <a href="https://beasiswapendidikanislam.com/" target="_blank" 
                class="group relative overflow-hidden bg-blue-900/40 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.2)] hover:shadow-[0_0_80px_rgba(59,130,246,0.5)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/30 hover:border-blue-300"
                data-aos="fade-up" data-aos-delay="200">
                 <div class="relative z-10 text-center">
-                    <div class="w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.4)]">
+                    <div class="w-24 h-24 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.4)]">
                         <i class="fas fa-user-graduate text-4xl text-white"></i>
                     </div>
                     <h3 class="text-3xl font-bold mb-4 text-white">Beasiswa</h3>
                     <p class="text-blue-200 text-lg leading-relaxed">Program beasiswa pendidikan Islam untuk mencetak kader dai berkualitas</p>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-b from-blue-700/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div class="absolute inset-0 bg-blue-700/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             </a>
 
             <a href="https://hasmipeduli.org/" target="_blank" 
                class="group relative overflow-hidden bg-blue-900/40 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.2)] hover:shadow-[0_0_80px_rgba(59,130,246,0.5)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/30 hover:border-blue-300"
                data-aos="fade-up" data-aos-delay="300">
                 <div class="relative z-10 text-center">
-                    <div class="w-24 h-24 bg-gradient-to-br from-blue-700 to-blue-900 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.4)]">
+                    <div class="w-24 h-24 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.4)]">
                         <i class="fas fa-hands-helping text-4xl text-white"></i>
                     </div>
                     <h3 class="text-3xl font-bold mb-4 text-white">Sosial</h3>
                     <p class="text-blue-200 text-lg leading-relaxed">Aksi sosial dan kemanusiaan untuk membantu sesama yang membutuhkan</p>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-b from-blue-700/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div class="absolute inset-0 bg-blue-700/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             </a>
         </div>
     </div>
@@ -726,6 +805,7 @@
 @endsection
 
 {{-- ENHANCED STYLES --}}
+@section('styles')
 <style>
 * {
     scroll-behavior: smooth;
@@ -806,6 +886,18 @@ body {
     top: 45%;
     left: 5%;
     animation-delay: 11s;
+}
+
+/* Article Card Style (Intisari Standard) */
+.article-card {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+}
+.article-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
+    border-color: rgba(96, 165, 250, 0.6);
 }
 
 @keyframes float-enhanced {
@@ -891,16 +983,6 @@ body {
 .animate-gradient-flow {
     background-size: 200% 200%;
     animation: gradient-flow 6s ease infinite;
-}
-
-@keyframes gradient-slow {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-
-.animate-gradient-slow {
-    background-size: 200% 200%;
-    animation: gradient-slow 12s ease infinite;
 }
 
 /* Enhanced Text Glow */
@@ -1105,8 +1187,9 @@ body {
     }
 }
 </style>
+@endsection
 
-{{-- ENHANCED SCRIPTS --}}
+@section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
@@ -1217,3 +1300,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+@endsection

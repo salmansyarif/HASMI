@@ -20,7 +20,7 @@ class KegiatanController extends Controller
 
         $kegiatans = $query->latest('event_date')
                            ->latest('created_at')
-                           ->paginate(9);
+                           ->paginate(10);
 
         return view('kegiatan.index', compact('kegiatans'));
     }
