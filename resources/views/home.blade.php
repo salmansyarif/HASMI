@@ -4,8 +4,8 @@
 
 @section('content')
 {{-- INTRO VIDEO OVERLAY --}}
-<div id="intro-overlay" class="fixed inset-0 z-[9999] bg-gradient-to-br from-blue-800 to-blue-900 backdrop-blur-xl flex items-center justify-center p-4 transition-all duration-700">
-    <div class="relative w-full max-w-6xl aspect-video bg-gradient-to-br from-blue-800 to-blue-900 rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(59,130,246,0.5)] border-2 border-blue-400/30 ring-8 ring-blue-500/20 animate-border-pulse">
+<div id="intro-overlay" class="fixed inset-0 z-[9999] bg-gradient-to-br from-blue-900 to-blue-950 backdrop-blur-xl flex items-center justify-center p-4 transition-all duration-700">
+    <div class="relative w-full max-w-6xl aspect-video bg-gradient-to-br from-blue-900 to-blue-950 rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(29,78,216,0.4)] border-2 border-blue-700/30 ring-8 ring-blue-800/20 animate-border-pulse">
         <button onclick="closeIntro()" class="absolute top-6 right-6 z-50 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-3 rounded-full font-bold shadow-[0_0_30px_rgba(239,68,68,0.5)] transition-all duration-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(239,68,68,0.8)] flex items-center gap-3 group">
             <span class="text-base">Tutup Video</span>
             <i class="fas fa-times group-hover:rotate-180 transition-transform duration-500"></i>
@@ -39,7 +39,7 @@
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
 {{-- HERO SECTION --}}
-<section class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-blue-800 to-blue-900">
+<section class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950">
     {{-- Animated Background Elements --}}
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="islamic-pattern"></div>
@@ -68,36 +68,36 @@
         <div class="grid lg:grid-cols-2 gap-16 items-center">
             {{-- Left Side: Content --}}
             <div class="space-y-8" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200">
-                <div class="inline-flex items-center gap-4 bg-white/10 backdrop-blur-xl px-8 py-4 rounded-full shadow-[0_0_40px_rgba(59,130,246,0.3)] border-2 border-white/30 hover:border-white/50 transition-all duration-500 hover:shadow-[0_0_60px_rgba(59,130,246,0.5)] hover:scale-105"
+                <div class="inline-flex items-center gap-4 bg-blue-900/30 backdrop-blur-xl px-8 py-4 rounded-full shadow-[0_0_40px_rgba(29,78,216,0.2)] border-2 border-blue-700/30 hover:border-blue-600/50 transition-all duration-500 hover:shadow-[0_0_60px_rgba(29,78,216,0.4)] hover:scale-105"
                      data-aos="zoom-in" data-aos-delay="400">
-                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.5)] animate-pulse-glow">
+                    <div class="w-14 h-14 bg-blue-700 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(29,78,216,0.4)] animate-pulse-glow">
                        <img src="{{ asset('img/hasmilogo.png') }}" alt="Logo HASMI" class="w-9 h-9 object-contain">
                     </div>
-                    <span class="text-2xl font-bold text-white tracking-wide drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">HASMI</span>
+                    <span class="text-2xl font-bold text-white tracking-wide drop-shadow-[0_0_10px_rgba(147,197,253,0.3)]">HASMI</span>
                 </div>
 
                 <h1 class="text-6xl lg:text-8xl font-bold leading-tight">
-                    <span class="block text-white mb-3 drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] animate-text-glow" data-aos="fade-up" data-aos-delay="600">Membangun</span>
-                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-blue-200 animate-gradient-flow drop-shadow-[0_0_30px_rgba(147,197,253,0.8)]"
+                    <span class="block text-white mb-3 drop-shadow-[0_0_20px_rgba(147,197,253,0.2)] animate-text-glow" data-aos="fade-up" data-aos-delay="600">Membangun</span>
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-200 to-blue-300 animate-gradient-flow drop-shadow-[0_0_30px_rgba(147,197,253,0.5)]"
                           data-aos="fade-up" data-aos-delay="800">
                         Peradaban Islami
                     </span>
                 </h1>
 
-                <p class="text-xl lg:text-2xl text-blue-100 leading-relaxed max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]" 
+                <p class="text-xl lg:text-2xl text-blue-200 leading-relaxed max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]" 
                    data-aos="fade-up" data-aos-delay="1000">
                     Himpunan Aktivis Siswa Muslim Indonesia berkomitmen membina generasi muslim melalui pendidikan, dakwah, dan aksi sosial berkelanjutan untuk kemajuan umat.
                 </p>
 
                 <div class="flex flex-wrap gap-5 pt-6" data-aos="fade-up" data-aos-delay="1200">
                     <a href="{{ route('materi.index') }}" 
-                       class="group px-10 py-5 bg-white text-blue-900 rounded-2xl font-bold shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 flex items-center gap-3 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-r from-blue-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                       class="group px-10 py-5 bg-blue-700 text-white rounded-2xl font-bold shadow-[0_0_40px_rgba(29,78,216,0.3)] hover:shadow-[0_0_60px_rgba(29,78,216,0.5)] hover:scale-110 transition-all duration-500 flex items-center gap-3 relative overflow-hidden border-2 border-blue-600/30">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <span class="relative z-10 text-lg">Jelajahi Materi</span>
                         <i class="fas fa-arrow-right relative z-10 group-hover:translate-x-2 transition-transform duration-300"></i>
                     </a>
                     <a href="{{ route('tentang') }}" 
-                       class="px-10 py-5 bg-blue-800/40 backdrop-blur-md text-white rounded-2xl font-bold shadow-[0_0_30px_rgba(59,130,246,0.3)] border-2 border-blue-400/50 hover:bg-blue-700/60 hover:border-blue-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(59,130,246,0.6)] transition-all duration-500 text-lg">
+                       class="px-10 py-5 bg-blue-900/40 backdrop-blur-md text-white rounded-2xl font-bold shadow-[0_0_30px_rgba(29,78,216,0.2)] border-2 border-blue-700/50 hover:bg-blue-800/60 hover:border-blue-600 hover:scale-110 hover:shadow-[0_0_50px_rgba(29,78,216,0.4)] transition-all duration-500 text-lg">
                         Tentang Kami
                     </a>
                 </div>
@@ -105,20 +105,20 @@
                 {{-- Trust Indicators with Enhanced Animation --}}
                 <div class="flex items-center gap-10 pt-10" data-aos="fade-up" data-aos-delay="1400">
                     <div class="text-center group" data-aos="zoom-in" data-aos-delay="1600">
-                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] group-hover:scale-125 transition-transform duration-300" data-target="{{ $materiCount }}">0</div>
-                        <div class="text-base text-blue-200 font-semibold mt-1">Materi</div>
+                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(147,197,253,0.3)] group-hover:scale-125 transition-transform duration-300" data-target="{{ $materiCount }}">0</div>
+                        <div class="text-base text-blue-300 font-semibold mt-1">Materi</div>
                     </div>
                     <div class="text-center group" data-aos="zoom-in" data-aos-delay="1800">
-                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] group-hover:scale-125 transition-transform duration-300" data-target="{{ $programCount }}">0</div>
-                        <div class="text-base text-blue-200 font-semibold mt-1">Program</div>
+                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(147,197,253,0.3)] group-hover:scale-125 transition-transform duration-300" data-target="{{ $programCount }}">0</div>
+                        <div class="text-base text-blue-300 font-semibold mt-1">Program</div>
                     </div>
                     <div class="text-center group" data-aos="zoom-in" data-aos-delay="2000">
-                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] group-hover:scale-125 transition-transform duration-300" data-target="{{ $intisariCount }}">0</div>
-                        <div class="text-base text-blue-200 font-semibold mt-1">Intisari</div>
+                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(147,197,253,0.3)] group-hover:scale-125 transition-transform duration-300" data-target="{{ $intisariCount }}">0</div>
+                        <div class="text-base text-blue-300 font-semibold mt-1">Intisari</div>
                     </div>
                     <div class="text-center group" data-aos="zoom-in" data-aos-delay="2200">
-                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(255,255,255,0.5)] group-hover:scale-125 transition-transform duration-300" data-target="{{ $kegiatanCount }}">0</div>
-                        <div class="text-base text-blue-200 font-semibold mt-1">Kegiatan</div>
+                        <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(147,197,253,0.3)] group-hover:scale-125 transition-transform duration-300" data-target="{{ $kegiatanCount }}">0</div>
+                        <div class="text-base text-blue-300 font-semibold mt-1">Kegiatan</div>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
                     .status-bullet {
                         flex: 1;
                         height: 5px;
-                        background: rgba(255, 255, 255, 0.2);
+                        background: rgba(147, 197, 253, 0.15);
                         border-radius: 5px;
                         overflow: hidden;
                         position: relative;
@@ -155,7 +155,7 @@
                     }
 
                     .status-bullet:hover {
-                        background: rgba(255, 255, 255, 0.3);
+                        background: rgba(147, 197, 253, 0.25);
                         transform: scaleY(1.3);
                     }
                     
@@ -165,9 +165,9 @@
                         left: 0;
                         height: 100%;
                         width: 0%;
-                        background: linear-gradient(90deg, #fff, #93c5fd);
+                        background: linear-gradient(90deg, #93c5fd, #dbeafe);
                         border-radius: 5px;
-                        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+                        box-shadow: 0 0 10px rgba(147, 197, 253, 0.4);
                     }
                     
                     .status-bullet.active .status-bullet-fill {
@@ -180,7 +180,7 @@
                     }
                 </style>
 
-                <div class="relative h-[650px] rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.4)] border-2 border-white/30 backdrop-blur-sm bg-white/5 hover:shadow-[0_0_120px_rgba(59,130,246,0.6)] transition-all duration-700">
+                <div class="relative h-[650px] rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(29,78,216,0.3)] border-2 border-blue-700/30 backdrop-blur-sm bg-blue-900/20 hover:shadow-[0_0_120px_rgba(29,78,216,0.5)] transition-all duration-700">
                     
                     <div class="swiper status-swiper">
                         <div class="status-pagination" id="statusPagination"></div>
@@ -206,20 +206,20 @@
                                         <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[12000ms] ease-linear scale-100 hover:scale-110" 
                                              style="background-image: url('{{ $bgUrl }}');"></div>
                                     @else
-                                         <div class="absolute inset-0 bg-gradient-to-br from-blue-800 to-blue-900"></div>
+                                         <div class="absolute inset-0 bg-gradient-to-br from-blue-950 to-blue-900"></div>
                                     @endif
                                 @else
-                                    <div class="absolute inset-0 bg-gradient-to-br from-blue-800 to-blue-900"></div>
+                                    <div class="absolute inset-0 bg-gradient-to-br from-blue-950 to-blue-900"></div>
                                 @endif
 
-                                <div class="absolute inset-0 bg-gradient-to-t from-blue-900 via-blue-900/60 to-blue-900/20"></div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-950/60 to-blue-950/20"></div>
 
                                 <div class="relative h-full flex flex-col justify-end p-8 pb-12">
                                     <div class="absolute top-12 left-8 right-8 flex justify-between items-start">
-                                        <span class="px-5 py-2 rounded-full bg-blue-600/90 backdrop-blur-md text-white text-sm font-bold uppercase tracking-wider shadow-[0_0_30px_rgba(59,130,246,0.5)] border-2 border-blue-400/50 animate-pulse-subtle">
+                                        <span class="px-5 py-2 rounded-full bg-blue-700/90 backdrop-blur-md text-white text-sm font-bold uppercase tracking-wider shadow-[0_0_30px_rgba(29,78,216,0.4)] border-2 border-blue-600/50 animate-pulse-subtle">
                                             {{ $update->type }}
                                         </span>
-                                        <div class="text-right bg-black/40 backdrop-blur-md p-3 rounded-xl border-2 border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.3)]">
+                                        <div class="text-right bg-black/40 backdrop-blur-md p-3 rounded-xl border-2 border-blue-700/20 shadow-[0_0_30px_rgba(0,0,0,0.3)]">
                                             <div class="text-white font-bold text-xl drop-shadow-lg">{{ $update->date ? \Carbon\Carbon::parse($update->date)->format('d M Y') : '' }}</div>
                                             <div class="text-blue-300 text-sm font-semibold">{{ $update->date ? \Carbon\Carbon::parse($update->date)->diffForHumans() : '' }}</div>
                                         </div>
@@ -228,7 +228,7 @@
                                     <div class="space-y-5 mb-6" data-swiper-parallax-y="-20">
                                         @if(isset($update->category))
                                         <div class="text-blue-300 font-semibold text-base mb-3 flex items-center gap-3">
-                                            <span class="w-12 h-[3px] bg-blue-400 inline-block animate-pulse-width"></span>
+                                            <span class="w-12 h-[3px] bg-blue-500 inline-block animate-pulse-width"></span>
                                             {{ $update->category->name }}
                                         </div>
                                         @endif
@@ -237,14 +237,14 @@
                                             {{ $update->title ?? $update->judul }}
                                         </h2>
                                         
-                                        <p class="text-gray-100 text-lg line-clamp-3 leading-relaxed drop-shadow-lg">
+                                        <p class="text-gray-200 text-lg line-clamp-3 leading-relaxed drop-shadow-lg">
                                             {{ \Illuminate\Support\Str::limit(strip_tags($update->excerpt ?? $update->description ?? $update->content ?? ''), 150) }}
                                         </p>
                                     </div>
 
                                     <div data-swiper-parallax-y="-10">
                                         <a href="{{ route($update->route_name, $update->route_params) }}" 
-                                           class="inline-flex items-center gap-3 px-8 py-4 bg-white text-blue-900 rounded-xl font-bold hover:bg-blue-50 transition-all duration-300 group w-fit shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:shadow-[0_0_50px_rgba(255,255,255,0.5)] hover:scale-105">
+                                           class="inline-flex items-center gap-3 px-8 py-4 bg-blue-700 text-white rounded-xl font-bold hover:bg-blue-600 transition-all duration-300 group w-fit shadow-[0_0_30px_rgba(29,78,216,0.3)] hover:shadow-[0_0_50px_rgba(29,78,216,0.5)] hover:scale-105 border-2 border-blue-600/30">
                                             <span class="text-lg">Selengkapnya</span>
                                             <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
                                         </a>
@@ -257,8 +257,8 @@
                 </div>
                 
                 {{-- Enhanced Decorative Elements --}}
-                <div class="absolute -z-10 -top-10 -right-10 w-full h-full bg-blue-500/20 rounded-3xl blur-3xl animate-pulse-glow"></div>
-                <div class="absolute -z-10 -bottom-10 -left-10 w-full h-full bg-blue-400/20 rounded-3xl blur-3xl animate-pulse-glow animation-delay-2000"></div>
+                <div class="absolute -z-10 -top-10 -right-10 w-full h-full bg-blue-800/15 rounded-3xl blur-3xl animate-pulse-glow"></div>
+                <div class="absolute -z-10 -bottom-10 -left-10 w-full h-full bg-blue-700/15 rounded-3xl blur-3xl animate-pulse-glow animation-delay-2000"></div>
             </div>
 
             <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -325,25 +325,25 @@
 
     {{-- Enhanced Scroll Indicator --}}
     <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
-        <div class="w-7 h-12 border-3 border-white/60 rounded-full flex justify-center p-2 shadow-[0_0_30px_rgba(255,255,255,0.3)]">
-            <div class="w-2 h-4 bg-white rounded-full animate-scroll-pulse shadow-[0_0_10px_rgba(255,255,255,0.8)]"></div>
+        <div class="w-7 h-12 border-3 border-blue-300/60 rounded-full flex justify-center p-2 shadow-[0_0_30px_rgba(147,197,253,0.2)]">
+            <div class="w-2 h-4 bg-blue-200 rounded-full animate-scroll-pulse shadow-[0_0_10px_rgba(147,197,253,0.5)]"></div>
         </div>
     </div>
 </section>
 
 {{-- ABOUT SECTION --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-800 to-blue-900 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-20">
-        <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-500 rounded-full blur-[150px] animate-blob-slow"></div>
-        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-400 rounded-full blur-[150px] animate-blob-slow animation-delay-3000"></div>
-        <div class="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-blue-600 rounded-full blur-[150px] animate-blob-slow animation-delay-6000"></div>
+<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-15">
+        <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-800 rounded-full blur-[150px] animate-blob-slow"></div>
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-700 rounded-full blur-[150px] animate-blob-slow animation-delay-3000"></div>
+        <div class="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-blue-900 rounded-full blur-[150px] animate-blob-slow animation-delay-6000"></div>
     </div>
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="grid lg:grid-cols-2 gap-20 items-center">
             <div class="relative" data-aos="fade-right" data-aos-duration="1000">
                 <div class="relative z-10" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="aspect-video rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.5)] border-4 border-white/30 backdrop-blur-lg bg-white/5 hover:scale-105 hover:shadow-[0_0_120px_rgba(59,130,246,0.7)] transition-all duration-700 group">
+                    <div class="aspect-video rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(29,78,216,0.4)] border-4 border-blue-700/30 backdrop-blur-lg bg-blue-900/20 hover:scale-105 hover:shadow-[0_0_120px_rgba(29,78,216,0.6)] transition-all duration-700 group">
                         <iframe 
                             class="w-full h-full"
                             src="https://www.youtube.com/embed/ovpPnlSwpe4?autoplay=0&controls=1&rel=0" 
@@ -354,22 +354,22 @@
                         </iframe>
                     </div>
                 </div>
-                <div class="absolute -z-10 top-10 left-10 w-full h-full border-4 border-blue-400/40 rounded-3xl animate-border-pulse-slow" data-aos="fade" data-aos-delay="400"></div>
-                <div class="absolute -z-20 -bottom-10 -right-10 w-96 h-96 bg-blue-500/30 rounded-full blur-[100px] animate-pulse-glow"></div>
+                <div class="absolute -z-10 top-10 left-10 w-full h-full border-4 border-blue-700/40 rounded-3xl animate-border-pulse-slow" data-aos="fade" data-aos-delay="400"></div>
+                <div class="absolute -z-20 -bottom-10 -right-10 w-96 h-96 bg-blue-800/25 rounded-full blur-[100px] animate-pulse-glow"></div>
             </div>
 
             <div class="space-y-7" data-aos="fade-left" data-aos-duration="1000">
                 <div class="inline-block" data-aos="zoom-in" data-aos-delay="200">
-                    <span class="px-6 py-3 bg-blue-600/40 backdrop-blur-md text-blue-100 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-400/40 shadow-[0_0_30px_rgba(59,130,246,0.3)]">Tentang Kami</span>
+                    <span class="px-6 py-3 bg-blue-800/40 backdrop-blur-md text-blue-200 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-700/40 shadow-[0_0_30px_rgba(29,78,216,0.2)]">Tentang Kami</span>
                 </div>
                 
                 <h2 class="text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="300">
                     Himpunan Aktivis Siswa Muslim Indonesia
                 </h2>
 
-                <div class="w-24 h-2 bg-gradient-to-r from-blue-400 via-white to-blue-400 rounded-full animate-gradient-flow shadow-[0_0_20px_rgba(147,197,253,0.5)]" data-aos="fade-right" data-aos-delay="400"></div>
+                <div class="w-24 h-2 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 rounded-full animate-gradient-flow shadow-[0_0_20px_rgba(59,130,246,0.4)]" data-aos="fade-right" data-aos-delay="400"></div>
 
-                <div class="space-y-5 text-blue-100 text-xl leading-relaxed">
+                <div class="space-y-5 text-blue-200 text-xl leading-relaxed">
                     <p data-aos="fade-up" data-aos-delay="500" class="drop-shadow-lg">
                         HASMI adalah organisasi pendidikan, dakwah, dan sosial yang berfokus membina generasi muda muslim Indonesia dengan pendekatan komprehensif dan berkelanjutan.
                     </p>
@@ -379,30 +379,30 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-5 pt-8">
-                    <div class="flex items-start gap-4 bg-blue-800/40 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/30 hover:border-blue-300 hover:bg-blue-700/40 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.4)] group"
+                    <div class="flex items-start gap-4 bg-blue-900/40 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-700/30 hover:border-blue-600 hover:bg-blue-800/40 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(29,78,216,0.3)] group"
                          data-aos="fade-up" data-aos-delay="700">
-                        <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.5)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                        <div class="w-12 h-12 bg-blue-700 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(29,78,216,0.4)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
                             <i class="fas fa-check text-white text-xl"></i>
                         </div>
                         <div>
                             <h4 class="font-bold text-white text-lg mb-1">Pendidikan Berkualitas</h4>
-                            <p class="text-sm text-blue-200">Program pembelajaran terpadu</p>
+                            <p class="text-sm text-blue-300">Program pembelajaran terpadu</p>
                         </div>
                     </div>
-                    <div class="flex items-start gap-4 bg-blue-800/40 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/30 hover:border-blue-300 hover:bg-blue-700/40 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.4)] group"
+                    <div class="flex items-start gap-4 bg-blue-900/40 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-700/30 hover:border-blue-600 hover:bg-blue-800/40 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(29,78,216,0.3)] group"
                          data-aos="fade-up" data-aos-delay="800">
-                        <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.5)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 animation-delay-1000">
+                        <div class="w-12 h-12 bg-blue-700 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(29,78,216,0.4)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 animation-delay-1000">
                             <i class="fas fa-check text-white text-xl"></i>
                         </div>
                         <div>
                             <h4 class="font-bold text-white text-lg mb-1">Dakwah Aktif</h4>
-                            <p class="text-sm text-blue-200">Menyebarkan nilai-nilai Islam</p>
+                            <p class="text-sm text-blue-300">Menyebarkan nilai-nilai Islam</p>
                         </div>
                     </div>
                 </div>
 
                 <a href="{{ route('tentang') }}" 
-                   class="inline-flex items-center gap-3 px-10 py-5 bg-white text-blue-900 rounded-2xl font-bold shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:scale-110 transition-all duration-500 group mt-6"
+                   class="inline-flex items-center gap-3 px-10 py-5 bg-blue-700 text-white rounded-2xl font-bold shadow-[0_0_40px_rgba(29,78,216,0.3)] hover:shadow-[0_0_60px_rgba(29,78,216,0.5)] hover:scale-110 transition-all duration-500 group mt-6 border-2 border-blue-600/30"
                    data-aos="fade-up" data-aos-delay="900">
                     <span class="text-lg">Selengkapnya</span>
                     <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300"></i>
@@ -413,27 +413,27 @@
 </section>
 
 {{-- VISI MISI SECTION --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-800 to-blue-900 relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 opacity-10 rounded-l-[100px] blur-[150px] animate-pulse-glow"></div>
-    <div class="absolute bottom-0 left-0 w-1/2 h-full bg-blue-400 opacity-10 rounded-r-[100px] blur-[150px] animate-pulse-glow animation-delay-3000"></div>
+<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-800 opacity-10 rounded-l-[100px] blur-[150px] animate-pulse-glow"></div>
+    <div class="absolute bottom-0 left-0 w-1/2 h-full bg-blue-700 opacity-10 rounded-r-[100px] blur-[150px] animate-pulse-glow animation-delay-3000"></div>
     
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-600/40 backdrop-blur-md text-blue-100 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-400/40 shadow-[0_0_30px_rgba(59,130,246,0.3)]" data-aos="zoom-in">Komitmen Kami</span>
+            <span class="px-6 py-3 bg-blue-800/40 backdrop-blur-md text-blue-200 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-700/40 shadow-[0_0_30px_rgba(29,78,216,0.2)]" data-aos="zoom-in">Komitmen Kami</span>
             <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Visi & Misi</h2>
-            <div class="w-28 h-2 bg-gradient-to-r from-blue-400 via-white to-blue-400 rounded-full mx-auto animate-gradient-flow shadow-[0_0_20px_rgba(147,197,253,0.5)]" data-aos="fade" data-aos-delay="300"></div>
+            <div class="w-28 h-2 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 rounded-full mx-auto animate-gradient-flow shadow-[0_0_20px_rgba(59,130,246,0.4)]" data-aos="fade" data-aos-delay="300"></div>
         </div>
 
         <div class="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
             {{-- Visi Card --}}
             <div class="group relative" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-800 to-blue-900 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 shadow-[0_0_60px_rgba(59,130,246,0.4)]"></div>
-                <div class="relative bg-blue-900/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_80px_rgba(59,130,246,0.3)] border-2 border-blue-400/40 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-300 hover:shadow-[0_0_100px_rgba(59,130,246,0.5)]">
-                    <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(255,255,255,0.4)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700">
-                        <i class="fas fa-eye text-blue-600 text-3xl"></i>
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-900 to-blue-950 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 shadow-[0_0_60px_rgba(29,78,216,0.3)]"></div>
+                <div class="relative bg-blue-950/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_80px_rgba(29,78,216,0.2)] border-2 border-blue-700/40 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-600 hover:shadow-[0_0_100px_rgba(29,78,216,0.4)]">
+                    <div class="w-20 h-20 bg-blue-700 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(29,78,216,0.4)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700 border-2 border-blue-600/30">
+                        <i class="fas fa-eye text-white text-3xl"></i>
                     </div>
                     <h3 class="text-3xl font-bold text-white mb-5 drop-shadow-lg">Visi</h3>
-                    <p class="text-blue-100 text-xl leading-relaxed drop-shadow-md">
+                    <p class="text-blue-200 text-xl leading-relaxed drop-shadow-md">
                         Menjadi organisasi terdepan dalam pembinaan generasi muslim yang berakhlak mulia, berilmu, dan bermanfaat bagi umat dan bangsa.
                     </p>
                 </div>
@@ -441,13 +441,13 @@
 
             {{-- Misi Card --}}
             <div class="group relative" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-800 to-blue-900 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 shadow-[0_0_60px_rgba(59,130,246,0.4)]"></div>
-                <div class="relative bg-blue-900/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_80px_rgba(59,130,246,0.3)] border-2 border-blue-400/40 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-300 hover:shadow-[0_0_100px_rgba(59,130,246,0.5)]">
-                    <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(255,255,255,0.4)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700">
-                        <i class="fas fa-bullseye text-blue-600 text-3xl"></i>
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-900 to-blue-950 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 shadow-[0_0_60px_rgba(29,78,216,0.3)]"></div>
+                <div class="relative bg-blue-950/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_80px_rgba(29,78,216,0.2)] border-2 border-blue-700/40 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-600 hover:shadow-[0_0_100px_rgba(29,78,216,0.4)]">
+                    <div class="w-20 h-20 bg-blue-700 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(29,78,216,0.4)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700 border-2 border-blue-600/30">
+                        <i class="fas fa-bullseye text-white text-3xl"></i>
                     </div>
                     <h3 class="text-3xl font-bold text-white mb-5 drop-shadow-lg">Misi</h3>
-                    <p class="text-blue-100 text-xl leading-relaxed drop-shadow-md">
+                    <p class="text-blue-200 text-xl leading-relaxed drop-shadow-md">
                         Menyelenggarakan program pendidikan, dakwah, dan sosial secara komprehensif dan berkelanjutan untuk kemajuan peradaban Islam.
                     </p>
                 </div>
@@ -457,16 +457,16 @@
 </section>
 
 {{-- PROGRAM UNGGULAN --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-800 to-blue-900 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-15">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-[150px] animate-blob-slow"></div>
-        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-400 rounded-full blur-[150px] animate-blob-slow animation-delay-3000"></div>
-        <div class="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-600 rounded-full blur-[150px] animate-blob-slow animation-delay-6000"></div>
+<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-800 rounded-full blur-[150px] animate-blob-slow"></div>
+        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-700 rounded-full blur-[150px] animate-blob-slow animation-delay-3000"></div>
+        <div class="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-900 rounded-full blur-[150px] animate-blob-slow animation-delay-6000"></div>
     </div>
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-600/40 backdrop-blur-md text-blue-100 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-400/40 shadow-[0_0_30px_rgba(59,130,246,0.3)]" data-aos="zoom-in">Program Kami</span>
+            <span class="px-6 py-3 bg-blue-800/40 backdrop-blur-md text-blue-200 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-700/40 shadow-[0_0_30px_rgba(29,78,216,0.2)]" data-aos="zoom-in">Program Kami</span>
             <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Program Unggulan</h2>
             <p class="text-blue-200 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Berbagai program terbaik untuk pembinaan generasi muslim Indonesia</p>
         </div>
@@ -484,7 +484,7 @@
                              alt="{{ $p->title }}"
                              loading="lazy">
                     @else
-                        <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                        <div class="w-full h-full bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center">
                             <i class="fas fa-hand-holding-heart text-white/20 text-6xl"></i>
                         </div>
                     @endif
@@ -496,7 +496,7 @@
 
                     {{-- Category Badge --}}
                     <div class="absolute top-4 left-4">
-                        <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
+                        <span class="px-4 py-2 bg-blue-700 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-blue-600/20">
                             {{ $p->category->name ?? 'Program' }}
                         </span>
                     </div>
@@ -508,13 +508,13 @@
                         {{ $p->title }}
                     </h3>
                     
-                    <p class="text-blue-100 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
+                    <p class="text-blue-200 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
                         {{ \Illuminate\Support\Str::limit(strip_tags($p->description), 100) }}
                     </p>
                     
                     <div class="mt-auto">
                         <a href="{{ route('program.show', $p->slug) }}" 
-                           class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                           class="w-full py-4 bg-blue-700 group-hover:bg-blue-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-950/50 border-2 border-blue-600/30">
                             <span>Lihat Program</span>
                             <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
                         </a>
@@ -525,7 +525,7 @@
         </div>
 
         <div class="text-center" data-aos="fade-up" data-aos-delay="600">
-            <a href="{{ route('program.index') }}" class="inline-flex items-center gap-3 text-blue-200 font-bold hover:gap-5 transition-all group px-8 py-4 bg-blue-800/40 backdrop-blur-md rounded-full border-2 border-blue-400/40 hover:bg-blue-700/50 hover:border-blue-300 shadow-[0_0_30px_rgba(59,130,246,0.3)] hover:shadow-[0_0_50px_rgba(59,130,246,0.5)] text-lg">
+            <a href="{{ route('program.index') }}" class="inline-flex items-center gap-3 text-blue-200 font-bold hover:gap-5 transition-all group px-8 py-4 bg-blue-900/40 backdrop-blur-md rounded-full border-2 border-blue-700/40 hover:bg-blue-800/50 hover:border-blue-600 shadow-[0_0_30px_rgba(29,78,216,0.2)] hover:shadow-[0_0_50px_rgba(29,78,216,0.4)] text-lg">
                 <span>Lihat Semua Program</span>
                 <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
             </a>
@@ -534,10 +534,10 @@
 </section>
 
 {{-- MATERI PEMBELAJARAN --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-800 to-blue-900">
+<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950">
     <div class="container mx-auto px-6 lg:px-12">
         <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-600/40 backdrop-blur-md text-blue-100 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-400/40 shadow-[0_0_30px_rgba(59,130,246,0.3)]" data-aos="zoom-in">Pembelajaran</span>
+            <span class="px-6 py-3 bg-blue-800/40 backdrop-blur-md text-blue-200 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-700/40 shadow-[0_0_30px_rgba(29,78,216,0.2)]" data-aos="zoom-in">Pembelajaran</span>
             <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Materi Terbaru</h2>
             <p class="text-blue-200 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Artikel dan materi pembelajaran untuk pemahaman agama yang lebih baik</p>
         </div>
@@ -555,7 +555,7 @@
                              alt="{{ $article->title }}"
                              loading="lazy">
                     @else
-                        <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                        <div class="w-full h-full bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center">
                             <i class="fas fa-book-open text-white/20 text-6xl"></i>
                         </div>
                     @endif
@@ -567,7 +567,7 @@
 
                     {{-- Category Badge --}}
                     <div class="absolute top-4 left-4">
-                        <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
+                        <span class="px-4 py-2 bg-blue-700 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-blue-600/20">
                             {{ $article->category->name }}
                         </span>
                     </div>
@@ -579,13 +579,13 @@
                         {{ $article->title }}
                     </h3>
                     
-                    <p class="text-blue-100 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
+                    <p class="text-blue-200 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
                         {{ \Illuminate\Support\Str::limit(strip_tags($article->content ?? $article->excerpt), 100) }}
                     </p>
                     
                     <div class="mt-auto">
                         <a href="{{ route('materi.detail', [$article->category->slug, $article->slug]) }}" 
-                           class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                           class="w-full py-4 bg-blue-700 group-hover:bg-blue-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-950/50 border-2 border-blue-600/30">
                             <span>Baca Materi</span>
                             <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
                         </a>
@@ -597,7 +597,7 @@
 
         <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="600">
             <a href="{{ route('materi.index') }}" 
-               class="inline-flex items-center gap-3 px-10 py-5 bg-white text-blue-900 rounded-2xl font-bold shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:scale-110 transition-all duration-500 group text-lg">
+               class="inline-flex items-center gap-3 px-10 py-5 bg-blue-700 text-white rounded-2xl font-bold shadow-[0_0_40px_rgba(29,78,216,0.3)] hover:shadow-[0_0_60px_rgba(29,78,216,0.5)] hover:scale-110 transition-all duration-500 group text-lg border-2 border-blue-600/30">
                 <span>Lihat Semua Materi</span>
                 <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300"></i>
             </a>
@@ -606,14 +606,14 @@
 </section>
 
 {{-- INTISARI SECTION --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-800 to-blue-900 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-0 left-0 w-full h-full bg-blue-500 animate-pulse-glow"></div>
+<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-8">
+        <div class="absolute top-0 left-0 w-full h-full bg-blue-800 animate-pulse-glow"></div>
     </div>
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-600/40 backdrop-blur-md text-blue-100 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-400/40 shadow-[0_0_30px_rgba(59,130,246,0.3)]" data-aos="zoom-in">Publikasi</span>
+            <span class="px-6 py-3 bg-blue-800/40 backdrop-blur-md text-blue-200 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-700/40 shadow-[0_0_30px_rgba(29,78,216,0.2)]" data-aos="zoom-in">Publikasi</span>
             <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Intisari HASMI</h2>
             <p class="text-blue-200 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Kumpulan materi dan ringkasan pembelajaran dalam bentuk publikasi</p>
         </div>
@@ -631,7 +631,7 @@
                              alt="{{ $i->title }}"
                              loading="lazy">
                     @else
-                        <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                        <div class="w-full h-full bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center">
                             <i class="fas fa-image text-white/20 text-6xl"></i>
                         </div>
                     @endif
@@ -643,7 +643,7 @@
 
                     {{-- Badge --}}
                     <div class="absolute top-4 left-4">
-                        <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
+                        <span class="px-4 py-2 bg-blue-700 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-blue-600/20">
                             Intisari
                         </span>
                     </div>
@@ -655,13 +655,13 @@
                         {{ $i->title }}
                     </h3>
                     
-                    <p class="text-blue-100 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
+                    <p class="text-blue-200 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
                         {{ \Illuminate\Support\Str::limit(strip_tags($i->content), 100) }}
                     </p>
                     
                     <div class="mt-auto">
                         <a href="{{ route('intisari.show', $i->slug) }}" 
-                           class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                           class="w-full py-4 bg-blue-700 group-hover:bg-blue-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-950/50 border-2 border-blue-600/30">
                             <span>Baca Intisari</span>
                             <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
                         </a>
@@ -672,7 +672,7 @@
         </div>
 
         <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="500">
-            <a href="{{ route('intisari.index') }}" class="inline-flex items-center gap-3 text-blue-200 font-bold hover:gap-5 transition-all group px-8 py-4 bg-blue-800/40 backdrop-blur-md rounded-full border-2 border-blue-400/40 hover:bg-blue-700/50 hover:border-blue-300 shadow-[0_0_30px_rgba(59,130,246,0.3)] hover:shadow-[0_0_50px_rgba(59,130,246,0.5)] text-lg">
+            <a href="{{ route('intisari.index') }}" class="inline-flex items-center gap-3 text-blue-200 font-bold hover:gap-5 transition-all group px-8 py-4 bg-blue-900/40 backdrop-blur-md rounded-full border-2 border-blue-700/40 hover:bg-blue-800/50 hover:border-blue-600 shadow-[0_0_30px_rgba(29,78,216,0.2)] hover:shadow-[0_0_50px_rgba(29,78,216,0.4)] text-lg">
                 <span>Lihat Semua Intisari</span>
                 <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
             </a>
@@ -681,14 +681,14 @@
 </section>
 
 {{-- KEGIATAN SECTION --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-800 to-blue-900 relative overflow-hidden" id="kegiatan">
+<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 relative overflow-hidden" id="kegiatan">
     <div class="absolute inset-0 opacity-5">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(59,130,246,0.3),transparent_50%)]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(29,78,216,0.3),transparent_50%)]"></div>
     </div>
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-600/40 backdrop-blur-md text-blue-100 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-400/40 shadow-[0_0_30px_rgba(59,130,246,0.3)]" data-aos="zoom-in">Aktivitas</span>
+            <span class="px-6 py-3 bg-blue-800/40 backdrop-blur-md text-blue-200 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-700/40 shadow-[0_0_30px_rgba(29,78,216,0.2)]" data-aos="zoom-in">Aktivitas</span>
             <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Kegiatan HASMI</h2>
             <p class="text-blue-200 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Dokumentasi kegiatan dan agenda dakwah terbaru</p>
         </div>
@@ -706,7 +706,7 @@
                              alt="{{ $k->title }}"
                              loading="lazy">
                     @else
-                        <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                        <div class="w-full h-full bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center">
                             <i class="fas fa-camera text-white/20 text-6xl"></i>
                         </div>
                     @endif
@@ -718,7 +718,7 @@
 
                     {{-- Badge --}}
                     <div class="absolute top-4 left-4">
-                        <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
+                        <span class="px-4 py-2 bg-blue-700 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-blue-600/20">
                             Kegiatan
                         </span>
                     </div>
@@ -739,7 +739,7 @@
                     
                     <div class="mt-auto">
                         <a href="{{ route('kegiatan.show', $k->slug) }}" 
-                           class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                           class="w-full py-4 bg-blue-700 group-hover:bg-blue-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-950/50 border-2 border-blue-600/30">
                             <span>Lihat Dokumentasi</span>
                             <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
                         </a>
@@ -750,7 +750,7 @@
         </div>
 
         <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="500">
-            <a href="{{ route('kegiatan.index') }}" class="inline-flex items-center gap-4 px-10 py-5 bg-white text-blue-900 rounded-2xl font-bold shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:scale-110 transition-all duration-500 group text-lg">
+            <a href="{{ route('kegiatan.index') }}" class="inline-flex items-center gap-4 px-10 py-5 bg-blue-700 text-white rounded-2xl font-bold shadow-[0_0_40px_rgba(29,78,216,0.3)] hover:shadow-[0_0_60px_rgba(29,78,216,0.5)] hover:scale-110 transition-all duration-500 group text-lg border-2 border-blue-600/30">
                 <span>Galeri Kegiatan</span>
                 <i class="fas fa-images group-hover:rotate-12 transition-transform"></i>
             </a>
@@ -759,53 +759,53 @@
 </section>
 
 {{-- EXTERNAL LINKS (LAYANAN KAMI) --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-800 to-blue-900 relative overflow-hidden">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-500/30 blur-[180px] rounded-full pointer-events-none"></div>
+<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 relative overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-800/25 blur-[180px] rounded-full pointer-events-none"></div>
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-600/40 backdrop-blur-md text-blue-100 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-400/40 shadow-[0_0_30px_rgba(59,130,246,0.3)]">Layanan Kami</span>
+            <span class="px-6 py-3 bg-blue-800/40 backdrop-blur-md text-blue-200 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-700/40 shadow-[0_0_30px_rgba(29,78,216,0.2)]">Layanan Kami</span>
             <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">Kontribusi Untuk Umat</h2>
         </div>
 
         <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
             <a href="https://donasi.hasmi.org/" target="_blank" 
-               class="group relative overflow-hidden bg-blue-900/40 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.2)] hover:shadow-[0_0_80px_rgba(59,130,246,0.5)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/30 hover:border-blue-300"
+               class="group relative overflow-hidden bg-blue-950/40 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(29,78,216,0.2)] hover:shadow-[0_0_80px_rgba(29,78,216,0.4)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-700/30 hover:border-blue-600"
                data-aos="fade-up" data-aos-delay="100">
                 <div class="relative z-10 text-center">
-                    <div class="w-24 h-24 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.4)]">
+                    <div class="w-24 h-24 bg-blue-700 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(29,78,216,0.3)] border-2 border-blue-600/30">
                         <i class="fas fa-hand-holding-heart text-4xl text-white"></i>
                     </div>
                     <h3 class="text-3xl font-bold mb-4 text-white">Donasi</h3>
                     <p class="text-blue-200 text-lg leading-relaxed">Salurkan donasi terbaik Anda untuk kemajuan dakwah dan pendidikan Islam</p>
                 </div>
-                <div class="absolute inset-0 bg-blue-700/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div class="absolute inset-0 bg-blue-800/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             </a>
 
             <a href="https://beasiswapendidikanislam.com/" target="_blank" 
-               class="group relative overflow-hidden bg-blue-900/40 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.2)] hover:shadow-[0_0_80px_rgba(59,130,246,0.5)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/30 hover:border-blue-300"
+               class="group relative overflow-hidden bg-blue-950/40 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(29,78,216,0.2)] hover:shadow-[0_0_80px_rgba(29,78,216,0.4)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-700/30 hover:border-blue-600"
                data-aos="fade-up" data-aos-delay="200">
                 <div class="relative z-10 text-center">
-                    <div class="w-24 h-24 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.4)]">
+                    <div class="w-24 h-24 bg-blue-700 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(29,78,216,0.3)] border-2 border-blue-600/30">
                         <i class="fas fa-user-graduate text-4xl text-white"></i>
                     </div>
                     <h3 class="text-3xl font-bold mb-4 text-white">Beasiswa</h3>
                     <p class="text-blue-200 text-lg leading-relaxed">Program beasiswa pendidikan Islam untuk mencetak kader dai berkualitas</p>
                 </div>
-                <div class="absolute inset-0 bg-blue-700/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div class="absolute inset-0 bg-blue-800/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             </a>
 
             <a href="https://hasmipeduli.org/" target="_blank" 
-               class="group relative overflow-hidden bg-blue-900/40 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.2)] hover:shadow-[0_0_80px_rgba(59,130,246,0.5)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/30 hover:border-blue-300"
+               class="group relative overflow-hidden bg-blue-950/40 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(29,78,216,0.2)] hover:shadow-[0_0_80px_rgba(29,78,216,0.4)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-700/30 hover:border-blue-600"
                data-aos="fade-up" data-aos-delay="300">
                 <div class="relative z-10 text-center">
-                    <div class="w-24 h-24 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.4)]">
+                    <div class="w-24 h-24 bg-blue-700 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(29,78,216,0.3)] border-2 border-blue-600/30">
                         <i class="fas fa-hands-helping text-4xl text-white"></i>
                     </div>
                     <h3 class="text-3xl font-bold mb-4 text-white">Sosial</h3>
                     <p class="text-blue-200 text-lg leading-relaxed">Aksi sosial dan kemanusiaan untuk membantu sesama yang membutuhkan</p>
                 </div>
-                <div class="absolute inset-0 bg-blue-700/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div class="absolute inset-0 bg-blue-800/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             </a>
         </div>
     </div>
@@ -822,7 +822,7 @@
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(to bottom, #1e3a8a, #1e40af);
+    background: linear-gradient(to bottom, #172554, #1e3a8a);
 }
 
 /* Enhanced Islamic Pattern */
@@ -830,9 +830,9 @@ body {
     position: absolute;
     inset: 0;
     background-image: 
-        radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.25) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(147, 197, 253, 0.25) 0%, transparent 50%),
-        radial-gradient(circle at 50% 20%, rgba(96, 165, 250, 0.2) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(29, 78, 216, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 50%);
     background-size: 1000px 1000px;
     animation: patternMove 30s ease-in-out infinite;
 }
@@ -843,19 +843,19 @@ body {
     66% { transform: translate(50px, -50px) rotate(-3deg); }
 }
 
-/* Enhanced Floating Orbs */
+/* Enhanced Floating Orbs - WARNA LEBIH GELAP */
 .floating-orb {
     position: absolute;
     border-radius: 50%;
     filter: blur(120px);
     animation: float-enhanced 25s ease-in-out infinite;
-    opacity: 0.7;
+    opacity: 0.5;
 }
 
 .orb-1 {
     width: 600px;
     height: 600px;
-    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
     top: -200px;
     left: -200px;
     animation-delay: 0s;
@@ -864,7 +864,7 @@ body {
 .orb-2 {
     width: 500px;
     height: 500px;
-    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
     bottom: -150px;
     right: 10%;
     animation-delay: 7s;
@@ -873,7 +873,7 @@ body {
 .orb-3 {
     width: 450px;
     height: 450px;
-    background: linear-gradient(135deg, #60a5fa 0%, #93c5fd 100%);
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
     top: 25%;
     right: -150px;
     animation-delay: 14s;
@@ -882,7 +882,7 @@ body {
 .orb-4 {
     width: 400px;
     height: 400px;
-    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
     bottom: 15%;
     left: 25%;
     animation-delay: 4s;
@@ -891,22 +891,22 @@ body {
 .orb-5 {
     width: 350px;
     height: 350px;
-    background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+    background: linear-gradient(135deg, #172554 0%, #1e3a8a 100%);
     top: 45%;
     left: 5%;
     animation-delay: 11s;
 }
 
-/* Article Card Style (Intisari Standard) */
+/* Article Card Style */
 .article-card {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    border: 1px solid rgba(29, 78, 216, 0.3);
     background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
 }
 .article-card:hover {
     transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
-    border-color: rgba(96, 165, 250, 0.6);
+    box-shadow: 0 25px 50px -12px rgba(29, 78, 216, 0.5);
+    border-color: rgba(59, 130, 246, 0.6);
 }
 
 @keyframes float-enhanced {
@@ -926,13 +926,13 @@ body {
     position: absolute;
     width: var(--size, 4px);
     height: var(--size, 4px);
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+    background: radial-gradient(circle, rgba(147, 197, 253, 0.6), rgba(147, 197, 253, 0.1));
     border-radius: 50%;
     animation: particleFloat-enhanced var(--duration, 15s) ease-in-out infinite;
     animation-delay: var(--delay, 0s);
     top: calc(50% + (var(--delay) * 15px));
     left: calc(50% + (var(--delay) * 20px));
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 15px rgba(147, 197, 253, 0.4);
 }
 
 @keyframes particleFloat-enhanced {
@@ -965,11 +965,11 @@ body {
     position: absolute;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    background: linear-gradient(180deg, transparent, rgba(147, 197, 253, 0.2), transparent);
     animation: lightRay 8s ease-in-out infinite;
     animation-delay: var(--ray-delay, 0s);
     left: calc(20% * var(--ray-delay));
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 @keyframes lightRay {
@@ -979,7 +979,7 @@ body {
     }
     50% { 
         transform: translateY(0) scaleY(1);
-        opacity: 0.5;
+        opacity: 0.3;
     }
 }
 
@@ -997,10 +997,10 @@ body {
 /* Enhanced Text Glow */
 @keyframes text-glow {
     0%, 100% { 
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        text-shadow: 0 0 20px rgba(147, 197, 253, 0.2);
     }
     50% { 
-        text-shadow: 0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(147, 197, 253, 0.4);
+        text-shadow: 0 0 40px rgba(147, 197, 253, 0.4), 0 0 60px rgba(147, 197, 253, 0.3);
     }
 }
 
@@ -1011,14 +1011,14 @@ body {
 /* Enhanced Pulse Animations */
 @keyframes pulse-glow {
     0%, 100% { 
-        opacity: 0.4; 
+        opacity: 0.3; 
         transform: scale(0.95);
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+        box-shadow: 0 0 30px rgba(29, 78, 216, 0.2);
     }
     50% { 
-        opacity: 0.7; 
+        opacity: 0.6; 
         transform: scale(1.15);
-        box-shadow: 0 0 60px rgba(59, 130, 246, 0.6);
+        box-shadow: 0 0 60px rgba(29, 78, 216, 0.4);
     }
 }
 
@@ -1064,12 +1064,12 @@ body {
 /* Enhanced Border Animations */
 @keyframes border-pulse {
     0%, 100% { 
-        border-color: rgba(96, 165, 250, 0.3);
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+        border-color: rgba(37, 99, 235, 0.3);
+        box-shadow: 0 0 30px rgba(29, 78, 216, 0.2);
     }
     50% { 
-        border-color: rgba(147, 197, 253, 0.8);
-        box-shadow: 0 0 60px rgba(59, 130, 246, 0.6);
+        border-color: rgba(59, 130, 246, 0.6);
+        box-shadow: 0 0 60px rgba(29, 78, 216, 0.4);
     }
 }
 
@@ -1079,12 +1079,12 @@ body {
 
 @keyframes border-pulse-slow {
     0%, 100% { 
-        border-color: rgba(96, 165, 250, 0.4);
-        box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+        border-color: rgba(37, 99, 235, 0.4);
+        box-shadow: 0 0 40px rgba(29, 78, 216, 0.2);
     }
     50% { 
-        border-color: rgba(147, 197, 253, 0.9);
-        box-shadow: 0 0 80px rgba(59, 130, 246, 0.7);
+        border-color: rgba(59, 130, 246, 0.7);
+        box-shadow: 0 0 80px rgba(29, 78, 216, 0.5);
     }
 }
 
@@ -1168,23 +1168,23 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: linear-gradient(to bottom, #1e3a8a, #1e40af);
+    background: linear-gradient(to bottom, #172554, #1e3a8a);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #3b82f6, #2563eb);
+    background: linear-gradient(to bottom, #1e40af, #1d4ed8);
     border-radius: 8px;
-    border: 4px solid #1e40af;
+    border: 4px solid #1e3a8a;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to bottom, #60a5fa, #3b82f6);
+    background: linear-gradient(to bottom, #2563eb, #1e40af);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .floating-orb {
-        opacity: 0.25;
+        opacity: 0.2;
     }
     
     .particle {
