@@ -136,6 +136,11 @@
                 </div>
             </div>
 
+            <a href="{{ route('berita-terkini.index') }}"
+               class="nav-link px-4 py-2 rounded-full text-base font-bold text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 flex items-center gap-2 {{ request()->routeIs('berita-terkini.*') ? 'bg-blue-50 text-blue-700' : '' }}">
+                Berita
+            </a>
+
             <a href="{{ route('intisari.index') }}"
                class="nav-link px-4 py-2 rounded-full text-base font-bold text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 flex items-center gap-2 {{ request()->routeIs('intisari.*') ? 'bg-blue-50 text-blue-700' : '' }}">
                 Intisari
@@ -256,7 +261,8 @@
                 @endforeach
             </div>
 
-            <a href="{{ route('intisari.index') }}" class="block px-4 py-3 rounded-2xl font-bold text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all text-base border-t border-gray-100 mt-2">Intisari</a>
+            <a href="{{ route('berita-terkini.index') }}" class="block px-4 py-3 rounded-2xl font-bold text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all text-base border-t border-gray-100 mt-2">Berita</a>
+            <a href="{{ route('intisari.index') }}" class="block px-4 py-3 rounded-2xl font-bold text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all text-base">Intisari</a>
             <a href="{{ route('kegiatan.index') }}" class="block px-4 py-3 rounded-2xl font-bold text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all text-base">Kegiatan</a>
 
             <!-- EXTERNAL MOBILE -->

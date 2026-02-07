@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\ProgramController as AdminProgramController;
 use App\Http\Controllers\Admin\IntisariController as AdminIntisariController;
 use App\Http\Controllers\Admin\KegiatanController as AdminKegiatanController;
 use App\Http\Controllers\Admin\CommentController as AdminCommentController;
+use App\Http\Controllers\Admin\BeritaTerkiniController as AdminBeritaTerkiniController;
+use App\Http\Controllers\BeritaTerkiniController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +84,16 @@ Route::prefix('intisari')->name('intisari.')->group(function () {
 Route::prefix('kegiatan')->name('kegiatan.')->group(function () {
     Route::get('/', [KegiatanController::class, 'index'])->name('index');
     Route::get('/{slug}', [KegiatanController::class, 'show'])->name('show');
+});
+
+/*
+|--------------------------------------------------------------------------
+| BERITA TERKINI ROUTES
+|--------------------------------------------------------------------------
+*/
+Route::prefix('berita-terkini')->name('berita-terkini.')->group(function () {
+    Route::get('/', [BeritaTerkiniController::class, 'index'])->name('index');
+    Route::get('/{slug}', [BeritaTerkiniController::class, 'show'])->name('show');
 });
 
 /*
@@ -181,6 +193,15 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         ->name('kegiatan.photo.delete');
     Route::post('kegiatan/{kegiatan}/thumbnail', [AdminKegiatanController::class, 'setThumbnail'])
         ->name('kegiatan.thumbnail.update');
+
+    /*
+    |--------------------------------------------------------------------------
+    | BERITA TERKINI
+    |--------------------------------------------------------------------------
+    */
+    Route::resource('berita-terkini', AdminBeritaTerkiniController::class);
+    Route::post('berita-terkini/{berita_terkini}/photo/delete', [AdminBeritaTerkiniController::class, 'deletePhoto'])
+        ->name('berita-terkini.photo.delete');
 
     /*
     |--------------------------------------------------------------------------

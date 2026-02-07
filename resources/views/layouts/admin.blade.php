@@ -53,6 +53,12 @@
                     <span>Artikel Materi</span>
                 </a>
 
+                <a href="{{ route('admin.berita-terkini.index') }}" 
+                   class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.berita-terkini.*') ? 'active' : '' }}">
+                    <i class="fas fa-newspaper w-5"></i>
+                    <span>Berita Terkini</span>
+                </a>
+
                 <a href="{{ route('admin.programs.index') }}" 
                    class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.programs.*') ? 'active' : '' }}">
                     <i class="fas fa-briefcase w-5"></i>
