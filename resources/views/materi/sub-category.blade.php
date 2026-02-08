@@ -9,9 +9,9 @@
 <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
-    /* Hero Gradient Animation */
+    /* Hero Gradient Animation - UPDATED */
     .hero-animate {
-        background: linear-gradient(-45deg, #1e40af, #1e3a8a, #1e40af, #1e3a8a);
+        background: linear-gradient(-45deg, #2563eb, #1d4ed8, #2563eb, #1d4ed8);
         background-size: 400% 400%;
         animation: gradientBG 15s ease infinite;
     }
@@ -21,16 +21,16 @@
         100% { background-position: 0% 50%; }
     }
 
-    /* Article Card Enhancements */
+    /* Article Card Enhancements - UPDATED */
     .article-card {
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 1px solid rgba(59, 130, 246, 0.3);
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
     }
     .article-card:hover {
         transform: translateY(-12px) scale(1.02);
-        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
-        border-color: rgba(96, 165, 250, 0.6);
+        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.7);
+        border-color: rgba(96, 165, 250, 0.7);
     }
 
     /* Floating Shape Animation */
@@ -54,13 +54,13 @@
     <div class="absolute inset-0 islamic-pattern"></div>
     
     {{-- Animated Shapes --}}
-    <div class="absolute top-10 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl shape-float"></div>
-    <div class="absolute bottom-10 right-10 w-48 h-48 bg-cyan-400/20 rounded-full blur-3xl shape-float" style="animation-delay: 2s"></div>
+    <div class="absolute top-10 left-10 w-32 h-32 bg-blue-300/20 rounded-full blur-3xl shape-float"></div>
+    <div class="absolute bottom-10 right-10 w-48 h-48 bg-blue-200/20 rounded-full blur-3xl shape-float" style="animation-delay: 2s"></div>
 
     <div class="container mx-auto px-6 relative z-10 py-16 text-center">
         <!-- Breadcrumb -->
         <nav class="flex justify-center mb-8" aria-label="Breadcrumb" data-aos="fade-down">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3 text-sm text-blue-200">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3 text-sm text-blue-100">
                 <li class="inline-flex items-center">
                     <a href="{{ route('materi.index') }}" class="hover:text-white transition-colors">
                         Materi
@@ -95,13 +95,13 @@
     {{-- Wave Divider --}}
     <div class="absolute bottom-0 left-0 right-0">
         <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
-            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#1e3a8a"/>
+            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#1d4ed8"/>
         </svg>
     </div>
 </section>
 
 {{-- MAIN CONTENT --}}
-<section class="py-16 bg-gradient-to-b from-blue-900 to-blue-800 relative min-h-screen">
+<section class="py-16 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative min-h-screen">
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         @if($articles->count() > 0)
             <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
@@ -117,7 +117,7 @@
                                  alt="{{ $article->title }}"
                                  loading="lazy">
                         @else
-                            <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                            <div class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
                                 <i class="fas fa-book-open text-white/20 text-6xl"></i>
                             </div>
                         @endif
@@ -131,7 +131,7 @@
 
                         {{-- Category Badge --}}
                         <div class="absolute top-4 left-4">
-                            <span class="px-4 py-2 bg-blue-600/90 backdrop-blur-md text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
+                            <span class="px-4 py-2 bg-blue-500/90 backdrop-blur-md text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-blue-400/30">
                                 {{ $article->subCategory->name ?? $category->name }}
                             </span>
                         </div>
@@ -140,13 +140,13 @@
                     {{-- Content --}}
                     <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
                         <div class="flex items-center gap-2 mb-3">
-                            <i class="far fa-calendar-alt text-blue-300 text-xs"></i>
-                            <span class="text-blue-200 text-[11px] font-bold uppercase tracking-wider">
+                            <i class="far fa-calendar-alt text-blue-100 text-xs"></i>
+                            <span class="text-blue-100 text-[11px] font-bold uppercase tracking-wider">
                                 {{ $article->published_at ? $article->published_at->locale('id')->isoFormat('D MMMM Y') : 'Baru' }}
                             </span>
                         </div>
 
-                        <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight">
+                        <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-100 transition-colors leading-tight">
                             {{ $article->title }}
                         </h3>
                         
@@ -156,7 +156,7 @@
                         
                         <div class="mt-auto">
                             <a href="{{ route('materi.detail', [$category->slug, $article->slug]) }}" 
-                               class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                               class="w-full py-4 bg-blue-500 group-hover:bg-blue-400 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-800/50 border-2 border-blue-400/40">
                                 <span>Baca Materi</span>
                                 <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
                             </a>
@@ -168,7 +168,7 @@
 
             {{-- Pagination --}}
             <div class="mt-20 flex justify-center" data-aos="fade-up">
-                <div class="bg-blue-900/50 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-blue-400/30">
+                <div class="bg-blue-600/50 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-blue-300/30">
                     {{ $articles->links('vendor.pagination.tailwind') }}
                 </div>
             </div>
@@ -177,16 +177,16 @@
             <!-- Empty State -->
             <div class="text-center py-20" data-aos="zoom-in">
                 <div class="relative w-48 h-48 mx-auto mb-10">
-                    <div class="absolute inset-0 bg-blue-600/30 rounded-full animate-ping opacity-20"></div>
-                    <div class="relative w-48 h-48 bg-blue-800 rounded-full flex items-center justify-center shadow-2xl border border-blue-600">
-                        <i class="fas fa-inbox text-blue-400 text-7xl"></i>
+                    <div class="absolute inset-0 bg-blue-500/30 rounded-full animate-ping opacity-20"></div>
+                    <div class="relative w-48 h-48 bg-blue-600 rounded-full flex items-center justify-center shadow-2xl border border-blue-400">
+                        <i class="fas fa-inbox text-blue-200 text-7xl"></i>
                     </div>
                 </div>
                 <h3 class="text-3xl font-bold text-white mb-4">Belum Ada Artikel</h3>
-                <p class="text-blue-200 max-w-md mx-auto mb-10">
+                <p class="text-blue-100 max-w-md mx-auto mb-10">
                     Sub-kategori <strong>{{ $subCategory->name }}</strong> belum memiliki artikel saat ini.
                 </p>
-                <a href="{{ route('materi.show', $category->slug) }}" class="px-10 py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl hover:bg-blue-500 transition-all">
+                <a href="{{ route('materi.show', $category->slug) }}" class="px-10 py-4 bg-blue-500 text-white rounded-2xl font-bold shadow-xl hover:bg-blue-400 transition-all border-2 border-blue-400/40">
                     Kembali ke {{ $category->name }}
                 </a>
             </div>

@@ -9,9 +9,9 @@
 <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
-    /* Custom Gradient Hero */
+    /* Custom Gradient Hero - UPDATED TO MATCH HOME */
     .hero-animate {
-        background: linear-gradient(-45deg, #1e3a8a, #1e40af, #1e3a8a, #1e40af);
+        background: linear-gradient(-45deg, #1d4ed8, #2563eb, #1d4ed8, #2563eb);
         background-size: 400% 400%;
         animation: gradientBG 15s ease infinite;
     }
@@ -21,16 +21,16 @@
         100% { background-position: 0% 50%; }
     }
 
-    /* Card Styling */
+    /* Card Styling - UPDATED TO MATCH HOME */
     .news-card {
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 1px solid rgba(59, 130, 246, 0.3);
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
     }
     .news-card:hover {
         transform: translateY(-12px) scale(1.02);
-        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
-        border-color: rgba(96, 165, 250, 0.6);
+        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.7);
+        border-color: rgba(96, 165, 250, 0.7);
     }
 </style>
 
@@ -39,7 +39,7 @@
     <div class="absolute inset-0 opacity-20 islamic-pattern"></div>
     <div class="container mx-auto px-6 relative z-10 py-16 text-center">
         <h1 class="text-4xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight" data-aos="fade-up">
-            Berita <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-200">Terkini</span>
+            Berita <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-blue-100 to-blue-200">Terkini</span>
         </h1>
         <p class="text-xl text-blue-100/80 max-w-2xl mx-auto mb-8 leading-relaxed font-light" data-aos="fade-up" data-aos-delay="200">
             Informasi terbaru seputar kegiatan dan perkembangan dakwah HASMI.
@@ -49,19 +49,19 @@
     {{-- Wave Divider --}}
     <div class="absolute bottom-0 left-0 right-0">
         <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
-            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#1e3a8a"/>
+            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#1d4ed8"/>
         </svg>
     </div>
 </section>
 
 {{-- MAIN CONTENT --}}
-<section class="py-16 bg-gradient-to-br from-blue-900 to-blue-800 relative overflow-hidden">
+<section class="py-16 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         
         {{-- SECTION: BERITA HARI INI --}}
         <div class="mb-20">
             <div class="flex items-center gap-4 mb-10" data-aos="fade-right">
-                <div class="w-2 h-10 bg-cyan-400 rounded-full"></div>
+                <div class="w-2 h-10 bg-blue-300 rounded-full"></div>
                 <h2 class="text-3xl font-bold text-white uppercase tracking-wider">Berita Hari Ini</h2>
             </div>
 
@@ -75,18 +75,18 @@
                             <img src="{{ $news->getThumbnailUrl() }}" 
                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                  alt="{{ $news->title }}" loading="lazy">
-                            <div class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse">
+                            <div class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse border-2 border-blue-300/40">
                                 NEW
                             </div>
                         </div>
 
                         <div class="p-6 flex flex-col flex-grow">
-                            <div class="flex items-center gap-2 mb-3 text-xs text-blue-200">
+                            <div class="flex items-center gap-2 mb-3 text-xs text-blue-100">
                                 <i class="far fa-calendar-alt"></i>
                                 <span>{{ $news->created_at->format('d M Y') }}</span>
                             </div>
 
-                            <h3 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-200 transition-colors">
+                            <h3 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-100 transition-colors">
                                 {{ $news->title }}
                             </h3>
                             
@@ -96,7 +96,7 @@
                             
                             <div class="mt-auto">
                                 <a href="{{ route('berita-terkini.show', $news->slug) }}" 
-                                   class="inline-flex items-center text-cyan-300 font-semibold hover:text-cyan-200 transition-colors">
+                                   class="inline-flex items-center text-blue-200 font-semibold hover:text-blue-100 transition-colors">
                                     Baca Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm"></i>
                                 </a>
                             </div>
@@ -105,8 +105,8 @@
                     @endforeach
                 </div>
             @else
-                <div class="text-center py-10 bg-blue-800/30 rounded-3xl border border-blue-700/50">
-                    <p class="text-blue-200 italic">Belum ada berita untuk hari ini.</p>
+                <div class="text-center py-10 bg-blue-700/30 rounded-3xl border border-blue-500/50">
+                    <p class="text-blue-100 italic">Belum ada berita untuk hari ini.</p>
                 </div>
             @endif
         </div>
@@ -121,7 +121,7 @@
             @if($olderNews->count() > 0)
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     @foreach($olderNews as $index => $news)
-                    <article class="news-card group rounded-2xl overflow-hidden flex flex-col h-full bg-blue-900/40"
+                    <article class="news-card group rounded-2xl overflow-hidden flex flex-col h-full"
                              data-aos="fade-up" data-aos-delay="{{ $index * 50 }}">
                         
                         <div class="h-48 relative overflow-hidden">
@@ -131,18 +131,18 @@
                         </div>
 
                         <div class="p-5 flex flex-col flex-grow">
-                            <div class="flex items-center gap-2 mb-2 text-xs text-blue-300">
+                            <div class="flex items-center gap-2 mb-2 text-xs text-blue-100">
                                 <i class="far fa-calendar-alt"></i>
                                 <span>{{ $news->created_at->format('d M Y') }}</span>
                             </div>
 
-                            <h3 class="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-blue-200 transition-colors">
+                            <h3 class="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-blue-100 transition-colors">
                                 {{ $news->title }}
                             </h3>
                             
                             <div class="mt-auto pt-4">
                                 <a href="{{ route('berita-terkini.show', $news->slug) }}" 
-                                   class="text-sm text-blue-300 font-semibold hover:text-white transition-colors">
+                                   class="text-sm text-blue-200 font-semibold hover:text-white transition-colors">
                                     Lihat Detail &rarr;
                                 </a>
                             </div>
@@ -155,8 +155,8 @@
                     {{ $olderNews->links('vendor.pagination.tailwind') }}
                 </div>
             @else
-                <div class="text-center py-10 bg-blue-800/30 rounded-3xl border border-blue-700/50">
-                    <p class="text-blue-200 italic">Belum ada berita lama.</p>
+                <div class="text-center py-10 bg-blue-700/30 rounded-3xl border border-blue-500/50">
+                    <p class="text-blue-100 italic">Belum ada berita lama.</p>
                 </div>
             @endif
         </div>

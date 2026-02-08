@@ -6,46 +6,46 @@
 @section('content')
 
 <!-- Hero Section (Brighter) -->
-<section class="relative pt-40 pb-32 bg-gradient-to-br from-blue-900 to-blue-800 overflow-hidden text-white">
+<section class="relative pt-40 pb-32 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 overflow-hidden text-white">
     <!-- Background Patterns -->
     <div class="absolute inset-0 opacity-10">
         <svg class="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
         </svg>
     </div>
-    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white opacity-10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-400 opacity-20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
 
     <div class="container max-w-7xl mx-auto px-6 relative z-10 py-32 text-center text-white">
-        <span class="inline-block py-2 px-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-blue-100 font-bold tracking-widest uppercase mb-8 shadow-lg">
+        <span class="inline-block py-2 px-6 rounded-full bg-blue-500/40 backdrop-blur-md border border-blue-400/40 text-blue-50 font-bold tracking-widest uppercase mb-8 shadow-[0_0_30px_rgba(59,130,246,0.4)]">
             Update Terbaru
         </span>
-        <h1 class="text-5xl md:text-7xl font-black mb-8 tracking-tight leading-tight drop-shadow-lg">
+        <h1 class="text-5xl md:text-7xl font-black mb-8 tracking-tight leading-tight drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">
             Berita & Informasi
         </h1>
-        <p class="text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed font-medium">
+        <p class="text-2xl text-blue-50 max-w-3xl mx-auto leading-relaxed font-medium">
             Dapatkan informasi terbaru seputar kegiatan dakwah, sosial, dan perkembangan program HASMI.
         </p>
     </div>
 </section>
 
 <!-- Berita Section -->
-<section class="py-24 bg-blue-50 min-h-screen" x-data="{ activeTab: 'hari_ini' }">
+<section class="py-24 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 min-h-screen" x-data="{ activeTab: 'hari_ini' }">
     <div class="container max-w-7xl mx-auto px-6">
         
         <!-- Filter Tabs -->
         <div class="flex justify-center mb-20">
-            <div class="bg-white p-2 rounded-full shadow-lg border border-slate-100 inline-flex shadow-blue-900/5">
+            <div class="bg-blue-700/60 backdrop-blur-xl p-2 rounded-full shadow-[0_0_40px_rgba(59,130,246,0.4)] border-2 border-blue-400/40 inline-flex">
                 <button @click="activeTab = 'hari_ini'"
                         :class="activeTab === 'hari_ini' 
-                            ? 'bg-blue-600 text-white shadow-md' 
-                            : 'text-slate-500 hover:text-blue-600 hover:bg-slate-50'"
+                            ? 'bg-blue-500 text-white shadow-[0_0_30px_rgba(59,130,246,0.5)]' 
+                            : 'text-blue-100 hover:text-white hover:bg-blue-600/50'"
                         class="px-10 py-4 rounded-full text-lg font-bold transition-all duration-300 flex items-center gap-3">
                     <i class="fas fa-calendar-day"></i> Hari Ini
                 </button>
                 <button @click="activeTab = 'minggu_lalu'"
                         :class="activeTab === 'minggu_lalu' 
-                            ? 'bg-blue-600 text-white shadow-md' 
-                            : 'text-slate-500 hover:text-blue-600 hover:bg-blue-50'"
+                            ? 'bg-blue-500 text-white shadow-[0_0_30px_rgba(59,130,246,0.5)]' 
+                            : 'text-blue-100 hover:text-white hover:bg-blue-600/50'"
                         class="px-10 py-4 rounded-full text-lg font-bold transition-all duration-300 flex items-center gap-3">
                     <i class="fas fa-history"></i> Berita Lalu
                 </button>
@@ -62,7 +62,7 @@
             @if($todayNews->count() > 0)
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-12 text-left">
                     @foreach($todayNews as $berita)
-                    <article class="group bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-blue-100/50 hover:shadow-2xl hover:shadow-blue-200 transition-all duration-300 border border-blue-50 h-full flex flex-col transform hover:-translate-y-2">
+                    <article class="group bg-blue-700/60 backdrop-blur-xl rounded-[2.5rem] overflow-hidden shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-300 border-2 border-blue-400/40 h-full flex flex-col transform hover:-translate-y-2">
                         <!-- Image Container with Overlay -->
                         <div class="relative h-80 overflow-hidden">
                             <img src="{{ $berita->getThumbnailUrl() }}" alt="{{ $berita->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -70,35 +70,35 @@
                             
                             <!-- Badge Time -->
                             <div class="absolute top-6 right-6">
-                                <span class="bg-white/95 backdrop-blur-sm text-blue-700 font-bold px-4 py-2 rounded-xl shadow-lg flex items-center gap-2">
+                                <span class="bg-blue-500/90 backdrop-blur-sm text-white font-bold px-4 py-2 rounded-xl shadow-[0_0_30px_rgba(59,130,246,0.5)] flex items-center gap-2 border-2 border-blue-400/40">
                                     <i class="far fa-clock"></i> {{ $berita->created_at->format('H:i') }} WIB
                                 </span>
                             </div>
 
                             <!-- Category Badge -->
                             <div class="absolute bottom-6 left-6">
-                                <span class="bg-blue-600 text-white font-bold px-4 py-2 rounded-xl shadow-lg uppercase tracking-wider text-sm">
+                                <span class="bg-blue-500 text-white font-bold px-4 py-2 rounded-xl shadow-[0_0_30px_rgba(59,130,246,0.5)] uppercase tracking-wider text-sm border-2 border-blue-400/40">
                                     Terbaru
                                 </span>
                             </div>
                         </div>
                         
                         <div class="p-10 flex flex-col flex-grow">
-                            <h3 class="text-3xl font-bold text-slate-800 mb-6 leading-tight group-hover:text-blue-600 transition-colors">
+                            <h3 class="text-3xl font-bold text-white mb-6 leading-tight group-hover:text-blue-100 transition-colors">
                                 <a href="{{ route('berita.show', $berita->slug) }}">{{ $berita->title }}</a>
                             </h3>
                             
                             <!-- Short Description or Limited Content -->
-                            <p class="text-slate-500 text-lg leading-relaxed mb-8 flex-grow">
+                            <p class="text-blue-100 text-lg leading-relaxed mb-8 flex-grow">
                                 {{ $berita->short_description ? Str::limit($berita->short_description, 120) : Str::limit(strip_tags($berita->content), 120) }}
                             </p>
                             
-                            <div class="pt-8 border-t border-slate-100 flex items-center justify-between">
-                                <div class="flex items-center text-slate-400 gap-6 text-lg">
+                            <div class="pt-8 border-t border-blue-400/30 flex items-center justify-between">
+                                <div class="flex items-center text-blue-200 gap-6 text-lg">
                                     <span class="flex items-center gap-2"><i class="far fa-eye"></i> {{ number_format($berita->views) }}</span>
                                     <span class="flex items-center gap-2"><i class="far fa-comment"></i> {{ $berita->comments->count() }}</span>
                                 </div>
-                                <a href="{{ route('berita.show', $berita->slug) }}" class="text-blue-600 font-bold text-lg hover:text-blue-700 flex items-center gap-2 group-hover:gap-3 transition-all">
+                                <a href="{{ route('berita.show', $berita->slug) }}" class="text-blue-200 font-bold text-lg hover:text-white flex items-center gap-2 group-hover:gap-3 transition-all">
                                     Baca Selengkapnya <i class="fas fa-arrow-right text-sm"></i>
                                 </a>
                             </div>
@@ -107,12 +107,12 @@
                     @endforeach
                 </div>
             @else
-                <div class="text-center py-24 bg-white rounded-[3rem] border-2 border-dashed border-slate-200">
-                    <div class="inline-block p-8 rounded-full bg-blue-50 mb-6">
-                        <i class="far fa-newspaper text-5xl text-blue-300"></i>
+                <div class="text-center py-24 bg-blue-700/60 backdrop-blur-xl rounded-[3rem] border-2 border-dashed border-blue-400/40">
+                    <div class="inline-block p-8 rounded-full bg-blue-600/40 mb-6">
+                        <i class="far fa-newspaper text-5xl text-blue-200"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-slate-700 mb-3">Belum Ada Berita Hari Ini</h3>
-                    <p class="text-slate-500 text-xl max-w-md mx-auto">Kami sedang menyiapkan informasi terbaru untuk Anda.</p>
+                    <h3 class="text-3xl font-bold text-white mb-3">Belum Ada Berita Hari Ini</h3>
+                    <p class="text-blue-100 text-xl max-w-md mx-auto">Kami sedang menyiapkan informasi terbaru untuk Anda.</p>
                 </div>
             @endif
         </div>
@@ -127,25 +127,25 @@
             @if($oldNews->count() > 0)
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
                     @foreach($oldNews as $berita)
-                    <article class="group bg-white rounded-[2rem] overflow-hidden shadow-lg shadow-blue-100 hover:shadow-2xl hover:shadow-blue-200 transition-all duration-300 border border-blue-50 h-full flex flex-col">
+                    <article class="group bg-blue-700/60 backdrop-blur-xl rounded-[2rem] overflow-hidden shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-300 border-2 border-blue-400/40 h-full flex flex-col">
                         <div class="relative h-60 overflow-hidden">
                             <img src="{{ $berita->getThumbnailUrl() }}" alt="{{ $berita->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                            <span class="absolute top-4 left-4 bg-white/90 backdrop-blur text-slate-700 font-bold px-3 py-1 rounded-lg shadow-sm text-sm">
+                            <span class="absolute top-4 left-4 bg-blue-500/90 backdrop-blur text-white font-bold px-3 py-1 rounded-lg shadow-[0_0_20px_rgba(59,130,246,0.4)] text-sm border border-blue-400/40">
                                 {{ $berita->created_at->format('d M Y') }}
                             </span>
                         </div>
                         
                         <div class="p-8 flex flex-col flex-grow">
-                            <h3 class="text-xl font-bold text-slate-800 mb-3 leading-tight group-hover:text-blue-600 transition-colors line-clamp-2">
+                            <h3 class="text-xl font-bold text-white mb-3 leading-tight group-hover:text-blue-100 transition-colors line-clamp-2">
                                 <a href="{{ route('berita.show', $berita->slug) }}">{{ $berita->title }}</a>
                             </h3>
                             
-                            <p class="text-slate-500 text-base line-clamp-3 mb-6 flex-grow leading-relaxed">
+                            <p class="text-blue-100 text-base line-clamp-3 mb-6 flex-grow leading-relaxed">
                                 {{ $berita->short_description ? Str::limit($berita->short_description, 100) : Str::limit(strip_tags($berita->content), 100) }}
                             </p>
                             
-                            <a href="{{ route('berita.show', $berita->slug) }}" class="text-blue-600 font-bold hover:underline mt-auto flex items-center gap-2">
+                            <a href="{{ route('berita.show', $berita->slug) }}" class="text-blue-200 font-bold hover:text-white mt-auto flex items-center gap-2">
                                 Baca Selengkapnya <i class="fas fa-arrow-right text-xs"></i>
                             </a>
                         </div>
@@ -157,12 +157,12 @@
                     {{ $oldNews->links() }}
                 </div>
             @else
-                 <div class="text-center py-24 bg-white rounded-[3rem] border-2 border-dashed border-slate-200">
-                    <div class="inline-block p-8 rounded-full bg-slate-100 mb-6">
-                        <i class="fas fa-history text-5xl text-slate-300"></i>
+                 <div class="text-center py-24 bg-blue-700/60 backdrop-blur-xl rounded-[3rem] border-2 border-dashed border-blue-400/40">
+                    <div class="inline-block p-8 rounded-full bg-blue-600/40 mb-6">
+                        <i class="fas fa-history text-5xl text-blue-200"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-slate-700 mb-3">Arsip Berita Kosong</h3>
-                    <p class="text-slate-500 text-xl">Belum ada berita yang diarsipkan.</p>
+                    <h3 class="text-3xl font-bold text-white mb-3">Arsip Berita Kosong</h3>
+                    <p class="text-blue-100 text-xl">Belum ada berita yang diarsipkan.</p>
                 </div>
             @endif
         </div>

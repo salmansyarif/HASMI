@@ -6,16 +6,16 @@
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
 {{-- HEADER SECTION --}}
-<section class="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950 pt-32 pb-20 overflow-hidden">
+<section class="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 pt-32 pb-20 overflow-hidden">
     {{-- Background Elements --}}
-    <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-3xl animate-blob"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500 rounded-full blur-3xl animate-blob animation-delay-2"></div>
-        <div class="absolute top-1/2 left-1/2 w-96 h-96 bg-blue-400 rounded-full blur-3xl animate-blob animation-delay-4"></div>
+    <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-40">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-300 rounded-full blur-3xl animate-blob"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-cyan-300 rounded-full blur-3xl animate-blob animation-delay-2"></div>
+        <div class="absolute top-1/2 left-1/2 w-96 h-96 bg-blue-200 rounded-full blur-3xl animate-blob animation-delay-4"></div>
     </div>
 
     <div class="container mx-auto px-6 text-center relative z-10">
-        <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl px-6 py-3 rounded-full border border-white/20 mb-8" data-aos="zoom-in">
+        <div class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-xl px-6 py-3 rounded-full border border-white/30 mb-8" data-aos="zoom-in">
             <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center animate-pulse-slow">
                <img src="{{ asset('img/hasmilogo.png') }}" alt="Logo HASMI" class="w-6 h-6 object-contain">
             </div>
@@ -23,49 +23,49 @@
         </div>
         
         <h1 class="text-5xl md:text-6xl font-bold text-white mb-6" data-aos="fade-up" data-aos-delay="100">
-            Mengenal Lebih Dekat <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-200 animate-gradient">HASMI</span>
+            Mengenal Lebih Dekat <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-cyan-100 animate-gradient">HASMI</span>
         </h1>
-        <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto rounded-full mb-8 animate-gradient" data-aos="fade" data-aos-delay="200"></div>
-        <p class="text-blue-100 text-lg max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="300">
+        <div class="w-24 h-1 bg-gradient-to-r from-blue-200 to-cyan-200 mx-auto rounded-full mb-8 animate-gradient" data-aos="fade" data-aos-delay="200"></div>
+        <p class="text-blue-50 text-lg max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="300">
             Menelusuri jati diri, filosofi, dan cita-cita luhur Himpunan Ahlussunnah untuk Masyarakat Islami dalam pengabdiannya kepada umat dan bangsa.
         </p>
     </div>
 
     {{-- Scroll Indicator --}}
     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div class="w-6 h-10 border-2 border-blue-400 rounded-full flex justify-center p-2">
-            <div class="w-1.5 h-3 bg-blue-400 rounded-full animate-scroll"></div>
+        <div class="w-6 h-10 border-2 border-blue-200 rounded-full flex justify-center p-2">
+            <div class="w-1.5 h-3 bg-blue-200 rounded-full animate-scroll"></div>
         </div>
     </div>
 </section>
 
 {{-- MAIN CONTENT --}}
-<div class="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 py-20">
+<div class="bg-gradient-to-br from-blue-700 via-blue-600 to-blue-500 py-20">
     <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto space-y-16">
             
             {{-- PROFILE SECTION --}}
-            <section class="bg-blue-800/30 backdrop-blur-xl rounded-3xl border border-blue-400/30 overflow-hidden hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-500" data-aos="fade-up">
+            <section class="bg-blue-500/40 backdrop-blur-xl rounded-3xl border border-blue-300/40 overflow-hidden hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-400/60 transition-all duration-500" data-aos="fade-up">
                 <div class="grid lg:grid-cols-12 gap-0">
-                    <div class="lg:col-span-5 bg-blue-900/30 p-12 flex flex-col justify-center items-center border-b lg:border-b-0 lg:border-r border-blue-400/30">
+                    <div class="lg:col-span-5 bg-blue-600/40 p-12 flex flex-col justify-center items-center border-b lg:border-b-0 lg:border-r border-blue-300/40">
                         <div class="relative">
-                            <div class="absolute -inset-10 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse-glow"></div>
+                            <div class="absolute -inset-10 bg-blue-300 rounded-full blur-3xl opacity-30 animate-pulse-glow"></div>
                             <img src="{{ asset('img/hasmilogo.jpg') }}" alt="Logo HASMI" class="relative w-72 h-72 object-contain drop-shadow-2xl animate-float-slow hover:scale-110 transition-transform duration-700">
                             
                             {{-- Decorative rings --}}
                             <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                <div class="w-3/4 h-3/4 border-2 border-blue-400/20 rounded-full animate-pulse-slow"></div>
+                                <div class="w-3/4 h-3/4 border-2 border-blue-200/30 rounded-full animate-pulse-slow"></div>
                             </div>
                         </div>
                     </div>
                     <div class="lg:col-span-7 p-12 md:p-16">
                         <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4" data-aos="fade-right" data-aos-delay="100">
-                            <span class="w-12 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 animate-gradient"></span>
+                            <span class="w-12 h-1 bg-gradient-to-r from-blue-200 to-cyan-200 animate-gradient"></span>
                             Profil Institusi
                         </h2>
-                        <div class="space-y-6 text-blue-100 text-lg leading-relaxed text-justify">
+                        <div class="space-y-6 text-blue-50 text-lg leading-relaxed text-justify">
                             <p data-aos="fade-up" data-aos-delay="200">
-                                <strong class="text-blue-300">Himpunan Ahlussunnah untuk Masyarakat Islami (HASMI)</strong> 
+                                <strong class="text-blue-100">Himpunan Ahlussunnah untuk Masyarakat Islami (HASMI)</strong> 
                             </p>
                             <p data-aos="fade-up" data-aos-delay="300">
                                 HASMI (Himpunan Ahlussunnah wal Jama'ah Indonesia) adalah organisasi dakwah Islam Ahlussunnah wal Jama'ah yang berlandaskan Al-Qur'an, Hadis, dan ijma', serta bermazhab Syafi'i. Didirikan pada tahun 2005 dan berpusat di Kota Bogor, HASMI merupakan ormas murni Indonesia dan tidak berafiliasi dengan organisasi lintas negara mana pun.
@@ -80,31 +80,31 @@
                                 HASMI bersifat independen dan tidak berafiliasi dengan partai politik maupun ormas lainnya.
                             </p>
                             <div class="grid md:grid-cols-1 gap-4 mt-8">
-                                <div class="flex items-start gap-4 p-5 bg-blue-900/40 rounded-xl border border-blue-400/20 hover:border-blue-300 hover:bg-blue-800/40 hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="700">
-                                    <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 animate-pulse-slow">
+                                <div class="flex items-start gap-4 p-5 bg-blue-600/50 rounded-xl border border-blue-300/30 hover:border-blue-200 hover:bg-blue-500/60 hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="700">
+                                    <div class="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center flex-shrink-0 animate-pulse-slow">
                                         <i class="fas fa-landmark text-white"></i>
                                     </div>
                                     <div>
                                         <h4 class="text-white font-bold mb-1">Eksistensi Hukum</h4>
-                                        <p class="text-sm text-blue-200">Terdaftar secara resmi sebagai organisasi nasional dengan struktur kepengurusan yang tersebar secara masif di berbagai provinsi.</p>
+                                        <p class="text-sm text-blue-100">Terdaftar secara resmi sebagai organisasi nasional dengan struktur kepengurusan yang tersebar secara masif di berbagai provinsi.</p>
                                     </div>
                                 </div>
-                                <div class="flex items-start gap-4 p-5 bg-blue-900/40 rounded-xl border border-blue-400/20 hover:border-blue-300 hover:bg-blue-800/40 hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="800">
-                                    <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 animate-pulse-slow animation-delay-1">
+                                <div class="flex items-start gap-4 p-5 bg-blue-600/50 rounded-xl border border-blue-300/30 hover:border-blue-200 hover:bg-blue-500/60 hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="800">
+                                    <div class="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center flex-shrink-0 animate-pulse-slow animation-delay-1">
                                         <i class="fas fa-shield-alt text-white"></i>
                                     </div>
                                     <div>
                                         <h4 class="text-white font-bold mb-1">Manhaj Pergerakan</h4>
-                                        <p class="text-sm text-blue-200">Berpegang teguh pada pemahaman Salafush Shalih dalam berakidah, beribadah, dan berakhlak mulia di tengah kehidupan bermasyarakat.</p>
+                                        <p class="text-sm text-blue-100">Berpegang teguh pada pemahaman Salafush Shalih dalam berakidah, beribadah, dan berakhlak mulia di tengah kehidupan bermasyarakat.</p>
                                     </div>
                                 </div>
-                                <div class="flex items-start gap-4 p-5 bg-blue-900/40 rounded-xl border border-blue-400/20 hover:border-blue-300 hover:bg-blue-800/40 hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="900">
-                                    <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 animate-pulse-slow animation-delay-2">
+                                <div class="flex items-start gap-4 p-5 bg-blue-600/50 rounded-xl border border-blue-300/30 hover:border-blue-200 hover:bg-blue-500/60 hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="900">
+                                    <div class="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center flex-shrink-0 animate-pulse-slow animation-delay-2">
                                         <i class="fas fa-sync text-white"></i>
                                     </div>
                                     <div>
                                         <h4 class="text-white font-bold mb-1">Inovasi Dakwah</h4>
-                                        <p class="text-sm text-blue-200">Mengintegrasikan teknologi informasi dan metode komunikasi kontemporer guna menjangkau seluruh lapisan generasi secara efektif.</p>
+                                        <p class="text-sm text-blue-100">Mengintegrasikan teknologi informasi dan metode komunikasi kontemporer guna menjangkau seluruh lapisan generasi secara efektif.</p>
                                     </div>
                                 </div>
                             </div>
@@ -115,20 +115,20 @@
 
             {{-- NAMA & TUJUAN SECTION --}}
             <section class="grid lg:grid-cols-2 gap-8">
-                <div class="bg-blue-800/30 backdrop-blur-xl border border-blue-400/30 p-12 rounded-2xl relative overflow-hidden group hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-500/50 hover:-translate-y-2 transition-all duration-500" data-aos="fade-up">
-                    <div class="absolute -top-10 -right-10 text-blue-500/5 text-[10rem] font-bold group-hover:text-blue-500/10 group-hover:scale-110 transition-all duration-700">HASMI</div>
+                <div class="bg-blue-500/40 backdrop-blur-xl border border-blue-300/40 p-12 rounded-2xl relative overflow-hidden group hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-400/60 hover:-translate-y-2 transition-all duration-500" data-aos="fade-up">
+                    <div class="absolute -top-10 -right-10 text-blue-300/10 text-[10rem] font-bold group-hover:text-blue-300/20 group-hover:scale-110 transition-all duration-700">HASMI</div>
                     
                     {{-- Floating particles --}}
                     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-                        <div class="absolute w-2 h-2 bg-blue-300/30 rounded-full animate-float-slow" style="top: 20%; left: 10%;"></div>
-                        <div class="absolute w-2 h-2 bg-blue-300/30 rounded-full animate-float-slow animation-delay-1" style="top: 60%; left: 80%;"></div>
-                        <div class="absolute w-2 h-2 bg-blue-300/30 rounded-full animate-float-slow animation-delay-2" style="top: 80%; left: 20%;"></div>
+                        <div class="absolute w-2 h-2 bg-blue-200/40 rounded-full animate-float-slow" style="top: 20%; left: 10%;"></div>
+                        <div class="absolute w-2 h-2 bg-blue-200/40 rounded-full animate-float-slow animation-delay-1" style="top: 60%; left: 80%;"></div>
+                        <div class="absolute w-2 h-2 bg-blue-200/40 rounded-full animate-float-slow animation-delay-2" style="top: 80%; left: 20%;"></div>
                     </div>
                     
                     <h3 class="text-3xl font-bold text-white mb-8 relative z-10" data-aos="fade-right" data-aos-delay="100">Makna Di Balik Nama</h3>
-                    <div class="space-y-6 text-blue-100 text-lg leading-relaxed relative z-10">
+                    <div class="space-y-6 text-blue-50 text-lg leading-relaxed relative z-10">
                         <p data-aos="fade-up" data-aos-delay="200">
-                            Pemilihan nama <span class="text-blue-300 font-bold">Himpunan Ahlussunnah</span> Organisasi ini menamakan dirinya Himpunan Ahlussunnah untuk Masyarakat Islami, yang disingkat dan dikenal dengan nama HASMI. Secara resmi, HASMI didirikan pada tanggal 18 November 2005 M berdasarkan Akte Notaris No. 20. Pemilihan nama tersebut bukan sekadar simbol, melainkan dirancang untuk mencerminkan dasar, sifat, serta arah perjuangan organisasi dakwah ini.
+                            Pemilihan nama <span class="text-blue-100 font-bold">Himpunan Ahlussunnah</span> Organisasi ini menamakan dirinya Himpunan Ahlussunnah untuk Masyarakat Islami, yang disingkat dan dikenal dengan nama HASMI. Secara resmi, HASMI didirikan pada tanggal 18 November 2005 M berdasarkan Akte Notaris No. 20. Pemilihan nama tersebut bukan sekadar simbol, melainkan dirancang untuk mencerminkan dasar, sifat, serta arah perjuangan organisasi dakwah ini.
                         </p>
                         <p data-aos="fade-up" data-aos-delay="300">
                             Kata "Himpunan" menggambarkan bahwa HASMI merupakan wadah yang terus bergerak aktif untuk menghimpun kaum muslimin dalam satu barisan dakwah yang dinamis. Istilah ini menegaskan bahwa HASMI bukan organisasi statis, melainkan harakah yang hidup, berenergi, dan berkesinambungan dalam upaya mencapai tujuan dakwahnya.
@@ -142,9 +142,9 @@
                     </div>
                 </div>
 
-                <div class="bg-blue-800/30 backdrop-blur-xl border border-blue-400/30 p-12 rounded-2xl hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-500/50 hover:-translate-y-2 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+                <div class="bg-blue-500/40 backdrop-blur-xl border border-blue-300/40 p-12 rounded-2xl hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-400/60 hover:-translate-y-2 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="text-3xl font-bold text-white mb-8" data-aos="fade-left" data-aos-delay="200">Tujuan HASMI</h3>
-                    <div class="space-y-6 text-blue-100 text-lg leading-relaxed">
+                    <div class="space-y-6 text-blue-50 text-lg leading-relaxed">
                         <p data-aos="fade-up" data-aos-delay="300">
                             Tujuan utama HASMI adalah terwujudnya masyarakat Islami yang berlandaskan tauhid, sunnah Rasulullah ﷺ, serta nilai-nilai Islam yang murni. HASMI berupaya membina kaum muslimin agar memiliki akidah yang lurus, ibadah yang benar, serta akhlak yang mulia, sehingga terbentuk individu-individu muslim yang kuat secara spiritual, intelektual, dan sosial.
                         </p>
@@ -163,56 +163,56 @@
 
             {{-- VISI MISI SECTION --}}
             <section class="relative" data-aos="fade-up">
-                <div class="absolute inset-0 bg-blue-500 rounded-3xl blur-3xl opacity-10 animate-pulse-glow"></div>
-                <div class="relative bg-blue-800/30 backdrop-blur-xl rounded-3xl p-12 md:p-16 border border-blue-400/30 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-500">
+                <div class="absolute inset-0 bg-blue-400 rounded-3xl blur-3xl opacity-15 animate-pulse-glow"></div>
+                <div class="relative bg-blue-500/40 backdrop-blur-xl rounded-3xl p-12 md:p-16 border border-blue-300/40 hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-400/60 transition-all duration-500">
                     <div class="grid lg:grid-cols-2 gap-16">
                         <div>
-                            <div class="inline-block px-6 py-2 bg-blue-500 text-white font-bold text-sm tracking-widest uppercase rounded-full mb-8 hover:scale-110 hover:bg-blue-600 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">Visi Utama</div>
+                            <div class="inline-block px-6 py-2 bg-blue-400 text-white font-bold text-sm tracking-widest uppercase rounded-full mb-8 hover:scale-110 hover:bg-blue-500 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">Visi Utama</div>
                             <h2 class="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight" data-aos="fade-right" data-aos-delay="200">
-                                Menjadi Mercusuar <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-200 animate-gradient">Peradaban Islami</span> <br>di Nusantara.
+                                Menjadi Mercusuar <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-cyan-100 animate-gradient">Peradaban Islami</span> <br>di Nusantara.
                             </h2>
                             <div class="relative" data-aos="fade-up" data-aos-delay="300">
-                                <div class="absolute -left-4 top-0 text-blue-500/20 text-6xl font-bold">"</div>
-                                <p class="text-blue-100 text-xl leading-relaxed pl-8">
+                                <div class="absolute -left-4 top-0 text-blue-300/30 text-6xl font-bold">"</div>
+                                <p class="text-blue-50 text-xl leading-relaxed pl-8">
                                     Menjadi organisasi massa Islam yang paling berpengaruh, terpercaya, dan profesional dalam mewujudkan masyarakat Indonesia yang bertauhid dan berakhlak mulia pada tahun 2030.
                                 </p>
                             </div>
-                            <div class="mt-8 border-l-4 border-blue-400 pl-6 text-blue-200 italic hover:border-cyan-400 transition-colors duration-300" data-aos="fade-up" data-aos-delay="400">
+                            <div class="mt-8 border-l-4 border-blue-300 pl-6 text-blue-100 italic hover:border-cyan-300 transition-colors duration-300" data-aos="fade-up" data-aos-delay="400">
                                 Visi ini bukan sekadar kalimat, melainkan komitmen setiap aktivis HASMI untuk bekerja keras setiap harinya.
                             </div>
                         </div>
 
                         <div class="space-y-8">
-                            <div class="inline-block px-6 py-2 bg-blue-900/50 text-blue-300 font-bold text-sm tracking-widest uppercase rounded-full border border-blue-400/30 hover:bg-blue-800/50 hover:scale-110 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">Misi Strategis</div>
+                            <div class="inline-block px-6 py-2 bg-blue-600/60 text-blue-100 font-bold text-sm tracking-widest uppercase rounded-full border border-blue-300/40 hover:bg-blue-500/70 hover:scale-110 transition-all duration-300" data-aos="zoom-in" data-aos-delay="100">Misi Strategis</div>
                             <div class="space-y-6">
                                 <div class="flex gap-6 group" data-aos="fade-left" data-aos-delay="200">
                                     <div class="relative">
-                                        <span class="text-3xl font-bold text-blue-400 group-hover:text-blue-300 group-hover:scale-125 transition-all duration-300 inline-block">01</span>
-                                        <div class="absolute -inset-2 bg-blue-500/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                        <span class="text-3xl font-bold text-blue-200 group-hover:text-blue-100 group-hover:scale-125 transition-all duration-300 inline-block">01</span>
+                                        <div class="absolute -inset-2 bg-blue-300/30 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
-                                    <div class="flex-1 p-4 bg-blue-900/20 rounded-xl border border-blue-400/20 group-hover:border-blue-300 group-hover:bg-blue-800/30 group-hover:-translate-y-1 transition-all duration-300">
+                                    <div class="flex-1 p-4 bg-blue-600/30 rounded-xl border border-blue-300/30 group-hover:border-blue-200 group-hover:bg-blue-500/40 group-hover:-translate-y-1 transition-all duration-300">
                                         <h4 class="text-xl font-bold text-white mb-2 uppercase tracking-wide">Standardisasi Dakwah</h4>
-                                        <p class="text-blue-100 leading-relaxed">Mengembangkan sistem dakwah yang terstruktur melalui berbagai media, kajian tatap muka, dan distribusi literatur islami guna mencerahkan pemikiran umat dari segala bentuk paham radikal maupun liberal yang menyimpang.</p>
+                                        <p class="text-blue-50 leading-relaxed">Mengembangkan sistem dakwah yang terstruktur melalui berbagai media, kajian tatap muka, dan distribusi literatur islami guna mencerahkan pemikiran umat dari segala bentuk paham radikal maupun liberal yang menyimpang.</p>
                                     </div>
                                 </div>
                                 <div class="flex gap-6 group" data-aos="fade-left" data-aos-delay="300">
                                     <div class="relative">
-                                        <span class="text-3xl font-bold text-blue-400 group-hover:text-blue-300 group-hover:scale-125 transition-all duration-300 inline-block">02</span>
-                                        <div class="absolute -inset-2 bg-blue-500/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                        <span class="text-3xl font-bold text-blue-200 group-hover:text-blue-100 group-hover:scale-125 transition-all duration-300 inline-block">02</span>
+                                        <div class="absolute -inset-2 bg-blue-300/30 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
-                                    <div class="flex-1 p-4 bg-blue-900/20 rounded-xl border border-blue-400/20 group-hover:border-blue-300 group-hover:bg-blue-800/30 group-hover:-translate-y-1 transition-all duration-300">
+                                    <div class="flex-1 p-4 bg-blue-600/30 rounded-xl border border-blue-300/30 group-hover:border-blue-200 group-hover:bg-blue-500/40 group-hover:-translate-y-1 transition-all duration-300">
                                         <h4 class="text-xl font-bold text-white mb-2 uppercase tracking-wide">Pusat Pendidikan Terpadu</h4>
-                                        <p class="text-blue-100 leading-relaxed">Membangun dan mengelola lembaga pendidikan formal maupun informal yang memadukan kurikulum nasional dengan nilai-nilai keislaman yang mendalam untuk mencetak pemimpin masa depan yang berwawasan luas.</p>
+                                        <p class="text-blue-50 leading-relaxed">Membangun dan mengelola lembaga pendidikan formal maupun informal yang memadukan kurikulum nasional dengan nilai-nilai keislaman yang mendalam untuk mencetak pemimpin masa depan yang berwawasan luas.</p>
                                     </div>
                                 </div>
                                 <div class="flex gap-6 group" data-aos="fade-left" data-aos-delay="400">
                                     <div class="relative">
-                                        <span class="text-3xl font-bold text-blue-400 group-hover:text-blue-300 group-hover:scale-125 transition-all duration-300 inline-block">03</span>
-                                        <div class="absolute -inset-2 bg-blue-500/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                        <span class="text-3xl font-bold text-blue-200 group-hover:text-blue-100 group-hover:scale-125 transition-all duration-300 inline-block">03</span>
+                                        <div class="absolute -inset-2 bg-blue-300/30 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                     </div>
-                                    <div class="flex-1 p-4 bg-blue-900/20 rounded-xl border border-blue-400/20 group-hover:border-blue-300 group-hover:bg-blue-800/30 group-hover:-translate-y-1 transition-all duration-300">
+                                    <div class="flex-1 p-4 bg-blue-600/30 rounded-xl border border-blue-300/30 group-hover:border-blue-200 group-hover:bg-blue-500/40 group-hover:-translate-y-1 transition-all duration-300">
                                         <h4 class="text-xl font-bold text-white mb-2 uppercase tracking-wide">Transformasi Sosial & Ekonomi</h4>
-                                        <p class="text-blue-100 leading-relaxed">Menggerakkan potensi ekonomi umat melalui lembaga Ziswaf yang dikelola secara amanah untuk membiayai program-program kemandirian sosial, santunan yatim, dan bantuan bencana alam secara berkesinambungan.</p>
+                                        <p class="text-blue-50 leading-relaxed">Menggerakkan potensi ekonomi umat melalui lembaga Ziswaf yang dikelola secara amanah untuk membiayai program-program kemandirian sosial, santunan yatim, dan bantuan bencana alam secara berkesinambungan.</p>
                                     </div>
                                 </div>
                             </div>
@@ -280,8 +280,8 @@ html {
 
 /* Pulse glow animation */
 @keyframes pulse-glow {
-    0%, 100% { opacity: 0.3; transform: scale(0.95); }
-    50% { opacity: 0.6; transform: scale(1.1); }
+    0%, 100% { opacity: 0.4; transform: scale(0.95); }
+    50% { opacity: 0.7; transform: scale(1.1); }
 }
 
 .animate-pulse-glow {
@@ -315,7 +315,7 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-    background: #1e40af;
+    background: #2563eb;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -346,7 +346,7 @@ body {
 /* Hide scroll indicator after scroll */
 @media (max-width: 768px) {
     .animate-blob {
-        opacity: 0.2;
+        opacity: 0.3;
     }
 }
 </style>

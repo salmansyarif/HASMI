@@ -10,12 +10,12 @@
 <style>
     body {
         font-family: 'Plus Jakarta Sans', sans-serif;
-        background: linear-gradient(to bottom, #1e3a8a, #1e40af);
+        background: linear-gradient(to bottom, #1d4ed8, #2563eb);
     }
 
     /* HERO SECTION */
     .hero-kegiatan {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1e40af 100%);
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #2563eb 100%);
         position: relative;
         overflow: hidden;
         min-height: 500px;
@@ -53,7 +53,7 @@
     }
 
     .hero-description {
-        color: #f1f5f9 !important;
+        color: #bfdbfe !important;
         font-size: 1.25rem;
         line-height: 1.8;
         font-weight: 500;
@@ -65,13 +65,13 @@
     /* Article Card Enhancements (Reused for Kegiatan) */
     .article-card {
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 1px solid rgba(59, 130, 246, 0.3);
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
     }
     .article-card:hover {
         transform: translateY(-12px) scale(1.02);
-        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
-        border-color: rgba(96, 165, 250, 0.6);
+        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.7);
+        border-color: rgba(96, 165, 250, 0.7);
     }
 
     .img-frame {
@@ -90,7 +90,7 @@
     }
 
     .wave-bottom svg {
-        fill: #1e3a8a;
+        fill: #1d4ed8;
     }
 </style>
 
@@ -100,13 +100,13 @@
     
     <div class="container mx-auto px-6 hero-content text-center">
         <div class="inline-block mb-6" data-aos="fade-down">
-            <span class="px-5 py-2 bg-blue-500/20 backdrop-blur-md border border-white/30 text-blue-100 rounded-full text-xs font-black uppercase tracking-[0.2em]">
+            <span class="px-5 py-2 bg-blue-500/40 backdrop-blur-md border border-blue-400/40 text-blue-50 rounded-full text-xs font-black uppercase tracking-[0.2em]">
                 <i class="fas fa-archive mr-2"></i> Arsip Dokumentasi
             </span>
         </div>
         
         <h1 class="hero-title mb-8" data-aos="zoom-in">
-            Laporan <span class="text-blue-200">Kegiatan</span>
+            Laporan <span class="text-blue-300">Kegiatan</span>
         </h1>
         
         <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
@@ -123,7 +123,7 @@
 </section>
 
 {{-- LIST SECTION - BACKGROUND BIRU --}}
-<section class="py-20 bg-gradient-to-b from-blue-900 to-blue-800">
+<section class="py-20 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
     <div class="container mx-auto px-6 lg:px-12">
         <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
             @forelse($kegiatans as $index => $kegiatan)
@@ -138,7 +138,7 @@
                              alt="{{ $kegiatan->title }}"
                              loading="lazy">
                     @else
-                        <div class="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center">
+                        <div class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
                             <i class="fas fa-camera text-white/20 text-6xl"></i>
                         </div>
                     @endif
@@ -152,7 +152,7 @@
 
                     {{-- Floating Badges --}}
                     <div class="absolute top-4 left-4 flex flex-col gap-2">
-                        <span class="px-4 py-2 bg-blue-600 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-white/20">
+                        <span class="px-4 py-2 bg-blue-500 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-blue-400/30">
                             Dokumentasi
                         </span>
                     </div>
@@ -161,13 +161,13 @@
                 {{-- Card Content --}}
                 <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
                     <div class="flex items-center gap-2 mb-3">
-                        <i class="far fa-calendar-alt text-blue-300 text-xs"></i>
-                        <span class="text-blue-200 text-[11px] font-bold uppercase tracking-wider">
+                        <i class="far fa-calendar-alt text-blue-100 text-xs"></i>
+                        <span class="text-blue-100 text-[11px] font-bold uppercase tracking-wider">
                             {{ $kegiatan->event_date ? $kegiatan->event_date->format('D M Y') : $kegiatan->created_at->format('D M Y') }}
                         </span>
                     </div>
 
-                    <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-200 transition-colors leading-tight">
+                    <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-100 transition-colors leading-tight">
                         {{ $kegiatan->title }}
                     </h3>
                     
@@ -177,7 +177,7 @@
                     
                     <div class="mt-auto">
                         <a href="{{ route('kegiatan.show', $kegiatan->slug) }}" 
-                           class="w-full py-4 bg-blue-600 group-hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-900/50">
+                           class="w-full py-4 bg-blue-500 group-hover:bg-blue-400 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-800/50 border-2 border-blue-400/40">
                             <span>Lihat Dokumentasi</span>
                             <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
                         </a>
@@ -187,12 +187,12 @@
             @empty
             <div class="col-span-full">
                 {{-- Empty State --}}
-                <div class="max-w-2xl mx-auto text-center py-20 bg-blue-800 rounded-[40px] shadow-lg border border-blue-600" data-aos="zoom-in">
-                    <div class="w-24 h-24 bg-blue-700 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-300 text-4xl">
+                <div class="max-w-2xl mx-auto text-center py-20 bg-blue-700/60 backdrop-blur-xl rounded-[40px] shadow-[0_0_80px_rgba(59,130,246,0.4)] border-2 border-blue-400/50" data-aos="zoom-in">
+                    <div class="w-24 h-24 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-100 text-4xl shadow-[0_0_40px_rgba(59,130,246,0.6)]">
                         <i class="fas fa-cloud-moon"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-2">Belum Ada Dokumentasi</h3>
-                    <p class="text-blue-200">Kami akan segera mengupdate laporan kegiatan terbaru dalam waktu dekat.</p>
+                    <p class="text-blue-50">Kami akan segera mengupdate laporan kegiatan terbaru dalam waktu dekat.</p>
                 </div>
             </div>
             @endforelse

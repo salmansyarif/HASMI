@@ -118,7 +118,7 @@
     .prose img {
         border-radius: 1rem;
         margin: 1.5rem 0;
-        border: 2px solid rgba(59, 130, 246, 0.3);
+        border: 2px solid rgba(59, 130, 246, 0.4);
     }
     
     .breadcrumb-link {
@@ -142,7 +142,7 @@
     }
     
     .badge-category {
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
@@ -165,7 +165,7 @@
     
     .badge-category:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
     }
     
     .badge-subcategory {
@@ -182,13 +182,13 @@
         position: relative;
         overflow: hidden;
         border-radius: 1.5rem;
-        border: 2px solid rgba(59, 130, 246, 0.3);
+        border: 2px solid rgba(59, 130, 246, 0.4);
         transition: all 0.4s ease;
     }
     
     .media-container:hover {
-        border-color: rgba(59, 130, 246, 0.6);
-        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        border-color: rgba(59, 130, 246, 0.7);
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
         transform: translateY(-4px);
     }
     
@@ -196,7 +196,7 @@
         cursor: pointer;
         overflow: hidden;
         border-radius: 1rem;
-        border: 2px solid rgba(59, 130, 246, 0.2);
+        border: 2px solid rgba(59, 130, 246, 0.3);
         position: relative;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -208,7 +208,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, transparent 100%);
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.4) 0%, transparent 100%);
         opacity: 0;
         transition: opacity 0.4s ease;
         z-index: 1;
@@ -227,8 +227,8 @@
     
     .gallery-item:hover {
         transform: translateY(-8px);
-        border-color: rgba(59, 130, 246, 0.6);
-        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        border-color: rgba(59, 130, 246, 0.7);
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
     }
     
     .gallery-item:hover img {
@@ -269,33 +269,33 @@
     
     .btn-gradient:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5);
     }
     
     .comment-card {
         transition: all 0.3s ease;
-        border: 1px solid rgba(59, 130, 246, 0.2);
+        border: 1px solid rgba(59, 130, 246, 0.3);
     }
     
     .comment-card:hover {
         transform: translateX(8px);
-        border-color: rgba(59, 130, 246, 0.4);
-        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+        border-color: rgba(59, 130, 246, 0.5);
+        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
     }
     
     .input-glow:focus {
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2), 0 0 20px rgba(59, 130, 246, 0.3);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3), 0 0 20px rgba(59, 130, 246, 0.4);
     }
     
     .related-card {
         transition: all 0.4s ease;
-        border: 2px solid rgba(59, 130, 246, 0.2);
+        border: 2px solid rgba(59, 130, 246, 0.3);
     }
     
     .related-card:hover {
         transform: translateY(-10px);
-        border-color: rgba(59, 130, 246, 0.5);
-        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        border-color: rgba(59, 130, 246, 0.6);
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
     }
     
     .related-card img {
@@ -308,45 +308,45 @@
     }
     
     .title-glow {
-        text-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+        text-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
     }
     
     .shimmer-effect {
-        background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+        background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.15), transparent);
         background-size: 200% 100%;
         animation: shimmer 2s infinite;
     }
 </style>
 
-<div class="bg-gradient-to-br from-blue-800 via-blue-900 to-blue-800 min-h-screen pb-20">
+<div class="bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 min-h-screen pb-20">
     <div class="container mx-auto px-6 py-12">
         <!-- Breadcrumb -->
         <div class="mb-8 animate-slide-in-left">
-            <nav class="flex items-center gap-2 text-sm text-blue-200">
+            <nav class="flex items-center gap-2 text-sm text-blue-100">
                 <a href="{{ route('program.index') }}" class="breadcrumb-link hover:text-white transition-colors">Program</a>
-                <i class="fas fa-chevron-right text-xs text-blue-400"></i>
+                <i class="fas fa-chevron-right text-xs text-blue-300"></i>
                 <a href="{{ route('program.category', $program->category->slug) }}" class="breadcrumb-link hover:text-white transition-colors">
                     {{ $program->category->name }}
                 </a>
                 @if($program->subcategory)
-                <i class="fas fa-chevron-right text-xs text-blue-400"></i>
+                <i class="fas fa-chevron-right text-xs text-blue-300"></i>
                 <a href="{{ route('program.subcategory', [$program->category->slug, $program->subcategory->slug]) }}" class="breadcrumb-link hover:text-white transition-colors">
                     {{ $program->subcategory->name }}
                 </a>
                 @endif
-                <i class="fas fa-chevron-right text-xs text-blue-400"></i>
+                <i class="fas fa-chevron-right text-xs text-blue-300"></i>
                 <span class="text-white font-semibold">{{ Str::limit($program->title, 30) }}</span>
             </nav>
         </div>
 
         <!-- Content -->
         <div class="max-w-4xl mx-auto">
-            <article class="bg-blue-800/50 backdrop-blur-xl rounded-[3rem] shadow-2xl overflow-hidden border-2 border-blue-400/30 animate-fade-in-up">
+            <article class="bg-blue-700/50 backdrop-blur-xl rounded-[3rem] shadow-2xl overflow-hidden border-2 border-blue-400/40 animate-fade-in-up">
                 <div class="p-8 md:p-12">
                     <!-- Badges -->
                     <div class="flex flex-wrap gap-3 mb-6 animate-slide-in-left">
                         <a href="{{ route('program.category', $program->category->slug) }}" 
-                           class="badge-category inline-flex items-center gap-2 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-blue-500/30 border-2 border-white/20">
+                           class="badge-category inline-flex items-center gap-2 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-blue-500/40 border-2 border-white/20">
                             <i class="fas fa-tag"></i>
                             {{ $program->category->name }}
                         </a>
@@ -388,9 +388,9 @@
                     </div>
 
                     <!-- Description/Excerpt -->
-                    <div class="mb-10 pb-8 border-b-2 border-blue-400/30 animate-fade-in-up">
-                        <div class="border-l-4 border-blue-500 pl-6 bg-gradient-to-r from-blue-600/20 to-transparent py-4 rounded-r-2xl">
-                            <p class="text-xl text-blue-100 leading-relaxed italic font-light">{{ $program->description }}</p>
+                    <div class="mb-10 pb-8 border-b-2 border-blue-400/40 animate-fade-in-up">
+                        <div class="border-l-4 border-blue-400 pl-6 bg-gradient-to-r from-blue-500/20 to-transparent py-4 rounded-r-2xl">
+                            <p class="text-xl text-blue-50 leading-relaxed italic font-light">{{ $program->description }}</p>
                         </div>
                     </div>
 
@@ -399,9 +399,9 @@
 
                     <!-- Photo Gallery (if exists) -->
                     @if($program->photos && count($program->photos) > 0)
-                    <div class="mt-12 pt-10 border-t-2 border-blue-400/30 animate-fade-in-up">
+                    <div class="mt-12 pt-10 border-t-2 border-blue-400/40 animate-fade-in-up">
                         <h3 class="text-3xl font-black text-white mb-8 flex items-center gap-4">
-                            <i class="fas fa-images text-blue-400 animate-float"></i>
+                            <i class="fas fa-images text-blue-300 animate-float"></i>
                             GALERI FOTO
                         </h3>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
@@ -415,22 +415,22 @@
                     @endif
                     
                     <!-- Share Buttons -->
-                    <div class="pt-10 mt-12 border-t-2 border-blue-400/30 animate-fade-in-up">
-                        <div class="p-8 bg-gradient-to-br from-blue-600/20 to-blue-700/10 rounded-3xl border-2 border-blue-400/30 flex flex-col md:flex-row justify-between items-center gap-6 backdrop-blur-sm shimmer-effect">
+                    <div class="pt-10 mt-12 border-t-2 border-blue-400/40 animate-fade-in-up">
+                        <div class="p-8 bg-gradient-to-br from-blue-500/20 to-blue-600/10 rounded-3xl border-2 border-blue-400/40 flex flex-col md:flex-row justify-between items-center gap-6 backdrop-blur-sm shimmer-effect">
                             <div class="text-center md:text-left">
                                 <h4 class="text-white font-bold mb-1 uppercase tracking-widest text-sm flex items-center gap-2">
-                                    <i class="fas fa-share-alt text-blue-400"></i>
+                                    <i class="fas fa-share-alt text-blue-300"></i>
                                     Bagikan Program Ini
                                 </h4>
-                                <p class="text-blue-200 text-xs italic">Sebarkan kebaikan kepada sesama</p>
+                                <p class="text-blue-100 text-xs italic">Sebarkan kebaikan kepada sesama</p>
                             </div>
                             <div class="flex gap-4">
                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" 
-                                   target="_blank" class="share-btn w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg shadow-blue-600/40 border-2 border-white/20">
+                                   target="_blank" class="share-btn w-14 h-14 bg-blue-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-blue-500/50 border-2 border-white/20">
                                     <i class="fab fa-facebook-f text-xl"></i>
                                 </a>
                                 <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($program->title) }}" 
-                                   target="_blank" class="share-btn w-14 h-14 bg-sky-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-sky-500/40 border-2 border-white/20">
+                                   target="_blank" class="share-btn w-14 h-14 bg-sky-400 text-white rounded-full flex items-center justify-center shadow-lg shadow-sky-400/50 border-2 border-white/20">
                                     <i class="fab fa-twitter text-xl"></i>
                                 </a>
                                 <a href="https://api.whatsapp.com/send?text={{ urlencode($program->title . ' - ' . url()->current()) }}" 
@@ -451,13 +451,13 @@
             @if(isset($relatedPrograms) && $relatedPrograms->count() > 0)
             <div class="mt-20 animate-fade-in-up">
                 <h2 class="text-3xl font-black text-white mb-10 flex items-center gap-4 uppercase tracking-tighter">
-                    <i class="fas fa-hand-holding-heart text-blue-400 animate-float"></i>
+                    <i class="fas fa-hand-holding-heart text-blue-300 animate-float"></i>
                     Program Terkait
                 </h2>
                 <div class="grid md:grid-cols-3 gap-8">
                     @foreach($relatedPrograms as $index => $related)
                     <a href="{{ route('program.show', $related->slug) }}" 
-                       class="related-card bg-blue-800/50 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl block"
+                       class="related-card bg-blue-700/50 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl block"
                        style="animation-delay: {{ $index * 0.1 }}s">
                         <div class="h-48 relative overflow-hidden">
                             @if($related->thumbnail)
@@ -465,15 +465,15 @@
                                      alt="{{ $related->title }}" 
                                      class="w-full h-full object-cover">
                             @else
-                                <div class="w-full h-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
+                                <div class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
                                     <i class="fas fa-hand-holding-heart text-white text-4xl animate-float"></i>
                                 </div>
                             @endif
-                            <div class="absolute inset-0 bg-gradient-to-t from-blue-900 to-transparent"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-blue-800 to-transparent"></div>
                         </div>
                         <div class="p-6">
                             <h3 class="font-bold text-white text-lg line-clamp-2 mb-2">{{ $related->title }}</h3>
-                            <p class="text-sm text-blue-200 line-clamp-2 font-light">{{ $related->description }}</p>
+                            <p class="text-sm text-blue-100 line-clamp-2 font-light">{{ $related->description }}</p>
                         </div>
                     </a>
                     @endforeach
@@ -484,16 +484,16 @@
             <!-- KOMENTAR SECTION -->
             <div class="mt-20">
                 <h2 class="text-3xl font-black text-white mb-10 flex items-center gap-4 uppercase tracking-tighter animate-slide-in-left">
-                    <i class="far fa-comments text-blue-400 animate-float"></i>
+                    <i class="far fa-comments text-blue-300 animate-float"></i>
                     Respon Umat ({{ $program->comments->count() }})
                 </h2>
 
                 <div class="grid lg:grid-cols-12 gap-10">
                     <!-- Form Komentar -->
                     <div class="lg:col-span-5 order-2 lg:order-1">
-                        <div class="bg-gradient-to-br from-blue-800 to-blue-900/60 rounded-[2rem] p-8 border-2 border-blue-400/30 sticky top-10 shadow-2xl backdrop-blur-xl animate-fade-in-up">
+                        <div class="bg-gradient-to-br from-blue-700 to-blue-600/60 rounded-[2rem] p-8 border-2 border-blue-400/40 sticky top-10 shadow-2xl backdrop-blur-xl animate-fade-in-up">
                             <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                                <i class="fas fa-pen text-blue-400"></i>
+                                <i class="fas fa-pen text-blue-200"></i>
                                 Tulis Komentar
                             </h3>
                             
@@ -512,11 +512,11 @@
                                 
                                 <div class="space-y-4">
                                     <div>
-                                        <label for="name" class="block text-sm font-bold text-blue-200 mb-2">
+                                        <label for="name" class="block text-sm font-bold text-blue-100 mb-2">
                                             Nama <span class="text-red-400">*</span>
                                         </label>
                                         <input type="text" id="name" name="name" value="{{ old('name') }}" required
-                                               class="input-glow w-full px-5 py-4 bg-blue-950/50 border-2 border-blue-400/30 rounded-xl text-white placeholder-blue-200/50 focus:ring-2 focus:ring-blue-400 outline-none transition-all backdrop-blur-sm @error('name') border-red-500 @enderror"
+                                               class="input-glow w-full px-5 py-4 bg-blue-800/50 border-2 border-blue-400/40 rounded-xl text-white placeholder-blue-100/50 focus:ring-2 focus:ring-blue-300 outline-none transition-all backdrop-blur-sm @error('name') border-red-500 @enderror"
                                                placeholder="Nama Lengkap">
                                         @error('name')
                                         <p class="text-red-400 text-sm mt-2 flex items-center gap-1">
@@ -526,11 +526,11 @@
                                     </div>
 
                                     <div>
-                                        <label for="email" class="block text-sm font-bold text-blue-200 mb-2">
+                                        <label for="email" class="block text-sm font-bold text-blue-100 mb-2">
                                             Email <span class="text-red-400">*</span>
                                         </label>
                                         <input type="email" id="email" name="email" value="{{ old('email') }}" required
-                                               class="input-glow w-full px-5 py-4 bg-blue-950/50 border-2 border-blue-400/30 rounded-xl text-white placeholder-blue-200/50 focus:ring-2 focus:ring-blue-400 outline-none transition-all backdrop-blur-sm @error('email') border-red-500 @enderror"
+                                               class="input-glow w-full px-5 py-4 bg-blue-800/50 border-2 border-blue-400/40 rounded-xl text-white placeholder-blue-100/50 focus:ring-2 focus:ring-blue-300 outline-none transition-all backdrop-blur-sm @error('email') border-red-500 @enderror"
                                                placeholder="email@example.com">
                                         @error('email')
                                         <p class="text-red-400 text-sm mt-2 flex items-center gap-1">
@@ -540,23 +540,23 @@
                                     </div>
 
                                     <div>
-                                        <label for="comment" class="block text-sm font-bold text-blue-200 mb-2">
+                                        <label for="comment" class="block text-sm font-bold text-blue-100 mb-2">
                                             Komentar <span class="text-red-400">*</span>
                                         </label>
                                         <textarea id="comment" name="comment" rows="4" required maxlength="1000"
-                                                  class="input-glow w-full px-5 py-4 bg-blue-950/50 border-2 border-blue-400/30 rounded-xl text-white placeholder-blue-200/50 focus:ring-2 focus:ring-blue-400 outline-none transition-all backdrop-blur-sm @error('comment') border-red-500 @enderror"
+                                                  class="input-glow w-full px-5 py-4 bg-blue-800/50 border-2 border-blue-400/40 rounded-xl text-white placeholder-blue-100/50 focus:ring-2 focus:ring-blue-300 outline-none transition-all backdrop-blur-sm @error('comment') border-red-500 @enderror"
                                                   placeholder="Tulis komentar Anda...">{{ old('comment') }}</textarea>
                                         @error('comment')
                                         <p class="text-red-400 text-sm mt-2 flex items-center gap-1">
                                             <i class="fas fa-exclamation-circle"></i>{{ $message }}
                                         </p>
                                         @enderror
-                                        <p class="text-blue-300/70 text-xs mt-2">Maksimal 1000 karakter</p>
+                                        <p class="text-blue-200/70 text-xs mt-2">Maksimal 1000 karakter</p>
                                     </div>
                                 </div>
 
                                 <button type="submit" 
-                                        class="btn-gradient w-full text-white font-black py-4 rounded-xl transition-all shadow-lg shadow-blue-500/40 uppercase tracking-widest text-sm border-2 border-white/20">
+                                        class="btn-gradient w-full text-white font-black py-4 rounded-xl transition-all shadow-lg shadow-blue-500/50 uppercase tracking-widest text-sm border-2 border-white/20">
                                     <span class="flex items-center justify-center gap-2">
                                         <i class="fas fa-paper-plane"></i>
                                         Kirim Respon
@@ -569,9 +569,9 @@
                     <!-- List Komentar -->
                     <div class="lg:col-span-7 order-1 lg:order-2 space-y-6">
                         @forelse($program->comments as $index => $comment)
-                        <div class="comment-card bg-blue-800/50 backdrop-blur-sm rounded-3xl p-8 flex gap-6 animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
+                        <div class="comment-card bg-blue-700/50 backdrop-blur-sm rounded-3xl p-8 flex gap-6 animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
                             <div class="flex-shrink-0">
-                                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-blue-500/40 border-2 border-white/20">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-blue-500/50 border-2 border-white/20">
                                     {{ $comment->initials }}
                                 </div>
                             </div>
@@ -579,18 +579,18 @@
                             <div class="flex-1">
                                 <div class="flex items-center justify-between mb-3">
                                     <h4 class="font-bold text-white text-lg">{{ $comment->name }}</h4>
-                                    <span class="text-[10px] text-blue-300 uppercase font-bold tracking-widest bg-blue-600/30 px-3 py-1 rounded-full flex items-center gap-1">
+                                    <span class="text-[10px] text-blue-200 uppercase font-bold tracking-widest bg-blue-500/30 px-3 py-1 rounded-full flex items-center gap-1">
                                         <i class="far fa-clock"></i>
                                         {{ $comment->created_at->locale('id')->diffForHumans() }}
                                     </span>
                                 </div>
-                                <p class="text-blue-100 leading-relaxed font-light whitespace-pre-wrap">{{ $comment->comment }}</p>
+                                <p class="text-blue-50 leading-relaxed font-light whitespace-pre-wrap">{{ $comment->comment }}</p>
                             </div>
                         </div>
                         @empty
-                        <div class="text-center py-20 bg-blue-800/30 backdrop-blur-sm rounded-[2rem] border-2 border-blue-400/20 border-dashed animate-fade-in-up">
-                            <i class="far fa-comment-dots text-blue-400/40 text-6xl mb-6 animate-float"></i>
-                            <p class="text-blue-300 italic font-light text-lg">Jadilah yang pertama memberikan respon...</p>
+                        <div class="text-center py-20 bg-blue-700/30 backdrop-blur-sm rounded-[2rem] border-2 border-blue-400/30 border-dashed animate-fade-in-up">
+                            <i class="far fa-comment-dots text-blue-300/40 text-6xl mb-6 animate-float"></i>
+                            <p class="text-blue-200 italic font-light text-lg">Jadilah yang pertama memberikan respon...</p>
                         </div>
                         @endforelse
                     </div>
