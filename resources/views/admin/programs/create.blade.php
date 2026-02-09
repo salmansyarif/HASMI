@@ -5,244 +5,210 @@
 @section('page-subtitle', 'Buat program baru')
 
 @section('content')
+<div class="container mx-auto">
+    <div class="mb-6">
+        <a href="{{ route('admin.programs.index') }}" class="text-gray-500 hover:text-gray-700 flex items-center gap-2 transition-colors">
+            <i class="fas fa-arrow-left"></i> Kembali ke Daftar
+        </a>
+    </div>
 
-<div class="max-w-4xl">
+    @if ($errors->any())
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded-r-lg shadow-sm">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-circle text-red-500"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-red-800">Terdapat kesalahan pada inputan:</h3>
+                    <ul class="mt-2 text-sm text-red-700 list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <form action="{{ route('admin.programs.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column: Main Content (2/3) -->
+            <div class="lg:col-span-2 space-y-6">
+                
+                <!-- General Info Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Informasi Program</h3>
+                    
+                    <!-- Judul -->
+                    <div class="mb-5">
+                        <label for="title" class="block text-sm font-semibold text-gray-700 mb-2">Judul Program <span class="text-red-500">*</span></label>
+                        <input type="text" name="title" id="title" 
+                               class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all py-3 px-4 text-lg bg-gray-50 focus:bg-white" 
+                               placeholder="Contoh: Bantuan Pangan untuk Dhuafa"
+                               value="{{ old('title') }}" required>
+                    </div>
 
-        <div class="bg-white rounded-lg shadow-lg p-8 space-y-6">
-            
-            <!-- KATEGORI PROGRAM -->
-            <div>
-                <label for="program_category_id" class="block text-sm font-semibold text-gray-700 mb-2">
-                    <i class="fas fa-folder text-blue-600 mr-1"></i> Kategori Program <span class="text-red-500">*</span>
-                </label>
-                <select id="program_category_id" name="program_category_id" required
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('program_category_id') border-red-500 @enderror">
-                    <option value="">-- Pilih Kategori --</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {{ old('program_category_id') == $category->id ? 'selected' : '' }}>
-                            {{ $category->name }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('program_category_id')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- SUB KATEGORI PROGRAM (Conditional) -->
-            <div id="subcategory-wrapper" class="hidden">
-                <label for="program_subcategory_id" class="block text-sm font-semibold text-gray-700 mb-2">
-                    <i class="fas fa-folder-open text-blue-600 mr-1"></i> Sub Kategori Program <span id="subcategory-required" class="text-red-500"></span>
-                </label>
-                <select id="program_subcategory_id" name="program_subcategory_id"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('program_subcategory_id') border-red-500 @enderror">
-                    <option value="">-- Pilih Sub Kategori --</option>
-                </select>
-                <p class="text-gray-500 text-xs mt-1">
-                    <i class="fas fa-info-circle"></i> Pilih sub kategori program (mirip seperti filter di Materi)
-                </p>
-                @error('program_subcategory_id')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- JUDUL PROGRAM -->
-            <div>
-                <label for="title" class="block text-sm font-semibold text-gray-700 mb-2">
-                    Judul Program <span class="text-red-500">*</span>
-                </label>
-                <input type="text" id="title" name="title" value="{{ old('title') }}" required
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('title') border-red-500 @enderror"
-                       placeholder="Contoh: Bantuan Pangan untuk Dhuafa">
-                @error('title')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- DESKRIPSI -->
-            <div>
-                <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">
-                    Deskripsi Singkat (Opsional)
-                </label>
-                <textarea id="description" name="description" rows="3"
-                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('description') border-red-500 @enderror"
-                          placeholder="Deskripsi singkat program (1-2 kalimat)...">{{ old('description') }}</textarea>
-                @error('description')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- KONTEN LENGKAP -->
-            <div>
-                <label for="content" class="block text-sm font-semibold text-gray-700 mb-2">
-                    Konten Lengkap
-                </label>
-                <textarea id="content" name="content" rows="10"
-                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('content') border-red-500 @enderror"
-                          placeholder="Isi konten program lengkap...">{{ old('content') }}</textarea>
-                @error('content')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- TIPE MEDIA -->
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">
-                    Tipe Media <span class="text-red-500">*</span>
-                </label>
-                <div class="flex gap-4">
-                    <label class="flex items-center">
-                        <input type="radio" name="media_type" value="image" {{ old('media_type', 'image') == 'image' ? 'checked' : '' }} 
-                               class="w-5 h-5 text-blue-600" onchange="toggleMediaType()">
-                        <span class="ml-2 text-gray-700">
-                            <i class="fas fa-image text-green-600 mr-1"></i> Gambar
-                        </span>
-                    </label>
-                    <label class="flex items-center">
-                        <input type="radio" name="media_type" value="video" {{ old('media_type') == 'video' ? 'checked' : '' }} 
-                               class="w-5 h-5 text-blue-600" onchange="toggleMediaType()">
-                        <span class="ml-2 text-gray-700">
-                            <i class="fas fa-video text-red-600 mr-1"></i> Video
-                        </span>
-                    </label>
-                </div>
-                @error('media_type')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- THUMBNAIL -->
-            <div>
-                <label for="thumbnail" class="block text-sm font-semibold text-gray-700 mb-2">
-                    <i class="fas fa-image text-blue-600 mr-1"></i> Thumbnail
-                </label>
-                <input type="file" id="thumbnail" name="thumbnail" accept="image/jpeg,image/png,image/jpg,image/webp"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('thumbnail') border-red-500 @enderror"
-                       onchange="previewThumbnail(event)">
-                <p class="text-gray-500 text-xs mt-1">
-                    Format: JPG, PNG, WEBP. Maks 2MB. Rasio 16:9 (landscape) direkomendasikan.
-                </p>
-                @error('thumbnail')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-
-                <div id="thumbnail-preview" class="mt-4"></div>
-            </div>
-
-            <!-- GALERI FOTO (Only for Image type) -->
-            <div id="photos-section">
-                <label for="photos" class="block text-sm font-semibold text-gray-700 mb-2">
-                    <i class="fas fa-images text-blue-600 mr-1"></i> Galeri Foto
-                </label>
-                <input type="file" id="photos" name="photos[]" accept="image/jpeg,image/png,image/jpg,image/webp" multiple
-                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('photos.*') border-red-500 @enderror"
-                       onchange="previewPhotos(event)">
-                <p class="text-gray-500 text-xs mt-1">
-                    Upload beberapa foto sekaligus untuk galeri. Format: JPG, PNG, WEBP. Maks 2MB per foto.
-                </p>
-                @error('photos.*')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-
-                <div id="photos-preview" class="mt-4 grid grid-cols-4 gap-4"></div>
-            </div>
-
-            <!-- VIDEO SECTION (Only for Video type) -->
-            <div id="video-section" style="display: none;">
-                <div class="border-t border-gray-200 pt-6">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">
-                        <i class="fas fa-video text-blue-600 mr-2"></i>Video Program
-                    </h3>
-
-                    <div class="space-y-4">
-                        <!-- Upload Video File -->
+                    <!-- Category & Sub Category Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                        <!-- Category -->
                         <div>
-                            <label for="video_file" class="block text-sm font-semibold text-gray-700 mb-2">
-                                <i class="fas fa-upload text-blue-600 mr-1"></i> Upload Video File
-                            </label>
-                            <input type="file" id="video_file" name="video_file" accept="video/mp4,video/mov,video/avi,video/wmv,video/webm"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('video_file') border-red-500 @enderror">
-                            <p class="text-gray-500 text-xs mt-1">
-                                Format: MP4, MOV, AVI, WMV, WebM. Maksimal 100MB.
-                            </p>
-                            @error('video_file')
-                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                            @enderror
+                            <label for="program_category_id" class="block text-sm font-semibold text-gray-700 mb-2">Kategori <span class="text-red-500">*</span></label>
+                            <select id="program_category_id" name="program_category_id" required
+                                    class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all py-3 px-4 text-lg bg-gray-50 focus:bg-white">
+                                <option value="">-- Pilih Kategori --</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('program_category_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
-                        <div class="text-center text-gray-500 font-semibold">ATAU</div>
+                        <!-- Sub Category -->
+                        <div id="subcategory-wrapper" class="hidden">
+                            <label for="program_subcategory_id" class="block text-sm font-semibold text-gray-700 mb-2">Sub Kategori <span id="subcategory-required" class="text-red-500"></span></label>
+                            <select id="program_subcategory_id" name="program_subcategory_id"
+                                    class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all py-3 px-4 text-lg bg-gray-50 focus:bg-white">
+                                <option value="">-- Pilih Sub Kategori --</option>
+                            </select>
+                        </div>
+                    </div>
 
-                        <!-- Video URL -->
-                        <div>
-                            <label for="video_url" class="block text-sm font-semibold text-gray-700 mb-2">
-                                <i class="fas fa-link text-blue-600 mr-1"></i> URL Video (YouTube, Vimeo, dll)
-                            </label>
-                            <input type="url" id="video_url" name="video_url" value="{{ old('video_url') }}"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('video_url') border-red-500 @enderror"
-                                   placeholder="https://www.youtube.com/watch?v=...">
-                            <p class="text-gray-500 text-xs mt-1">
-                                Atau paste link video dari YouTube, Vimeo, atau platform lainnya.
-                            </p>
-                            @error('video_url')
-                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                            @enderror
+                    <!-- Description -->
+                    <div class="mb-5">
+                        <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">Deskripsi Singkat (Opsional)</label>
+                        <textarea name="description" id="description" rows="3"
+                                  class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all py-3 px-4 text-lg bg-gray-50 focus:bg-white"
+                                  placeholder="Deskripsi singkat program...">{{ old('description') }}</textarea>
+                    </div>
+
+                    <!-- Content -->
+                    <div>
+                        <label for="content" class="block text-sm font-semibold text-gray-700 mb-2">Konten Lengkap</label>
+                        <textarea name="content" id="content" rows="15"
+                                  class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all font-sans text-lg leading-relaxed p-4 bg-gray-50 focus:bg-white"
+                                  placeholder="Isi konten program lengkap...">{{ old('content') }}</textarea>
+                    </div>
+                </div>
+
+                <!-- Media Content Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Konten Media</h3>
+
+                    <!-- Image Section (Gallery) -->
+                    <div id="photos-section">
+                        <div class="mb-4">
+                            <label class="block text-sm text-gray-500 mb-2">Upload Galeri Foto</label>
+                            <input type="file" name="photos[]" id="photos" accept="image/jpeg,image/png,image/jpg,image/webp" multiple
+                                   class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all"
+                                   onchange="previewPhotos(event)">
+                            <p class="mt-2 text-xs text-gray-400">Bisa pilih lebih dari satu foto. Format: JPG, PNG, WEBP. Maks 2MB.</p>
+                        </div>
+                        <div id="photos-preview" class="grid grid-cols-4 gap-4 mt-4"></div>
+                    </div>
+
+                    <!-- Video Section -->
+                    <div id="video-section" style="display: none;">
+                        <div class="space-y-4">
+                            <!-- File -->
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Upload Video File</label>
+                                <input type="file" name="video_file" accept="video/mp4,video/mov,video/avi,video/wmv,video/webm"
+                                       class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all">
+                                <p class="mt-1 text-xs text-gray-400">Format: MP4, MOV, AVI. Maks 100MB.</p>
+                            </div>
+                            
+                            <div class="text-center text-xs font-bold text-gray-400">- ATAU -</div>
+
+                            <!-- URL -->
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">URL Video (YouTube, dll)</label>
+                                <input type="url" name="video_url" class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all py-3 px-4 text-lg bg-gray-50 focus:bg-white"  
+                                       placeholder="https://youtube.com/..." value="{{ old('video_url') }}">
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
-            <!-- POSISI MEDIA -->
-            <div>
-                <label for="media_position" class="block text-sm font-semibold text-gray-700 mb-2">
-                    <i class="fas fa-arrows-alt text-blue-600 mr-1"></i> Posisi Media <span class="text-red-500">*</span>
-                </label>
-                <select id="media_position" name="media_position" required
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('media_position') border-red-500 @enderror">
-                    <option value="top" {{ old('media_position', 'top') == 'top' ? 'selected' : '' }}>Atas (Top)</option>
-                    <option value="left" {{ old('media_position') == 'left' ? 'selected' : '' }}>Kiri (Left)</option>
-                    <option value="right" {{ old('media_position') == 'right' ? 'selected' : '' }}>Kanan (Right)</option>
-                    <option value="bottom" {{ old('media_position') == 'bottom' ? 'selected' : '' }}>Bawah (Bottom)</option>
-                </select>
-                <p class="text-gray-500 text-xs mt-1">
-                    <i class="fas fa-info-circle"></i> Posisi media (gambar/video) pada halaman detail program
-                </p>
-                @error('media_position')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+            <!-- Right Column: Sidebar (1/3) -->
+            <div class="space-y-6">
+                
+                <!-- Status & Action Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sticky top-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Status Publikasi</h3>
+                    
+                    <div class="mb-4">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" name="is_active" value="1" class="sr-only peer" {{ old('is_active', true) ? 'checked' : '' }}>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            <span class="ml-3 text-sm font-medium text-gray-900 peer-checked:text-blue-600">Program Aktif</span>
+                        </label>
+                    </div>
 
-            <!-- URUTAN TAMPILAN - REMOVED, AUTO GENERATE -->
-            <!-- This field has been removed. Urutan tampilan will be auto-generated based on the order items are created -->
-
-            <!-- STATUS AKTIF -->
-            <div class="border-t border-gray-200 pt-6">
-                <div class="flex items-center gap-3">
-                    <input type="checkbox" id="is_active" name="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }}
-                           class="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500">
-                    <label for="is_active" class="text-gray-700 font-medium">
-                        <i class="fas fa-toggle-on text-green-600 mr-1"></i> Program Aktif
-                    </label>
+                    <div class="flex flex-col gap-3">
+                        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                            <i class="fas fa-save"></i> Simpan Program
+                        </button>
+                        <button type="reset" class="w-full bg-gray-100 text-gray-700 font-semibold py-3 px-4 rounded-lg hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
+                            <i class="fas fa-redo"></i> Reset Form
+                        </button>
+                    </div>
                 </div>
-                <p class="text-gray-500 text-xs mt-2 ml-8">
-                    Centang untuk mengaktifkan program dan menampilkannya di website
-                </p>
-            </div>
 
-            <!-- TOMBOL AKSI -->
-            <div class="flex items-center justify-between pt-6 border-t border-gray-200">
-                <a href="{{ route('admin.programs.index') }}" class="text-gray-600 hover:text-gray-800 font-semibold">
-                    <i class="fas fa-arrow-left mr-2"></i> Kembali
-                </a>
-                <div class="flex gap-3">
-                    <button type="reset" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-3 rounded-lg font-semibold transition-all">
-                        <i class="fas fa-redo mr-2"></i> Reset
-                    </button>
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all">
-                        <i class="fas fa-save mr-2"></i> Simpan Program
-                    </button>
+                <!-- Media Settings Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Pengaturan Media</h3>
+                    
+                    <!-- Media Type -->
+                    <div class="mb-5">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Tipe Media</label>
+                        <div class="flex flex-col gap-2">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="media_type" value="image" {{ old('media_type', 'image') == 'image' ? 'checked' : '' }} 
+                                       class="form-radio text-blue-600" onchange="toggleMediaType()">
+                                <span class="ml-2">Gambar (Galeri)</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="media_type" value="video" {{ old('media_type') == 'video' ? 'checked' : '' }} 
+                                       class="form-radio text-blue-600" onchange="toggleMediaType()">
+                                <span class="ml-2">Video</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Media Position -->
+                    <div>
+                        <label for="media_position" class="block text-sm font-semibold text-gray-700 mb-2">Posisi Media</label>
+                        <select id="media_position" name="media_position" required
+                                class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all py-3 px-4 text-lg bg-gray-50 focus:bg-white">
+                            <option value="top" {{ old('media_position', 'top') == 'top' ? 'selected' : '' }}>Atas (Top)</option>
+                            <option value="left" {{ old('media_position') == 'left' ? 'selected' : '' }}>Kiri (Left)</option>
+                            <option value="right" {{ old('media_position') == 'right' ? 'selected' : '' }}>Kanan (Right)</option>
+                            <option value="bottom" {{ old('media_position') == 'bottom' ? 'selected' : '' }}>Bawah (Bottom)</option>
+                        </select>
+                    </div>
                 </div>
+
+                <!-- Thumbnail Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Thumbnail</h3>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm text-gray-500 mb-2">Foto Thumbnail</label>
+                        <input type="file" name="thumbnail" id="thumbnail" accept="image/jpeg,image/png,image/jpg,image/webp"
+                               class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all"
+                               onchange="previewThumbnail(event)">
+                        <p class="mt-2 text-xs text-gray-400">Format: JPG, PNG, WEBP. Maks 2MB.</p>
+                    </div>
+
+                    <!-- Preview -->
+                    <div id="thumbnail-preview" class="mt-4"></div>
+                </div>
+
             </div>
         </div>
     </form>
@@ -252,17 +218,16 @@
 
 @section('scripts')
 <script>
-    // Get all categories data from backend
+    // Categories Data
     const categoriesData = {!! json_encode($categories->mapWithKeys(function($cat) { return [$cat->id => ['has_subcategories' => $cat->has_subcategories]]; })) !!};
     
-    // Load subcategories based on selected category
+    // Subcategories Logic
     document.getElementById('program_category_id').addEventListener('change', function() {
         const categoryId = this.value;
         const subcategoryWrapper = document.getElementById('subcategory-wrapper');
         const subcategorySelect = document.getElementById('program_subcategory_id');
         const subcategoryRequired = document.getElementById('subcategory-required');
         
-        // Reset subcategory
         subcategorySelect.innerHTML = '<option value="">-- Pilih Sub Kategori --</option>';
         subcategorySelect.removeAttribute('required');
         subcategoryRequired.textContent = '';
@@ -275,19 +240,14 @@
         const categoryInfo = categoriesData[categoryId];
         const hasSubcategories = categoryInfo && categoryInfo.has_subcategories;
         
-        // Fetch subcategories via AJAX
         fetch(`/admin/programs/subcategories?category_id=${categoryId}`)
             .then(response => response.json())
             .then(data => {
-                subcategorySelect.innerHTML = '<option value="">-- Pilih Sub Kategori --</option>';
-                
                 if (data.length > 0) {
-                    // Set required if this category has subcategories
                     if (hasSubcategories) {
                         subcategorySelect.setAttribute('required', 'required');
                         subcategoryRequired.textContent = '*';
                     }
-                    
                     data.forEach(sub => {
                         const option = document.createElement('option');
                         option.value = sub.id;
@@ -305,7 +265,7 @@
             });
     });
 
-    // Toggle media type sections
+    // Toggle Media Type
     function toggleMediaType() {
         const mediaType = document.querySelector('input[name="media_type"]:checked').value;
         const photosSection = document.getElementById('photos-section');
@@ -320,9 +280,10 @@
         }
     }
 
-    // Initialize on page load
+    // Initialize
     toggleMediaType();
 
+    // Previews
     function previewThumbnail(event) {
         const file = event.target.files[0];
         const preview = document.getElementById('thumbnail-preview');
@@ -330,9 +291,7 @@
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                preview.innerHTML = `
-                    <img src="${e.target.result}" alt="Thumbnail Preview" class="w-full max-w-md h-48 object-cover rounded-lg border border-gray-300">
-                `;
+                preview.innerHTML = `<img src="${e.target.result}" class="w-full rounded-lg border border-gray-200 shadow-sm">`;
             }
             reader.readAsDataURL(file);
         } else {
@@ -345,16 +304,13 @@
         const previewContainer = document.getElementById('photos-preview');
         previewContainer.innerHTML = '';
 
-        if (files.length > 0) {
-            Array.from(files).forEach((file, index) => {
+        if (files) {
+            Array.from(files).forEach(file => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const div = document.createElement('div');
-                    div.className = 'relative';
-                    div.innerHTML = `
-                        <img src="${e.target.result}" alt="Preview ${index + 1}" class="w-full h-32 object-cover rounded-lg border border-gray-300">
-                        <div class="absolute bottom-2 right-2 bg-gray-800 bg-opacity-75 text-white text-xs px-2 py-1 rounded">#${index + 1}</div>
-                    `;
+                    div.className = 'relative aspect-square rounded-lg overflow-hidden border border-gray-200 shadow-sm';
+                    div.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
                     previewContainer.appendChild(div);
                 }
                 reader.readAsDataURL(file);

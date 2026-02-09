@@ -32,8 +32,8 @@
 
     <!-- Header -->
     <div class="text-center mb-8">
-      <div class="mx-auto w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center glow">
-        <span class="text-white text-4xl font-bold">H</span>
+      <div class="mx-auto w-20 h-20 rounded-2xl bg-white flex items-center justify-center glow">
+        <img src="{{ asset('img/hasmilogo.png') }}" alt="HASMI Logo" class="w-12 h-12 object-contain">
       </div>
       <h1 class="mt-5 text-3xl font-bold text-white tracking-wide">HASMI Admin</h1>
       <p class="mt-2 text-blue-300 text-sm">Masuk ke dashboard administrator</p>

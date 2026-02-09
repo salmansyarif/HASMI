@@ -70,7 +70,7 @@
             <div class="space-y-8" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200">
                 <div class="inline-flex items-center gap-4 bg-blue-500/40 backdrop-blur-xl px-8 py-4 rounded-full shadow-[0_0_40px_rgba(59,130,246,0.4)] border-2 border-blue-400/40 hover:border-blue-300/60 transition-all duration-500 hover:shadow-[0_0_60px_rgba(59,130,246,0.6)] hover:scale-105"
                      data-aos="zoom-in" data-aos-delay="400">
-                    <div class="w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.6)] animate-pulse-glow">
+                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.6)] animate-pulse-glow">
                        <img src="{{ asset('img/hasmilogo.png') }}" alt="Logo HASMI" class="w-9 h-9 object-contain">
                     </div>
                     <span class="text-2xl font-bold text-white tracking-wide drop-shadow-[0_0_10px_rgba(191,219,254,0.5)]">HASMI</span>

@@ -9,7 +9,7 @@
             {{-- BRAND --}}
             <div data-aos="fade-up">
                 <div class="flex items-center gap-3 mb-6">
-                    <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-400/30">
+                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-400/30">
                         <img src="{{ asset('img/hasmilogo.png') }}" alt="Logo HASMI" class="w-8 h-8 object-contain">
                     </div>
                     <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white">HASMI</span>

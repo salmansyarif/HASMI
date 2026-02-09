@@ -98,33 +98,7 @@
             @endforeach
         </div>
 
-        {{-- Details --}}
-        <div class="bg-green-800/30 backdrop-blur-xl rounded-2xl border border-green-400/30 p-8 hover:border-green-300 transition-colors duration-500" data-aos="fade-up">
-            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <div class="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-mosque text-white"></i>
-                </div>
-                Detail Program Dakwah
-            </h3>
-            <div class="grid md:grid-cols-2 gap-4 text-blue-100">
-                <div class="flex items-start gap-3 hover:text-white transition-colors">
-                    <i class="fas fa-check-circle text-green-400 mt-1 flex-shrink-0"></i>
-                    <span>Tabligh akbar dengan ustadz kondang</span>
-                </div>
-                <div class="flex items-start gap-3 hover:text-white transition-colors">
-                    <i class="fas fa-check-circle text-green-400 mt-1 flex-shrink-0"></i>
-                    <span>Kajian rutin berbagai wilayah</span>
-                </div>
-                <div class="flex items-start gap-3 hover:text-white transition-colors">
-                    <i class="fas fa-check-circle text-green-400 mt-1 flex-shrink-0"></i>
-                    <span>Bedah buku Shirotul Mustaqim</span>
-                </div>
-                <div class="flex items-start gap-3 hover:text-white transition-colors">
-                    <i class="fas fa-check-circle text-green-400 mt-1 flex-shrink-0"></i>
-                    <span>Safari dakwah ke masjid-masjid</span>
-                </div>
-            </div>
-        </div>
+
     </div>
 </section>
 
@@ -183,33 +157,7 @@
             @endforeach
         </div>
 
-        {{-- Details --}}
-        <div class="bg-blue-800/30 backdrop-blur-xl rounded-2xl border border-blue-400/30 p-8 hover:border-blue-300 transition-colors duration-500" data-aos="fade-up">
-            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-book-open text-white"></i>
-                </div>
-                Detail Program Pendidikan
-            </h3>
-            <div class="grid md:grid-cols-2 gap-4 text-blue-100">
-                <div class="flex items-start gap-3 hover:text-white transition-colors">
-                    <i class="fas fa-check-circle text-green-400 mt-1 flex-shrink-0"></i>
-                    <span>Mahad Huda Islami Bogor</span>
-                </div>
-                <div class="flex items-start gap-3 hover:text-white transition-colors">
-                    <i class="fas fa-check-circle text-green-400 mt-1 flex-shrink-0"></i>
-                    <span>Training untuk para da'i</span>
-                </div>
-                <div class="flex items-start gap-3 hover:text-white transition-colors">
-                    <i class="fas fa-check-circle text-green-400 mt-1 flex-shrink-0"></i>
-                    <span>Beasiswa pendidikan Islam</span>
-                </div>
-                <div class="flex items-start gap-3 hover:text-white transition-colors">
-                    <i class="fas fa-check-circle text-green-400 mt-1 flex-shrink-0"></i>
-                    <span>Pembinaan tahfidz Al-Qur'an</span>
-                </div>
-            </div>
-        </div>
+
     </div>
 </section>
 
@@ -239,10 +187,16 @@
             @endphp
             
             @foreach($sosialPrograms as $index => $item)
-            <div onclick="openImageModal('{{ asset('sosial_' . ($index + 1) . '.jpg') }}', '{{ $item['title'] }}', '{{ $item['desc'] }}', 'Sosial')" 
+            @php
+                $imageName = 'sosial_' . ($index + 1);
+                // Check if index corresponds to the last two items (7 and 8) which are pngs
+                $extension = ($index >= 6) ? 'png' : 'jpg';
+                $imagePath = $imageName . '.' . $extension;
+            @endphp
+            <div onclick="openImageModal('{{ asset($imagePath) }}', '{{ $item['title'] }}', '{{ $item['desc'] }}', 'Sosial')" 
                  class="group relative aspect-[4/3] rounded-2xl overflow-hidden border-2 border-white/10 hover:border-white/30 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer" 
                  data-aos="zoom-in" data-aos-delay="{{ ($index + 1) * 100 }}">
-                <img src="{{ asset('sosial_' . ($index + 1) . '.jpg') }}" 
+                <img src="{{ asset($imagePath) }}" 
                      alt="{{ $item['title'] }}" 
                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                      onerror="this.src='https://via.placeholder.com/800x600/333333/ffffff?text={{ urlencode($item['title']) }}'">
@@ -264,33 +218,7 @@
             @endforeach
         </div>
 
-        {{-- Details --}}
-        <div class="bg-red-800/30 backdrop-blur-xl rounded-2xl border border-red-400/30 p-8 hover:border-red-300 transition-colors duration-500" data-aos="fade-up">
-            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <div class="w-10 h-10 bg-red-500 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-hands-helping text-white"></i>
-                </div>
-                Detail Program Sosial
-            </h3>
-            <div class="grid md:grid-cols-2 gap-4 text-blue-100">
-                <div class="flex items-start gap-3 hover:text-white transition-colors">
-                    <i class="fas fa-check-circle text-green-400 mt-1 flex-shrink-0"></i>
-                    <span>Bakti sosial ke daerah terpencil</span>
-                </div>
-                <div class="flex items-start gap-3 hover:text-white transition-colors">
-                    <i class="fas fa-check-circle text-green-400 mt-1 flex-shrink-0"></i>
-                    <span>Santunan anak yatim dan dhuafa</span>
-                </div>
-                <div class="flex items-start gap-3 hover:text-white transition-colors">
-                    <i class="fas fa-check-circle text-green-400 mt-1 flex-shrink-0"></i>
-                    <span>Bantuan bencana alam</span>
-                </div>
-                <div class="flex items-start gap-3 hover:text-white transition-colors">
-                    <i class="fas fa-check-circle text-green-400 mt-1 flex-shrink-0"></i>
-                    <span>Pengobatan dan khitanan gratis</span>
-                </div>
-            </div>
-        </div>
+
     </div>
 </section>
 
