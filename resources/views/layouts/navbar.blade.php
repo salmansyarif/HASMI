@@ -220,45 +220,57 @@
             <a href="{{ route('home') }}" class="block px-4 py-3 rounded-2xl font-bold text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-all text-base">Beranda</a>
             <a href="{{ route('tentang') }}" class="block px-4 py-3 rounded-2xl font-bold text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-all text-base">Tentang Kami</a>
 
-            <!-- Mobile Materi -->
-            <div class="border-t border-blue-100 pt-2">
-                <p class="px-4 py-2 text-xs font-bold text-blue-400 uppercase tracking-widest">Materi</p>
-                @foreach(\App\Models\Category::with('subCategories')->orderBy('name')->get() as $cat)
-                <div x-data="{ open: false }">
-                    <div class="flex items-center justify-between px-4 py-2.5 rounded-xl text-blue-700 hover:bg-blue-50 transition-all">
-                        <a href="{{ route('materi.show', $cat->slug) }}" class="flex-grow font-semibold text-base flex items-center gap-3">
-                            <i class="fas {{ $cat->icon }} text-blue-500 w-5"></i> {{ $cat->name }}
-                        </a>
+            <!-- Mobile Materi Dropdown -->
+            <div class="border-t border-blue-100 pt-2" x-data="{ openMateri: false }">
+                <button @click="openMateri = !openMateri" class="w-full flex items-center justify-between px-4 py-2 text-blue-700 hover:bg-blue-50 transition-all">
+                    <span class="text-xs font-bold uppercase tracking-widest text-blue-400">Materi</span>
+                    <i class="fas fa-chevron-down text-xs transition-transform duration-300" :class="openMateri ? 'rotate-180' : ''"></i>
+                </button>
+                
+                <div x-show="openMateri" x-collapse class="pl-2 space-y-1">
+                    @foreach(\App\Models\Category::with('subCategories')->orderBy('name')->get() as $cat)
+                    <div x-data="{ openSub: false }">
+                        <div class="flex items-center justify-between px-4 py-2.5 rounded-xl text-blue-700 hover:bg-blue-50 transition-all">
+                            <a href="{{ route('materi.show', $cat->slug) }}" class="flex-grow font-semibold text-base flex items-center gap-3">
+                                <i class="fas {{ $cat->icon }} text-blue-500 w-5"></i> {{ $cat->name }}
+                            </a>
+                            @if($cat->hasSubCategories())
+                            <button @click="openSub = !openSub" class="p-3 text-blue-400">
+                                <i class="fas fa-chevron-down text-sm transition-transform duration-300" :class="openSub ? 'rotate-180' : ''"></i>
+                            </button>
+                            @endif
+                        </div>
                         @if($cat->hasSubCategories())
-                        <button onclick="document.getElementById('sub-mobil-{{ $cat->id }}').classList.toggle('hidden')" class="p-3 text-blue-400">
-                            <i class="fas fa-chevron-down text-sm"></i>
-                        </button>
+                        <div x-show="openSub" x-collapse class="pl-12 space-y-1 mb-2">
+                            @foreach($cat->subCategories as $sub)
+                            <a href="{{ route('materi.sub-category', [$cat->slug, $sub->slug]) }}" 
+                               class="block py-2 text-sm font-medium text-blue-500 hover:text-blue-700">
+                                {{ $sub->name }}
+                            </a>
+                            @endforeach
+                        </div>
                         @endif
                     </div>
-                    @if($cat->hasSubCategories())
-                    <div id="sub-mobil-{{ $cat->id }}" class="hidden pl-12 space-y-1 mb-2">
-                        @foreach($cat->subCategories as $sub)
-                        <a href="{{ route('materi.sub-category', [$cat->slug, $sub->slug]) }}" 
-                           class="block py-2 text-sm font-medium text-blue-500 hover:text-blue-700">
-                            {{ $sub->name }}
-                        </a>
-                        @endforeach
-                    </div>
-                    @endif
+                    @endforeach
                 </div>
-                @endforeach
             </div>
 
-            <!-- Mobile Program -->
-            <div class="border-t border-blue-100 pt-2">
-                <p class="px-4 py-2 text-xs font-bold text-blue-400 uppercase tracking-widest">Program</p>
-                @foreach(\App\Models\ProgramCategory::with('subcategories')->orderBy('sort_order')->get() as $cat)
-                    <div class="px-4 py-2.5">
-                        <a href="{{ route('program.category', $cat->slug) }}" class="flex items-center gap-3 font-semibold text-blue-700 text-base">
-                            <i class="fas fa-bookmark text-blue-500 w-5"></i> {{ $cat->name }}
-                        </a>
-                    </div>
-                @endforeach
+            <!-- Mobile Program Dropdown -->
+            <div class="border-t border-blue-100 pt-2" x-data="{ openProgram: false }">
+                 <button @click="openProgram = !openProgram" class="w-full flex items-center justify-between px-4 py-2 text-blue-700 hover:bg-blue-50 transition-all">
+                    <span class="text-xs font-bold uppercase tracking-widest text-blue-400">Program</span>
+                    <i class="fas fa-chevron-down text-xs transition-transform duration-300" :class="openProgram ? 'rotate-180' : ''"></i>
+                </button>
+
+                <div x-show="openProgram" x-collapse class="pl-2 space-y-1">
+                    @foreach(\App\Models\ProgramCategory::with('subcategories')->orderBy('sort_order')->get() as $cat)
+                        <div class="px-4 py-2.5">
+                            <a href="{{ route('program.category', $cat->slug) }}" class="flex items-center gap-3 font-semibold text-blue-700 text-base">
+                                <i class="fas fa-bookmark text-blue-500 w-5"></i> {{ $cat->name }}
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             </div>
 
             <a href="{{ route('berita-terkini.index') }}" class="block px-4 py-3 rounded-2xl font-bold text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-all text-base border-t border-blue-100 mt-2">Berita</a>

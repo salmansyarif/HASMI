@@ -12,7 +12,7 @@
         </button>
         <iframe id="intro-frame" 
                 class="w-full h-full" 
-                src="https://www.youtube.com/embed/ykIhoH0FlD8?autoplay=1&controls=1&rel=0&modestbranding=1" 
+                src="https://www.youtube.com/embed/ykIhoH0FlD8?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&playsinline=1" 
                 title="Intro HASMI" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -39,7 +39,7 @@
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
 {{-- HERO SECTION --}}
-<section class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
+<section class="relative min-h-screen flex items-center pt-36 lg:pt-0 overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
     {{-- Animated Background Elements --}}
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="islamic-pattern"></div>
@@ -346,7 +346,7 @@
                     <div class="aspect-video rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.6)] border-4 border-blue-400/40 backdrop-blur-lg bg-blue-600/30 hover:scale-105 hover:shadow-[0_0_120px_rgba(59,130,246,0.8)] transition-all duration-700 group">
                         <iframe 
                             class="w-full h-full"
-                            src="https://www.youtube.com/embed/ovpPnlSwpe4?autoplay=0&controls=1&rel=0" 
+                            src="https://www.youtube.com/embed/ovpPnlSwpe4?autoplay=0&controls=1&rel=0&modestbranding=1" 
                             title="Profil HASMI" 
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 

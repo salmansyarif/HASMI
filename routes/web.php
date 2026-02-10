@@ -118,7 +118,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
     
     // Profile (jika ada)
     Route::get('/profile', [AuthController::class, 'profile'])->name('profile.edit');
@@ -202,6 +202,20 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('berita-terkini', AdminBeritaTerkiniController::class);
     Route::post('berita-terkini/{berita_terkini}/photo/delete', [AdminBeritaTerkiniController::class, 'deletePhoto'])
         ->name('berita-terkini.photo.delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | ADMIN MANAGEMENT (USERS)
+    |--------------------------------------------------------------------------
+    */
+    Route::resource('admins', \App\Http\Controllers\Admin\AdminManagementController::class)->names([
+        'index' => 'admins.index',
+        'create' => 'admins.create',
+        'store' => 'admins.store',
+        'edit' => 'admins.edit',
+        'update' => 'admins.update',
+        'destroy' => 'admins.destroy',
+    ]);
 
     /*
     |--------------------------------------------------------------------------

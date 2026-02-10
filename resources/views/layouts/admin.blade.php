@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin - HASMI')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -81,6 +82,12 @@
                    class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.comments.*') ? 'active' : '' }}">
                     <i class="fas fa-comments w-5"></i>
                     <span>Moderasi Komentar</span>
+                </a>
+
+                <a href="{{ route('admin.admins.index') }}" 
+                   class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.admins.*') ? 'active' : '' }}">
+                    <i class="fas fa-users-cog w-5"></i>
+                    <span>Kelola Admin</span>
                 </a>
 
                 <div class="border-t border-gray-200 my-4"></div>
