@@ -3,80 +3,6 @@
 @section('title', 'HASMI - Membangun Peradaban Islami')
 
 @section('content')
-<<<<<<< HEAD
-{{-- INTRO VIDEO OVERLAY --}}
-<div id="intro-overlay" class="fixed inset-0 z-[9999] bg-gradient-to-br from-blue-700 to-blue-900 lg:backdrop-blur-xl flex items-center justify-center p-4 transition-all duration-700">
-    <div class="relative w-full max-w-6xl aspect-video bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl overflow-hidden lg:shadow-[0_0_100px_rgba(59,130,246,0.6)] border-2 border-blue-500/40 lg:ring-8 lg:ring-blue-600/30 lg:animate-border-pulse">
-        <button onclick="closeIntro()" class="absolute top-6 right-6 z-50 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-3 rounded-full font-bold shadow-[0_0_30px_rgba(239,68,68,0.5)] transition-all duration-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(239,68,68,0.8)] flex items-center gap-3 group">
-            <span class="text-base">Tutup Video</span>
-            <i class="fas fa-times group-hover:rotate-180 transition-transform duration-500"></i>
-        </button>
-        <iframe id="intro-frame" 
-                class="w-full h-full" 
-                src="https://www.youtube.com/embed/aqflN-aX-6U?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&playsinline=1&origin={{ request()->getSchemeAndHttpHost() }}" 
-                title="Intro HASMI" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen>
-        </iframe>
-    </div>
-</div>
-
-<script>
-    function closeIntro() {
-        const overlay = document.getElementById('intro-overlay');
-        const frame = document.getElementById('intro-frame');
-        
-        overlay.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
-        
-        setTimeout(() => {
-            frame.src = '';
-            overlay.style.display = 'none';
-        }, 700);
-    }
-</script>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
-
-{{-- HERO SECTION --}}
-<section class="relative min-h-screen flex items-center pt-36 lg:pt-0 overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
-    {{-- Animated Background Elements --}}
-    <div class="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block">
-        <div class="islamic-pattern"></div>
-        <div class="floating-orb orb-1"></div>
-        <div class="floating-orb orb-2"></div>
-        <div class="floating-orb orb-3"></div>
-        <div class="floating-orb orb-4"></div>
-        <div class="floating-orb orb-5"></div>
-        
-        {{-- Enhanced Animated Particles --}}
-        <div class="particles">
-            @for($i = 0; $i < 30; $i++)
-                <div class="particle" style="--delay: {{ $i * 0.2 }}s; --duration: {{ 12 + ($i % 8) }}s; --size: {{ 3 + ($i % 4) }}px;"></div>
-            @endfor
-        </div>
-
-        {{-- Light Rays --}}
-        <div class="light-rays">
-            @for($i = 0; $i < 5; $i++)
-                <div class="light-ray" style="--ray-delay: {{ $i * 0.5 }}s;"></div>
-            @endfor
-        </div>
-    </div>
-
-    <div class="container mx-auto px-6 lg:px-12 relative z-10">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
-            {{-- Left Side: Content --}}
-            <div class="space-y-8" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200">
-                <div class="inline-flex items-center gap-4 bg-blue-500/40 lg:backdrop-blur-xl px-8 py-4 rounded-full lg:shadow-[0_0_40px_rgba(59,130,246,0.4)] border-2 border-blue-400/40 hover:border-blue-300/60 transition-all duration-500 hover:shadow-[0_0_60px_rgba(59,130,246,0.6)] hover:scale-105"
-                     data-aos="zoom-in" data-aos-delay="400">
-                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.6)] animate-pulse-glow">
-                       <img src="{{ asset('img/hasmilogo.png') }}" alt="Logo HASMI" class="w-9 h-9 object-contain">
-                    </div>
-                    <span class="text-2xl font-bold text-white tracking-wide drop-shadow-[0_0_10px_rgba(191,219,254,0.5)]">HASMI</span>
-                </div>
-=======
     {{-- INTRO VIDEO OVERLAY --}}
     <div id="intro-overlay"
         class="fixed inset-0 z-[9999] bg-gradient-to-br from-blue-700 to-blue-900 backdrop-blur-xl flex items-center justify-center p-4 transition-all duration-700">
@@ -95,7 +21,6 @@
         function closeIntro() {
             const overlay = document.getElementById('intro-overlay');
             const frame = document.querySelector('.lite-youtube-embed iframe'); // Target iframe if loaded
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
             overlay.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
 
@@ -152,12 +77,6 @@
                             class="text-2xl font-bold text-white tracking-wide drop-shadow-[0_0_10px_rgba(191,219,254,0.5)]">HASMI</span>
                     </div>
 
-<<<<<<< HEAD
-                <div class="relative h-[500px] lg:h-[650px] rounded-3xl overflow-hidden lg:shadow-[0_0_80px_rgba(59,130,246,0.5)] border-2 border-blue-400/40 lg:backdrop-blur-sm bg-blue-600/30 hover:shadow-[0_0_120px_rgba(59,130,246,0.7)] transition-all duration-700">
-                    
-                    <div class="swiper status-swiper">
-                        <div class="status-pagination" id="statusPagination"></div>
-=======
                     <h1 class="text-6xl lg:text-8xl font-bold leading-tight">
                         <span class="block text-white mb-3 drop-shadow-[0_0_20px_rgba(191,219,254,0.4)] animate-text-glow"
                             data-aos="fade-up" data-aos-delay="600">Membangun</span>
@@ -167,7 +86,6 @@
                             Peradaban Islami
                         </span>
                     </h1>
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
                     <p class="text-xl lg:text-2xl text-blue-100 leading-relaxed max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]"
                         data-aos="fade-up" data-aos-delay="1000">
@@ -469,66 +387,6 @@
             </div>
         </div>
 
-<<<<<<< HEAD
-    <div class="container mx-auto px-6 lg:px-12 relative z-10">
-        <div class="grid lg:grid-cols-2 gap-20 items-center">
-            <div class="relative" data-aos="fade-right" data-aos-duration="1000">
-                <div class="relative z-10" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="aspect-video rounded-3xl overflow-hidden lg:shadow-[0_0_80px_rgba(59,130,246,0.6)] border-4 border-blue-400/40 lg:backdrop-blur-lg bg-blue-600/30 hover:scale-105 hover:shadow-[0_0_120px_rgba(59,130,246,0.8)] transition-all duration-700 group">
-                        <iframe 
-                            class="w-full h-full"
-                            src="https://www.youtube.com/embed/1La4QzGeaaQ?autoplay=0&controls=1&rel=0&modestbranding=1&origin={{ request()->getSchemeAndHttpHost() }}" 
-                            title="Profil HASMI" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-                <div class="absolute -z-10 top-10 left-10 w-full h-full border-4 border-blue-400/50 rounded-3xl lg:animate-border-pulse-slow" data-aos="fade" data-aos-delay="400"></div>
-                <div class="absolute -z-20 -bottom-10 -right-10 w-96 h-96 bg-blue-500/35 rounded-full blur-[100px] lg:animate-pulse-glow"></div>
-            </div>
-
-            <div class="space-y-7" data-aos="fade-left" data-aos-duration="1000">
-                <div class="inline-block" data-aos="zoom-in" data-aos-delay="200">
-                    <span class="px-6 py-3 bg-blue-500/50 lg:backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)]">Tentang Kami</span>
-                </div>
-                
-                <h2 class="text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="300">
-                    Himpunan Aktivis Siswa Muslim Indonesia
-                </h2>
-
-                <div class="w-24 h-2 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-400 rounded-full animate-gradient-flow shadow-[0_0_20px_rgba(96,165,250,0.6)]" data-aos="fade-right" data-aos-delay="400"></div>
-
-                <div class="space-y-5 text-blue-50 text-xl leading-relaxed">
-                    <p data-aos="fade-up" data-aos-delay="500" class="drop-shadow-lg">
-                        HASMI adalah organisasi pendidikan, dakwah, dan sosial yang berfokus membina generasi muda muslim Indonesia dengan pendekatan komprehensif dan berkelanjutan.
-                    </p>
-                    <p data-aos="fade-up" data-aos-delay="600" class="drop-shadow-lg">
-                        Melalui berbagai program unggulan, kami membentuk karakter Islami yang kuat, berilmu, dan berkontribusi nyata bagi kemajuan umat dan bangsa.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-2 gap-5 pt-8">
-                    <div class="flex items-start gap-4 bg-blue-600/50 lg:backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/40 hover:border-blue-300 hover:bg-blue-500/60 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] group"
-                         data-aos="fade-up" data-aos-delay="700">
-                        <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.6)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                            <i class="fas fa-check text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white text-lg mb-1">Pendidikan Berkualitas</h4>
-                            <p class="text-sm text-blue-100">Program pembelajaran terpadu</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4 bg-blue-600/50 lg:backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/40 hover:border-blue-300 hover:bg-blue-500/60 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] group"
-                         data-aos="fade-up" data-aos-delay="800">
-                        <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.6)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 animation-delay-1000">
-                            <i class="fas fa-check text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white text-lg mb-1">Dakwah Aktif</h4>
-                            <p class="text-sm text-blue-100">Menyebarkan nilai-nilai Islam</p>
-=======
         <div class="container mx-auto px-6 lg:px-12 relative z-10">
             <div class="grid lg:grid-cols-2 gap-20 items-center">
                 <div class="relative" data-aos="fade-right" data-aos-duration="1000">
@@ -638,7 +496,6 @@
                         <div
                             class="w-20 h-20 bg-blue-500 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(59,130,246,0.6)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700 border-2 border-blue-300/40">
                             <i class="fas fa-eye text-white text-3xl"></i>
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
                         </div>
                         <h3 class="text-3xl font-bold text-white mb-5 drop-shadow-lg">Visi</h3>
                         <p class="text-blue-50 text-xl leading-relaxed drop-shadow-md">
@@ -846,35 +703,6 @@
             <div class="absolute top-0 left-0 w-full h-full bg-blue-500 animate-pulse-glow"></div>
         </div>
 
-<<<<<<< HEAD
-        <div class="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
-            {{-- Visi Card --}}
-            <div class="group relative" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 shadow-[0_0_60px_rgba(59,130,246,0.5)]"></div>
-                <div class="relative bg-blue-700/60 lg:backdrop-blur-xl rounded-3xl p-12 lg:shadow-[0_0_80px_rgba(59,130,246,0.4)] border-2 border-blue-400/50 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-300 hover:shadow-[0_0_100px_rgba(59,130,246,0.6)]">
-                    <div class="w-20 h-20 bg-blue-500 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(59,130,246,0.6)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700 border-2 border-blue-300/40">
-                        <i class="fas fa-eye text-white text-3xl"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold text-white mb-5 drop-shadow-lg">Visi</h3>
-                    <p class="text-blue-50 text-xl leading-relaxed drop-shadow-md">
-                        Menjadi organisasi terdepan dalam pembinaan generasi muslim yang berakhlak mulia, berilmu, dan bermanfaat bagi umat dan bangsa.
-                    </p>
-                </div>
-            </div>
-
-            {{-- Misi Card --}}
-            <div class="group relative" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 shadow-[0_0_60px_rgba(59,130,246,0.5)]"></div>
-                <div class="relative bg-blue-700/60 lg:backdrop-blur-xl rounded-3xl p-12 lg:shadow-[0_0_80px_rgba(59,130,246,0.4)] border-2 border-blue-400/50 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-300 hover:shadow-[0_0_100px_rgba(59,130,246,0.6)]">
-                    <div class="w-20 h-20 bg-blue-500 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(59,130,246,0.6)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700 border-2 border-blue-300/40">
-                        <i class="fas fa-bullseye text-white text-3xl"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold text-white mb-5 drop-shadow-lg">Misi</h3>
-                    <p class="text-blue-50 text-xl leading-relaxed drop-shadow-md">
-                        Menyelenggarakan program pendidikan, dakwah, dan sosial secara komprehensif dan berkelanjutan untuk kemajuan peradaban Islam.
-                    </p>
-                </div>
-=======
         <div class="container mx-auto px-6 lg:px-12 relative z-10">
             <div class="text-center mb-20" data-aos="fade-up">
                 <span
@@ -949,33 +777,16 @@
                     <span>Lihat Semua Intisari</span>
                     <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
                 </a>
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
             </div>
         </div>
     </section>
 
-<<<<<<< HEAD
-{{-- PROGRAM UNGGULAN --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-15">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-[150px] animate-blob-slow"></div>
-        <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-400 rounded-full blur-[150px] animate-blob-slow animation-delay-3000"></div>
-        <div class="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-600 rounded-full blur-[150px] animate-blob-slow animation-delay-6000"></div>
-    </div>
-
-    <div class="container mx-auto px-6 lg:px-12 relative z-10">
-        <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-500/50 lg:backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)]" data-aos="zoom-in">Program Kami</span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 lg:drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Program Unggulan</h2>
-            <p class="text-blue-50 text-xl max-w-2xl mx-auto lg:drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Berbagai program terbaik untuk pembinaan generasi muslim Indonesia</p>
-=======
     {{-- KEGIATAN SECTION --}}
     <section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden"
         id="kegiatan">
         <div class="absolute inset-0 opacity-8">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(59,130,246,0.4),transparent_50%)]">
             </div>
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
         </div>
 
         <div class="container mx-auto px-6 lg:px-12 relative z-10">
@@ -1036,41 +847,6 @@
                                 {{ $k->title }}
                             </h3>
 
-<<<<<<< HEAD
-        <div class="text-center" data-aos="fade-up" data-aos-delay="600">
-            <a href="{{ route('program.index') }}" class="inline-flex items-center gap-3 text-blue-50 font-bold hover:gap-5 transition-all group px-8 py-4 bg-blue-600/50 lg:backdrop-blur-md rounded-full border-2 border-blue-300/50 hover:bg-blue-500/60 hover:border-blue-200 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_50px_rgba(59,130,246,0.6)] text-lg">
-                <span>Lihat Semua Program</span>
-                <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
-            </a>
-        </div>
-    </div>
-</section>
-
-{{-- MATERI PEMBELAJARAN --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
-    <div class="container mx-auto px-6 lg:px-12">
-        <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-500/50 lg:backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)]" data-aos="zoom-in">Pembelajaran</span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 lg:drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Materi Terbaru</h2>
-            <p class="text-blue-50 text-xl max-w-2xl mx-auto lg:drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Artikel dan materi pembelajaran untuk pemahaman agama yang lebih baik</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @foreach($homeArticles as $index => $article)
-            <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
-                     data-aos="fade-up" data-aos-delay="{{ $index * 150 }}">
-                
-                {{-- Thumbnail --}}
-                <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
-                    @if($article->thumbnail)
-                        <img src="{{ asset($article->thumbnail) }}" 
-                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                             alt="{{ $article->title }}"
-                             loading="lazy">
-                    @else
-                        <div class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                            <i class="fas fa-book-open text-white/20 text-6xl"></i>
-=======
                             <div class="mt-auto">
                                 <a href="{{ route('kegiatan.show', $k->slug) }}"
                                     class="w-full py-4 bg-blue-500 group-hover:bg-blue-400 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-800/50 border-2 border-blue-400/40">
@@ -1079,7 +855,6 @@
                                         class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
                                 </a>
                             </div>
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
                         </div>
                     </article>
                 @endforeach
@@ -1101,46 +876,6 @@
             class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-500/35 blur-[180px] rounded-full pointer-events-none">
         </div>
 
-<<<<<<< HEAD
-        <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="600">
-            <a href="{{ route('materi.index') }}" 
-               class="inline-flex items-center gap-3 px-10 py-5 bg-blue-500 text-white rounded-2xl font-bold lg:shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 group text-lg border-2 border-blue-400/40">
-                <span>Lihat Semua Materi</span>
-                <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300"></i>
-            </a>
-        </div>
-    </div>
-</section>
-
-{{-- INTISARI SECTION --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-0 left-0 w-full h-full bg-blue-500 animate-pulse-glow"></div>
-    </div>
-
-    <div class="container mx-auto px-6 lg:px-12 relative z-10">
-        <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-500/50 lg:backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)]" data-aos="zoom-in">Publikasi</span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 lg:drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Intisari HASMI</h2>
-            <p class="text-blue-50 text-xl max-w-2xl mx-auto lg:drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Kumpulan materi dan ringkasan pembelajaran dalam bentuk publikasi</p>
-        </div>
-
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-8">
-            @foreach($homeIntisari as $index => $i)
-            <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
-                     data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                
-                {{-- Thumbnail --}}
-                <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
-                    @if($i->thumbnail_url)
-                        <img src="{{ $i->thumbnail_url }}" 
-                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                             alt="{{ $i->title }}"
-                             loading="lazy">
-                    @else
-                        <div class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                            <i class="fas fa-image text-white/20 text-6xl"></i>
-=======
         <div class="container mx-auto px-6 lg:px-12 relative z-10">
             <div class="text-center mb-20" data-aos="fade-up">
                 <span
@@ -1158,7 +893,6 @@
                         <div
                             class="w-24 h-24 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.5)] border-2 border-blue-400/40">
                             <i class="fas fa-hand-holding-heart text-4xl text-white"></i>
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
                         </div>
                         <h3 class="text-3xl font-bold mb-4 text-white">Donasi</h3>
                         <p class="text-blue-50 text-lg leading-relaxed">Salurkan donasi terbaik Anda untuk kemajuan dakwah
@@ -1169,67 +903,6 @@
                     </div>
                 </a>
 
-<<<<<<< HEAD
-                {{-- Content --}}
-                <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
-                    <h3 class="text-xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-100 transition-colors leading-tight">
-                        {{ $i->title }}
-                    </h3>
-                    
-                    <p class="text-blue-100 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
-                        {{ \Illuminate\Support\Str::limit(strip_tags($i->content), 100) }}
-                    </p>
-                    
-                    <div class="mt-auto">
-                        <a href="{{ route('intisari.show', $i->slug) }}" 
-                           class="w-full py-4 bg-blue-500 group-hover:bg-blue-400 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-800/50 border-2 border-blue-400/40">
-                            <span>Baca Intisari</span>
-                            <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-            </article>
-            @endforeach
-        </div>
-
-        <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="500">
-            <a href="{{ route('intisari.index') }}" class="inline-flex items-center gap-3 text-blue-50 font-bold hover:gap-5 transition-all group px-8 py-4 bg-blue-600/50 lg:backdrop-blur-md rounded-full border-2 border-blue-300/50 hover:bg-blue-500/60 hover:border-blue-200 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_50px_rgba(59,130,246,0.6)] text-lg">
-                <span>Lihat Semua Intisari</span>
-                <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
-            </a>
-        </div>
-    </div>
-</section>
-
-{{-- KEGIATAN SECTION --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden" id="kegiatan">
-    <div class="absolute inset-0 opacity-8">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(59,130,246,0.4),transparent_50%)]"></div>
-    </div>
-
-    <div class="container mx-auto px-6 lg:px-12 relative z-10">
-        <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-500/50 lg:backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)]" data-aos="zoom-in">Aktivitas</span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 lg:drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Kegiatan HASMI</h2>
-            <p class="text-blue-50 text-xl max-w-2xl mx-auto lg:drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Dokumentasi kegiatan dan agenda dakwah terbaru</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @foreach($homeKegiatan as $index => $k)
-            <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
-                     data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                
-                {{-- Thumbnail --}}
-                <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
-                    @if($k->thumbnail_url)
-                        <img src="{{ $k->thumbnail_url }}" 
-                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                             alt="{{ $k->title }}"
-                             loading="lazy">
-                    @else
-                        <div class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                            <i class="fas fa-camera text-white/20 text-6xl"></i>
-=======
                 <a href="https://beasiswapendidikanislam.com/" target="_blank"
                     class="group relative overflow-hidden bg-blue-700/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
                     data-aos="fade-up" data-aos-delay="200">
@@ -1237,7 +910,6 @@
                         <div
                             class="w-24 h-24 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.5)] border-2 border-blue-400/40">
                             <i class="fas fa-user-graduate text-4xl text-white"></i>
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
                         </div>
                         <h3 class="text-3xl font-bold mb-4 text-white">Beasiswa</h3>
                         <p class="text-blue-50 text-lg leading-relaxed">Program beasiswa pendidikan Islam untuk mencetak
@@ -1266,72 +938,7 @@
                 </a>
             </div>
         </div>
-<<<<<<< HEAD
-
-        <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="500">
-            <a href="{{ route('kegiatan.index') }}" class="inline-flex items-center gap-4 px-10 py-5 bg-blue-500 text-white rounded-2xl font-bold lg:shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 group text-lg border-2 border-blue-400/40">
-                <span>Galeri Kegiatan</span>
-                <i class="fas fa-images group-hover:rotate-12 transition-transform"></i>
-            </a>
-        </div>
-    </div>
-</section>
-
-{{-- EXTERNAL LINKS (LAYANAN KAMI) --}}
-<section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-500/35 blur-[180px] rounded-full pointer-events-none"></div>
-
-    <div class="container mx-auto px-6 lg:px-12 relative z-10">
-        <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-500/50 lg:backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)]">Layanan Kami</span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 lg:drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">Kontribusi Untuk Umat</h2>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-            <a href="https://donasi.hasmi.org/" target="_blank" 
-               class="group relative overflow-hidden bg-blue-700/50 lg:backdrop-blur-xl rounded-3xl p-12 lg:shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
-               data-aos="fade-up" data-aos-delay="100">
-                <div class="relative z-10 text-center">
-                    <div class="w-24 h-24 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.5)] border-2 border-blue-400/40">
-                        <i class="fas fa-hand-holding-heart text-4xl text-white"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold mb-4 text-white">Donasi</h3>
-                    <p class="text-blue-50 text-lg leading-relaxed">Salurkan donasi terbaik Anda untuk kemajuan dakwah dan pendidikan Islam</p>
-                </div>
-                <div class="absolute inset-0 bg-blue-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-            </a>
-
-            <a href="https://beasiswapendidikanislam.com/" target="_blank" 
-               class="group relative overflow-hidden bg-blue-700/50 lg:backdrop-blur-xl rounded-3xl p-12 lg:shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
-               data-aos="fade-up" data-aos-delay="200">
-                <div class="relative z-10 text-center">
-                    <div class="w-24 h-24 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.5)] border-2 border-blue-400/40">
-                        <i class="fas fa-user-graduate text-4xl text-white"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold mb-4 text-white">Beasiswa</h3>
-                    <p class="text-blue-50 text-lg leading-relaxed">Program beasiswa pendidikan Islam untuk mencetak kader dai berkualitas</p>
-                </div>
-                <div class="absolute inset-0 bg-blue-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-            </a>
-
-            <a href="https://hasmipeduli.org/" target="_blank" 
-               class="group relative overflow-hidden bg-blue-700/50 lg:backdrop-blur-xl rounded-3xl p-12 lg:shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
-               data-aos="fade-up" data-aos-delay="300">
-                <div class="relative z-10 text-center">
-                    <div class="w-24 h-24 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.5)] border-2 border-blue-400/40">
-                        <i class="fas fa-hands-helping text-4xl text-white"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold mb-4 text-white">Sosial</h3>
-                    <p class="text-blue-50 text-lg leading-relaxed">Aksi sosial dan kemanusiaan untuk membantu sesama yang membutuhkan</p>
-                </div>
-                <div class="absolute inset-0 bg-blue-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-            </a>
-        </div>
-    </div>
-</section>
-=======
     </section>
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
 @endsection
 
@@ -1347,24 +954,6 @@
             background: linear-gradient(to bottom, #1d4ed8, #2563eb);
         }
 
-<<<<<<< HEAD
-/* Enhanced Islamic Pattern */
-.islamic-pattern {
-    position: absolute;
-    inset: 0;
-    background-image: 
-        radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(96, 165, 250, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.25) 0%, transparent 50%);
-    background-size: 1000px 1000px;
-}
-
-@media (min-width: 1024px) {
-    .islamic-pattern {
-        animation: patternMove 30s ease-in-out infinite;
-    }
-}
-=======
         /* Enhanced Islamic Pattern */
         .islamic-pattern {
             position: absolute;
@@ -1376,7 +965,6 @@
             background-size: 1000px 1000px;
             animation: patternMove 30s ease-in-out infinite;
         }
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
         @keyframes patternMove {
 
@@ -1476,22 +1064,10 @@
                 transform: translate(-40px, 50px) scale(0.9) rotate(-5deg);
             }
 
-<<<<<<< HEAD
-.animate-gradient-flow {
-    background-size: 200% 200%;
-}
-
-@media (min-width: 1024px) {
-    .animate-gradient-flow {
-        animation: gradient-flow 6s ease infinite;
-    }
-}
-=======
             75% {
                 transform: translate(50px, 40px) scale(1.1) rotate(3deg);
             }
         }
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
         /* Enhanced Particles */
         .particles {
@@ -1499,13 +1075,6 @@
             inset: 0;
         }
 
-<<<<<<< HEAD
-@media (min-width: 1024px) {
-    .animate-text-glow {
-        animation: text-glow 3s ease-in-out infinite;
-    }
-}
-=======
         .particle {
             position: absolute;
             width: var(--size, 4px);
@@ -1518,41 +1087,24 @@
             left: calc(50% + (var(--delay) * 20px));
             box-shadow: 0 0 15px rgba(191, 219, 254, 0.6);
         }
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
         @keyframes particleFloat-enhanced {
 
-<<<<<<< HEAD
-@media (min-width: 1024px) {
-    .animate-pulse-glow {
-        animation: pulse-glow 6s ease-in-out infinite;
-    }
-}
-=======
             0%,
             100% {
                 transform: translate(0, 0) scale(0.3);
                 opacity: 0;
             }
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
             25% {
                 transform: translate(120px, -120px) scale(1.2);
                 opacity: 1;
             }
 
-<<<<<<< HEAD
-@media (min-width: 1024px) {
-    .animate-pulse-subtle {
-        animation: pulse-subtle 3s ease-in-out infinite;
-    }
-}
-=======
             50% {
                 transform: translate(-100px, -250px) scale(0.9);
                 opacity: 0.8;
             }
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
             75% {
                 transform: translate(180px, -180px) scale(1.4);
@@ -1560,20 +1112,12 @@
             }
         }
 
-<<<<<<< HEAD
-@media (min-width: 1024px) {
-    .animate-blob-slow {
-        animation: blob-slow 20s infinite ease-in-out;
-    }
-}
-=======
         /* Light Rays */
         .light-rays {
             position: absolute;
             inset: 0;
             overflow: hidden;
         }
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
         .light-ray {
             position: absolute;
@@ -1586,15 +1130,7 @@
             opacity: 0.4;
         }
 
-<<<<<<< HEAD
-@media (min-width: 1024px) {
-    .animate-border-pulse {
-        animation: border-pulse 3s ease-in-out infinite;
-    }
-}
-=======
         @keyframes lightRay {
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
             0%,
             100% {
@@ -1602,35 +1138,19 @@
                 opacity: 0;
             }
 
-<<<<<<< HEAD
-@media (min-width: 1024px) {
-    .animate-border-pulse-slow {
-        animation: border-pulse-slow 5s ease-in-out infinite;
-    }
-}
-=======
             50% {
                 transform: translateY(0) scaleY(1);
                 opacity: 0.4;
             }
         }
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
         /* Enhanced Gradient Animations */
         @keyframes gradient-flow {
 
-<<<<<<< HEAD
-@media (min-width: 1024px) {
-    .animate-pulse-width {
-        animation: pulse-width 2s ease-in-out infinite;
-    }
-}
-=======
             0%,
             100% {
                 background-position: 0% 50%;
             }
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
             50% {
                 background-position: 100% 50%;
@@ -1645,18 +1165,10 @@
         /* Enhanced Text Glow */
         @keyframes text-glow {
 
-<<<<<<< HEAD
-@media (min-width: 1024px) {
-    .animate-bounce-slow {
-        animation: bounce-slow 3s ease-in-out infinite;
-    }
-}
-=======
             0%,
             100% {
                 text-shadow: 0 0 20px rgba(191, 219, 254, 0.3);
             }
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
 
             50% {
                 text-shadow: 0 0 40px rgba(191, 219, 254, 0.6), 0 0 60px rgba(191, 219, 254, 0.5);
@@ -1900,101 +1412,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-<<<<<<< HEAD
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS
-    AOS.init({
-        disable: 'mobile',
-        duration: 1200,
-        easing: 'ease-out-cubic',
-        once: false,
-        offset: 120,
-        delay: 100,
-        mirror: true,
-        anchorPlacement: 'top-bottom',
-    });
-
-    window.addEventListener('resize', () => {
-        AOS.refresh();
-    });
-
-    // Enhanced Counter Animation
-    const counters = document.querySelectorAll('.counter');
-    const speed = 200;
-    
-    const observerOptions = {
-        threshold: 0.7,
-        rootMargin: '0px'
-    };
-
-    const counterObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const counter = entry.target;
-                const target = +counter.getAttribute('data-target');
-                const increment = target / speed;
-                
-                const updateCount = () => {
-                    const count = +counter.innerText;
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count + increment);
-                        setTimeout(updateCount, 10);
-                    } else {
-                        counter.innerText = target;
-                        counter.style.transform = 'scale(1.3)';
-                        setTimeout(() => {
-                            counter.style.transform = 'scale(1)';
-                        }, 300);
-                    }
-                };
-                
-                counter.style.transition = 'transform 0.3s ease';
-                updateCount();
-                counterObserver.unobserve(counter);
-            }
-        });
-    }, observerOptions);
-
-    counters.forEach(counter => counterObserver.observe(counter));
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Enhanced Parallax
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking && window.innerWidth >= 1024) {
-            window.requestAnimationFrame(() => {
-                const scrolled = window.pageYOffset;
-                const parallaxElements = document.querySelectorAll('.floating-orb');
-                
-                parallaxElements.forEach((el, index) => {
-                    const speed = 0.2 + (index * 0.05);
-                    const yPos = -(scrolled * speed);
-                    el.style.transform = `translateY(${yPos}px)`;
-                });
-
-                const particles = document.querySelectorAll('.particle');
-                particles.forEach((particle, index) => {
-                    const speed = 0.08 + (index * 0.01);
-                    const yPos = -(scrolled * speed);
-                    particle.style.transform = `translateY(${yPos}px)`;
-                });
-
-                ticking = false;
-=======
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize AOS
@@ -2006,7 +1423,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 delay: 100,
                 mirror: true,
                 anchorPlacement: 'top-bottom',
->>>>>>> 8bd8799e1e720a3f90d4ea5f8a22ea30ee91e989
             });
 
             window.addEventListener('resize', () => {
