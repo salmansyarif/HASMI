@@ -59,6 +59,7 @@
                 iframe.allow =
                     "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
                 iframe.allowFullscreen = true;
+                iframe.referrerPolicy = "strict-origin-when-cross-origin";
                 iframe.className = "absolute inset-0 w-full h-full animate-fade-in";
 
                 element.innerHTML = '';
