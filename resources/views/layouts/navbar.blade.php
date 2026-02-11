@@ -1,4 +1,4 @@
-<nav id="navbar" class="fixed w-full z-50 bg-white/90 backdrop-blur-xl transition-all duration-300 shadow-sm border-b border-blue-100/60">
+<nav id="navbar" class="fixed w-full z-50 bg-white/95 lg:bg-white/90 backdrop-blur-md lg:backdrop-blur-xl transition-all duration-300 shadow-sm border-b border-blue-100/60">
     <div class="container mx-auto px-6 h-24 flex items-center justify-between">
 
         <!-- LOGO BRANDING (Matches Home Hero) -->
@@ -215,17 +215,21 @@
     </div>
 
     <!-- ================= MOBILE MENU ================= -->
-    <div id="mobileMenu" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-t border-blue-100/60 absolute w-full left-0 top-24 shadow-xl max-h-[85vh] overflow-y-auto">
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-blue-100/60 absolute w-full left-0 top-24 shadow-xl max-h-[85vh] overflow-y-auto">
         <div class="p-4 space-y-2 pb-20">
             <a href="{{ route('home') }}" class="block px-4 py-3 rounded-2xl font-bold text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-all text-base">Beranda</a>
             <a href="{{ route('tentang') }}" class="block px-4 py-3 rounded-2xl font-bold text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-all text-base">Tentang Kami</a>
 
             <!-- Mobile Materi Dropdown -->
             <div class="border-t border-blue-100 pt-2" x-data="{ openMateri: false }">
-                <button @click="openMateri = !openMateri" class="w-full flex items-center justify-between px-4 py-2 text-blue-700 hover:bg-blue-50 transition-all">
-                    <span class="text-xs font-bold uppercase tracking-widest text-blue-400">Materi</span>
-                    <i class="fas fa-chevron-down text-xs transition-transform duration-300" :class="openMateri ? 'rotate-180' : ''"></i>
-                </button>
+                <div class="flex items-center justify-between px-4 py-2 hover:bg-blue-50 transition-all group">
+                    <a href="{{ route('materi.index') }}" class="flex-grow text-xs font-bold uppercase tracking-widest text-blue-400 hover:text-blue-600 transition-colors block py-1">
+                        Materi
+                    </a>
+                    <button @click="openMateri = !openMateri" class="p-2 -mr-2 text-blue-400 hover:text-blue-600 transition-colors focus:outline-none">
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-300" :class="openMateri ? 'rotate-180' : ''"></i>
+                    </button>
+                </div>
                 
                 <div x-show="openMateri" x-collapse class="pl-2 space-y-1">
                     @foreach(\App\Models\Category::with('subCategories')->orderBy('name')->get() as $cat)
@@ -257,10 +261,14 @@
 
             <!-- Mobile Program Dropdown -->
             <div class="border-t border-blue-100 pt-2" x-data="{ openProgram: false }">
-                 <button @click="openProgram = !openProgram" class="w-full flex items-center justify-between px-4 py-2 text-blue-700 hover:bg-blue-50 transition-all">
-                    <span class="text-xs font-bold uppercase tracking-widest text-blue-400">Program</span>
-                    <i class="fas fa-chevron-down text-xs transition-transform duration-300" :class="openProgram ? 'rotate-180' : ''"></i>
-                </button>
+                 <div class="flex items-center justify-between px-4 py-2 hover:bg-blue-50 transition-all group">
+                    <a href="{{ route('program.index') }}" class="flex-grow text-xs font-bold uppercase tracking-widest text-blue-400 hover:text-blue-600 transition-colors block py-1">
+                        Program
+                    </a>
+                     <button @click="openProgram = !openProgram" class="p-2 -mr-2 text-blue-400 hover:text-blue-600 transition-colors focus:outline-none">
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-300" :class="openProgram ? 'rotate-180' : ''"></i>
+                    </button>
+                </div>
 
                 <div x-show="openProgram" x-collapse class="pl-2 space-y-1">
                     @foreach(\App\Models\ProgramCategory::with('subcategories')->orderBy('sort_order')->get() as $cat)

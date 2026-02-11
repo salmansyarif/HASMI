@@ -1,7 +1,7 @@
 <footer class="bg-gradient-to-br from-blue-600 to-blue-700 text-white pt-20 pb-10 border-t border-blue-500 relative overflow-hidden">
     {{-- Decorative Elements --}}
     <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-60"></div>
-    <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-400/20 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-400/20 rounded-full blur-[100px] pointer-events-none hidden lg:block"></div>
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
@@ -18,7 +18,7 @@
                 
                 {{-- Profil Video Embed --}}
                 <div class="mb-6 rounded-xl overflow-hidden shadow-lg border border-white/20 group bg-blue-700/60">
-                    <iframe class="w-full h-48 md:h-40 object-cover" src="https://www.youtube.com/embed/ovpPnlSwpe4?controls=1&rel=0" title="Profil HASMI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe class="w-full h-48 md:h-40 object-cover" src="https://www.youtube.com/embed/aqflN-aX-6U?controls=1&rel=0&origin={{ request()->getSchemeAndHttpHost() }}" title="Profil HASMI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
 
                 <div class="flex gap-4">
@@ -64,7 +64,7 @@
 
             {{-- PRAYER TIMES WIDGET --}}
             <div class="lg:col-span-2" data-aos="fade-up" data-aos-delay="200">
-                <div class="bg-gradient-to-br from-blue-700/50 to-blue-800/70 backdrop-blur-md rounded-2xl p-6 border border-blue-400/30 relative overflow-hidden group hover:border-blue-300/50 transition-all duration-500">
+                <div class="bg-gradient-to-br from-blue-700/50 to-blue-800/70 lg:backdrop-blur-md rounded-2xl p-6 border border-blue-400/30 relative overflow-hidden group hover:border-blue-300/50 transition-all duration-500">
                     <div class="absolute inset-0 bg-blue-400/10 group-hover:bg-blue-400/15 transition-colors"></div>
                     
                     <div class="relative z-10">

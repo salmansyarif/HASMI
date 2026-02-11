@@ -4,15 +4,15 @@
 
 @section('content')
 {{-- INTRO VIDEO OVERLAY --}}
-<div id="intro-overlay" class="fixed inset-0 z-[9999] bg-gradient-to-br from-blue-700 to-blue-900 backdrop-blur-xl flex items-center justify-center p-4 transition-all duration-700">
-    <div class="relative w-full max-w-6xl aspect-video bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(59,130,246,0.6)] border-2 border-blue-500/40 ring-8 ring-blue-600/30 animate-border-pulse">
+<div id="intro-overlay" class="fixed inset-0 z-[9999] bg-gradient-to-br from-blue-700 to-blue-900 lg:backdrop-blur-xl flex items-center justify-center p-4 transition-all duration-700">
+    <div class="relative w-full max-w-6xl aspect-video bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl overflow-hidden lg:shadow-[0_0_100px_rgba(59,130,246,0.6)] border-2 border-blue-500/40 lg:ring-8 lg:ring-blue-600/30 lg:animate-border-pulse">
         <button onclick="closeIntro()" class="absolute top-6 right-6 z-50 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-3 rounded-full font-bold shadow-[0_0_30px_rgba(239,68,68,0.5)] transition-all duration-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(239,68,68,0.8)] flex items-center gap-3 group">
             <span class="text-base">Tutup Video</span>
             <i class="fas fa-times group-hover:rotate-180 transition-transform duration-500"></i>
         </button>
         <iframe id="intro-frame" 
                 class="w-full h-full" 
-                src="https://www.youtube.com/embed/ykIhoH0FlD8?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&playsinline=1" 
+                src="https://www.youtube.com/embed/aqflN-aX-6U?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&playsinline=1&origin={{ request()->getSchemeAndHttpHost() }}" 
                 title="Intro HASMI" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -41,7 +41,7 @@
 {{-- HERO SECTION --}}
 <section class="relative min-h-screen flex items-center pt-36 lg:pt-0 overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
     {{-- Animated Background Elements --}}
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block">
         <div class="islamic-pattern"></div>
         <div class="floating-orb orb-1"></div>
         <div class="floating-orb orb-2"></div>
@@ -68,7 +68,7 @@
         <div class="grid lg:grid-cols-2 gap-16 items-center">
             {{-- Left Side: Content --}}
             <div class="space-y-8" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200">
-                <div class="inline-flex items-center gap-4 bg-blue-500/40 backdrop-blur-xl px-8 py-4 rounded-full shadow-[0_0_40px_rgba(59,130,246,0.4)] border-2 border-blue-400/40 hover:border-blue-300/60 transition-all duration-500 hover:shadow-[0_0_60px_rgba(59,130,246,0.6)] hover:scale-105"
+                <div class="inline-flex items-center gap-4 bg-blue-500/40 lg:backdrop-blur-xl px-8 py-4 rounded-full lg:shadow-[0_0_40px_rgba(59,130,246,0.4)] border-2 border-blue-400/40 hover:border-blue-300/60 transition-all duration-500 hover:shadow-[0_0_60px_rgba(59,130,246,0.6)] hover:scale-105"
                      data-aos="zoom-in" data-aos-delay="400">
                     <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.6)] animate-pulse-glow">
                        <img src="{{ asset('img/hasmilogo.png') }}" alt="Logo HASMI" class="w-9 h-9 object-contain">
@@ -180,7 +180,7 @@
                     }
                 </style>
 
-                <div class="relative h-[650px] rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.5)] border-2 border-blue-400/40 backdrop-blur-sm bg-blue-600/30 hover:shadow-[0_0_120px_rgba(59,130,246,0.7)] transition-all duration-700">
+                <div class="relative h-[500px] lg:h-[650px] rounded-3xl overflow-hidden lg:shadow-[0_0_80px_rgba(59,130,246,0.5)] border-2 border-blue-400/40 lg:backdrop-blur-sm bg-blue-600/30 hover:shadow-[0_0_120px_rgba(59,130,246,0.7)] transition-all duration-700">
                     
                     <div class="swiper status-swiper">
                         <div class="status-pagination" id="statusPagination"></div>
@@ -343,10 +343,10 @@
         <div class="grid lg:grid-cols-2 gap-20 items-center">
             <div class="relative" data-aos="fade-right" data-aos-duration="1000">
                 <div class="relative z-10" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="aspect-video rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.6)] border-4 border-blue-400/40 backdrop-blur-lg bg-blue-600/30 hover:scale-105 hover:shadow-[0_0_120px_rgba(59,130,246,0.8)] transition-all duration-700 group">
+                    <div class="aspect-video rounded-3xl overflow-hidden lg:shadow-[0_0_80px_rgba(59,130,246,0.6)] border-4 border-blue-400/40 lg:backdrop-blur-lg bg-blue-600/30 hover:scale-105 hover:shadow-[0_0_120px_rgba(59,130,246,0.8)] transition-all duration-700 group">
                         <iframe 
                             class="w-full h-full"
-                            src="https://www.youtube.com/embed/ovpPnlSwpe4?autoplay=0&controls=1&rel=0&modestbranding=1" 
+                            src="https://www.youtube.com/embed/1La4QzGeaaQ?autoplay=0&controls=1&rel=0&modestbranding=1&origin={{ request()->getSchemeAndHttpHost() }}" 
                             title="Profil HASMI" 
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -354,13 +354,13 @@
                         </iframe>
                     </div>
                 </div>
-                <div class="absolute -z-10 top-10 left-10 w-full h-full border-4 border-blue-400/50 rounded-3xl animate-border-pulse-slow" data-aos="fade" data-aos-delay="400"></div>
-                <div class="absolute -z-20 -bottom-10 -right-10 w-96 h-96 bg-blue-500/35 rounded-full blur-[100px] animate-pulse-glow"></div>
+                <div class="absolute -z-10 top-10 left-10 w-full h-full border-4 border-blue-400/50 rounded-3xl lg:animate-border-pulse-slow" data-aos="fade" data-aos-delay="400"></div>
+                <div class="absolute -z-20 -bottom-10 -right-10 w-96 h-96 bg-blue-500/35 rounded-full blur-[100px] lg:animate-pulse-glow"></div>
             </div>
 
             <div class="space-y-7" data-aos="fade-left" data-aos-duration="1000">
                 <div class="inline-block" data-aos="zoom-in" data-aos-delay="200">
-                    <span class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]">Tentang Kami</span>
+                    <span class="px-6 py-3 bg-blue-500/50 lg:backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)]">Tentang Kami</span>
                 </div>
                 
                 <h2 class="text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="300">
@@ -379,7 +379,7 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-5 pt-8">
-                    <div class="flex items-start gap-4 bg-blue-600/50 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/40 hover:border-blue-300 hover:bg-blue-500/60 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] group"
+                    <div class="flex items-start gap-4 bg-blue-600/50 lg:backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/40 hover:border-blue-300 hover:bg-blue-500/60 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] group"
                          data-aos="fade-up" data-aos-delay="700">
                         <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.6)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
                             <i class="fas fa-check text-white text-xl"></i>
@@ -389,7 +389,7 @@
                             <p class="text-sm text-blue-100">Program pembelajaran terpadu</p>
                         </div>
                     </div>
-                    <div class="flex items-start gap-4 bg-blue-600/50 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/40 hover:border-blue-300 hover:bg-blue-500/60 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] group"
+                    <div class="flex items-start gap-4 bg-blue-600/50 lg:backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/40 hover:border-blue-300 hover:bg-blue-500/60 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] group"
                          data-aos="fade-up" data-aos-delay="800">
                         <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.6)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 animation-delay-1000">
                             <i class="fas fa-check text-white text-xl"></i>
@@ -428,7 +428,7 @@
             {{-- Visi Card --}}
             <div class="group relative" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
                 <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 shadow-[0_0_60px_rgba(59,130,246,0.5)]"></div>
-                <div class="relative bg-blue-700/60 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_80px_rgba(59,130,246,0.4)] border-2 border-blue-400/50 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-300 hover:shadow-[0_0_100px_rgba(59,130,246,0.6)]">
+                <div class="relative bg-blue-700/60 lg:backdrop-blur-xl rounded-3xl p-12 lg:shadow-[0_0_80px_rgba(59,130,246,0.4)] border-2 border-blue-400/50 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-300 hover:shadow-[0_0_100px_rgba(59,130,246,0.6)]">
                     <div class="w-20 h-20 bg-blue-500 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(59,130,246,0.6)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700 border-2 border-blue-300/40">
                         <i class="fas fa-eye text-white text-3xl"></i>
                     </div>
@@ -442,7 +442,7 @@
             {{-- Misi Card --}}
             <div class="group relative" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
                 <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 shadow-[0_0_60px_rgba(59,130,246,0.5)]"></div>
-                <div class="relative bg-blue-700/60 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_80px_rgba(59,130,246,0.4)] border-2 border-blue-400/50 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-300 hover:shadow-[0_0_100px_rgba(59,130,246,0.6)]">
+                <div class="relative bg-blue-700/60 lg:backdrop-blur-xl rounded-3xl p-12 lg:shadow-[0_0_80px_rgba(59,130,246,0.4)] border-2 border-blue-400/50 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-300 hover:shadow-[0_0_100px_rgba(59,130,246,0.6)]">
                     <div class="w-20 h-20 bg-blue-500 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(59,130,246,0.6)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700 border-2 border-blue-300/40">
                         <i class="fas fa-bullseye text-white text-3xl"></i>
                     </div>
@@ -466,9 +466,9 @@
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]" data-aos="zoom-in">Program Kami</span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Program Unggulan</h2>
-            <p class="text-blue-50 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Berbagai program terbaik untuk pembinaan generasi muslim Indonesia</p>
+            <span class="px-6 py-3 bg-blue-500/50 lg:backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)]" data-aos="zoom-in">Program Kami</span>
+            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 lg:drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Program Unggulan</h2>
+            <p class="text-blue-50 text-xl max-w-2xl mx-auto lg:drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Berbagai program terbaik untuk pembinaan generasi muslim Indonesia</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
@@ -525,7 +525,7 @@
         </div>
 
         <div class="text-center" data-aos="fade-up" data-aos-delay="600">
-            <a href="{{ route('program.index') }}" class="inline-flex items-center gap-3 text-blue-50 font-bold hover:gap-5 transition-all group px-8 py-4 bg-blue-600/50 backdrop-blur-md rounded-full border-2 border-blue-300/50 hover:bg-blue-500/60 hover:border-blue-200 shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_50px_rgba(59,130,246,0.6)] text-lg">
+            <a href="{{ route('program.index') }}" class="inline-flex items-center gap-3 text-blue-50 font-bold hover:gap-5 transition-all group px-8 py-4 bg-blue-600/50 lg:backdrop-blur-md rounded-full border-2 border-blue-300/50 hover:bg-blue-500/60 hover:border-blue-200 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_50px_rgba(59,130,246,0.6)] text-lg">
                 <span>Lihat Semua Program</span>
                 <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
             </a>
@@ -537,9 +537,9 @@
 <section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
     <div class="container mx-auto px-6 lg:px-12">
         <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]" data-aos="zoom-in">Pembelajaran</span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Materi Terbaru</h2>
-            <p class="text-blue-50 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Artikel dan materi pembelajaran untuk pemahaman agama yang lebih baik</p>
+            <span class="px-6 py-3 bg-blue-500/50 lg:backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)]" data-aos="zoom-in">Pembelajaran</span>
+            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 lg:drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Materi Terbaru</h2>
+            <p class="text-blue-50 text-xl max-w-2xl mx-auto lg:drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Artikel dan materi pembelajaran untuk pemahaman agama yang lebih baik</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -597,7 +597,7 @@
 
         <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="600">
             <a href="{{ route('materi.index') }}" 
-               class="inline-flex items-center gap-3 px-10 py-5 bg-blue-500 text-white rounded-2xl font-bold shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 group text-lg border-2 border-blue-400/40">
+               class="inline-flex items-center gap-3 px-10 py-5 bg-blue-500 text-white rounded-2xl font-bold lg:shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 group text-lg border-2 border-blue-400/40">
                 <span>Lihat Semua Materi</span>
                 <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300"></i>
             </a>
@@ -613,9 +613,9 @@
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]" data-aos="zoom-in">Publikasi</span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Intisari HASMI</h2>
-            <p class="text-blue-50 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Kumpulan materi dan ringkasan pembelajaran dalam bentuk publikasi</p>
+            <span class="px-6 py-3 bg-blue-500/50 lg:backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)]" data-aos="zoom-in">Publikasi</span>
+            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 lg:drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Intisari HASMI</h2>
+            <p class="text-blue-50 text-xl max-w-2xl mx-auto lg:drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Kumpulan materi dan ringkasan pembelajaran dalam bentuk publikasi</p>
         </div>
 
         <div class="grid grid-cols-2 lg:grid-cols-3 gap-8">
@@ -672,7 +672,7 @@
         </div>
 
         <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="500">
-            <a href="{{ route('intisari.index') }}" class="inline-flex items-center gap-3 text-blue-50 font-bold hover:gap-5 transition-all group px-8 py-4 bg-blue-600/50 backdrop-blur-md rounded-full border-2 border-blue-300/50 hover:bg-blue-500/60 hover:border-blue-200 shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_50px_rgba(59,130,246,0.6)] text-lg">
+            <a href="{{ route('intisari.index') }}" class="inline-flex items-center gap-3 text-blue-50 font-bold hover:gap-5 transition-all group px-8 py-4 bg-blue-600/50 lg:backdrop-blur-md rounded-full border-2 border-blue-300/50 hover:bg-blue-500/60 hover:border-blue-200 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_50px_rgba(59,130,246,0.6)] text-lg">
                 <span>Lihat Semua Intisari</span>
                 <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
             </a>
@@ -688,9 +688,9 @@
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]" data-aos="zoom-in">Aktivitas</span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Kegiatan HASMI</h2>
-            <p class="text-blue-50 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Dokumentasi kegiatan dan agenda dakwah terbaru</p>
+            <span class="px-6 py-3 bg-blue-500/50 lg:backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)]" data-aos="zoom-in">Aktivitas</span>
+            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 lg:drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">Kegiatan HASMI</h2>
+            <p class="text-blue-50 text-xl max-w-2xl mx-auto lg:drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">Dokumentasi kegiatan dan agenda dakwah terbaru</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -750,7 +750,7 @@
         </div>
 
         <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="500">
-            <a href="{{ route('kegiatan.index') }}" class="inline-flex items-center gap-4 px-10 py-5 bg-blue-500 text-white rounded-2xl font-bold shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 group text-lg border-2 border-blue-400/40">
+            <a href="{{ route('kegiatan.index') }}" class="inline-flex items-center gap-4 px-10 py-5 bg-blue-500 text-white rounded-2xl font-bold lg:shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 group text-lg border-2 border-blue-400/40">
                 <span>Galeri Kegiatan</span>
                 <i class="fas fa-images group-hover:rotate-12 transition-transform"></i>
             </a>
@@ -764,13 +764,13 @@
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         <div class="text-center mb-20" data-aos="fade-up">
-            <span class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]">Layanan Kami</span>
-            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">Kontribusi Untuk Umat</h2>
+            <span class="px-6 py-3 bg-blue-500/50 lg:backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 lg:shadow-[0_0_30px_rgba(59,130,246,0.4)]">Layanan Kami</span>
+            <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 lg:drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">Kontribusi Untuk Umat</h2>
         </div>
 
         <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
             <a href="https://donasi.hasmi.org/" target="_blank" 
-               class="group relative overflow-hidden bg-blue-700/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
+               class="group relative overflow-hidden bg-blue-700/50 lg:backdrop-blur-xl rounded-3xl p-12 lg:shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
                data-aos="fade-up" data-aos-delay="100">
                 <div class="relative z-10 text-center">
                     <div class="w-24 h-24 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.5)] border-2 border-blue-400/40">
@@ -783,7 +783,7 @@
             </a>
 
             <a href="https://beasiswapendidikanislam.com/" target="_blank" 
-               class="group relative overflow-hidden bg-blue-700/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
+               class="group relative overflow-hidden bg-blue-700/50 lg:backdrop-blur-xl rounded-3xl p-12 lg:shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
                data-aos="fade-up" data-aos-delay="200">
                 <div class="relative z-10 text-center">
                     <div class="w-24 h-24 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.5)] border-2 border-blue-400/40">
@@ -796,7 +796,7 @@
             </a>
 
             <a href="https://hasmipeduli.org/" target="_blank" 
-               class="group relative overflow-hidden bg-blue-700/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
+               class="group relative overflow-hidden bg-blue-700/50 lg:backdrop-blur-xl rounded-3xl p-12 lg:shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
                data-aos="fade-up" data-aos-delay="300">
                 <div class="relative z-10 text-center">
                     <div class="w-24 h-24 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.5)] border-2 border-blue-400/40">
@@ -834,7 +834,12 @@ body {
         radial-gradient(circle at 80% 50%, rgba(96, 165, 250, 0.3) 0%, transparent 50%),
         radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.25) 0%, transparent 50%);
     background-size: 1000px 1000px;
-    animation: patternMove 30s ease-in-out infinite;
+}
+
+@media (min-width: 1024px) {
+    .islamic-pattern {
+        animation: patternMove 30s ease-in-out infinite;
+    }
 }
 
 @keyframes patternMove {
@@ -991,7 +996,12 @@ body {
 
 .animate-gradient-flow {
     background-size: 200% 200%;
-    animation: gradient-flow 6s ease infinite;
+}
+
+@media (min-width: 1024px) {
+    .animate-gradient-flow {
+        animation: gradient-flow 6s ease infinite;
+    }
 }
 
 /* Enhanced Text Glow */
@@ -1004,8 +1014,10 @@ body {
     }
 }
 
-.animate-text-glow {
-    animation: text-glow 3s ease-in-out infinite;
+@media (min-width: 1024px) {
+    .animate-text-glow {
+        animation: text-glow 3s ease-in-out infinite;
+    }
 }
 
 /* Enhanced Pulse Animations */
@@ -1022,8 +1034,10 @@ body {
     }
 }
 
-.animate-pulse-glow {
-    animation: pulse-glow 6s ease-in-out infinite;
+@media (min-width: 1024px) {
+    .animate-pulse-glow {
+        animation: pulse-glow 6s ease-in-out infinite;
+    }
 }
 
 @keyframes pulse-subtle {
@@ -1037,8 +1051,10 @@ body {
     }
 }
 
-.animate-pulse-subtle {
-    animation: pulse-subtle 3s ease-in-out infinite;
+@media (min-width: 1024px) {
+    .animate-pulse-subtle {
+        animation: pulse-subtle 3s ease-in-out infinite;
+    }
 }
 
 /* Enhanced Blob Animation */
@@ -1057,8 +1073,10 @@ body {
     }
 }
 
-.animate-blob-slow {
-    animation: blob-slow 20s infinite ease-in-out;
+@media (min-width: 1024px) {
+    .animate-blob-slow {
+        animation: blob-slow 20s infinite ease-in-out;
+    }
 }
 
 /* Enhanced Border Animations */
@@ -1073,8 +1091,10 @@ body {
     }
 }
 
-.animate-border-pulse {
-    animation: border-pulse 3s ease-in-out infinite;
+@media (min-width: 1024px) {
+    .animate-border-pulse {
+        animation: border-pulse 3s ease-in-out infinite;
+    }
 }
 
 @keyframes border-pulse-slow {
@@ -1088,8 +1108,10 @@ body {
     }
 }
 
-.animate-border-pulse-slow {
-    animation: border-pulse-slow 5s ease-in-out infinite;
+@media (min-width: 1024px) {
+    .animate-border-pulse-slow {
+        animation: border-pulse-slow 5s ease-in-out infinite;
+    }
 }
 
 /* Pulse Width Animation */
@@ -1104,8 +1126,10 @@ body {
     }
 }
 
-.animate-pulse-width {
-    animation: pulse-width 2s ease-in-out infinite;
+@media (min-width: 1024px) {
+    .animate-pulse-width {
+        animation: pulse-width 2s ease-in-out infinite;
+    }
 }
 
 /* Enhanced Scroll Animation */
@@ -1136,8 +1160,10 @@ body {
     }
 }
 
-.animate-bounce-slow {
-    animation: bounce-slow 3s ease-in-out infinite;
+@media (min-width: 1024px) {
+    .animate-bounce-slow {
+        animation: bounce-slow 3s ease-in-out infinite;
+    }
 }
 
 /* Animation Delays */
@@ -1206,6 +1232,7 @@ body {
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize AOS
     AOS.init({
+        disable: 'mobile',
         duration: 1200,
         easing: 'ease-out-cubic',
         once: false,
@@ -1275,7 +1302,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Enhanced Parallax
     let ticking = false;
     window.addEventListener('scroll', () => {
-        if (!ticking) {
+        if (!ticking && window.innerWidth >= 1024) {
             window.requestAnimationFrame(() => {
                 const scrolled = window.pageYOffset;
                 const parallaxElements = document.querySelectorAll('.floating-orb');
