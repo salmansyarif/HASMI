@@ -53,8 +53,7 @@
                 const iframe = document.createElement('iframe');
                 iframe.width = "100%";
                 iframe.height = "100%";
-                iframe.src =
-                `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1`;
                 iframe.title = title;
                 iframe.frameBorder = "0";
                 iframe.allow =
