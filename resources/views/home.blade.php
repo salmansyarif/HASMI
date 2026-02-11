@@ -13,24 +13,19 @@
                 <span class="text-base">Tutup Video</span>
                 <i class="fas fa-times group-hover:rotate-180 transition-transform duration-500"></i>
             </button>
-            <iframe id="intro-frame" class="w-full h-full"
-                src="https://www.youtube-nocookie.com/embed/ykIhoH0FlD8?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&playsinline=1"
-                title="Intro HASMI" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-            </iframe>
+            <x-lite-youtube videoId="ykIhoH0FlD8" title="Intro HASMI" class="w-full h-full" />
         </div>
     </div>
 
     <script>
         function closeIntro() {
             const overlay = document.getElementById('intro-overlay');
-            const frame = document.getElementById('intro-frame');
+            const frame = document.querySelector('.lite-youtube-embed iframe'); // Target iframe if loaded
 
             overlay.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
 
             setTimeout(() => {
-                frame.src = '';
+                if (frame) frame.src = ''; // Stop video
                 overlay.style.display = 'none';
             }, 700);
         }
@@ -398,12 +393,7 @@
                     <div class="relative z-10" data-aos="zoom-in" data-aos-delay="200">
                         <div
                             class="aspect-video rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.6)] border-4 border-blue-400/40 backdrop-blur-lg bg-blue-600/30 hover:scale-105 hover:shadow-[0_0_120px_rgba(59,130,246,0.8)] transition-all duration-700 group">
-                            <iframe class="w-full h-full"
-                                src="https://www.youtube-nocookie.com/embed/ovpPnlSwpe4?autoplay=0&controls=1&rel=0&modestbranding=1"
-                                title="Profil HASMI" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen>
-                            </iframe>
+                            <x-lite-youtube videoId="ovpPnlSwpe4" title="Profil HASMI" class="w-full h-full" />
                         </div>
                     </div>
                     <div class="absolute -z-10 top-10 left-10 w-full h-full border-4 border-blue-400/50 rounded-3xl animate-border-pulse-slow"

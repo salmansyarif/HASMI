@@ -23,12 +23,9 @@
                     peradaban Islami melalui pendidikan, dakwah, dan aksi sosial.</p>
 
                 {{-- Profil Video Embed --}}
-                <div class="mb-6 rounded-xl overflow-hidden shadow-lg border border-white/20 group bg-blue-700/60">
-                    <iframe class="w-full h-48 md:h-40 object-cover"
-                        src="https://www.youtube-nocookie.com/embed/ovpPnlSwpe4?controls=1&rel=0" title="Profil HASMI"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
+                <div
+                    class="mb-6 rounded-xl overflow-hidden shadow-lg border border-white/20 group bg-blue-700/60 aspect-video">
+                    <x-lite-youtube videoId="ovpPnlSwpe4" title="Profil HASMI" />
                 </div>
 
                 <div class="flex gap-4">
@@ -180,7 +177,7 @@
                 const date = new Date();
                 const response = await fetch(
                     `https://api.aladhan.com/v1/timings/${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}?latitude=${lat}&longitude=${long}&method=20`
-                    ); // Method 20: Kemenag UI
+                ); // Method 20: Kemenag UI
                 const data = await response.json();
 
                 if (data.code === 200) {

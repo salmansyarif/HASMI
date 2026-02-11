@@ -69,18 +69,7 @@
                     @if ($berita->video_url)
                         <div class="aspect-video w-full relative">
                             @if (Str::contains($berita->video_url, 'youtube.com') || Str::contains($berita->video_url, 'youtu.be'))
-                                @php
-                                    $videoUrl = $berita->video_url;
-                                    if (Str::contains($videoUrl, 'watch?v=')) {
-                                        $videoUrl = str_replace('watch?v=', 'embed/', $videoUrl);
-                                    } elseif (Str::contains($videoUrl, 'youtu.be/')) {
-                                        $videoUrl = str_replace('youtu.be/', 'youtube.com/embed/', $videoUrl);
-                                    }
-                                    $videoUrl = str_replace('youtube.com', 'youtube-nocookie.com', $videoUrl);
-                                @endphp
-                                <iframe src="{{ $videoUrl }}" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen class="absolute inset-0 w-full h-full"></iframe>
+                                <x-lite-youtube :videoId="$berita->video_url" :title="$berita->title" />
                             @else
                                 <video controls class="w-full h-full object-cover">
                                     <source src="{{ asset('storage/' . $berita->video_url) }}" type="video/mp4">

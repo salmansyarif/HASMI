@@ -93,17 +93,7 @@
                             <div class="rounded-[2rem] overflow-hidden bg-black aspect-video relative">
                                 @if (filter_var($berita->video_url, FILTER_VALIDATE_URL))
                                     @if (Str::contains($berita->video_url, 'youtube.com') || Str::contains($berita->video_url, 'youtu.be'))
-                                        @php
-                                            $videoUrl = $berita->video_url;
-                                            if (Str::contains($videoUrl, 'watch?v=')) {
-                                                $videoUrl = str_replace('watch?v=', 'embed/', $videoUrl);
-                                            } elseif (Str::contains($videoUrl, 'youtu.be/')) {
-                                                $videoUrl = str_replace('youtu.be/', 'youtube.com/embed/', $videoUrl);
-                                            }
-                                            $videoUrl = str_replace('youtube.com', 'youtube-nocookie.com', $videoUrl);
-                                        @endphp
-                                        <iframe class="w-full h-full" src="{{ $videoUrl }}" frameborder="0"
-                                            allowfullscreen></iframe>
+                                        <x-lite-youtube :videoId="$berita->video_url" :title="$berita->title" class="w-full h-full" />
                                     @else
                                         <video controls class="w-full h-full">
                                             <source src="{{ $berita->video_url }}" type="video/mp4">

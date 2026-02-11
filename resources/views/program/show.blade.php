@@ -390,23 +390,7 @@
                             @if ($program->media_type == 'video' && $program->video_url)
                                 <div class="aspect-video w-full relative overflow-hidden rounded-xl">
                                     @if (Str::contains($program->video_url, 'youtube.com') || Str::contains($program->video_url, 'youtu.be'))
-                                        @php
-                                            $videoUrl = $program->video_url;
-                                            // Handle standard youtube.com/watch?v=
-                                            if (Str::contains($videoUrl, 'watch?v=')) {
-                                                $videoUrl = str_replace('watch?v=', 'embed/', $videoUrl);
-                                            }
-                                            // Handle short youtu.be/
-                                            elseif (Str::contains($videoUrl, 'youtu.be/')) {
-                                                $videoUrl = str_replace('youtu.be/', 'youtube.com/embed/', $videoUrl);
-                                            }
-
-                                            // Force privacy-enhanced mode
-                                            $videoUrl = str_replace('youtube.com', 'youtube-nocookie.com', $videoUrl);
-                                        @endphp
-                                        <iframe src="{{ $videoUrl }}" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen class="absolute inset-0 w-full h-full text-center"></iframe>
+                                        <x-lite-youtube :videoId="$program->video_url" :title="$program->title" />
                                     @else
                                         <video controls class="w-full h-full object-cover rounded-xl">
                                             <source src="{{ asset('storage/' . $program->video_url) }}" type="video/mp4">
