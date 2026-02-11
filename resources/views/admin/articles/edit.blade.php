@@ -11,7 +11,7 @@
         @csrf
         @method('PUT')
 
-        <div class="bg-white rounded-lg shadow-lg p-8 space-y-6">
+        <div class="bg-white rounded-lg shadow-lg p-4 md:p-8 space-y-6">
             
             <!-- Title -->
             <div>

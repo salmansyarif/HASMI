@@ -6,6 +6,7 @@
     <title>@yield('title', 'Admin - HASMI')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .hero-gradient {
@@ -19,16 +20,21 @@
             color: #2563EB;
             border-left: 4px solid #2563EB;
         }
+        [x-cloak] { display: none !important; }
     </style>
     @yield('styles')
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100" x-data="{ sidebarOpen: false }">
 
     <div class="flex h-screen overflow-hidden">
+        <!-- Mobile Sidebar Backdrop -->
+        <div x-show="sidebarOpen" x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-900/80 z-20 md:hidden" @click="sidebarOpen = false" x-cloak></div>
+
         <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-lg flex flex-col">
+        <aside class="fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-lg flex flex-col transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:inset-auto"
+               :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
             <!-- Logo -->
-            <div class="p-6 hero-gradient">
+            <div class="p-6 hero-gradient flex justify-between items-center">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
                         <span class="text-blue-800 font-bold text-lg">H</span>
@@ -38,6 +44,10 @@
                         <p class="text-blue-200 text-xs">Dashboard</p>
                     </div>
                 </div>
+                <!-- Close Button (Mobile Only) -->
+                <button @click="sidebarOpen = false" class="md:hidden text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
 
             <!-- Navigation -->
@@ -108,7 +118,7 @@
                             <span class="text-white font-bold">{{ substr(Auth::user()->name, 0, 1) }}</span>
                         </div>
                         <div>
-                            <p class="text-sm font-semibold text-gray-800">{{ Auth::user()->name }}</p>
+                            <p class="text-sm font-semibold text-gray-800 truncate max-w-[100px]">{{ Auth::user()->name }}</p>
                             <p class="text-xs text-gray-500">Admin</p>
                         </div>
                     </div>
@@ -123,17 +133,22 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 overflow-y-auto">
+        <main class="flex-1 overflow-y-auto flex flex-col h-screen">
             <!-- Header -->
-            <header class="bg-white shadow-sm">
-                <div class="px-8 py-4">
-                    <h1 class="text-2xl font-bold text-gray-800">@yield('page-title', 'Dashboard')</h1>
-                    <p class="text-gray-600 text-sm">@yield('page-subtitle', 'Kelola konten website HASMI')</p>
+            <header class="bg-white shadow-sm flex items-center px-4 py-3 md:px-8 md:py-4 sticky top-0 z-10">
+                <!-- Hamburger Menu -->
+                <button @click="sidebarOpen = true" class="mr-4 text-gray-600 focus:outline-none md:hidden">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+
+                <div class="flex-1">
+                    <h1 class="text-lg md:text-2xl font-bold text-gray-800">@yield('page-title', 'Dashboard')</h1>
+                    <p class="text-gray-600 text-xs md:text-sm">@yield('page-subtitle', 'Kelola konten website HASMI')</p>
                 </div>
             </header>
 
             <!-- Content -->
-            <div class="p-8">
+            <div class="p-4 md:p-8 flex-1 overflow-y-auto">
                 <!-- Alert Messages -->
                 @if(session('success'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6 flex items-center justify-between">
