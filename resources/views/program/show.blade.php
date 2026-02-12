@@ -381,7 +381,7 @@
 
                         <!-- Title -->
                         <h1
-                            class="title-glow text-4xl md:text-5xl font-black text-white mb-8 leading-tight tracking-tight animate-fade-in-up">
+                            class="title-glow text-3xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-tight tracking-tight animate-fade-in-up break-words py-2">
                             {{ $program->title }}
                         </h1>
 
@@ -414,7 +414,7 @@
                         </div>
 
                         <!-- Full Content -->
-                        <div class="prose prose-lg max-w-none mb-10 whitespace-pre-wrap animate-fade-in-up">
+                        <div class="prose prose-base md:prose-lg max-w-none mb-10 whitespace-pre-wrap text-justify animate-fade-in-up">
                             {!! nl2br(e($program->content)) !!}</div>
 
                         <!-- Photo Gallery (if exists) -->

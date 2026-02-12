@@ -67,7 +67,7 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 {{-- Left Side: Content --}}
                 <div class="space-y-8" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200">
-                    <div class="inline-flex items-center gap-4 bg-blue-500/40 backdrop-blur-xl px-8 py-4 rounded-full shadow-[0_0_40px_rgba(59,130,246,0.4)] border-2 border-blue-400/40 hover:border-blue-300/60 transition-all duration-500 hover:shadow-[0_0_60px_rgba(59,130,246,0.6)] hover:scale-105"
+                    <div class="inline-flex items-center gap-4 bg-blue-500/40 md:backdrop-blur-xl px-4 py-2 md:px-8 md:py-4 rounded-full shadow-md md:shadow-[0_0_40px_rgba(59,130,246,0.4)] border border-blue-400/40 hover:border-blue-300/60 transition-all duration-500 hover:shadow-lg md:hover:shadow-[0_0_60px_rgba(59,130,246,0.6)] hover:scale-105"
                         data-aos="zoom-in" data-aos-delay="400">
                         <div
                             class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.6)] animate-pulse-glow">
@@ -110,7 +110,7 @@
                     </div>
 
                     {{-- Trust Indicators with Enhanced Animation --}}
-                    <div class="grid grid-cols-2 lg:flex lg:items-center gap-6 lg:gap-10 pt-8 lg:pt-10" data-aos="fade-up" data-aos-delay="1400">
+                    <div class="grid grid-cols-2 lg:flex lg:items-center gap-4 md:gap-6 lg:gap-10 pt-6 lg:pt-10" data-aos="fade-up" data-aos-delay="1400">
                         <div class="text-center group" data-aos="zoom-in" data-aos-delay="1600">
                             <div class="text-3xl lg:text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
                                 data-target="{{ $materiCount }}">0</div>
@@ -139,14 +139,8 @@
                     <style>
                         .status-swiper {
                             width: 100%;
-                            height: 480px;
+                            height: 100%; /* Let container control height */
                             border-radius: 1.5rem;
-                        }
-                        
-                        @media (min-width: 1024px) {
-                            .status-swiper {
-                                height: 650px;
-                            }
                         }
 
                         .status-pagination {
@@ -198,7 +192,7 @@
                     </style>
 
                     <div
-                        class="relative h-[480px] lg:h-[650px] rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.5)] border-2 border-blue-400/40 backdrop-blur-sm bg-blue-600/30 hover:shadow-[0_0_120px_rgba(59,130,246,0.7)] transition-all duration-700">
+                        class="relative h-[550px] lg:h-[650px] rounded-3xl overflow-hidden shadow-md md:shadow-[0_0_80px_rgba(59,130,246,0.5)] border-2 border-blue-400/40 md:backdrop-blur-sm bg-blue-600/30 hover:shadow-lg md:hover:shadow-[0_0_120px_rgba(59,130,246,0.7)] transition-all duration-700">
 
                         <div class="swiper status-swiper">
                             <div class="status-pagination" id="statusPagination"></div>
@@ -244,17 +238,17 @@
                                         </div>
 
                                         <div class="relative h-full flex flex-col justify-between p-6 pb-10 md:p-8 md:pb-12">
-                                            <div class="flex justify-between items-start pt-2">
+                                            <div class="flex justify-between items-start pt-2 mb-2 lg:mb-0">
                                                 <span
-                                                    class="px-4 py-2 rounded-full bg-blue-500/90 backdrop-blur-md text-white text-xs md:text-sm font-bold uppercase tracking-wider shadow-[0_0_30px_rgba(59,130,246,0.6)] border-2 border-blue-300/60 animate-pulse-subtle">
+                                                    class="px-3 py-1 md:px-4 md:py-2 rounded-full bg-blue-500/90 backdrop-blur-md text-white text-[10px] md:text-sm font-bold uppercase tracking-wider shadow-sm md:shadow-[0_0_30px_rgba(59,130,246,0.6)] border border-blue-300/60 animate-pulse-subtle">
                                                     {{ $update->type }}
                                                 </span>
                                                 <div
-                                                    class="text-right bg-black/40 backdrop-blur-md p-2 md:p-3 rounded-xl border-2 border-blue-400/30 shadow-[0_0_30px_rgba(0,0,0,0.3)]">
-                                                    <div class="text-white font-bold text-base md:text-xl drop-shadow-lg">
+                                                    class="text-right bg-black/40 backdrop-blur-md p-2 md:p-3 rounded-xl border border-blue-400/30 shadow-sm">
+                                                    <div class="text-white font-bold text-sm md:text-xl drop-shadow-md">
                                                         {{ $update->date ? \Carbon\Carbon::parse($update->date)->format('d M Y') : '' }}
                                                     </div>
-                                                    <div class="text-blue-100 text-xs md:text-sm font-semibold">
+                                                    <div class="text-blue-100 text-[10px] md:text-sm font-semibold">
                                                         {{ $update->date ? \Carbon\Carbon::parse($update->date)->diffForHumans() : '' }}
                                                     </div>
                                                 </div>
@@ -271,7 +265,7 @@
                                                 @endif
 
                                                 <h2
-                                                    class="text-lg md:text-4xl lg:text-5xl font-bold text-white leading-tight drop-shadow-[0_0_30px_rgba(0,0,0,0.8)] line-clamp-2 md:line-clamp-3">
+                                                    class="text-xl md:text-4xl lg:text-5xl font-bold text-white leading-tight drop-shadow-md md:drop-shadow-[0_0_30px_rgba(0,0,0,0.8)] line-clamp-3 mb-2">
                                                     {{ $update->title ?? $update->judul }}
                                                 </h2>
 
@@ -298,10 +292,10 @@
 
                     {{-- Enhanced Decorative Elements --}}
                     <div
-                        class="absolute -z-10 -top-10 -right-10 w-full h-full bg-blue-500/25 rounded-3xl blur-3xl animate-pulse-glow">
+                        class="absolute -z-10 -top-10 -right-10 w-full h-full bg-blue-500/25 rounded-3xl blur-md md:blur-3xl animate-pulse-glow">
                     </div>
                     <div
-                        class="absolute -z-10 -bottom-10 -left-10 w-full h-full bg-blue-400/25 rounded-3xl blur-3xl animate-pulse-glow animation-delay-2000">
+                        class="absolute -z-10 -bottom-10 -left-10 w-full h-full bg-blue-400/25 rounded-3xl blur-md md:blur-3xl animate-pulse-glow animation-delay-2000">
                     </div>
                 </div>
 
@@ -1400,16 +1394,15 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .floating-orb {
-                opacity: 0.3;
-            }
-
-            .particle {
+            .floating-orb, .particle, .light-ray {
                 display: none;
             }
-
-            .light-ray {
-                display: none;
+            /* Disable heavy animations on mobile */
+            .animate-pulse-glow, .animate-blob-slow, .animate-border-pulse, .animate-text-glow, .animate-gradient-flow, .animate-pulse-subtle {
+                animation: none !important;
+                filter: none !important;
+                backdrop-filter: none !important;
+                box-shadow: none !important;
             }
         }
     </style>
@@ -1423,6 +1416,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize AOS
             AOS.init({
+                disable: 'mobile',
                 duration: 1200,
                 easing: 'ease-out-cubic',
                 once: false,

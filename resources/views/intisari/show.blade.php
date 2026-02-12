@@ -10,7 +10,7 @@
     .prose-reader {
         color: #dbeafe; /* blue-100 */
         line-height: 2.2;
-        font-size: 1.25rem;
+        /* font-size removed to allow responsive classes */
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
     .prose-reader p {
@@ -159,7 +159,7 @@
             <article class="bg-blue-700/60 backdrop-blur-xl rounded-[3rem] shadow-[0_0_80px_rgba(59,130,246,0.4)] border-2 border-blue-400/50 overflow-hidden hover:shadow-[0_0_120px_rgba(59,130,246,0.6)] transition-all duration-700" data-aos="fade-up" data-aos-duration="1000">
                 
                 <div class="p-10 md:p-20">
-                    <h1 class="text-5xl md:text-7xl font-black text-white mb-10 leading-tight tracking-tighter drop-shadow-[0_0_40px_rgba(255,255,255,0.3)] animate-text-glow" data-aos="fade-up" data-aos-delay="200">
+                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-10 leading-tight tracking-tighter drop-shadow-[0_0_40px_rgba(255,255,255,0.3)] animate-text-glow break-words py-2" data-aos="fade-up" data-aos-delay="200">
                         {{ $intisari->title }}
                     </h1>
 
@@ -167,7 +167,7 @@
                         <div class="w-14 h-14 bg-blue-500/30 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-blue-400/50 shadow-[0_0_30px_rgba(59,130,246,0.4)] group hover:scale-125 hover:rotate-12 transition-all duration-500">
                             <i class="far fa-calendar-alt text-blue-200 text-xl group-hover:text-white transition-colors"></i>
                         </div>
-                        <span class="text-blue-100 text-base font-bold uppercase tracking-widest drop-shadow-lg">
+                        <span class="text-blue-100 text-xs md:text-sm font-bold uppercase tracking-widest drop-shadow-lg">
                             Diterbitkan pada: {{ $intisari->published_at->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
                         </span>
                     </div>
@@ -180,7 +180,7 @@
                     </div>
                     @endif
 
-                    <div class="prose-reader whitespace-pre-wrap mb-20 text-justify" data-aos="fade-up" data-aos-delay="800">
+                    <div class="prose-reader whitespace-pre-wrap mb-20 text-justify text-base md:text-xl leading-relaxed" data-aos="fade-up" data-aos-delay="800">
                         {{ $intisari->content }}
                     </div>
 

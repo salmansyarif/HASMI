@@ -336,7 +336,7 @@
                     </div>
 
                     <!-- Title -->
-                    <h1 class="title-glow text-4xl md:text-5xl font-black text-white mb-8 leading-tight tracking-tight animate-fade-in-up">
+                    <h1 class="title-glow text-3xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-tight tracking-tight animate-fade-in-up break-words py-2">
                         {{ $article->title }}
                     </h1>
 
@@ -350,12 +350,12 @@
                     @endif
 
                     <!-- Content -->
-                    <div class="prose prose-lg max-w-none mb-10 whitespace-pre-wrap animate-fade-in-up">{!! nl2br(e($article->content)) !!}</div>
+                    <div class="prose prose-base md:prose-lg max-w-none mb-10 whitespace-pre-wrap text-justify animate-fade-in-up">{!! nl2br(e($article->content)) !!}</div>
 
                     <!-- Meta (Dipindah ke bawah artikel) -->
                     <div class="flex flex-wrap items-center gap-6 pt-8 border-t-2 border-blue-400/30 mb-10 animate-slide-in-left">
-                        <div class="flex items-center gap-3 bg-blue-500/30 px-5 py-3 rounded-full text-blue-100 font-semibold">
-                            <i class="far fa-calendar text-blue-200 text-lg"></i>
+                        <div class="flex items-center gap-3 bg-blue-500/30 px-5 py-3 rounded-full text-blue-100 font-semibold text-xs md:text-sm">
+                            <i class="far fa-calendar text-blue-200"></i>
                             <span>{{ $article->published_at->locale('id')->isoFormat('dddd, D MMMM YYYY') }}</span>
                         </div>
                         @if($article->author)

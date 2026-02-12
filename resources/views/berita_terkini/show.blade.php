@@ -51,10 +51,10 @@
                 {{-- Header --}}
                 <div class="mb-10 text-center" data-aos="fade-up">
                     <div
-                        class="inline-block px-4 py-2 bg-blue-500/50 rounded-full text-blue-50 text-sm font-semibold mb-4 border border-blue-300/50">
+                        class="inline-block px-4 py-2 bg-blue-500/50 rounded-full text-blue-50 text-xs md:text-sm font-semibold mb-4 border border-blue-300/50">
                         {{ $berita->created_at->format('l, d F Y') }}
                     </div>
-                    <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-6">{{ $berita->title }}</h1>
+                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 break-words py-2">{{ $berita->title }}</h1>
                     <div class="flex justify-center items-center gap-6 text-sm text-blue-100">
                         <div class="flex items-center gap-2">
                             <i class="far fa-eye"></i>
@@ -84,7 +84,7 @@
                 </div>
 
                 {{-- Content --}}
-                <article class="prose prose-lg max-w-none mb-16 bg-blue-700/30 p-8 rounded-3xl border border-blue-500/30"
+                <article class="prose prose-base md:prose-lg max-w-none mb-16 bg-blue-700/30 p-8 rounded-3xl border border-blue-500/30 text-justify"
                     data-aos="fade-up">
                     {!! nl2br(e($berita->content)) !!}
                 </article>

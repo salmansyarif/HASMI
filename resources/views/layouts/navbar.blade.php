@@ -342,7 +342,6 @@
                 </a>
             </div>
 
-<<<<<<< HEAD
             <div class="border-t border-blue-100 pt-4 mt-4 space-y-3">
                 @auth
                     <div class="flex items-center gap-3 px-4 py-2 bg-blue-50 rounded-xl">
@@ -374,13 +373,6 @@
                         Masuk Akun
                     </a>
                 @endauth
-=======
-            <div class="border-t border-blue-100 pt-4 mt-4 grid grid-cols-2 gap-3">
-                <a href="{{ route('login') }}"
-                    class="col-span-2 py-3 rounded-xl bg-blue-500 text-white font-bold text-center shadow-lg shadow-blue-400/40 text-lg">
-                    Masuk Akun
-                </a>
->>>>>>> 1d55ab5ed172920249a6256ab215d7d327cde5c1
             </div>
         </div>
     </div>

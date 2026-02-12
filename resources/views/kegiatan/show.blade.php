@@ -274,7 +274,7 @@
                         @endif
                     </div>
 
-                    <h1 class="title-glow text-4xl md:text-6xl font-black text-white mb-10 leading-none tracking-tighter animate-fade-in-up">
+                    <h1 class="title-glow text-3xl md:text-5xl lg:text-6xl font-black text-white mb-10 leading-tight tracking-tighter animate-fade-in-up break-words py-2">
                         {{ $kegiatan->title }}
                     </h1>
 
@@ -283,7 +283,7 @@
                     </div>
 
                     @if($kegiatan->content)
-                    <div class="prose-custom text-lg mb-16 animate-fade-in-up">
+                    <div class="prose-custom text-base md:text-lg mb-16 text-justify animate-fade-in-up">
                         <div class="whitespace-pre-wrap">{{ $kegiatan->content }}</div>
                     </div>
                     @endif
