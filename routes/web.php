@@ -117,13 +117,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
-    
-    // Profile (jika ada)
-    Route::get('/profile', [AuthController::class, 'profile'])->name('profile.edit');
-    Route::put('/profile', [AuthController::class, 'updateProfile'])->name('profile.update');
-});
+
 
 /*
 |--------------------------------------------------------------------------

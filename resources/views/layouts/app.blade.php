@@ -10,7 +10,8 @@
 
     <link rel="icon" type="image/png" href="{{ asset('img/hasmilogo.jpg') }}">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css'])
+    
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
@@ -60,7 +61,7 @@
     </style>
 
     @yield('styles')
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script data-cfasync="false" defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body class="bg-slate-50 text-slate-800 selection:bg-blue-500 selection:text-white">
@@ -76,7 +77,7 @@
     @yield('scripts')
     @stack('scripts')
 
-    <script>
+    <script data-cfasync="false">
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');

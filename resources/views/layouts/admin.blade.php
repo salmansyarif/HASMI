@@ -1,38 +1,52 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin - HASMI')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @vite(['resources/css/app.css'])
+    
+    <script data-cfasync="false" defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .hero-gradient {
             background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
         }
+
         .sidebar-link {
             transition: all 0.2s ease;
         }
-        .sidebar-link:hover, .sidebar-link.active {
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
             background-color: #EFF6FF;
             color: #2563EB;
             border-left: 4px solid #2563EB;
         }
-        [x-cloak] { display: none !important; }
+
+        [x-cloak] {
+            display: none !important;
+        }
     </style>
     @yield('styles')
 </head>
+
 <body class="bg-gray-100" x-data="{ sidebarOpen: false }">
 
     <div class="flex h-screen overflow-hidden">
         <!-- Mobile Sidebar Backdrop -->
-        <div x-show="sidebarOpen" x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-900/80 z-20 md:hidden" @click="sidebarOpen = false" x-cloak></div>
+        <div x-show="sidebarOpen" x-transition:enter="transition-opacity ease-linear duration-300"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            x-transition:leave="transition-opacity ease-linear duration-300" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-900/80 z-20 md:hidden"
+            @click="sidebarOpen = false" x-cloak></div>
 
         <!-- Sidebar -->
-        <aside class="fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-lg flex flex-col transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:inset-auto"
-               :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
+        <aside
+            class="fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-lg flex flex-col transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:inset-auto"
+            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
             <!-- Logo -->
             <div class="p-6 hero-gradient flex justify-between items-center">
                 <div class="flex items-center gap-3">
@@ -52,59 +66,58 @@
 
             <!-- Navigation -->
             <nav class="flex-1 overflow-y-auto py-6">
-                <a href="{{ route('admin.dashboard') }}" 
-                   class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <i class="fas fa-home w-5"></i>
                     <span>Dashboard</span>
                 </a>
-                
-                <a href="{{ route('admin.articles.index') }}" 
-                   class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
+
+                <a href="{{ route('admin.articles.index') }}"
+                    class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}">
                     <i class="fas fa-newspaper w-5"></i>
                     <span>Artikel Materi</span>
                 </a>
 
-                <a href="{{ route('admin.berita-terkini.index') }}" 
-                   class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.berita-terkini.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.berita-terkini.index') }}"
+                    class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.berita-terkini.*') ? 'active' : '' }}">
                     <i class="fas fa-newspaper w-5"></i>
                     <span>Berita Terkini</span>
                 </a>
 
-                <a href="{{ route('admin.programs.index') }}" 
-                   class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.programs.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.programs.index') }}"
+                    class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.programs.*') ? 'active' : '' }}">
                     <i class="fas fa-briefcase w-5"></i>
                     <span>Program</span>
                 </a>
 
-                <a href="{{ route('admin.intisari.index') }}" 
-                   class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.intisari.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.intisari.index') }}"
+                    class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.intisari.*') ? 'active' : '' }}">
                     <i class="fas fa-file-alt w-5"></i>
                     <span>Intisari HASMI</span>
                 </a>
 
-                <a href="{{ route('admin.kegiatan.index') }}" 
-                   class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.kegiatan.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.kegiatan.index') }}"
+                    class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.kegiatan.*') ? 'active' : '' }}">
                     <i class="fas fa-calendar-alt w-5"></i>
                     <span>Kegiatan</span>
                 </a>
 
-                <a href="{{ route('admin.comments.index') }}" 
-                   class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.comments.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.comments.index') }}"
+                    class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.comments.*') ? 'active' : '' }}">
                     <i class="fas fa-comments w-5"></i>
                     <span>Moderasi Komentar</span>
                 </a>
 
-                <a href="{{ route('admin.admins.index') }}" 
-                   class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.admins.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.admins.index') }}"
+                    class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700 {{ request()->routeIs('admin.admins.*') ? 'active' : '' }}">
                     <i class="fas fa-users-cog w-5"></i>
                     <span>Kelola Admin</span>
                 </a>
 
                 <div class="border-t border-gray-200 my-4"></div>
 
-                <a href="{{ route('home') }}" 
-                   target="_blank" 
-                   class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700">
+                <a href="{{ route('home') }}" target="_blank"
+                    class="sidebar-link flex items-center gap-3 px-6 py-3 text-gray-700">
                     <i class="fas fa-external-link-alt w-5"></i>
                     <span>Lihat Website</span>
                 </a>
@@ -118,7 +131,8 @@
                             <span class="text-white font-bold">{{ substr(Auth::user()->name, 0, 1) }}</span>
                         </div>
                         <div>
-                            <p class="text-sm font-semibold text-gray-800 truncate max-w-[100px]">{{ Auth::user()->name }}</p>
+                            <p class="text-sm font-semibold text-gray-800 truncate max-w-[100px]">
+                                {{ Auth::user()->name }}</p>
                             <p class="text-xs text-gray-500">Admin</p>
                         </div>
                     </div>
@@ -150,28 +164,32 @@
             <!-- Content -->
             <div class="p-4 md:p-8 flex-1 overflow-y-auto">
                 <!-- Alert Messages -->
-                @if(session('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6 flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-check-circle"></i>
-                        <span>{{ session('success') }}</span>
+                @if (session('success'))
+                    <div
+                        class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle"></i>
+                            <span>{{ session('success') }}</span>
+                        </div>
+                        <button onclick="this.parentElement.parentElement.remove()"
+                            class="text-green-700 hover:text-green-900">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
-                    <button onclick="this.parentElement.parentElement.remove()" class="text-green-700 hover:text-green-900">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
                 @endif
 
-                @if(session('error'))
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6 flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <span>{{ session('error') }}</span>
+                @if (session('error'))
+                    <div
+                        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>{{ session('error') }}</span>
+                        </div>
+                        <button onclick="this.parentElement.parentElement.remove()"
+                            class="text-red-700 hover:text-red-900">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
-                    <button onclick="this.parentElement.parentElement.remove()" class="text-red-700 hover:text-red-900">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
                 @endif
 
                 @yield('content')
@@ -182,4 +200,5 @@
     @yield('scripts')
 
 </body>
+
 </html>

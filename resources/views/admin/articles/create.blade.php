@@ -153,7 +153,7 @@
 @endsection
 
 @section('scripts')
-<script>
+<script data-cfasync="false">
     // Preview image sebelum upload
     function previewImage(event) {
         const file = event.target.files[0];

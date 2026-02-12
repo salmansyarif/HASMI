@@ -86,7 +86,7 @@
 @endsection
 
 @section('scripts')
-<script>
+<script data-cfasync="false">
 function togglePassword(inputId) {
     const input = document.getElementById(inputId);
     const icon = input.nextElementSibling.querySelector('i');

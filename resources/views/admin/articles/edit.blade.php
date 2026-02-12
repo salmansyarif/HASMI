@@ -174,7 +174,7 @@
 @endsection
 
 @section('scripts')
-<script>
+<script data-cfasync="false">
     function previewImage(event) {
         const file = event.target.files[0];
         if (file) {

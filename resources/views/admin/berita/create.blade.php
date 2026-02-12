@@ -152,7 +152,7 @@
 @endsection
 
 @section('scripts')
-<script>
+<script data-cfasync="false">
     function previewThumbnail(event) {
         const file = event.target.files[0];
         const preview = document.getElementById('thumbnail-preview');

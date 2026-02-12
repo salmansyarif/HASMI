@@ -178,7 +178,7 @@
     </form>
 </div>
 
-<script>
+<script data-cfasync="false">
     function toggleVideoInput(type) {
         const fileInput = document.getElementById('video_file_input');
         const urlInput = document.getElementById('video_url_input');

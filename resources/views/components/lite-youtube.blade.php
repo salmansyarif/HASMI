@@ -43,7 +43,7 @@
 
 @push('scripts')
     @once
-        <script>
+        <script data-cfasync="false">
             function loadLiteYoutube(element) {
                 const videoId = element.getAttribute('data-video-id');
                 const title = element.getAttribute('data-title');

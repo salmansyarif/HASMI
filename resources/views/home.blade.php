@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <script>
+    <script data-cfasync="false">
         function closeIntro() {
             const overlay = document.getElementById('intro-overlay');
             const frame = document.querySelector('.lite-youtube-embed iframe'); // Target iframe if loaded
@@ -305,8 +305,8 @@
                     </div>
                 </div>
 
-                <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-                <script>
+                <script data-cfasync="false" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+                <script data-cfasync="false">
                     document.addEventListener('DOMContentLoaded', function() {
                         const totalSlides = {{ count($latestUpdates) }};
                         const paginationLimit = 10;
@@ -1416,10 +1416,10 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script data-cfasync="false" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script data-cfasync="false" src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-    <script>
+    <script data-cfasync="false">
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize AOS
             AOS.init({

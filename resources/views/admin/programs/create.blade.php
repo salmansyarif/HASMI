@@ -217,7 +217,7 @@
 @endsection
 
 @section('scripts')
-<script>
+<script data-cfasync="false">
     // Categories Data
     const categoriesData = {!! json_encode($categories->mapWithKeys(function($cat) { return [$cat->id => ['has_subcategories' => $cat->has_subcategories]]; })) !!};
     

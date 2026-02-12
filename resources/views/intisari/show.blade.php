@@ -299,8 +299,8 @@
     </div>
 </div>
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
+<script data-cfasync="false" src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script data-cfasync="false">
 // Initialize AOS
 AOS.init({
     duration: 1000,
