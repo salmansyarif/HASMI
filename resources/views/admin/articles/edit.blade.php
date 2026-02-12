@@ -107,7 +107,7 @@
             <!-- Thumbnail -->
             <div>
                 <label for="thumbnail" class="block text-sm font-semibold text-gray-700 mb-2">
-                    Foto Thumbnail
+                    Foto Thumbnail (Opsional)
                 </label>
                 
                 @if($article->thumbnail)
