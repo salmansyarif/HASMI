@@ -298,10 +298,37 @@
                 </a>
             </div>
 
-            <div class="border-t border-blue-100 pt-4 mt-4 grid grid-cols-2 gap-3">
-                <a href="{{ route('login') }}" class="col-span-2 py-3 rounded-xl bg-blue-500 text-white font-bold text-center shadow-lg shadow-blue-400/40 text-lg">
-                    Masuk Akun
-                </a>
+            <div class="border-t border-blue-100 pt-4 mt-4 space-y-3">
+                @auth
+                    <div class="flex items-center gap-3 px-4 py-2 bg-blue-50 rounded-xl">
+                        <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg font-bold">
+                            {{ substr(Auth::user()->name, 0, 1) }}
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-blue-700">{{ Auth::user()->name }}</span>
+                            <span class="text-xs text-blue-400">Logged in</span>
+                        </div>
+                    </div>
+
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-blue-700 hover:bg-blue-100 font-bold transition-all">
+                        <i class="fas fa-tachometer-alt w-6 text-center"></i> Dashboard
+                    </a>
+
+                    <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-blue-700 hover:bg-blue-100 font-bold transition-all">
+                        <i class="fas fa-user-cog w-6 text-center"></i> Edit Profil
+                    </a>
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 font-bold transition-all text-left">
+                            <i class="fas fa-sign-out-alt w-6 text-center"></i> Logout
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="block w-full py-3 rounded-xl bg-blue-500 text-white font-bold text-center shadow-lg shadow-blue-400/40 text-lg hover:bg-blue-600 transition-all">
+                        Masuk Akun
+                    </a>
+                @endauth
             </div>
         </div>
     </div>

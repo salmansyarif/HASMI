@@ -9,9 +9,9 @@
         <div
             class="relative w-full max-w-6xl aspect-video bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(59,130,246,0.6)] border-2 border-blue-500/40 ring-8 ring-blue-600/30 animate-border-pulse">
             <button onclick="closeIntro()"
-                class="absolute top-6 right-6 z-50 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-3 rounded-full font-bold shadow-[0_0_30px_rgba(239,68,68,0.5)] transition-all duration-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(239,68,68,0.8)] flex items-center gap-3 group">
-                <span class="text-base">Tutup Video</span>
-                <i class="fas fa-times group-hover:rotate-180 transition-transform duration-500"></i>
+                class="absolute top-4 right-4 md:top-6 md:right-6 z-50 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-3 py-1.5 md:px-6 md:py-3 rounded-full font-bold shadow-[0_0_30px_rgba(239,68,68,0.5)] transition-all duration-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(239,68,68,0.8)] flex items-center gap-2 md:gap-3 group">
+                <span class="text-xs md:text-base">Tutup Video</span>
+                <i class="fas fa-times group-hover:rotate-180 transition-transform duration-500 text-xs md:text-base"></i>
             </button>
             <x-lite-youtube videoId="ykIhoH0FlD8" title="Intro HASMI" class="w-full h-full" />
         </div>
@@ -36,7 +36,7 @@
 
     {{-- HERO SECTION --}}
     <section
-        class="relative min-h-screen flex items-center pt-36 lg:pt-0 overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
+        class="relative min-h-[auto] lg:min-h-screen pb-12 lg:pb-0 flex items-center pt-28 lg:pt-0 overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
         {{-- Animated Background Elements --}}
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
             <div class="islamic-pattern"></div>
@@ -77,8 +77,8 @@
                             class="text-2xl font-bold text-white tracking-wide drop-shadow-[0_0_10px_rgba(191,219,254,0.5)]">HASMI</span>
                     </div>
 
-                    <h1 class="text-6xl lg:text-8xl font-bold leading-tight">
-                        <span class="block text-white mb-3 drop-shadow-[0_0_20px_rgba(191,219,254,0.4)] animate-text-glow"
+                    <h1 class="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
+                        <span class="block text-white mb-2 lg:mb-3 drop-shadow-[0_0_20px_rgba(191,219,254,0.4)] animate-text-glow"
                             data-aos="fade-up" data-aos-delay="600">Membangun</span>
                         <span
                             class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-blue-100 to-blue-200 animate-gradient-flow drop-shadow-[0_0_30px_rgba(191,219,254,0.7)]"
@@ -87,60 +87,66 @@
                         </span>
                     </h1>
 
-                    <p class="text-xl lg:text-2xl text-blue-100 leading-relaxed max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]"
+                    <p class="text-base md:text-lg lg:text-2xl text-blue-100 leading-relaxed max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)] line-clamp-4 md:line-clamp-none"
                         data-aos="fade-up" data-aos-delay="1000">
                         Himpunan Aktivis Siswa Muslim Indonesia berkomitmen membina generasi muslim melalui pendidikan,
                         dakwah, dan aksi sosial berkelanjutan untuk kemajuan umat.
                     </p>
 
-                    <div class="flex flex-wrap gap-5 pt-6" data-aos="fade-up" data-aos-delay="1200">
+                    <div class="flex flex-wrap gap-3 lg:gap-5 pt-4 lg:pt-6" data-aos="fade-up" data-aos-delay="1200">
                         <a href="{{ route('materi.index') }}"
-                            class="group px-10 py-5 bg-blue-500 text-white rounded-2xl font-bold shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 flex items-center gap-3 relative overflow-hidden border-2 border-blue-400/40">
+                            class="group px-6 py-3 lg:px-10 lg:py-5 bg-blue-500 text-white rounded-2xl font-bold shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 flex items-center gap-3 relative overflow-hidden border-2 border-blue-400/40">
                             <div
                                 class="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                             </div>
-                            <span class="relative z-10 text-lg">Jelajahi Materi</span>
+                            <span class="relative z-10 text-base lg:text-lg">Jelajahi Materi</span>
                             <i
                                 class="fas fa-arrow-right relative z-10 group-hover:translate-x-2 transition-transform duration-300"></i>
                         </a>
                         <a href="{{ route('tentang') }}"
-                            class="px-10 py-5 bg-blue-600/50 backdrop-blur-md text-white rounded-2xl font-bold shadow-[0_0_30px_rgba(59,130,246,0.4)] border-2 border-blue-400/60 hover:bg-blue-500/70 hover:border-blue-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(59,130,246,0.6)] transition-all duration-500 text-lg">
+                            class="px-6 py-3 lg:px-10 lg:py-5 bg-blue-600/50 backdrop-blur-md text-white rounded-2xl font-bold shadow-[0_0_30px_rgba(59,130,246,0.4)] border-2 border-blue-400/60 hover:bg-blue-500/70 hover:border-blue-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(59,130,246,0.6)] transition-all duration-500 text-base lg:text-lg">
                             Tentang Kami
                         </a>
                     </div>
 
                     {{-- Trust Indicators with Enhanced Animation --}}
-                    <div class="flex items-center gap-10 pt-10" data-aos="fade-up" data-aos-delay="1400">
+                    <div class="grid grid-cols-2 lg:flex lg:items-center gap-6 lg:gap-10 pt-8 lg:pt-10" data-aos="fade-up" data-aos-delay="1400">
                         <div class="text-center group" data-aos="zoom-in" data-aos-delay="1600">
-                            <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
+                            <div class="text-3xl lg:text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
                                 data-target="{{ $materiCount }}">0</div>
-                            <div class="text-base text-blue-100 font-semibold mt-1">Materi</div>
+                            <div class="text-sm lg:text-base text-blue-100 font-semibold mt-1">Materi</div>
                         </div>
                         <div class="text-center group" data-aos="zoom-in" data-aos-delay="1800">
-                            <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
+                            <div class="text-3xl lg:text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
                                 data-target="{{ $programCount }}">0</div>
-                            <div class="text-base text-blue-100 font-semibold mt-1">Program</div>
+                            <div class="text-sm lg:text-base text-blue-100 font-semibold mt-1">Program</div>
                         </div>
                         <div class="text-center group" data-aos="zoom-in" data-aos-delay="2000">
-                            <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
+                            <div class="text-3xl lg:text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
                                 data-target="{{ $intisariCount }}">0</div>
-                            <div class="text-base text-blue-100 font-semibold mt-1">Intisari</div>
+                            <div class="text-sm lg:text-base text-blue-100 font-semibold mt-1">Intisari</div>
                         </div>
                         <div class="text-center group" data-aos="zoom-in" data-aos-delay="2200">
-                            <div class="text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
+                            <div class="text-3xl lg:text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
                                 data-target="{{ $kegiatanCount }}">0</div>
-                            <div class="text-base text-blue-100 font-semibold mt-1">Kegiatan</div>
+                            <div class="text-sm lg:text-base text-blue-100 font-semibold mt-1">Kegiatan</div>
                         </div>
                     </div>
                 </div>
 
                 {{-- Right Side: Latest Updates Slider --}}
-                <div class="hidden lg:block relative" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="400">
+                <div class="relative mt-4 lg:mt-0" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="400">
                     <style>
                         .status-swiper {
                             width: 100%;
-                            height: 650px;
+                            height: 480px;
                             border-radius: 1.5rem;
+                        }
+                        
+                        @media (min-width: 1024px) {
+                            .status-swiper {
+                                height: 650px;
+                            }
                         }
 
                         .status-pagination {
@@ -192,7 +198,7 @@
                     </style>
 
                     <div
-                        class="relative h-[650px] rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.5)] border-2 border-blue-400/40 backdrop-blur-sm bg-blue-600/30 hover:shadow-[0_0_120px_rgba(59,130,246,0.7)] transition-all duration-700">
+                        class="relative h-[480px] lg:h-[650px] rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.5)] border-2 border-blue-400/40 backdrop-blur-sm bg-blue-600/30 hover:shadow-[0_0_120px_rgba(59,130,246,0.7)] transition-all duration-700">
 
                         <div class="swiper status-swiper">
                             <div class="status-pagination" id="statusPagination"></div>
@@ -234,54 +240,54 @@
                                         @endif
 
                                         <div
-                                            class="absolute inset-0 bg-gradient-to-t from-blue-800 via-blue-700/60 to-blue-700/20">
+                                            class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent">
                                         </div>
 
-                                        <div class="relative h-full flex flex-col justify-end p-8 pb-12">
-                                            <div class="absolute top-12 left-8 right-8 flex justify-between items-start">
+                                        <div class="relative h-full flex flex-col justify-between p-6 pb-10 md:p-8 md:pb-12">
+                                            <div class="flex justify-between items-start pt-2">
                                                 <span
-                                                    class="px-5 py-2 rounded-full bg-blue-500/90 backdrop-blur-md text-white text-sm font-bold uppercase tracking-wider shadow-[0_0_30px_rgba(59,130,246,0.6)] border-2 border-blue-300/60 animate-pulse-subtle">
+                                                    class="px-4 py-2 rounded-full bg-blue-500/90 backdrop-blur-md text-white text-xs md:text-sm font-bold uppercase tracking-wider shadow-[0_0_30px_rgba(59,130,246,0.6)] border-2 border-blue-300/60 animate-pulse-subtle">
                                                     {{ $update->type }}
                                                 </span>
                                                 <div
-                                                    class="text-right bg-black/40 backdrop-blur-md p-3 rounded-xl border-2 border-blue-400/30 shadow-[0_0_30px_rgba(0,0,0,0.3)]">
-                                                    <div class="text-white font-bold text-xl drop-shadow-lg">
+                                                    class="text-right bg-black/40 backdrop-blur-md p-2 md:p-3 rounded-xl border-2 border-blue-400/30 shadow-[0_0_30px_rgba(0,0,0,0.3)]">
+                                                    <div class="text-white font-bold text-base md:text-xl drop-shadow-lg">
                                                         {{ $update->date ? \Carbon\Carbon::parse($update->date)->format('d M Y') : '' }}
                                                     </div>
-                                                    <div class="text-blue-100 text-sm font-semibold">
+                                                    <div class="text-blue-100 text-xs md:text-sm font-semibold">
                                                         {{ $update->date ? \Carbon\Carbon::parse($update->date)->diffForHumans() : '' }}
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="space-y-5 mb-6" data-swiper-parallax-y="-20">
+                                            <div class="space-y-4 md:space-y-5 mb-4 md:mb-6 mt-auto" data-swiper-parallax-y="-20">
                                                 @if (isset($update->category))
                                                     <div
-                                                        class="text-blue-100 font-semibold text-base mb-3 flex items-center gap-3">
+                                                        class="text-blue-100 font-semibold text-sm md:text-base mb-2 md:mb-3 flex items-center gap-2 md:gap-3">
                                                         <span
-                                                            class="w-12 h-[3px] bg-blue-300 inline-block animate-pulse-width"></span>
+                                                            class="w-8 md:w-12 h-[2px] md:h-[3px] bg-blue-300 inline-block animate-pulse-width"></span>
                                                         {{ $update->category->name }}
                                                     </div>
                                                 @endif
 
                                                 <h2
-                                                    class="text-4xl lg:text-5xl font-bold text-white leading-tight drop-shadow-[0_0_30px_rgba(0,0,0,0.8)]">
+                                                    class="text-lg md:text-4xl lg:text-5xl font-bold text-white leading-tight drop-shadow-[0_0_30px_rgba(0,0,0,0.8)] line-clamp-2 md:line-clamp-3">
                                                     {{ $update->title ?? $update->judul }}
                                                 </h2>
 
                                                 <p
-                                                    class="text-gray-100 text-lg line-clamp-3 leading-relaxed drop-shadow-lg">
+                                                    class="text-gray-100 text-sm md:text-lg line-clamp-2 md:line-clamp-3 leading-relaxed drop-shadow-lg">
                                                     {{ \Illuminate\Support\Str::limit(strip_tags($update->excerpt ?? ($update->description ?? ($update->content ?? ''))), 150) }}
                                                 </p>
-                                            </div>
-
-                                            <div data-swiper-parallax-y="-10">
-                                                <a href="{{ route($update->route_name, $update->route_params) }}"
-                                                    class="inline-flex items-center gap-3 px-8 py-4 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-400 transition-all duration-300 group w-fit shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] hover:scale-105 border-2 border-blue-400/40">
-                                                    <span class="text-lg">Selengkapnya</span>
-                                                    <i
-                                                        class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
-                                                </a>
+                                            
+                                                <div data-swiper-parallax-y="-10" class="pt-3 md:pt-2">
+                                                    <a href="{{ route($update->route_name, $update->route_params) }}"
+                                                        class="inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-8 md:py-4 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-400 transition-all duration-300 group w-fit shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] hover:scale-105 border-2 border-blue-400/40">
+                                                        <span class="text-base md:text-lg">Selengkapnya</span>
+                                                        <i
+                                                            class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -375,7 +381,8 @@
     </section>
 
     {{-- ABOUT SECTION --}}
-    <section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
+    {{-- ABOUT SECTION --}}
+    <section class="py-16 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
         <div class="absolute inset-0 opacity-20">
             <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-500 rounded-full blur-[150px] animate-blob-slow">
             </div>
@@ -410,7 +417,7 @@
                             Kami</span>
                     </div>
 
-                    <h2 class="text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
+                    <h2 class="text-3xl lg:text-6xl font-bold text-white leading-tight drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
                         data-aos="fade-up" data-aos-delay="300">
                         Himpunan Aktivis Siswa Muslim Indonesia
                     </h2>
@@ -429,8 +436,8 @@
                         </p>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-5 pt-8">
-                        <div class="flex items-start gap-4 bg-blue-600/50 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/40 hover:border-blue-300 hover:bg-blue-500/60 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] group"
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-8">
+                        <div class="flex items-start gap-4 bg-blue-600/50 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/40 hover:border-blue-300 hover:bg-blue-500/60 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] group h-full"
                             data-aos="fade-up" data-aos-delay="700">
                             <div
                                 class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.6)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
@@ -438,10 +445,10 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-white text-lg mb-1">Pendidikan Berkualitas</h4>
-                                <p class="text-sm text-blue-100">Program pembelajaran terpadu</p>
+                                <p class="text-sm text-blue-100 leading-relaxed">Program pembelajaran terpadu untuk membentuk karakter islami.</p>
                             </div>
                         </div>
-                        <div class="flex items-start gap-4 bg-blue-600/50 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/40 hover:border-blue-300 hover:bg-blue-500/60 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] group"
+                        <div class="flex items-start gap-4 bg-blue-600/50 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/40 hover:border-blue-300 hover:bg-blue-500/60 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] group h-full"
                             data-aos="fade-up" data-aos-delay="800">
                             <div
                                 class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.6)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 animation-delay-1000">
@@ -449,7 +456,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-white text-lg mb-1">Dakwah Aktif</h4>
-                                <p class="text-sm text-blue-100">Menyebarkan nilai-nilai Islam</p>
+                                <p class="text-sm text-blue-100 leading-relaxed">Menyebarkan nilai-nilai Islam rahmatan lil 'alamin.</p>
                             </div>
                         </div>
                     </div>
@@ -466,7 +473,7 @@
     </section>
 
     {{-- VISI MISI SECTION --}}
-    <section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
+    <section class="py-20 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
         <div
             class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 opacity-15 rounded-l-[100px] blur-[150px] animate-pulse-glow">
         </div>
@@ -479,7 +486,7 @@
                 <span
                     class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]"
                     data-aos="zoom-in">Komitmen Kami</span>
-                <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
+                <h2 class="text-3xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
                     data-aos="fade-up" data-aos-delay="200">Visi & Misi</h2>
                 <div class="w-28 h-2 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-400 rounded-full mx-auto animate-gradient-flow shadow-[0_0_20px_rgba(96,165,250,0.6)]"
                     data-aos="fade" data-aos-delay="300"></div>
@@ -528,7 +535,7 @@
     </section>
 
     {{-- PROGRAM UNGGULAN --}}
-    <section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
+    <section class="py-20 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
         <div class="absolute inset-0 opacity-15">
             <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-[150px] animate-blob-slow"></div>
             <div
@@ -544,7 +551,7 @@
                 <span
                     class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]"
                     data-aos="zoom-in">Program Kami</span>
-                <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
+                <h2 class="text-3xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
                     data-aos="fade-up" data-aos-delay="200">Program Unggulan</h2>
                 <p class="text-blue-50 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">
                     Berbagai program terbaik untuk pembinaan generasi muslim Indonesia</p>
