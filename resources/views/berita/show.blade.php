@@ -320,7 +320,7 @@
     </div>
 
     <!-- Scroll Progress Script -->
-    <script>
+    <script data-cfasync="false">
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -330,6 +330,6 @@
     </script>
 
     <!-- FSLightbox script for gallery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.0.9/index.min.js"></script>
+    <script data-cfasync="false" src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.0.9/index.min.js"></script>
 
 @endsection

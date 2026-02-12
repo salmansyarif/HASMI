@@ -139,7 +139,7 @@
     </div>
 </footer>
 
-<script>
+<script data-cfasync="false">
     document.addEventListener('DOMContentLoaded', function() {
         // Clock
         setInterval(() => {

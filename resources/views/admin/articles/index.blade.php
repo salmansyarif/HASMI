@@ -212,7 +212,7 @@
 @endsection
 
 @section('scripts')
-<script>
+<script data-cfasync="false">
     // Load Sub Categories when Category filter changes
     const filterCategory = document.getElementById('filter-category');
     const filterSubCategoryContainer = document.getElementById('filter-sub-category-container');

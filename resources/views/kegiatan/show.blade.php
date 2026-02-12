@@ -394,7 +394,7 @@
     <button class="absolute right-10 text-white text-4xl p-4 bg-blue-500/30 backdrop-blur-sm rounded-full hover:bg-blue-500 transition-all duration-300 border-2 border-white/20 hover:scale-110" onclick="changeImage(1, event)">&#10095;</button>
 </div>
 
-<script>
+<script data-cfasync="false">
     const galleryPhotos = @json($kegiatan->photos);
     let currentImageIndex = 0;
 

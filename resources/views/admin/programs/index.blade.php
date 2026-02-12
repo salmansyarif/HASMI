@@ -189,7 +189,7 @@
 @endsection
 
 @section('scripts')
-<script>
+<script data-cfasync="false">
 // Load subcategories berdasarkan category yang dipilih
 document.getElementById('filter-category').addEventListener('change', function() {
     const categoryId = this.value;

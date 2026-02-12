@@ -202,7 +202,7 @@
     </form>
 </div>
 
-<script>
+<script data-cfasync="false">
     function previewPhotos(event) {
         const previewContainer = document.getElementById('photos-preview');
         previewContainer.innerHTML = '';
