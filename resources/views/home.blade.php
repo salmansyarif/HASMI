@@ -80,7 +80,7 @@
                         </a>
                     </div>
 
-                    {{-- ===== STATS - ALWAYS VISIBLE ===== --}}
+                    {{-- ===== STATS ===== --}}
                     <div class="stats-grid grid grid-cols-4 gap-3 sm:gap-6">
                         <div class="text-center">
                             <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white counter leading-none mb-1"
@@ -213,17 +213,23 @@
     <script data-cfasync="false">
     (function() {
         const AUTOPLAY_MS = 5000;
+        const isMobile = window.innerWidth < 1024;
         let swiper;
 
         function initSlider() {
             const bullets = document.querySelectorAll('.bullet-item');
 
             swiper = new Swiper('.hero-swiper', {
-                effect: 'fade',
+                // Mobile pakai 'slide' (lebih ringan), desktop tetap 'fade'
+                effect: isMobile ? 'slide' : 'fade',
                 fadeEffect: { crossFade: true },
-                speed: 700,
+                // Transisi lebih cepat di mobile
+                speed: isMobile ? 400 : 700,
                 loop: true,
                 allowTouchMove: true,
+                // Jangan preload semua gambar sekaligus
+                preloadImages: false,
+                lazy: { loadPrevNext: true },
                 autoplay: {
                     delay: AUTOPLAY_MS,
                     disableOnInteraction: false,
@@ -235,7 +241,6 @@
                 }
             });
 
-            // Initial bullet state
             updateBullets(0);
 
             window.goToSlide = function(idx) {
@@ -245,7 +250,6 @@
             function updateBullets(activeIdx) {
                 bullets.forEach((b, i) => {
                     const fill = b.querySelector('.bullet-fill');
-                    // Reset
                     fill.style.transition = 'none';
                     fill.style.width = '0%';
                     b.classList.remove('is-active', 'is-done');
@@ -255,7 +259,6 @@
                         fill.style.width = '100%';
                     } else if (i === activeIdx) {
                         b.classList.add('is-active');
-                        // Start fill animation after tiny delay
                         requestAnimationFrame(() => {
                             requestAnimationFrame(() => {
                                 fill.style.transition = `width ${AUTOPLAY_MS}ms linear`;
@@ -666,17 +669,15 @@ body {
     }
 }
 
-/* ===== SLIDER - CRITICAL FIX ===== */
+/* ===== SLIDER ===== */
 .slider-wrapper {
     position: relative;
     width: 100%;
-    /* Fixed height set inline, overridden by media query */
 }
 @media (min-width: 1024px) {
     .slider-wrapper { height: 600px !important; }
 }
 
-/* Swiper MUST fill container */
 .hero-swiper,
 .hero-swiper .swiper-wrapper,
 .hero-swiper .swiper-slide {
@@ -700,46 +701,64 @@ body {
 }
 
 /* ===== CARDS ===== */
+/* Mobile: hanya transition ringan, tanpa transform */
 .card-item {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.25s ease;
 }
-.card-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
-}
-@media (max-width: 640px) {
-    .card-item:hover { transform: none; box-shadow: none; }
+/* Desktop hover dengan transform hanya untuk perangkat yang support hover */
+@media (hover: hover) and (pointer: fine) {
+    .card-item {
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        will-change: transform;
+    }
+    .card-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    }
 }
 
 /* ===== STATS ===== */
-.stats-grid {
-    width: 100%;
-}
+.stats-grid { width: 100%; }
 .counter {
     display: block;
     font-variant-numeric: tabular-nums;
 }
 
-/* ===== FLOATING ORBS (desktop only) ===== */
-.floating-orb {
-    position: absolute; border-radius: 50%;
-    filter: blur(100px); opacity: 0.4;
-    pointer-events: none;
-}
-.orb-1 { width: 500px; height: 500px; background: #60a5fa; top: -200px; left: -150px; animation: floatOrb 20s ease-in-out infinite; }
-.orb-2 { width: 400px; height: 400px; background: #3b82f6; bottom: -100px; right: 5%; animation: floatOrb 25s ease-in-out infinite reverse; }
-.orb-3 { width: 350px; height: 350px; background: #93c5fd; top: 30%; right: -100px; animation: floatOrb 18s ease-in-out infinite; animation-delay: -8s; }
+/* ===== FLOATING ORBS — HANYA DESKTOP ===== */
+@media (min-width: 1024px) {
+    .floating-orb {
+        position: absolute;
+        border-radius: 50%;
+        /* Blur dikurangi 100px → 60px, opacity 0.4 → 0.25 */
+        filter: blur(60px);
+        opacity: 0.25;
+        pointer-events: none;
+    }
+    .orb-1 {
+        width: 400px; height: 400px;
+        background: #60a5fa;
+        top: -150px; left: -100px;
+        animation: floatOrb 25s ease-in-out infinite;
+    }
+    .orb-2 {
+        width: 320px; height: 320px;
+        background: #3b82f6;
+        bottom: -80px; right: 5%;
+        animation: floatOrb 30s ease-in-out infinite reverse;
+    }
+    .orb-3 {
+        width: 280px; height: 280px;
+        background: #93c5fd;
+        top: 30%; right: -80px;
+        animation: floatOrb 22s ease-in-out infinite;
+        animation-delay: -8s;
+    }
 
-@keyframes floatOrb {
-    0%, 100% { transform: translate(0,0); }
-    33% { transform: translate(40px, -50px); }
-    66% { transform: translate(-30px, 40px); }
-}
-
-/* ===== ANIMATIONS ===== */
-@keyframes gradient-flow {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    /* Gerak diperkecil dari 40px → 20px agar lebih ringan */
+    @keyframes floatOrb {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(20px, -25px); }
+    }
 }
 
 /* ===== SCROLLBAR ===== */
@@ -751,6 +770,15 @@ body {
 /* ===== LINE CLAMP ===== */
 .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* ===== REDUCE MOTION: hormati preferensi aksesibilitas ===== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
 </style>
 @endsection
 
@@ -758,21 +786,35 @@ body {
 <script data-cfasync="false" src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script data-cfasync="false">
 document.addEventListener('DOMContentLoaded', function() {
-    // AOS
-    AOS.init({
-        disable: 'mobile',
-        duration: 900,
-        easing: 'ease-out-cubic',
-        once: true,
-        offset: 60,
-    });
+
+    // Deteksi mobile
+    const isMobile = window.innerWidth < 1024 ||
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    // ===== AOS: hanya aktif di desktop =====
+    if (!isMobile) {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+        });
+    }
+    // Mobile: AOS tidak diinit → semua elemen langsung visible, tanpa animasi masuk
 
     // ===== COUNTER ANIMATION =====
     function animateCounter(el) {
         const target = parseInt(el.getAttribute('data-target')) || 0;
         if (target === 0) { el.textContent = '0'; return; }
+
+        // Mobile: langsung tampilkan angka final, tidak perlu animasi
+        if (isMobile) {
+            el.textContent = target;
+            return;
+        }
+
         const duration = 1500;
-        const steps = 60;
+        const steps = 50;
         const increment = target / steps;
         let current = 0;
         let step = 0;
@@ -784,7 +826,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, duration / steps);
     }
 
-    // Use IntersectionObserver for counter trigger
     const counters = document.querySelectorAll('.counter');
     const obs = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -797,11 +838,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     counters.forEach(c => obs.observe(c));
 
-    // Smooth scroll
+    // ===== SMOOTH SCROLL =====
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
             const target = document.querySelector(a.getAttribute('href'));
-            if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+            if (target) {
+                e.preventDefault();
+                // Mobile: pakai 'auto' agar lebih ringan
+                target.scrollIntoView({ behavior: isMobile ? 'auto' : 'smooth' });
+            }
         });
     });
 });

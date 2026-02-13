@@ -9,44 +9,70 @@
 <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
-    /* Custom Gradient Hero - UPDATED TO MATCH HOME */
-    .hero-animate {
-        background: linear-gradient(-45deg, #1d4ed8, #2563eb, #1d4ed8, #2563eb);
-        background-size: 400% 400%;
-        animation: gradientBG 15s ease infinite;
+    /* Hero BG animasi: hanya desktop */
+    @media (min-width: 1024px) {
+        .hero-animate {
+            background: linear-gradient(-45deg, #1d4ed8, #2563eb, #1d4ed8, #2563eb);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
     }
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    @media (max-width: 1023px) {
+        .hero-animate {
+            background: linear-gradient(135deg, #1d4ed8, #2563eb);
+        }
     }
 
-    /* Card Styling - UPDATED TO MATCH HOME */
+    /* Card: mobile hanya border transition */
     .news-card {
-        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         border: 1px solid rgba(59, 130, 246, 0.4);
         background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+        transition: border-color 0.25s ease;
     }
-    .news-card:hover {
-        transform: translateY(-12px) scale(1.02);
-        box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.7);
-        border-color: rgba(96, 165, 250, 0.7);
+
+    /* Hover hanya desktop */
+    @media (hover: hover) and (pointer: fine) {
+        .news-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+        .news-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.6);
+            border-color: rgba(96, 165, 250, 0.7);
+        }
+    }
+
+    /* Pulse badge hanya desktop */
+    @media (max-width: 1023px) {
+        .badge-new { animation: none !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
     }
 </style>
 
 {{-- HERO SECTION --}}
 <section class="relative min-h-[40vh] flex items-center overflow-hidden hero-animate">
-    <div class="absolute inset-0 opacity-20 islamic-pattern"></div>
     <div class="container mx-auto px-6 relative z-10 py-16 text-center">
         <h1 class="text-4xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight" data-aos="fade-up">
-            Berita <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-blue-100 to-blue-200">Terkini</span>
+            Berita <span class="text-blue-200">Terkini</span>
         </h1>
         <p class="text-xl text-blue-100/80 max-w-2xl mx-auto mb-8 leading-relaxed font-light" data-aos="fade-up" data-aos-delay="200">
             Informasi terbaru seputar kegiatan dan perkembangan dakwah HASMI.
         </p>
     </div>
     
-    {{-- Wave Divider --}}
     <div class="absolute bottom-0 left-0 right-0">
         <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
             <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#1d4ed8"/>
@@ -58,7 +84,7 @@
 <section class="py-16 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
     <div class="container mx-auto px-6 lg:px-12 relative z-10">
         
-        {{-- SECTION: BERITA HARI INI --}}
+        {{-- BERITA HARI INI --}}
         <div class="mb-20">
             <div class="flex items-center gap-4 mb-10" data-aos="fade-right">
                 <div class="w-2 h-10 bg-blue-300 rounded-full"></div>
@@ -73,9 +99,9 @@
                         
                         <div class="h-60 relative overflow-hidden">
                             <img src="{{ $news->getThumbnailUrl() }}" 
-                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                  alt="{{ $news->title }}" loading="lazy">
-                            <div class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse border-2 border-blue-300/40">
+                            <div class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full badge-new animate-pulse border-2 border-blue-300/40">
                                 NEW
                             </div>
                         </div>
@@ -111,7 +137,7 @@
             @endif
         </div>
 
-        {{-- SECTION: BERITA MINGGU LALU --}}
+        {{-- BERITA MINGGU LALU --}}
         <div>
             <div class="flex items-center gap-4 mb-10" data-aos="fade-right">
                 <div class="w-2 h-10 bg-blue-400 rounded-full"></div>
@@ -126,7 +152,7 @@
                         
                         <div class="h-48 relative overflow-hidden">
                             <img src="{{ $news->getThumbnailUrl() }}" 
-                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                  alt="{{ $news->title }}" loading="lazy">
                         </div>
 
@@ -167,11 +193,12 @@
 <script data-cfasync="false" src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script data-cfasync="false">
     document.addEventListener('DOMContentLoaded', function() {
-        AOS.init({
-            duration: 800,
-            easing: 'ease-out-back',
-            once: true
-        });
+        const isMobile = window.innerWidth < 1024 ||
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true });
+        }
     });
 </script>
 @endsection
