@@ -5,13 +5,12 @@
 @section('content')
     {{-- INTRO VIDEO OVERLAY --}}
     <div id="intro-overlay"
-        class="fixed inset-0 z-[9999] bg-gradient-to-br from-blue-700 to-blue-900 backdrop-blur-xl flex items-center justify-center p-4 transition-all duration-700">
-        <div
-            class="relative w-full max-w-6xl aspect-video bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(59,130,246,0.6)] border-2 border-blue-500/40 ring-8 ring-blue-600/30 animate-border-pulse">
+        class="fixed inset-0 z-[9999] bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center p-4 transition-all duration-700">
+        <div class="relative w-full max-w-6xl aspect-video bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl overflow-hidden shadow-2xl border-2 border-blue-500/40">
             <button onclick="closeIntro()"
-                class="absolute top-4 right-4 md:top-6 md:right-6 z-50 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-3 py-1.5 md:px-6 md:py-3 rounded-full font-bold shadow-[0_0_30px_rgba(239,68,68,0.5)] transition-all duration-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(239,68,68,0.8)] flex items-center gap-2 md:gap-3 group">
+                class="absolute top-4 right-4 z-50 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 md:px-6 md:py-3 rounded-full font-bold transition-all duration-300 flex items-center gap-2">
                 <span class="text-xs md:text-base">Tutup Video</span>
-                <i class="fas fa-times group-hover:rotate-180 transition-transform duration-500 text-xs md:text-base"></i>
+                <i class="fas fa-times text-xs md:text-base"></i>
             </button>
             <x-lite-youtube videoId="ykIhoH0FlD8" title="Intro HASMI" class="w-full h-full" />
         </div>
@@ -20,12 +19,10 @@
     <script data-cfasync="false">
         function closeIntro() {
             const overlay = document.getElementById('intro-overlay');
-            const frame = document.querySelector('.lite-youtube-embed iframe'); // Target iframe if loaded
-
-            overlay.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
-
+            const frame = document.querySelector('.lite-youtube-embed iframe');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
             setTimeout(() => {
-                if (frame) frame.src = ''; // Stop video
+                if (frame) frame.src = '';
                 overlay.style.display = 'none';
             }, 700);
         }
@@ -34,254 +31,170 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
-    {{-- HERO SECTION --}}
-    <section
-        class="relative min-h-[auto] lg:min-h-screen pb-12 lg:pb-0 flex items-center pt-28 lg:pt-0 overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
-        {{-- Animated Background Elements --}}
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="islamic-pattern"></div>
+    {{-- ===== HERO SECTION ===== --}}
+    <section class="hero-section relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
+
+        {{-- Background decorations desktop only --}}
+        <div class="absolute inset-0 pointer-events-none hidden lg:block">
             <div class="floating-orb orb-1"></div>
             <div class="floating-orb orb-2"></div>
             <div class="floating-orb orb-3"></div>
-            <div class="floating-orb orb-4"></div>
-            <div class="floating-orb orb-5"></div>
-
-            {{-- Enhanced Animated Particles --}}
-            <div class="particles">
-                @for ($i = 0; $i < 30; $i++)
-                    <div class="particle"
-                        style="--delay: {{ $i * 0.2 }}s; --duration: {{ 12 + ($i % 8) }}s; --size: {{ 3 + ($i % 4) }}px;">
-                    </div>
-                @endfor
-            </div>
-
-            {{-- Light Rays --}}
-            <div class="light-rays">
-                @for ($i = 0; $i < 5; $i++)
-                    <div class="light-ray" style="--ray-delay: {{ $i * 0.5 }}s;"></div>
-                @endfor
-            </div>
         </div>
 
-        <div class="container mx-auto px-6 lg:px-12 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                {{-- Left Side: Content --}}
-                <div class="space-y-8" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200">
-                    <div class="inline-flex items-center gap-4 bg-blue-500/40 md:backdrop-blur-xl px-4 py-2 md:px-8 md:py-4 rounded-full shadow-md md:shadow-[0_0_40px_rgba(59,130,246,0.4)] border border-blue-400/40 hover:border-blue-300/60 transition-all duration-500 hover:shadow-lg md:hover:shadow-[0_0_60px_rgba(59,130,246,0.6)] hover:scale-105"
-                        data-aos="zoom-in" data-aos-delay="400">
-                        <div
-                            class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.6)] animate-pulse-glow">
-                            <img src="{{ asset('img/hasmilogo.png') }}" alt="Logo HASMI" class="w-9 h-9 object-contain">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-6 lg:gap-16 items-center">
+
+                {{-- ===== LEFT: Content ===== --}}
+                <div class="hero-left pt-24 pb-6 lg:pt-0 lg:pb-0 lg:py-32">
+
+                    {{-- Logo Badge --}}
+                    <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-5 lg:mb-8">
+                        <div class="w-9 h-9 lg:w-12 lg:h-12 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                            <img src="{{ asset('img/hasmilogo.png') }}" alt="Logo HASMI" class="w-6 h-6 lg:w-8 lg:h-8 object-contain">
                         </div>
-                        <span
-                            class="text-2xl font-bold text-white tracking-wide drop-shadow-[0_0_10px_rgba(191,219,254,0.5)]">HASMI</span>
+                        <span class="text-lg lg:text-2xl font-bold text-white tracking-wide">HASMI</span>
                     </div>
 
-                    <h1 class="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
-                        <span class="block text-white mb-2 lg:mb-3 drop-shadow-[0_0_20px_rgba(191,219,254,0.4)] animate-text-glow"
-                            data-aos="fade-up" data-aos-delay="600">Membangun</span>
-                        <span
-                            class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-blue-100 to-blue-200 animate-gradient-flow drop-shadow-[0_0_30px_rgba(191,219,254,0.7)]"
-                            data-aos="fade-up" data-aos-delay="800">
-                            Peradaban Islami
-                        </span>
+                    {{-- Heading --}}
+                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.1] mb-4 lg:mb-6">
+                        <span class="block text-white">Membangun</span>
+                        <span class="block text-blue-200">Peradaban Islami</span>
                     </h1>
 
-                    <p class="text-base md:text-lg lg:text-2xl text-blue-100 leading-relaxed max-w-2xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)] line-clamp-4 md:line-clamp-none"
-                        data-aos="fade-up" data-aos-delay="1000">
+                    {{-- Description --}}
+                    <p class="text-sm sm:text-base lg:text-xl text-blue-100 leading-relaxed max-w-lg mb-6 lg:mb-8">
                         Himpunan Aktivis Siswa Muslim Indonesia berkomitmen membina generasi muslim melalui pendidikan,
                         dakwah, dan aksi sosial berkelanjutan untuk kemajuan umat.
                     </p>
 
-                    <div class="flex flex-wrap gap-3 lg:gap-5 pt-4 lg:pt-6" data-aos="fade-up" data-aos-delay="1200">
+                    {{-- CTA Buttons --}}
+                    <div class="flex flex-wrap gap-3 mb-8 lg:mb-12">
                         <a href="{{ route('materi.index') }}"
-                            class="group px-6 py-3 lg:px-10 lg:py-5 bg-blue-500 text-white rounded-2xl font-bold shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 flex items-center gap-3 relative overflow-hidden border-2 border-blue-400/40">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
-                            <span class="relative z-10 text-base lg:text-lg">Jelajahi Materi</span>
-                            <i
-                                class="fas fa-arrow-right relative z-10 group-hover:translate-x-2 transition-transform duration-300"></i>
+                            class="inline-flex items-center gap-2 px-6 py-3 lg:px-8 lg:py-4 bg-white text-blue-700 rounded-xl font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 text-sm lg:text-base">
+                            <span>Jelajahi Materi</span>
+                            <i class="fas fa-arrow-right text-xs"></i>
                         </a>
                         <a href="{{ route('tentang') }}"
-                            class="px-6 py-3 lg:px-10 lg:py-5 bg-blue-600/50 backdrop-blur-md text-white rounded-2xl font-bold shadow-[0_0_30px_rgba(59,130,246,0.4)] border-2 border-blue-400/60 hover:bg-blue-500/70 hover:border-blue-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(59,130,246,0.6)] transition-all duration-500 text-base lg:text-lg">
-                            Tentang Kami
+                            class="inline-flex items-center gap-2 px-6 py-3 lg:px-8 lg:py-4 bg-white/10 text-white rounded-xl font-bold border border-white/30 hover:bg-white/20 hover:scale-105 transition-all duration-300 text-sm lg:text-base">
+                            <span>Tentang Kami</span>
                         </a>
                     </div>
 
-                    {{-- Trust Indicators with Enhanced Animation --}}
-                    <div class="grid grid-cols-2 lg:flex lg:items-center gap-4 md:gap-6 lg:gap-10 pt-6 lg:pt-10" data-aos="fade-up" data-aos-delay="1400">
-                        <div class="text-center group" data-aos="zoom-in" data-aos-delay="1600">
-                            <div class="text-3xl lg:text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
+                    {{-- ===== STATS - ALWAYS VISIBLE ===== --}}
+                    <div class="stats-grid grid grid-cols-4 gap-3 sm:gap-6">
+                        <div class="text-center">
+                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white counter leading-none mb-1"
                                 data-target="{{ $materiCount }}">0</div>
-                            <div class="text-sm lg:text-base text-blue-100 font-semibold mt-1">Materi</div>
+                            <div class="text-[10px] sm:text-xs lg:text-sm text-blue-200 font-semibold uppercase tracking-wide">Materi</div>
                         </div>
-                        <div class="text-center group" data-aos="zoom-in" data-aos-delay="1800">
-                            <div class="text-3xl lg:text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
+                        <div class="text-center">
+                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white counter leading-none mb-1"
                                 data-target="{{ $programCount }}">0</div>
-                            <div class="text-sm lg:text-base text-blue-100 font-semibold mt-1">Program</div>
+                            <div class="text-[10px] sm:text-xs lg:text-sm text-blue-200 font-semibold uppercase tracking-wide">Program</div>
                         </div>
-                        <div class="text-center group" data-aos="zoom-in" data-aos-delay="2000">
-                            <div class="text-3xl lg:text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
+                        <div class="text-center">
+                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white counter leading-none mb-1"
                                 data-target="{{ $intisariCount }}">0</div>
-                            <div class="text-sm lg:text-base text-blue-100 font-semibold mt-1">Intisari</div>
+                            <div class="text-[10px] sm:text-xs lg:text-sm text-blue-200 font-semibold uppercase tracking-wide">Intisari</div>
                         </div>
-                        <div class="text-center group" data-aos="zoom-in" data-aos-delay="2200">
-                            <div class="text-3xl lg:text-4xl font-bold text-white counter drop-shadow-[0_0_20px_rgba(191,219,254,0.5)] group-hover:scale-125 transition-transform duration-300"
+                        <div class="text-center">
+                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white counter leading-none mb-1"
                                 data-target="{{ $kegiatanCount }}">0</div>
-                            <div class="text-sm lg:text-base text-blue-100 font-semibold mt-1">Kegiatan</div>
+                            <div class="text-[10px] sm:text-xs lg:text-sm text-blue-200 font-semibold uppercase tracking-wide">Kegiatan</div>
                         </div>
                     </div>
                 </div>
 
-                {{-- Right Side: Latest Updates Slider --}}
-                <div class="relative mt-4 lg:mt-0" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="400">
-                    <style>
-                        .status-swiper {
-                            width: 100%;
-                            height: 100%; /* Let container control height */
-                            border-radius: 1.5rem;
-                        }
+                {{-- ===== RIGHT: Slider ===== --}}
+                <div class="hero-right pb-8 lg:py-12">
 
-                        .status-pagination {
-                            position: absolute;
-                            top: 20px;
-                            left: 0;
-                            right: 0;
-                            z-index: 50;
-                            display: flex;
-                            gap: 8px;
-                            padding: 0 20px;
-                        }
+                    {{-- Slider Container --}}
+                    <div class="slider-wrapper relative rounded-2xl lg:rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-blue-800"
+                         style="height: 380px; min-height: 380px;">
 
-                        .status-bullet {
-                            flex: 1;
-                            height: 5px;
-                            background: rgba(191, 219, 254, 0.25);
-                            border-radius: 5px;
-                            overflow: hidden;
-                            position: relative;
-                            cursor: pointer;
-                            transition: all 0.3s ease;
-                        }
+                        {{-- Progress bullets on TOP --}}
+                        <div class="slider-bullets absolute top-3 left-3 right-3 z-20 flex gap-1.5 lg:gap-2">
+                            @foreach ($latestUpdates as $index => $update)
+                                @if ($index < 10)
+                                <div class="bullet-item flex-1 h-1 lg:h-1.5 rounded-full overflow-hidden bg-white/20 cursor-pointer"
+                                     onclick="goToSlide({{ $index }})">
+                                    <div class="bullet-fill h-full w-0 bg-white rounded-full"></div>
+                                </div>
+                                @endif
+                            @endforeach
+                        </div>
 
-                        .status-bullet:hover {
-                            background: rgba(191, 219, 254, 0.35);
-                            transform: scaleY(1.3);
-                        }
-
-                        .status-bullet-fill {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            height: 100%;
-                            width: 0%;
-                            background: linear-gradient(90deg, #bfdbfe, #dbeafe);
-                            border-radius: 5px;
-                            box-shadow: 0 0 10px rgba(191, 219, 254, 0.6);
-                        }
-
-                        .status-bullet.active .status-bullet-fill {
-                            width: 100%;
-                            transition: width 5s linear;
-                        }
-
-                        .status-bullet.passed .status-bullet-fill {
-                            width: 100%;
-                        }
-                    </style>
-
-                    <div
-                        class="relative h-[550px] lg:h-[650px] rounded-3xl overflow-hidden shadow-md md:shadow-[0_0_80px_rgba(59,130,246,0.5)] border-2 border-blue-400/40 md:backdrop-blur-sm bg-blue-600/30 hover:shadow-lg md:hover:shadow-[0_0_120px_rgba(59,130,246,0.7)] transition-all duration-700">
-
-                        <div class="swiper status-swiper">
-                            <div class="status-pagination" id="statusPagination"></div>
-
+                        {{-- Swiper --}}
+                        <div class="swiper hero-swiper w-full h-full">
                             <div class="swiper-wrapper">
                                 @foreach ($latestUpdates as $index => $update)
-                                    <div class="swiper-slide relative">
-                                        @if (
-                                            $update->thumbnail ||
-                                                (isset($update->cover) && $update->cover) ||
-                                                (isset($update->photos) && !empty($update->photos)))
-                                            @php
-                                                $bgImage =
-                                                    $update->thumbnail ??
-                                                    ($update->cover ?? ($update->photos[0] ?? null));
-                                                $bgUrl = null;
-                                                if ($bgImage) {
-                                                    if (filter_var($bgImage, FILTER_VALIDATE_URL)) {
-                                                        $bgUrl = $bgImage;
-                                                    } elseif (
-                                                        \Illuminate\Support\Str::startsWith($bgImage, 'storage/')
-                                                    ) {
-                                                        $bgUrl = asset($bgImage);
-                                                    } else {
-                                                        $bgUrl = asset('storage/' . $bgImage);
-                                                    }
+                                    <div class="swiper-slide relative w-full h-full overflow-hidden">
+
+                                        {{-- BG Image --}}
+                                        @php
+                                            $bgImage = $update->thumbnail ?? ($update->cover ?? ($update->photos[0] ?? null));
+                                            $bgUrl = null;
+                                            if ($bgImage) {
+                                                if (filter_var($bgImage, FILTER_VALIDATE_URL)) {
+                                                    $bgUrl = $bgImage;
+                                                } elseif (\Illuminate\Support\Str::startsWith($bgImage, 'storage/')) {
+                                                    $bgUrl = asset($bgImage);
+                                                } else {
+                                                    $bgUrl = asset('storage/' . $bgImage);
                                                 }
-                                            @endphp
-                                            @if ($bgUrl)
-                                                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[12000ms] ease-linear scale-100 hover:scale-110"
-                                                    style="background-image: url('{{ $bgUrl }}');"></div>
-                                            @else
-                                                <div class="absolute inset-0 bg-gradient-to-br from-blue-700 to-blue-600">
-                                                </div>
-                                            @endif
+                                            }
+                                        @endphp
+
+                                        @if ($bgUrl)
+                                            <div class="absolute inset-0" style="background: url('{{ $bgUrl }}') center/cover no-repeat;"></div>
                                         @else
-                                            <div class="absolute inset-0 bg-gradient-to-br from-blue-700 to-blue-600">
+                                            <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
+                                                <i class="fas fa-image text-white/10 text-6xl"></i>
                                             </div>
                                         @endif
 
-                                        <div
-                                            class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent">
-                                        </div>
+                                        {{-- Dark gradient overlay --}}
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
 
-                                        <div class="relative h-full flex flex-col justify-between p-6 pb-10 md:p-8 md:pb-12">
-                                            <div class="flex justify-between items-start pt-2 mb-2 lg:mb-0">
-                                                <span
-                                                    class="px-3 py-1 md:px-4 md:py-2 rounded-full bg-blue-500/90 backdrop-blur-md text-white text-[10px] md:text-sm font-bold uppercase tracking-wider shadow-sm md:shadow-[0_0_30px_rgba(59,130,246,0.6)] border border-blue-300/60 animate-pulse-subtle">
+                                        {{-- Slide Content --}}
+                                        <div class="absolute inset-0 flex flex-col justify-between p-4 lg:p-8">
+                                            {{-- Top: Type + Date --}}
+                                            <div class="flex items-start justify-between mt-6">
+                                                <span class="inline-block px-2.5 py-1 bg-blue-500 text-white text-[9px] lg:text-xs font-bold uppercase tracking-widest rounded-lg">
                                                     {{ $update->type }}
                                                 </span>
-                                                <div
-                                                    class="text-right bg-black/40 backdrop-blur-md p-2 md:p-3 rounded-xl border border-blue-400/30 shadow-sm">
-                                                    <div class="text-white font-bold text-sm md:text-xl drop-shadow-md">
+                                                <div class="text-right bg-black/50 px-2 py-1.5 lg:px-3 lg:py-2 rounded-lg">
+                                                    <div class="text-white font-bold text-xs lg:text-sm leading-tight">
                                                         {{ $update->date ? \Carbon\Carbon::parse($update->date)->format('d M Y') : '' }}
                                                     </div>
-                                                    <div class="text-blue-100 text-[10px] md:text-sm font-semibold">
+                                                    <div class="text-blue-200 text-[9px] lg:text-xs">
                                                         {{ $update->date ? \Carbon\Carbon::parse($update->date)->diffForHumans() : '' }}
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="space-y-4 md:space-y-5 mb-4 md:mb-6 mt-auto" data-swiper-parallax-y="-20">
+                                            {{-- Bottom: Text --}}
+                                            <div class="space-y-2 lg:space-y-3">
                                                 @if (isset($update->category))
-                                                    <div
-                                                        class="text-blue-100 font-semibold text-sm md:text-base mb-2 md:mb-3 flex items-center gap-2 md:gap-3">
-                                                        <span
-                                                            class="w-8 md:w-12 h-[2px] md:h-[3px] bg-blue-300 inline-block animate-pulse-width"></span>
+                                                    <p class="text-blue-200 text-xs lg:text-sm font-semibold flex items-center gap-2">
+                                                        <span class="w-5 h-px bg-blue-300 inline-block"></span>
                                                         {{ $update->category->name }}
-                                                    </div>
+                                                    </p>
                                                 @endif
 
-                                                <h2
-                                                    class="text-xl md:text-4xl lg:text-5xl font-bold text-white leading-tight drop-shadow-md md:drop-shadow-[0_0_30px_rgba(0,0,0,0.8)] line-clamp-3 mb-2">
+                                                <h2 class="text-lg sm:text-xl lg:text-3xl font-bold text-white leading-tight line-clamp-2">
                                                     {{ $update->title ?? $update->judul }}
                                                 </h2>
 
-                                                <p
-                                                    class="text-gray-100 text-sm md:text-lg line-clamp-2 md:line-clamp-3 leading-relaxed drop-shadow-lg">
-                                                    {{ \Illuminate\Support\Str::limit(strip_tags($update->excerpt ?? ($update->description ?? ($update->content ?? ''))), 150) }}
+                                                <p class="text-gray-300 text-xs lg:text-sm line-clamp-2 leading-relaxed">
+                                                    {{ \Illuminate\Support\Str::limit(strip_tags($update->excerpt ?? ($update->description ?? ($update->content ?? ''))), 100) }}
                                                 </p>
-                                            
-                                                <div data-swiper-parallax-y="-10" class="pt-3 md:pt-2">
-                                                    <a href="{{ route($update->route_name, $update->route_params) }}"
-                                                        class="inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-8 md:py-4 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-400 transition-all duration-300 group w-fit shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:shadow-[0_0_50px_rgba(59,130,246,0.7)] hover:scale-105 border-2 border-blue-400/40">
-                                                        <span class="text-base md:text-lg">Selengkapnya</span>
-                                                        <i
-                                                            class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
-                                                    </a>
-                                                </div>
+
+                                                <a href="{{ route($update->route_name, $update->route_params) }}"
+                                                    class="inline-flex items-center gap-2 px-4 py-2 lg:px-6 lg:py-3 bg-blue-500 hover:bg-blue-400 text-white rounded-lg font-bold transition-all text-xs lg:text-sm border border-blue-400/50">
+                                                    <span>Selengkapnya</span>
+                                                    <i class="fas fa-arrow-right text-xs"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -289,318 +202,210 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- Enhanced Decorative Elements --}}
-                    <div
-                        class="absolute -z-10 -top-10 -right-10 w-full h-full bg-blue-500/25 rounded-3xl blur-md md:blur-3xl animate-pulse-glow">
-                    </div>
-                    <div
-                        class="absolute -z-10 -bottom-10 -left-10 w-full h-full bg-blue-400/25 rounded-3xl blur-md md:blur-3xl animate-pulse-glow animation-delay-2000">
-                    </div>
                 </div>
 
-                <script data-cfasync="false" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-                <script data-cfasync="false">
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const totalSlides = {{ count($latestUpdates) }};
-                        const paginationLimit = 10;
-                        const paginationContainer = document.getElementById('statusPagination');
-
-                        let paginationHTML = '';
-                        for (let i = 0; i < Math.min(totalSlides, paginationLimit); i++) {
-                            paginationHTML +=
-                                `<div class="status-bullet" onclick="goToSlide(${i})"><div class="status-bullet-fill"></div></div>`;
-                        }
-                        paginationContainer.innerHTML = paginationHTML;
-
-                        const bullets = document.querySelectorAll('.status-bullet');
-                        const autoplayDuration = 5000;
-
-                        const swiper = new Swiper(".status-swiper", {
-                            effect: "fade",
-                            fadeEffect: {
-                                crossFade: true
-                            },
-                            speed: 800,
-                            autoplay: {
-                                delay: autoplayDuration,
-                                disableOnInteraction: false,
-                            },
-                            loop: true,
-                            on: {
-                                slideChangeTransitionStart: function() {
-                                    updatePagination(this.realIndex);
-                                }
-                            }
-                        });
-
-                        window.goToSlide = function(index) {
-                            swiper.slideToLoop(index);
-                        };
-
-                        function updatePagination(activeIndex) {
-                            bullets.forEach((bullet, index) => {
-                                bullet.classList.remove('active', 'passed');
-                                const fill = bullet.querySelector('.status-bullet-fill');
-
-                                fill.style.transition = 'none';
-                                fill.style.width = '0%';
-
-                                if (index < activeIndex) {
-                                    bullet.classList.add('passed');
-                                } else if (index === activeIndex) {
-                                    setTimeout(() => {
-                                        bullet.classList.add('active');
-                                        fill.style.transition = `width ${autoplayDuration}ms linear`;
-                                        fill.style.width = '100%';
-                                    }, 10);
-                                }
-                            });
-                        }
-
-                        updatePagination(0);
-                    });
-                </script>
-            </div>
-        </div>
-
-        {{-- Enhanced Scroll Indicator --}}
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
-            <div
-                class="w-7 h-12 border-3 border-blue-200/70 rounded-full flex justify-center p-2 shadow-[0_0_30px_rgba(191,219,254,0.4)]">
-                <div class="w-2 h-4 bg-blue-100 rounded-full animate-scroll-pulse shadow-[0_0_10px_rgba(191,219,254,0.7)]">
-                </div>
-            </div>
-        </div>
+            </div>{{-- end grid --}}
+        </div>{{-- end container --}}
     </section>
 
-    {{-- ABOUT SECTION --}}
-    {{-- ABOUT SECTION --}}
-    <section class="py-16 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-20">
-            <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-500 rounded-full blur-[150px] animate-blob-slow">
-            </div>
-            <div
-                class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-400 rounded-full blur-[150px] animate-blob-slow animation-delay-3000">
-            </div>
-            <div
-                class="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-blue-600 rounded-full blur-[150px] animate-blob-slow animation-delay-6000">
-            </div>
-        </div>
+    {{-- Swiper & Slider JS --}}
+    <script data-cfasync="false" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script data-cfasync="false">
+    (function() {
+        const AUTOPLAY_MS = 5000;
+        let swiper;
 
-        <div class="container mx-auto px-6 lg:px-12 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
-                <div class="relative" data-aos="fade-right" data-aos-duration="1000">
-                    <div class="relative z-10" data-aos="zoom-in" data-aos-delay="200">
-                        <div
-                            class="aspect-video rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(59,130,246,0.6)] border-4 border-blue-400/40 backdrop-blur-lg bg-blue-600/30 hover:scale-105 hover:shadow-[0_0_120px_rgba(59,130,246,0.8)] transition-all duration-700 group">
-                            <x-lite-youtube videoId="ovpPnlSwpe4" title="Profil HASMI" class="w-full h-full" />
-                        </div>
-                    </div>
-                    <div class="absolute -z-10 top-10 left-10 w-full h-full border-4 border-blue-400/50 rounded-3xl animate-border-pulse-slow"
-                        data-aos="fade" data-aos-delay="400"></div>
-                    <div
-                        class="absolute -z-20 -bottom-10 -right-10 w-96 h-96 bg-blue-500/35 rounded-full blur-[100px] animate-pulse-glow">
+        function initSlider() {
+            const bullets = document.querySelectorAll('.bullet-item');
+
+            swiper = new Swiper('.hero-swiper', {
+                effect: 'fade',
+                fadeEffect: { crossFade: true },
+                speed: 700,
+                loop: true,
+                allowTouchMove: true,
+                autoplay: {
+                    delay: AUTOPLAY_MS,
+                    disableOnInteraction: false,
+                },
+                on: {
+                    slideChangeTransitionStart: function () {
+                        updateBullets(this.realIndex);
+                    }
+                }
+            });
+
+            // Initial bullet state
+            updateBullets(0);
+
+            window.goToSlide = function(idx) {
+                swiper.slideToLoop(idx);
+            };
+
+            function updateBullets(activeIdx) {
+                bullets.forEach((b, i) => {
+                    const fill = b.querySelector('.bullet-fill');
+                    // Reset
+                    fill.style.transition = 'none';
+                    fill.style.width = '0%';
+                    b.classList.remove('is-active', 'is-done');
+
+                    if (i < activeIdx) {
+                        b.classList.add('is-done');
+                        fill.style.width = '100%';
+                    } else if (i === activeIdx) {
+                        b.classList.add('is-active');
+                        // Start fill animation after tiny delay
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                fill.style.transition = `width ${AUTOPLAY_MS}ms linear`;
+                                fill.style.width = '100%';
+                            });
+                        });
+                    }
+                });
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSlider);
+        } else {
+            initSlider();
+        }
+    })();
+    </script>
+
+    {{-- ===== ABOUT SECTION ===== --}}
+    <section class="py-16 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <div class="aspect-video rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl border-2 border-white/20 bg-blue-800">
+                        <x-lite-youtube videoId="ovpPnlSwpe4" title="Profil HASMI" class="w-full h-full" />
                     </div>
                 </div>
 
-                <div class="space-y-7" data-aos="fade-left" data-aos-duration="1000">
-                    <div class="inline-block" data-aos="zoom-in" data-aos-delay="200">
-                        <span
-                            class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]">Tentang
-                            Kami</span>
-                    </div>
+                <div class="space-y-5 lg:space-y-7" data-aos="fade-left" data-aos-duration="1000">
+                    <span class="inline-block px-4 py-2 lg:px-6 lg:py-3 bg-white/10 text-white rounded-full text-xs lg:text-sm font-bold uppercase tracking-wider border border-white/20">Tentang Kami</span>
 
-                    <h2 class="text-3xl lg:text-6xl font-bold text-white leading-tight drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
-                        data-aos="fade-up" data-aos-delay="300">
+                    <h2 class="text-2xl sm:text-3xl lg:text-5xl font-bold text-white leading-tight">
                         Himpunan Aktivis Siswa Muslim Indonesia
                     </h2>
 
-                    <div class="w-24 h-2 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-400 rounded-full animate-gradient-flow shadow-[0_0_20px_rgba(96,165,250,0.6)]"
-                        data-aos="fade-right" data-aos-delay="400"></div>
+                    <div class="w-16 lg:w-24 h-1 lg:h-1.5 bg-blue-300 rounded-full"></div>
 
-                    <div class="space-y-5 text-blue-50 text-xl leading-relaxed">
-                        <p data-aos="fade-up" data-aos-delay="500" class="drop-shadow-lg">
-                            HASMI adalah organisasi pendidikan, dakwah, dan sosial yang berfokus membina generasi muda
-                            muslim Indonesia dengan pendekatan komprehensif dan berkelanjutan.
-                        </p>
-                        <p data-aos="fade-up" data-aos-delay="600" class="drop-shadow-lg">
-                            Melalui berbagai program unggulan, kami membentuk karakter Islami yang kuat, berilmu, dan
-                            berkontribusi nyata bagi kemajuan umat dan bangsa.
-                        </p>
+                    <div class="space-y-3 text-blue-100 text-sm sm:text-base lg:text-lg leading-relaxed">
+                        <p>HASMI adalah organisasi pendidikan, dakwah, dan sosial yang berfokus membina generasi muda muslim Indonesia dengan pendekatan komprehensif dan berkelanjutan.</p>
+                        <p>Melalui berbagai program unggulan, kami membentuk karakter Islami yang kuat, berilmu, dan berkontribusi nyata bagi kemajuan umat dan bangsa.</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-8">
-                        <div class="flex items-start gap-4 bg-blue-600/50 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/40 hover:border-blue-300 hover:bg-blue-500/60 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] group h-full"
-                            data-aos="fade-up" data-aos-delay="700">
-                            <div
-                                class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.6)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                                <i class="fas fa-check text-white text-xl"></i>
+                    <div class="grid sm:grid-cols-2 gap-4 pt-2">
+                        <div class="flex items-start gap-3 bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20">
+                            <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-white text-sm"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-white text-lg mb-1">Pendidikan Berkualitas</h4>
-                                <p class="text-sm text-blue-100 leading-relaxed">Program pembelajaran terpadu untuk membentuk karakter islami.</p>
+                                <h4 class="font-bold text-white text-sm mb-0.5">Pendidikan Berkualitas</h4>
+                                <p class="text-xs text-blue-200 leading-relaxed">Program pembelajaran terpadu untuk membentuk karakter islami.</p>
                             </div>
                         </div>
-                        <div class="flex items-start gap-4 bg-blue-600/50 backdrop-blur-md p-6 rounded-2xl border-2 border-blue-400/40 hover:border-blue-300 hover:bg-blue-500/60 transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] group h-full"
-                            data-aos="fade-up" data-aos-delay="800">
-                            <div
-                                class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-[0_0_30px_rgba(59,130,246,0.6)] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 animation-delay-1000">
-                                <i class="fas fa-check text-white text-xl"></i>
+                        <div class="flex items-start gap-3 bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20">
+                            <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-white text-sm"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-white text-lg mb-1">Dakwah Aktif</h4>
-                                <p class="text-sm text-blue-100 leading-relaxed">Menyebarkan nilai-nilai Islam rahmatan lil 'alamin.</p>
+                                <h4 class="font-bold text-white text-sm mb-0.5">Dakwah Aktif</h4>
+                                <p class="text-xs text-blue-200 leading-relaxed">Menyebarkan nilai-nilai Islam rahmatan lil 'alamin.</p>
                             </div>
                         </div>
                     </div>
 
                     <a href="{{ route('tentang') }}"
-                        class="inline-flex items-center gap-3 px-10 py-5 bg-blue-500 text-white rounded-2xl font-bold shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 group mt-6 border-2 border-blue-400/40"
-                        data-aos="fade-up" data-aos-delay="900">
-                        <span class="text-lg">Selengkapnya</span>
-                        <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300"></i>
+                        class="inline-flex items-center gap-3 px-6 py-3 lg:px-8 lg:py-4 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-400 hover:scale-105 transition-all duration-300 text-sm lg:text-base border border-blue-400/50">
+                        <span>Selengkapnya</span>
+                        <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- VISI MISI SECTION --}}
-    <section class="py-20 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
-        <div
-            class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 opacity-15 rounded-l-[100px] blur-[150px] animate-pulse-glow">
-        </div>
-        <div
-            class="absolute bottom-0 left-0 w-1/2 h-full bg-blue-400 opacity-15 rounded-r-[100px] blur-[150px] animate-pulse-glow animation-delay-3000">
-        </div>
-
-        <div class="container mx-auto px-6 lg:px-12 relative z-10">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <span
-                    class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]"
-                    data-aos="zoom-in">Komitmen Kami</span>
-                <h2 class="text-3xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
-                    data-aos="fade-up" data-aos-delay="200">Visi & Misi</h2>
-                <div class="w-28 h-2 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-400 rounded-full mx-auto animate-gradient-flow shadow-[0_0_20px_rgba(96,165,250,0.6)]"
-                    data-aos="fade" data-aos-delay="300"></div>
+    {{-- ===== VISI MISI ===== --}}
+    <section class="py-16 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="text-center mb-10 lg:mb-20" data-aos="fade-up">
+                <span class="inline-block px-4 py-2 lg:px-6 lg:py-3 bg-white/10 text-white rounded-full text-xs lg:text-sm font-bold uppercase tracking-wider border border-white/20 mb-4">Komitmen Kami</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-3">Visi & Misi</h2>
+                <div class="w-16 lg:w-24 h-1 bg-blue-300 rounded-full mx-auto"></div>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
-                {{-- Visi Card --}}
-                <div class="group relative" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 shadow-[0_0_60px_rgba(59,130,246,0.5)]">
+            <div class="grid sm:grid-cols-2 gap-5 lg:gap-10 max-w-5xl mx-auto">
+                <div class="group bg-white/10 backdrop-blur-xl rounded-2xl lg:rounded-3xl p-6 lg:p-10 border border-white/20 hover:bg-white/15 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 lg:w-16 lg:h-16 bg-blue-500 rounded-xl flex items-center justify-center mb-4 lg:mb-6">
+                        <i class="fas fa-eye text-white text-lg lg:text-2xl"></i>
                     </div>
-                    <div
-                        class="relative bg-blue-700/60 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_80px_rgba(59,130,246,0.4)] border-2 border-blue-400/50 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-300 hover:shadow-[0_0_100px_rgba(59,130,246,0.6)]">
-                        <div
-                            class="w-20 h-20 bg-blue-500 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(59,130,246,0.6)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700 border-2 border-blue-300/40">
-                            <i class="fas fa-eye text-white text-3xl"></i>
-                        </div>
-                        <h3 class="text-3xl font-bold text-white mb-5 drop-shadow-lg">Visi</h3>
-                        <p class="text-blue-50 text-xl leading-relaxed drop-shadow-md">
-                            Menjadi organisasi terdepan dalam pembinaan generasi muslim yang berakhlak mulia, berilmu, dan
-                            bermanfaat bagi umat dan bangsa.
-                        </p>
-                    </div>
+                    <h3 class="text-xl lg:text-2xl font-bold text-white mb-3">Visi</h3>
+                    <p class="text-blue-100 text-sm lg:text-base leading-relaxed">
+                        Menjadi organisasi terdepan dalam pembinaan generasi muslim yang berakhlak mulia, berilmu, dan bermanfaat bagi umat dan bangsa.
+                    </p>
                 </div>
 
-                {{-- Misi Card --}}
-                <div class="group relative" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl transform group-hover:scale-105 transition-transform duration-700 shadow-[0_0_60px_rgba(59,130,246,0.5)]">
+                <div class="group bg-white/10 backdrop-blur-xl rounded-2xl lg:rounded-3xl p-6 lg:p-10 border border-white/20 hover:bg-white/15 transition-all duration-500" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-12 h-12 lg:w-16 lg:h-16 bg-blue-500 rounded-xl flex items-center justify-center mb-4 lg:mb-6">
+                        <i class="fas fa-bullseye text-white text-lg lg:text-2xl"></i>
                     </div>
-                    <div
-                        class="relative bg-blue-700/60 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_80px_rgba(59,130,246,0.4)] border-2 border-blue-400/50 transform group-hover:-translate-y-4 transition-all duration-700 hover:border-blue-300 hover:shadow-[0_0_100px_rgba(59,130,246,0.6)]">
-                        <div
-                            class="w-20 h-20 bg-blue-500 rounded-2xl flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(59,130,246,0.6)] group-hover:rotate-12 group-hover:scale-125 transition-all duration-700 border-2 border-blue-300/40">
-                            <i class="fas fa-bullseye text-white text-3xl"></i>
-                        </div>
-                        <h3 class="text-3xl font-bold text-white mb-5 drop-shadow-lg">Misi</h3>
-                        <p class="text-blue-50 text-xl leading-relaxed drop-shadow-md">
-                            Menyelenggarakan program pendidikan, dakwah, dan sosial secara komprehensif dan berkelanjutan
-                            untuk kemajuan peradaban Islam.
-                        </p>
-                    </div>
+                    <h3 class="text-xl lg:text-2xl font-bold text-white mb-3">Misi</h3>
+                    <p class="text-blue-100 text-sm lg:text-base leading-relaxed">
+                        Menyelenggarakan program pendidikan, dakwah, dan sosial secara komprehensif dan berkelanjutan untuk kemajuan peradaban Islam.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- PROGRAM UNGGULAN --}}
-    <section class="py-20 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-15">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-[150px] animate-blob-slow"></div>
-            <div
-                class="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-400 rounded-full blur-[150px] animate-blob-slow animation-delay-3000">
-            </div>
-            <div
-                class="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-600 rounded-full blur-[150px] animate-blob-slow animation-delay-6000">
-            </div>
-        </div>
-
-        <div class="container mx-auto px-6 lg:px-12 relative z-10">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <span
-                    class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]"
-                    data-aos="zoom-in">Program Kami</span>
-                <h2 class="text-3xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
-                    data-aos="fade-up" data-aos-delay="200">Program Unggulan</h2>
-                <p class="text-blue-50 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">
-                    Berbagai program terbaik untuk pembinaan generasi muslim Indonesia</p>
+    {{-- ===== PROGRAM UNGGULAN ===== --}}
+    <section class="py-16 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="text-center mb-10 lg:mb-20" data-aos="fade-up">
+                <span class="inline-block px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold uppercase tracking-wider border border-white/20 mb-4">Program Kami</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-3">Program Unggulan</h2>
+                <p class="text-blue-200 text-sm lg:text-base max-w-xl mx-auto">Berbagai program terbaik untuk pembinaan generasi muslim Indonesia</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-8 mb-10">
                 @foreach ($homePrograms as $index => $p)
-                    <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                    <article class="card-item group rounded-2xl overflow-hidden flex flex-col h-full bg-blue-600/50 border border-white/20 hover:border-white/40 transition-all duration-300"
                         data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-
-                        {{-- Thumbnail --}}
-                        <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
+                        <div class="relative overflow-hidden" style="height: 200px;">
                             @if ($p->thumbnail)
                                 <img src="{{ asset('storage/' . $p->thumbnail) }}"
-                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     alt="{{ $p->title }}" loading="lazy">
                             @else
-                                <div
-                                    class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                                    <i class="fas fa-hand-holding-heart text-white/20 text-6xl"></i>
+                                <div class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-800 flex items-center justify-center">
+                                    <i class="fas fa-hand-holding-heart text-white/20 text-5xl"></i>
                                 </div>
                             @endif
-
-                            {{-- Overlay --}}
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
-                                <p class="text-white text-xs leading-relaxed italic">"Klik untuk detail."</p>
-                            </div>
-
-                            {{-- Category Badge --}}
-                            <div class="absolute top-4 left-4">
-                                <span
-                                    class="px-4 py-2 bg-blue-500 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-blue-400/30">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <div class="absolute top-3 left-3">
+                                <span class="px-2.5 py-1 bg-blue-500 text-white text-[9px] font-bold uppercase tracking-wider rounded-lg border border-blue-400/40">
                                     {{ $p->category->name ?? 'Program' }}
                                 </span>
                             </div>
                         </div>
-
-                        {{-- Content --}}
-                        <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
-                            <h3
-                                class="text-xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-100 transition-colors leading-tight">
+                        <div class="p-5 flex flex-col flex-grow">
+                            <h3 class="text-base font-bold text-white mb-2 line-clamp-2 group-hover:text-blue-100 transition-colors">
                                 {{ $p->title }}
                             </h3>
-
-                            <p class="text-blue-100 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
+                            <p class="text-blue-200 text-xs leading-relaxed mb-4 line-clamp-3">
                                 {{ \Illuminate\Support\Str::limit(strip_tags($p->description), 100) }}
                             </p>
-
                             <div class="mt-auto">
                                 <a href="{{ route('program.show', $p->slug) }}"
-                                    class="w-full py-4 bg-blue-500 group-hover:bg-blue-400 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-800/50 border-2 border-blue-400/40">
+                                    class="w-full py-3 bg-blue-500 hover:bg-blue-400 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all text-sm border border-blue-400/40">
                                     <span>Lihat Program</span>
-                                    <i
-                                        class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
+                                    <i class="fas fa-arrow-right text-xs"></i>
                                 </a>
                             </div>
                         </div>
@@ -608,79 +413,58 @@
                 @endforeach
             </div>
 
-            <div class="text-center" data-aos="fade-up" data-aos-delay="600">
+            <div class="text-center">
                 <a href="{{ route('program.index') }}"
-                    class="inline-flex items-center gap-3 text-blue-50 font-bold hover:gap-5 transition-all group px-8 py-4 bg-blue-600/50 backdrop-blur-md rounded-full border-2 border-blue-300/50 hover:bg-blue-500/60 hover:border-blue-200 shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_50px_rgba(59,130,246,0.6)] text-lg">
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded-full border border-white/30 hover:bg-white/20 transition-all text-sm font-bold">
                     <span>Lihat Semua Program</span>
-                    <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                    <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    {{-- MATERI PEMBELAJARAN --}}
-    <section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
-        <div class="container mx-auto px-6 lg:px-12">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <span
-                    class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]"
-                    data-aos="zoom-in">Pembelajaran</span>
-                <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
-                    data-aos="fade-up" data-aos-delay="200">Materi Terbaru</h2>
-                <p class="text-blue-50 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">
-                    Artikel dan materi pembelajaran untuk pemahaman agama yang lebih baik</p>
+    {{-- ===== MATERI PEMBELAJARAN ===== --}}
+    <section class="py-16 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="text-center mb-10 lg:mb-20" data-aos="fade-up">
+                <span class="inline-block px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold uppercase tracking-wider border border-white/20 mb-4">Pembelajaran</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-3">Materi Terbaru</h2>
+                <p class="text-blue-200 text-sm lg:text-base max-w-xl mx-auto">Artikel dan materi pembelajaran untuk pemahaman agama yang lebih baik</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-8">
                 @foreach ($homeArticles as $index => $article)
-                    <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
-                        data-aos="fade-up" data-aos-delay="{{ $index * 150 }}">
-
-                        {{-- Thumbnail --}}
-                        <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
+                    <article class="card-item group rounded-2xl overflow-hidden flex flex-col h-full bg-blue-600/50 border border-white/20 hover:border-white/40 transition-all duration-300"
+                        data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                        <div class="relative overflow-hidden" style="height: 200px;">
                             @if ($article->thumbnail)
                                 <img src="{{ asset($article->thumbnail) }}"
-                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     alt="{{ $article->title }}" loading="lazy">
                             @else
-                                <div
-                                    class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                                    <i class="fas fa-book-open text-white/20 text-6xl"></i>
+                                <div class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-800 flex items-center justify-center">
+                                    <i class="fas fa-book-open text-white/20 text-5xl"></i>
                                 </div>
                             @endif
-
-                            {{-- Overlay --}}
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
-                                <p class="text-white text-xs leading-relaxed italic">"Klik untuk membaca."</p>
-                            </div>
-
-                            {{-- Category Badge --}}
-                            <div class="absolute top-4 left-4">
-                                <span
-                                    class="px-4 py-2 bg-blue-500 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-blue-400/30">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <div class="absolute top-3 left-3">
+                                <span class="px-2.5 py-1 bg-blue-500 text-white text-[9px] font-bold uppercase tracking-wider rounded-lg border border-blue-400/40">
                                     {{ $article->category->name }}
                                 </span>
                             </div>
                         </div>
-
-                        {{-- Content --}}
-                        <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
-                            <h3
-                                class="text-xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-100 transition-colors leading-tight">
+                        <div class="p-5 flex flex-col flex-grow">
+                            <h3 class="text-base font-bold text-white mb-2 line-clamp-2 group-hover:text-blue-100 transition-colors">
                                 {{ $article->title }}
                             </h3>
-
-                            <p class="text-blue-100 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
+                            <p class="text-blue-200 text-xs leading-relaxed mb-4 line-clamp-3">
                                 {{ \Illuminate\Support\Str::limit(strip_tags($article->content ?? $article->excerpt), 100) }}
                             </p>
-
                             <div class="mt-auto">
                                 <a href="{{ route('materi.detail', [$article->category->slug, $article->slug]) }}"
-                                    class="w-full py-4 bg-blue-500 group-hover:bg-blue-400 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-800/50 border-2 border-blue-400/40">
+                                    class="w-full py-3 bg-blue-500 hover:bg-blue-400 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all text-sm border border-blue-400/40">
                                     <span>Baca Materi</span>
-                                    <i
-                                        class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
+                                    <i class="fas fa-arrow-right text-xs"></i>
                                 </a>
                             </div>
                         </div>
@@ -688,83 +472,55 @@
                 @endforeach
             </div>
 
-            <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="600">
+            <div class="text-center mt-10">
                 <a href="{{ route('materi.index') }}"
-                    class="inline-flex items-center gap-3 px-10 py-5 bg-blue-500 text-white rounded-2xl font-bold shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 group text-lg border-2 border-blue-400/40">
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-400 transition-all text-sm border border-blue-400/40">
                     <span>Lihat Semua Materi</span>
-                    <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300"></i>
+                    <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    {{-- INTISARI SECTION --}}
-    <section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-0 left-0 w-full h-full bg-blue-500 animate-pulse-glow"></div>
-        </div>
-
-        <div class="container mx-auto px-6 lg:px-12 relative z-10">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <span
-                    class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]"
-                    data-aos="zoom-in">Publikasi</span>
-                <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
-                    data-aos="fade-up" data-aos-delay="200">Intisari HASMI</h2>
-                <p class="text-blue-50 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">
-                    Kumpulan materi dan ringkasan pembelajaran dalam bentuk publikasi</p>
+    {{-- ===== INTISARI SECTION ===== --}}
+    <section class="py-16 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="text-center mb-10 lg:mb-20" data-aos="fade-up">
+                <span class="inline-block px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold uppercase tracking-wider border border-white/20 mb-4">Publikasi</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-3">Intisari HASMI</h2>
+                <p class="text-blue-200 text-sm lg:text-base max-w-xl mx-auto">Kumpulan materi dan ringkasan pembelajaran dalam bentuk publikasi</p>
             </div>
 
-            <div class="grid grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
                 @foreach ($homeIntisari as $index => $i)
-                    <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                    <article class="card-item group rounded-2xl overflow-hidden flex flex-col h-full bg-blue-600/50 border border-white/20 hover:border-white/40 transition-all duration-300"
                         data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-
-                        {{-- Thumbnail --}}
-                        <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
+                        <div class="relative overflow-hidden" style="height: 160px;">
                             @if ($i->thumbnail_url)
                                 <img src="{{ $i->thumbnail_url }}"
-                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     alt="{{ $i->title }}" loading="lazy">
                             @else
-                                <div
-                                    class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                                    <i class="fas fa-image text-white/20 text-6xl"></i>
+                                <div class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-800 flex items-center justify-center">
+                                    <i class="fas fa-image text-white/20 text-4xl"></i>
                                 </div>
                             @endif
-
-                            {{-- Overlay --}}
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
-                                <p class="text-white text-xs leading-relaxed italic">"Klik untuk membaca."</p>
-                            </div>
-
-                            {{-- Badge --}}
-                            <div class="absolute top-4 left-4">
-                                <span
-                                    class="px-4 py-2 bg-blue-500 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-blue-400/30">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <div class="absolute top-2.5 left-2.5">
+                                <span class="px-2 py-1 bg-blue-500 text-white text-[8px] font-bold uppercase tracking-wider rounded-md border border-blue-400/40">
                                     Intisari
                                 </span>
                             </div>
                         </div>
-
-                        {{-- Content --}}
-                        <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
-                            <h3
-                                class="text-xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-100 transition-colors leading-tight">
+                        <div class="p-3 sm:p-4 flex flex-col flex-grow">
+                            <h3 class="text-xs sm:text-sm font-bold text-white mb-2 line-clamp-2 group-hover:text-blue-100 transition-colors leading-tight">
                                 {{ $i->title }}
                             </h3>
-
-                            <p class="text-blue-100 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">
-                                {{ \Illuminate\Support\Str::limit(strip_tags($i->content), 100) }}
-                            </p>
-
                             <div class="mt-auto">
                                 <a href="{{ route('intisari.show', $i->slug) }}"
-                                    class="w-full py-4 bg-blue-500 group-hover:bg-blue-400 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-800/50 border-2 border-blue-400/40">
-                                    <span>Baca Intisari</span>
-                                    <i
-                                        class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
+                                    class="w-full py-2 sm:py-2.5 bg-blue-500 hover:bg-blue-400 text-white rounded-lg font-bold flex items-center justify-center gap-1.5 transition-all text-xs border border-blue-400/40">
+                                    <span>Baca</span>
+                                    <i class="fas fa-arrow-right text-[10px]"></i>
                                 </a>
                             </div>
                         </div>
@@ -772,88 +528,61 @@
                 @endforeach
             </div>
 
-            <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="500">
+            <div class="text-center mt-10">
                 <a href="{{ route('intisari.index') }}"
-                    class="inline-flex items-center gap-3 text-blue-50 font-bold hover:gap-5 transition-all group px-8 py-4 bg-blue-600/50 backdrop-blur-md rounded-full border-2 border-blue-300/50 hover:bg-blue-500/60 hover:border-blue-200 shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_50px_rgba(59,130,246,0.6)] text-lg">
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded-full border border-white/30 hover:bg-white/20 transition-all text-sm font-bold">
                     <span>Lihat Semua Intisari</span>
-                    <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                    <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    {{-- KEGIATAN SECTION --}}
-    <section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden"
-        id="kegiatan">
-        <div class="absolute inset-0 opacity-8">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(59,130,246,0.4),transparent_50%)]">
-            </div>
-        </div>
-
-        <div class="container mx-auto px-6 lg:px-12 relative z-10">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <span
-                    class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]"
-                    data-aos="zoom-in">Aktivitas</span>
-                <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
-                    data-aos="fade-up" data-aos-delay="200">Kegiatan HASMI</h2>
-                <p class="text-blue-50 text-xl max-w-2xl mx-auto drop-shadow-lg" data-aos="fade-up" data-aos-delay="300">
-                    Dokumentasi kegiatan dan agenda dakwah terbaru</p>
+    {{-- ===== KEGIATAN ===== --}}
+    <section class="py-16 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800" id="kegiatan">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="text-center mb-10 lg:mb-20" data-aos="fade-up">
+                <span class="inline-block px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold uppercase tracking-wider border border-white/20 mb-4">Aktivitas</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-3">Kegiatan HASMI</h2>
+                <p class="text-blue-200 text-sm lg:text-base max-w-xl mx-auto">Dokumentasi kegiatan dan agenda dakwah terbaru</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-8">
                 @foreach ($homeKegiatan as $index => $k)
-                    <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
+                    <article class="card-item group rounded-2xl overflow-hidden flex flex-col h-full bg-blue-600/50 border border-white/20 hover:border-white/40 transition-all duration-300"
                         data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-
-                        {{-- Thumbnail --}}
-                        <div class="h-64 relative overflow-hidden m-4 rounded-[2rem]">
+                        <div class="relative overflow-hidden" style="height: 200px;">
                             @if ($k->thumbnail_url)
                                 <img src="{{ $k->thumbnail_url }}"
-                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     alt="{{ $k->title }}" loading="lazy">
                             @else
-                                <div
-                                    class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                                    <i class="fas fa-camera text-white/20 text-6xl"></i>
+                                <div class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-800 flex items-center justify-center">
+                                    <i class="fas fa-camera text-white/20 text-5xl"></i>
                                 </div>
                             @endif
-
-                            {{-- Overlay --}}
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
-                                <p class="text-white text-xs leading-relaxed italic">"Klik untuk dokumentasi."</p>
-                            </div>
-
-                            {{-- Badge --}}
-                            <div class="absolute top-4 left-4">
-                                <span
-                                    class="px-4 py-2 bg-blue-500 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-blue-400/30">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <div class="absolute top-3 left-3">
+                                <span class="px-2.5 py-1 bg-blue-500 text-white text-[9px] font-bold uppercase tracking-wider rounded-lg border border-blue-400/40">
                                     Kegiatan
                                 </span>
                             </div>
                         </div>
-
-                        {{-- Content --}}
-                        <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
-                            <div class="flex items-center gap-2 mb-3">
-                                <i class="far fa-calendar-alt text-blue-100 text-xs"></i>
-                                <span class="text-blue-100 text-[11px] font-bold uppercase tracking-wider">
+                        <div class="p-5 flex flex-col flex-grow">
+                            <div class="flex items-center gap-1.5 mb-2">
+                                <i class="far fa-calendar-alt text-blue-300 text-xs"></i>
+                                <span class="text-blue-300 text-[10px] font-semibold">
                                     {{ $k->event_date ? \Carbon\Carbon::parse($k->event_date)->isoFormat('D MMM Y') : \Carbon\Carbon::parse($k->created_at)->isoFormat('D MMM Y') }}
                                 </span>
                             </div>
-
-                            <h3
-                                class="text-xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-100 transition-colors leading-tight">
+                            <h3 class="text-base font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-100 transition-colors">
                                 {{ $k->title }}
                             </h3>
-
                             <div class="mt-auto">
                                 <a href="{{ route('kegiatan.show', $k->slug) }}"
-                                    class="w-full py-4 bg-blue-500 group-hover:bg-blue-400 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-800/50 border-2 border-blue-400/40">
+                                    class="w-full py-3 bg-blue-500 hover:bg-blue-400 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all text-sm border border-blue-400/40">
                                     <span>Lihat Dokumentasi</span>
-                                    <i
-                                        class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
+                                    <i class="fas fa-arrow-right text-xs"></i>
                                 </a>
                             </div>
                         </div>
@@ -861,663 +590,220 @@
                 @endforeach
             </div>
 
-            <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="500">
+            <div class="text-center mt-10">
                 <a href="{{ route('kegiatan.index') }}"
-                    class="inline-flex items-center gap-4 px-10 py-5 bg-blue-500 text-white rounded-2xl font-bold shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-500 group text-lg border-2 border-blue-400/40">
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-400 transition-all text-sm border border-blue-400/40">
                     <span>Galeri Kegiatan</span>
-                    <i class="fas fa-images group-hover:rotate-12 transition-transform"></i>
+                    <i class="fas fa-images"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    {{-- EXTERNAL LINKS (LAYANAN KAMI) --}}
-    <section class="py-32 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 relative overflow-hidden">
-        <div
-            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-500/35 blur-[180px] rounded-full pointer-events-none">
-        </div>
-
-        <div class="container mx-auto px-6 lg:px-12 relative z-10">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <span
-                    class="px-6 py-3 bg-blue-500/50 backdrop-blur-md text-blue-50 rounded-full text-sm font-bold uppercase tracking-wider border-2 border-blue-300/50 shadow-[0_0_30px_rgba(59,130,246,0.4)]">Layanan
-                    Kami</span>
-                <h2 class="text-5xl lg:text-6xl font-bold text-white mt-8 mb-5 drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-                    Kontribusi Untuk Umat</h2>
+    {{-- ===== LAYANAN KAMI ===== --}}
+    <section class="py-16 lg:py-40 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="text-center mb-10 lg:mb-16" data-aos="fade-up">
+                <span class="inline-block px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold uppercase tracking-wider border border-white/20 mb-4">Layanan Kami</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-5xl font-bold text-white">Kontribusi Untuk Umat</h2>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-                <a href="https://donasi.hasmi.org/" target="_blank"
-                    class="group relative overflow-hidden bg-blue-700/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
-                    data-aos="fade-up" data-aos-delay="100">
-                    <div class="relative z-10 text-center">
-                        <div
-                            class="w-24 h-24 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.5)] border-2 border-blue-400/40">
-                            <i class="fas fa-hand-holding-heart text-4xl text-white"></i>
-                        </div>
-                        <h3 class="text-3xl font-bold mb-4 text-white">Donasi</h3>
-                        <p class="text-blue-50 text-lg leading-relaxed">Salurkan donasi terbaik Anda untuk kemajuan dakwah
-                            dan pendidikan Islam</p>
-                    </div>
-                    <div
-                        class="absolute inset-0 bg-blue-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                    </div>
-                </a>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 lg:gap-8 max-w-5xl mx-auto">
+                @php
+                $layanan = [
+                    ['url' => 'https://donasi.hasmi.org/', 'icon' => 'fa-hand-holding-heart', 'title' => 'Donasi', 'desc' => 'Salurkan donasi terbaik Anda untuk kemajuan dakwah dan pendidikan Islam', 'delay' => 100],
+                    ['url' => 'https://beasiswapendidikanislam.com/', 'icon' => 'fa-user-graduate', 'title' => 'Beasiswa', 'desc' => 'Program beasiswa pendidikan Islam untuk mencetak kader dai berkualitas', 'delay' => 200],
+                    ['url' => 'https://hasmipeduli.org/', 'icon' => 'fa-hands-helping', 'title' => 'Sosial', 'desc' => 'Aksi sosial dan kemanusiaan untuk membantu sesama yang membutuhkan', 'delay' => 300],
+                ];
+                @endphp
 
-                <a href="https://beasiswapendidikanislam.com/" target="_blank"
-                    class="group relative overflow-hidden bg-blue-700/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
-                    data-aos="fade-up" data-aos-delay="200">
-                    <div class="relative z-10 text-center">
-                        <div
-                            class="w-24 h-24 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.5)] border-2 border-blue-400/40">
-                            <i class="fas fa-user-graduate text-4xl text-white"></i>
-                        </div>
-                        <h3 class="text-3xl font-bold mb-4 text-white">Beasiswa</h3>
-                        <p class="text-blue-50 text-lg leading-relaxed">Program beasiswa pendidikan Islam untuk mencetak
-                            kader dai berkualitas</p>
+                @foreach ($layanan as $l)
+                <a href="{{ $l['url'] }}" target="_blank"
+                    class="group flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 sm:text-center bg-white/10 rounded-2xl p-5 sm:p-8 border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300"
+                    data-aos="fade-up" data-aos-delay="{{ $l['delay'] }}">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-blue-500 rounded-2xl flex items-center justify-center flex-shrink-0 sm:mx-auto sm:mb-4 lg:mb-6 group-hover:scale-110 transition-transform duration-300 border border-blue-400/40">
+                        <i class="fas {{ $l['icon'] }} text-xl lg:text-3xl text-white"></i>
                     </div>
-                    <div
-                        class="absolute inset-0 bg-blue-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                    <div>
+                        <h3 class="text-lg lg:text-2xl font-bold text-white mb-1 sm:mb-2">{{ $l['title'] }}</h3>
+                        <p class="text-blue-200 text-xs lg:text-sm leading-relaxed">{{ $l['desc'] }}</p>
                     </div>
                 </a>
-
-                <a href="https://hasmipeduli.org/" target="_blank"
-                    class="group relative overflow-hidden bg-blue-700/50 backdrop-blur-xl rounded-3xl p-12 shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_80px_rgba(59,130,246,0.6)] transition-all duration-700 hover:-translate-y-3 border-2 border-blue-400/40 hover:border-blue-300"
-                    data-aos="fade-up" data-aos-delay="300">
-                    <div class="relative z-10 text-center">
-                        <div
-                            class="w-24 h-24 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 shadow-[0_10px_40px_rgba(59,130,246,0.5)] border-2 border-blue-400/40">
-                            <i class="fas fa-hands-helping text-4xl text-white"></i>
-                        </div>
-                        <h3 class="text-3xl font-bold mb-4 text-white">Sosial</h3>
-                        <p class="text-blue-50 text-lg leading-relaxed">Aksi sosial dan kemanusiaan untuk membantu sesama
-                            yang membutuhkan</p>
-                    </div>
-                    <div
-                        class="absolute inset-0 bg-blue-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                    </div>
-                </a>
+                @endforeach
             </div>
         </div>
     </section>
 
 @endsection
 
-{{-- ENHANCED STYLES --}}
 @section('styles')
-    <style>
-        * {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(to bottom, #1d4ed8, #2563eb);
-        }
-
-        /* Enhanced Islamic Pattern */
-        .islamic-pattern {
-            position: absolute;
-            inset: 0;
-            background-image:
-                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(96, 165, 250, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.25) 0%, transparent 50%);
-            background-size: 1000px 1000px;
-            animation: patternMove 30s ease-in-out infinite;
-        }
-
-        @keyframes patternMove {
-
-            0%,
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-
-            33% {
-                transform: translate(-50px, 50px) rotate(3deg);
-            }
-
-            66% {
-                transform: translate(50px, -50px) rotate(-3deg);
-            }
-        }
-
-        /* Enhanced Floating Orbs - WARNA BIRU LEBIH TERANG */
-        .floating-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            animation: float-enhanced 25s ease-in-out infinite;
-            opacity: 0.6;
-        }
-
-        .orb-1 {
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
-            top: -200px;
-            left: -200px;
-            animation-delay: 0s;
-        }
-
-        .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-            bottom: -150px;
-            right: 10%;
-            animation-delay: 7s;
-        }
-
-        .orb-3 {
-            width: 450px;
-            height: 450px;
-            background: linear-gradient(135deg, #60a5fa 0%, #93c5fd 100%);
-            top: 25%;
-            right: -150px;
-            animation-delay: 14s;
-        }
-
-        .orb-4 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
-            bottom: 15%;
-            left: 25%;
-            animation-delay: 4s;
-        }
-
-        .orb-5 {
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-            top: 45%;
-            left: 5%;
-            animation-delay: 11s;
-        }
-
-        /* Article Card Style */
-        .article-card {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-        }
-
-        .article-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.7);
-            border-color: rgba(96, 165, 250, 0.7);
-        }
-
-        @keyframes float-enhanced {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1) rotate(0deg);
-            }
-
-            25% {
-                transform: translate(60px, -60px) scale(1.2) rotate(5deg);
-            }
-
-            50% {
-                transform: translate(-40px, 50px) scale(0.9) rotate(-5deg);
-            }
-
-            75% {
-                transform: translate(50px, 40px) scale(1.1) rotate(3deg);
-            }
-        }
-
-        /* Enhanced Particles */
-        .particles {
-            position: absolute;
-            inset: 0;
-        }
-
-        .particle {
-            position: absolute;
-            width: var(--size, 4px);
-            height: var(--size, 4px);
-            background: radial-gradient(circle, rgba(191, 219, 254, 0.8), rgba(147, 197, 253, 0.2));
-            border-radius: 50%;
-            animation: particleFloat-enhanced var(--duration, 15s) ease-in-out infinite;
-            animation-delay: var(--delay, 0s);
-            top: calc(50% + (var(--delay) * 15px));
-            left: calc(50% + (var(--delay) * 20px));
-            box-shadow: 0 0 15px rgba(191, 219, 254, 0.6);
-        }
-
-        @keyframes particleFloat-enhanced {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(0.3);
-                opacity: 0;
-            }
-
-            25% {
-                transform: translate(120px, -120px) scale(1.2);
-                opacity: 1;
-            }
-
-            50% {
-                transform: translate(-100px, -250px) scale(0.9);
-                opacity: 0.8;
-            }
-
-            75% {
-                transform: translate(180px, -180px) scale(1.4);
-                opacity: 1;
-            }
-        }
-
-        /* Light Rays */
-        .light-rays {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-        }
-
-        .light-ray {
-            position: absolute;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(180deg, transparent, rgba(191, 219, 254, 0.3), transparent);
-            animation: lightRay 8s ease-in-out infinite;
-            animation-delay: var(--ray-delay, 0s);
-            left: calc(20% * var(--ray-delay));
-            opacity: 0.4;
-        }
-
-        @keyframes lightRay {
-
-            0%,
-            100% {
-                transform: translateY(-100%) scaleY(0);
-                opacity: 0;
-            }
-
-            50% {
-                transform: translateY(0) scaleY(1);
-                opacity: 0.4;
-            }
-        }
-
-        /* Enhanced Gradient Animations */
-        @keyframes gradient-flow {
-
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        .animate-gradient-flow {
-            background-size: 200% 200%;
-            animation: gradient-flow 6s ease infinite;
-        }
-
-        /* Enhanced Text Glow */
-        @keyframes text-glow {
-
-            0%,
-            100% {
-                text-shadow: 0 0 20px rgba(191, 219, 254, 0.3);
-            }
-
-            50% {
-                text-shadow: 0 0 40px rgba(191, 219, 254, 0.6), 0 0 60px rgba(191, 219, 254, 0.5);
-            }
-        }
-
-        .animate-text-glow {
-            animation: text-glow 3s ease-in-out infinite;
-        }
-
-        /* Enhanced Pulse Animations */
-        @keyframes pulse-glow {
-
-            0%,
-            100% {
-                opacity: 0.4;
-                transform: scale(0.95);
-                box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
-            }
-
-            50% {
-                opacity: 0.7;
-                transform: scale(1.15);
-                box-shadow: 0 0 60px rgba(59, 130, 246, 0.6);
-            }
-        }
-
-        .animate-pulse-glow {
-            animation: pulse-glow 6s ease-in-out infinite;
-        }
-
-        @keyframes pulse-subtle {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            50% {
-                transform: scale(1.05);
-                opacity: 0.9;
-            }
-        }
-
-        .animate-pulse-subtle {
-            animation: pulse-subtle 3s ease-in-out infinite;
-        }
-
-        /* Enhanced Blob Animation */
-        @keyframes blob-slow {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1) rotate(0deg);
-            }
-
-            25% {
-                transform: translate(40px, -60px) scale(1.15) rotate(5deg);
-            }
-
-            50% {
-                transform: translate(-30px, 30px) scale(0.85) rotate(-5deg);
-            }
-
-            75% {
-                transform: translate(50px, 40px) scale(1.1) rotate(3deg);
-            }
-        }
-
-        .animate-blob-slow {
-            animation: blob-slow 20s infinite ease-in-out;
-        }
-
-        /* Enhanced Border Animations */
-        @keyframes border-pulse {
-
-            0%,
-            100% {
-                border-color: rgba(59, 130, 246, 0.4);
-                box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
-            }
-
-            50% {
-                border-color: rgba(96, 165, 250, 0.7);
-                box-shadow: 0 0 60px rgba(59, 130, 246, 0.6);
-            }
-        }
-
-        .animate-border-pulse {
-            animation: border-pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes border-pulse-slow {
-
-            0%,
-            100% {
-                border-color: rgba(59, 130, 246, 0.5);
-                box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
-            }
-
-            50% {
-                border-color: rgba(96, 165, 250, 0.8);
-                box-shadow: 0 0 80px rgba(59, 130, 246, 0.7);
-            }
-        }
-
-        .animate-border-pulse-slow {
-            animation: border-pulse-slow 5s ease-in-out infinite;
-        }
-
-        /* Pulse Width Animation */
-        @keyframes pulse-width {
-
-            0%,
-            100% {
-                width: 48px;
-                opacity: 1;
-            }
-
-            50% {
-                width: 72px;
-                opacity: 0.7;
-            }
-        }
-
-        .animate-pulse-width {
-            animation: pulse-width 2s ease-in-out infinite;
-        }
-
-        /* Enhanced Scroll Animation */
-        @keyframes scroll-pulse {
-            0% {
-                transform: translateY(0);
-                opacity: 0;
-            }
-
-            50% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(16px);
-                opacity: 0;
-            }
-        }
-
-        .animate-scroll-pulse {
-            animation: scroll-pulse 2.5s ease-in-out infinite;
-        }
-
-        @keyframes bounce-slow {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-
-        .animate-bounce-slow {
-            animation: bounce-slow 3s ease-in-out infinite;
-        }
-
-        /* Animation Delays */
-        .animation-delay-1000 {
-            animation-delay: 1s;
-        }
-
-        .animation-delay-2000 {
-            animation-delay: 2s;
-        }
-
-        .animation-delay-3000 {
-            animation-delay: 3s;
-        }
-
-        .animation-delay-4000 {
-            animation-delay: 4s;
-        }
-
-        .animation-delay-6000 {
-            animation-delay: 6s;
-        }
-
-        /* Line Clamp */
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* Enhanced Scrollbar */
-        ::-webkit-scrollbar {
-            width: 16px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: linear-gradient(to bottom, #1d4ed8, #2563eb);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, #3b82f6, #60a5fa);
-            border-radius: 8px;
-            border: 4px solid #2563eb;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, #60a5fa, #93c5fd);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .floating-orb, .particle, .light-ray {
-                display: none;
-            }
-            /* Disable heavy animations on mobile */
-            .animate-pulse-glow, .animate-blob-slow, .animate-border-pulse, .animate-text-glow, .animate-gradient-flow, .animate-pulse-subtle {
-                animation: none !important;
-                filter: none !important;
-                backdrop-filter: none !important;
-                box-shadow: none !important;
-            }
-        }
-    </style>
+<style>
+/* ===== GLOBAL ===== */
+* { scroll-behavior: smooth; box-sizing: border-box; }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #1d4ed8;
+    overflow-x: hidden;
+}
+
+/* ===== HERO ===== */
+.hero-section {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+}
+@media (max-width: 1023px) {
+    .hero-section {
+        min-height: auto;
+        padding-bottom: 2rem;
+    }
+    .hero-left {
+        padding-top: 5.5rem;
+        padding-bottom: 1.5rem;
+    }
+    .hero-right {
+        padding-bottom: 2rem;
+    }
+}
+
+/* ===== SLIDER - CRITICAL FIX ===== */
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    /* Fixed height set inline, overridden by media query */
+}
+@media (min-width: 1024px) {
+    .slider-wrapper { height: 600px !important; }
+}
+
+/* Swiper MUST fill container */
+.hero-swiper,
+.hero-swiper .swiper-wrapper,
+.hero-swiper .swiper-slide {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0; left: 0;
+}
+.hero-swiper {
+    position: absolute !important;
+    inset: 0;
+    overflow: hidden;
+}
+.hero-swiper .swiper-wrapper {
+    display: flex;
+}
+.hero-swiper .swiper-slide {
+    position: absolute !important;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+/* ===== CARDS ===== */
+.card-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+@media (max-width: 640px) {
+    .card-item:hover { transform: none; box-shadow: none; }
+}
+
+/* ===== STATS ===== */
+.stats-grid {
+    width: 100%;
+}
+.counter {
+    display: block;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ===== FLOATING ORBS (desktop only) ===== */
+.floating-orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(100px); opacity: 0.4;
+    pointer-events: none;
+}
+.orb-1 { width: 500px; height: 500px; background: #60a5fa; top: -200px; left: -150px; animation: floatOrb 20s ease-in-out infinite; }
+.orb-2 { width: 400px; height: 400px; background: #3b82f6; bottom: -100px; right: 5%; animation: floatOrb 25s ease-in-out infinite reverse; }
+.orb-3 { width: 350px; height: 350px; background: #93c5fd; top: 30%; right: -100px; animation: floatOrb 18s ease-in-out infinite; animation-delay: -8s; }
+
+@keyframes floatOrb {
+    0%, 100% { transform: translate(0,0); }
+    33% { transform: translate(40px, -50px); }
+    66% { transform: translate(-30px, 40px); }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes gradient-flow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #1e40af; }
+::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #60a5fa; }
+
+/* ===== LINE CLAMP ===== */
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+</style>
 @endsection
 
 @section('scripts')
-    <script data-cfasync="false" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script data-cfasync="false" src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script data-cfasync="false" src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script data-cfasync="false">
+document.addEventListener('DOMContentLoaded', function() {
+    // AOS
+    AOS.init({
+        disable: 'mobile',
+        duration: 900,
+        easing: 'ease-out-cubic',
+        once: true,
+        offset: 60,
+    });
 
-    <script data-cfasync="false">
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize AOS
-            AOS.init({
-                disable: 'mobile',
-                duration: 1200,
-                easing: 'ease-out-cubic',
-                once: false,
-                offset: 120,
-                delay: 100,
-                mirror: true,
-                anchorPlacement: 'top-bottom',
-            });
+    // ===== COUNTER ANIMATION =====
+    function animateCounter(el) {
+        const target = parseInt(el.getAttribute('data-target')) || 0;
+        if (target === 0) { el.textContent = '0'; return; }
+        const duration = 1500;
+        const steps = 60;
+        const increment = target / steps;
+        let current = 0;
+        let step = 0;
+        const timer = setInterval(() => {
+            step++;
+            current = Math.min(Math.ceil(increment * step), target);
+            el.textContent = current;
+            if (current >= target) clearInterval(timer);
+        }, duration / steps);
+    }
 
-            window.addEventListener('resize', () => {
-                AOS.refresh();
-            });
-
-            // Enhanced Counter Animation
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200;
-
-            const observerOptions = {
-                threshold: 0.7,
-                rootMargin: '0px'
-            };
-
-            const counterObserver = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counter = entry.target;
-                        const target = +counter.getAttribute('data-target');
-                        const increment = target / speed;
-
-                        const updateCount = () => {
-                            const count = +counter.innerText;
-                            if (count < target) {
-                                counter.innerText = Math.ceil(count + increment);
-                                setTimeout(updateCount, 10);
-                            } else {
-                                counter.innerText = target;
-                                counter.style.transform = 'scale(1.3)';
-                                setTimeout(() => {
-                                    counter.style.transform = 'scale(1)';
-                                }, 300);
-                            }
-                        };
-
-                        counter.style.transition = 'transform 0.3s ease';
-                        updateCount();
-                        counterObserver.unobserve(counter);
-                    }
-                });
-            }, observerOptions);
-
-            counters.forEach(counter => counterObserver.observe(counter));
-
-            // Smooth scroll
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
-            // Enhanced Parallax
-            let ticking = false;
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        const scrolled = window.pageYOffset;
-                        const parallaxElements = document.querySelectorAll('.floating-orb');
-
-                        parallaxElements.forEach((el, index) => {
-                            const speed = 0.2 + (index * 0.05);
-                            const yPos = -(scrolled * speed);
-                            el.style.transform = `translateY(${yPos}px)`;
-                        });
-
-                        const particles = document.querySelectorAll('.particle');
-                        particles.forEach((particle, index) => {
-                            const speed = 0.08 + (index * 0.01);
-                            const yPos = -(scrolled * speed);
-                            particle.style.transform = `translateY(${yPos}px)`;
-                        });
-
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            });
-
-            // Loading animation
-            window.addEventListener('load', function() {
-                document.body.style.opacity = '0';
-                setTimeout(() => {
-                    document.body.style.transition = 'opacity 0.8s ease';
-                    document.body.style.opacity = '1';
-                }, 100);
-            });
+    // Use IntersectionObserver for counter trigger
+    const counters = document.querySelectorAll('.counter');
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                obs.unobserve(entry.target);
+            }
         });
-    </script>
+    }, { threshold: 0.3 });
+
+    counters.forEach(c => obs.observe(c));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+        });
+    });
+});
+</script>
 @endsection
