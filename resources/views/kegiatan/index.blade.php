@@ -81,6 +81,18 @@
     .wave-bottom { position: absolute; bottom: -1px; left: 0; width: 100%; line-height: 0; z-index: 5; }
     .wave-bottom svg { fill: #1d4ed8; }
 
+    /* ===== AOS MOBILE SAFETY NET =====
+       Paksa elemen data-aos selalu visible di mobile
+       sebelum JS sempat jalan (mencegah halaman kosong) */
+    @media (max-width: 1023px) {
+        [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+            visibility: visible !important;
+        }
+    }
+
     @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
             animation-duration: 0.01ms !important;
@@ -88,6 +100,8 @@
             transition-duration: 0.01ms !important;
         }
     }
+
+    
 </style>
 
 {{-- HERO SECTION --}}
@@ -203,9 +217,25 @@
         const isMobile = window.innerWidth < 1024 ||
             /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-        if (!isMobile) {
-            AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 50 });
-        }
-    });
+        
+    // AOS init + fix mobile visibility
+    if (!isMobile) {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+        });
+    } else {
+        // Mobile: AOS tidak diinit, paksa semua elemen data-aos jadi visible
+        document.querySelectorAll('[data-aos]').forEach(el => {
+            el.removeAttribute('data-aos');
+            el.removeAttribute('data-aos-delay');
+            el.removeAttribute('data-aos-duration');
+            el.style.opacity = '';
+            el.style.transform = '';
+            el.style.visibility = '';
+        });
+    }    });
 </script>
 @endsection
