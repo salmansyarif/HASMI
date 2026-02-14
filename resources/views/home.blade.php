@@ -779,6 +779,19 @@ body {
         transition-duration: 0.01ms !important;
     }
 }
+
+    /* ===== AOS MOBILE SAFETY NET =====
+       Paksa elemen data-aos selalu visible di mobile
+       sebelum JS sempat jalan (mencegah blank page) */
+    @media (max-width: 1023px) {
+        [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+            visibility: visible !important;
+        }
+    }
+
 </style>
 @endsection
 
@@ -792,6 +805,8 @@ document.addEventListener('DOMContentLoaded', function() {
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     // ===== AOS: hanya aktif di desktop =====
+    
+    // AOS init + fix mobile visibility
     if (!isMobile) {
         AOS.init({
             duration: 800,
@@ -799,11 +814,17 @@ document.addEventListener('DOMContentLoaded', function() {
             once: true,
             offset: 60,
         });
-    }
-    // Mobile: AOS tidak diinit → semua elemen langsung visible, tanpa animasi masuk
-
-    // ===== COUNTER ANIMATION =====
-    function animateCounter(el) {
+    } else {
+        // Mobile: AOS tidak diinit, paksa semua elemen data-aos jadi visible
+        document.querySelectorAll('[data-aos]').forEach(el => {
+            el.removeAttribute('data-aos');
+            el.removeAttribute('data-aos-delay');
+            el.removeAttribute('data-aos-duration');
+            el.style.opacity = '';
+            el.style.transform = '';
+            el.style.visibility = '';
+        });
+    }    function animateCounter(el) {
         const target = parseInt(el.getAttribute('data-target')) || 0;
         if (target === 0) { el.textContent = '0'; return; }
 

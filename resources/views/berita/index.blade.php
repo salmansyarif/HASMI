@@ -191,6 +191,19 @@
             transition-duration: 0.01ms !important;
         }
     }
+
+    /* ===== AOS MOBILE SAFETY NET =====
+       Paksa elemen data-aos selalu visible di mobile
+       sebelum JS sempat jalan (mencegah blank page) */
+    @media (max-width: 1023px) {
+        [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+            visibility: visible !important;
+        }
+    }
+
 </style>
 
 @endsection

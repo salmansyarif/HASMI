@@ -296,6 +296,19 @@ body { animation: fadeIn 0.4s ease-out; }
         transition-duration: 0.01ms !important;
     }
 }
+
+    /* ===== AOS MOBILE SAFETY NET =====
+       Paksa elemen data-aos selalu visible di mobile
+       sebelum JS sempat jalan (mencegah blank page) */
+    @media (max-width: 1023px) {
+        [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+            visibility: visible !important;
+        }
+    }
+
 </style>
 
 <script data-cfasync="false" src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
@@ -306,17 +319,26 @@ document.addEventListener('DOMContentLoaded', function() {
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     // AOS hanya di desktop
+    
+    // AOS init + fix mobile visibility
     if (!isMobile) {
         AOS.init({
             duration: 800,
-            easing: 'ease-out',
+            easing: 'ease-out-cubic',
             once: true,
-            offset: 80
+            offset: 60,
         });
-    }
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    } else {
+        // Mobile: AOS tidak diinit, paksa semua elemen data-aos jadi visible
+        document.querySelectorAll('[data-aos]').forEach(el => {
+            el.removeAttribute('data-aos');
+            el.removeAttribute('data-aos-delay');
+            el.removeAttribute('data-aos-duration');
+            el.style.opacity = '';
+            el.style.transform = '';
+            el.style.visibility = '';
+        });
+    }    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
