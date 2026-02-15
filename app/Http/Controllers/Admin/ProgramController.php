@@ -77,7 +77,9 @@ class ProgramController extends Controller
             'description' => 'nullable',
             'content' => 'nullable',
             'content' => 'nullable',
-            'media_type' => 'required|in:image,video',
+            'content' => 'nullable',
+            'media_type' => 'required|in:image,video,none',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'video_file' => 'nullable|file|mimes:mp4,mov,avi,wmv,webm|max:102400',
@@ -98,6 +100,15 @@ class ProgramController extends Controller
         // Auto set position to 0 (will be handled by model boot)
         $validated['position'] = 0;
         $validated['is_active'] = $request->has('is_active') ? true : false;
+
+        // Handle No Media (Only clear internal media, preserve thumbnail)
+        if ($validated['media_type'] === 'none') {
+            $validated['media_type'] = 'image'; // Default for DB Enum or leave as is if nullable? 
+            // DB enum is likely 'image', 'video'. 
+            $validated['photos'] = null;
+            $validated['video_url'] = null;
+            // DO NOT set thumbnail to null here!
+        }
 
         // Upload thumbnail
         if ($request->hasFile('thumbnail')) {
@@ -166,7 +177,9 @@ class ProgramController extends Controller
             'description' => 'nullable',
             'content' => 'nullable',
             'content' => 'nullable',
-            'media_type' => 'required|in:image,video',
+            'content' => 'nullable',
+            'media_type' => 'required|in:image,video,none',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'video_file' => 'nullable|file|mimes:mp4,mov,avi,wmv,webm|max:102400',
@@ -191,6 +204,25 @@ class ProgramController extends Controller
         }
 
         $validated['is_active'] = $request->has('is_active') ? true : false;
+
+        // Handle No Media (Only clear internal media)
+        if ($validated['media_type'] === 'none') {
+            $validated['media_type'] = 'image'; // Default for DB Enum
+            
+            // Delete old internal media if exists (Photos & Video)
+            if ($program->hasPhotos()) {
+                foreach ($program->photos as $photo) {
+                    if (Storage::disk('public')->exists($photo)) Storage::disk('public')->delete($photo);
+                }
+            }
+            if ($program->video_url && !filter_var($program->video_url, FILTER_VALIDATE_URL)) {
+                if (Storage::disk('public')->exists($program->video_url)) Storage::disk('public')->delete($program->video_url);
+            }
+
+            $validated['photos'] = null;
+            $validated['video_url'] = null;
+            // DO NOT set thumbnail to null here!
+        }
 
         // Update thumbnail
         if ($request->hasFile('thumbnail')) {

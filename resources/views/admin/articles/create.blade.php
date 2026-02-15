@@ -126,6 +126,60 @@
                     </div>
                 </div>
 
+                <!-- Media Settings Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Pengaturan Media</h3>
+                    
+                    <!-- Media Type -->
+                    <div class="mb-5">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Tipe Media</label>
+                        <div class="flex flex-col gap-2">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="media_type" value="image" {{ old('media_type', 'image') == 'image' ? 'checked' : '' }} 
+                                       class="form-radio text-blue-600" onchange="toggleMediaType()">
+                                <span class="ml-2">Gambar (Galeri)</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="media_type" value="video" {{ old('media_type') == 'video' ? 'checked' : '' }} 
+                                       class="form-radio text-blue-600" onchange="toggleMediaType()">
+                                <span class="ml-2">Video</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="media_type" value="none" {{ old('media_type') == 'none' ? 'checked' : '' }} 
+                                       class="form-radio text-blue-600" onchange="toggleMediaType()">
+                                <span class="ml-2">Tanpa Media</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Photos Section -->
+                    <div id="photos-section">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Upload Foto Galeri</label>
+                                <input type="file" name="photos[]" multiple accept="image/jpeg,image/png,image/jpg,image/webp"
+                                       class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all"
+                                       onchange="previewPhotos(event)">
+                                <p class="mt-1 text-xs text-gray-400">Bisa pilih banyak foto sekaligus. Format: JPG, PNG, WEBP.</p>
+                            </div>
+                            <!-- Preview Photos -->
+                            <div id="photos-preview" class="grid grid-cols-3 gap-2 mt-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Video Section -->
+                    <div id="video-section" style="display: none;">
+                        <div class="space-y-4">
+                            <!-- URL -->
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">URL Video (YouTube, dll)</label>
+                                <input type="url" name="video_url" class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all py-3 px-4 text-lg bg-gray-50 focus:bg-white"  
+                                       placeholder="https://youtube.com/..."></input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Thumbnail Card -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                     <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Thumbnail</h3>
@@ -202,5 +256,49 @@
                 subCategoryContainer.classList.add('hidden');
             });
     });
+
+    // Toggle Media Type
+    function toggleMediaType() {
+        const mediaType = document.querySelector('input[name="media_type"]:checked').value;
+        const photosSection = document.getElementById('photos-section');
+        const videoSection = document.getElementById('video-section');
+        const thumbnailCard = document.querySelector('input[name="thumbnail"]').closest('.bg-white');
+
+        if (mediaType === 'image') {
+            photosSection.style.display = 'block';
+            videoSection.style.display = 'none';
+            if(thumbnailCard) thumbnailCard.style.display = 'block';
+        } else if (mediaType === 'video') {
+            photosSection.style.display = 'none';
+            videoSection.style.display = 'block';
+            if(thumbnailCard) thumbnailCard.style.display = 'block';
+        } else {
+            photosSection.style.display = 'none';
+            videoSection.style.display = 'none';
+            if(thumbnailCard) thumbnailCard.style.display = 'none';
+        }
+    }
+
+    // Initialize
+    toggleMediaType();
+
+    function previewPhotos(event) {
+        const files = event.target.files;
+        const previewContainer = document.getElementById('photos-preview');
+        previewContainer.innerHTML = '';
+
+        if (files) {
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.className = 'relative aspect-square rounded-lg overflow-hidden border border-gray-200 shadow-sm';
+                    div.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
+                    previewContainer.appendChild(div);
+                }
+                reader.readAsDataURL(file);
+            });
+        }
+    }
 </script>
 @endsection

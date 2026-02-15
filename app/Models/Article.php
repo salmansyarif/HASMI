@@ -21,10 +21,15 @@ class Article extends Model
         'thumbnail',
         'status',
         'published_at',
+        'media_type', // image, video
+        'photos', // json
+        'video_url',
+        'media_position', // top, bottom
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
+        'photos' => 'array',
     ];
 
     // Auto generate slug dari title
@@ -93,5 +98,16 @@ class Article extends Model
             return asset($this->thumbnail);
         }
         return null;
+    }
+    // Check if article has photos (gallery)
+    public function hasPhotos()
+    {
+        return $this->photos && count($this->photos) > 0;
+    }
+
+    // Check if article has video
+    public function isVideo()
+    {
+        return $this->media_type === 'video' && !empty($this->video_url);
     }
 }

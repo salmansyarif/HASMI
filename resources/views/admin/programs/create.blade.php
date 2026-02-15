@@ -177,6 +177,11 @@
                                        class="form-radio text-blue-600" onchange="toggleMediaType()">
                                 <span class="ml-2">Video</span>
                             </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="media_type" value="none" {{ old('media_type') == 'none' ? 'checked' : '' }} 
+                                       class="form-radio text-blue-600" onchange="toggleMediaType()">
+                                <span class="ml-2">Tanpa Media</span>
+                            </label>
                         </div>
                     </div>
 
@@ -270,13 +275,20 @@
         const mediaType = document.querySelector('input[name="media_type"]:checked').value;
         const photosSection = document.getElementById('photos-section');
         const videoSection = document.getElementById('video-section');
-        
+        const thumbnailCard = document.querySelector('input[name="thumbnail"]').closest('.bg-white');
+
         if (mediaType === 'image') {
             photosSection.style.display = 'block';
             videoSection.style.display = 'none';
-        } else {
+            if(thumbnailCard) thumbnailCard.style.display = 'block';
+        } else if (mediaType === 'video') {
             photosSection.style.display = 'none';
             videoSection.style.display = 'block';
+            if(thumbnailCard) thumbnailCard.style.display = 'block';
+        } else {
+            photosSection.style.display = 'none';
+            videoSection.style.display = 'none';
+            if(thumbnailCard) thumbnailCard.style.display = 'block'; // KEEP THUMBNAIL VISIBLE
         }
     }
 

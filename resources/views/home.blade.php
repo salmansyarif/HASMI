@@ -28,7 +28,18 @@
         }
     </script>
 
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        .swiper-slide {
+            opacity: 0 !important;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .swiper-slide-active {
+            opacity: 1 !important;
+            z-index: 10;
+        }
+    </style>
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
     {{-- ===== HERO SECTION ===== --}}
@@ -81,24 +92,24 @@
                     </div>
 
                     {{-- ===== STATS ===== --}}
-                    <div class="stats-grid grid grid-cols-4 gap-3 sm:gap-6">
-                        <div class="text-center">
-                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white counter leading-none mb-1"
+                    <div class="stats-grid grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+                        <div class="text-center min-w-[80px]">
+                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white stats-counter leading-none mb-1"
                                 data-target="{{ $materiCount }}">0</div>
                             <div class="text-[10px] sm:text-xs lg:text-sm text-blue-200 font-semibold uppercase tracking-wide">Materi</div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white counter leading-none mb-1"
+                        <div class="text-center min-w-[80px]">
+                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white stats-counter leading-none mb-1"
                                 data-target="{{ $programCount }}">0</div>
                             <div class="text-[10px] sm:text-xs lg:text-sm text-blue-200 font-semibold uppercase tracking-wide">Program</div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white counter leading-none mb-1"
+                        <div class="text-center min-w-[80px]">
+                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white stats-counter leading-none mb-1"
                                 data-target="{{ $intisariCount }}">0</div>
                             <div class="text-[10px] sm:text-xs lg:text-sm text-blue-200 font-semibold uppercase tracking-wide">Intisari</div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white counter leading-none mb-1"
+                        <div class="text-center min-w-[80px]">
+                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white stats-counter leading-none mb-1"
                                 data-target="{{ $kegiatanCount }}">0</div>
                             <div class="text-[10px] sm:text-xs lg:text-sm text-blue-200 font-semibold uppercase tracking-wide">Kegiatan</div>
                         </div>
@@ -109,17 +120,18 @@
                 <div class="hero-right pb-8 lg:py-12">
 
                     {{-- Slider Container --}}
+                    {{-- Scrollable List Container --}}
+                    {{-- Slider Container (IG Story Style) --}}
                     <div class="slider-wrapper relative rounded-2xl lg:rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-blue-800"
                          style="height: 380px; min-height: 380px;">
 
-                        {{-- Progress bullets on TOP --}}
-                        <div class="slider-bullets absolute top-3 left-3 right-3 z-20 flex gap-1.5 lg:gap-2">
+                        {{-- Story Progress Bars --}}
+                        <div class="absolute top-3 left-3 right-3 z-30 flex gap-1.5">
                             @foreach ($latestUpdates as $index => $update)
                                 @if ($index < 10)
-                                <div class="bullet-item flex-1 h-1 lg:h-1.5 rounded-full overflow-hidden bg-white/20 cursor-pointer"
-                                     onclick="goToSlide({{ $index }})">
-                                    <div class="bullet-fill h-full w-0 bg-white rounded-full"></div>
-                                </div>
+                                    <div class="h-1 lg:h-1.5 flex-1 bg-white/30 rounded-full overflow-hidden">
+                                        <div class="story-progress-bar h-full bg-white w-0" id="progress-{{ $index }}"></div>
+                                    </div>
                                 @endif
                             @endforeach
                         </div>
@@ -128,7 +140,7 @@
                         <div class="swiper hero-swiper w-full h-full">
                             <div class="swiper-wrapper">
                                 @foreach ($latestUpdates as $index => $update)
-                                    <div class="swiper-slide relative w-full h-full overflow-hidden">
+                                    <div class="swiper-slide relative w-full h-full overflow-hidden" data-swiper-autoplay="5000">
 
                                         {{-- BG Image --}}
                                         @php
@@ -154,47 +166,50 @@
                                         @endif
 
                                         {{-- Dark gradient overlay --}}
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
 
                                         {{-- Slide Content --}}
-                                        <div class="absolute inset-0 flex flex-col justify-between p-4 lg:p-8">
+                                        <div class="absolute inset-0 flex flex-col justify-between p-5 lg:p-8 pt-12 lg:pt-16">
+                                            
                                             {{-- Top: Type + Date --}}
-                                            <div class="flex items-start justify-between mt-6">
-                                                <span class="inline-block px-2.5 py-1 bg-blue-500 text-white text-[9px] lg:text-xs font-bold uppercase tracking-widest rounded-lg">
+                                            <div class="flex items-start justify-between">
+                                                <span class="inline-block px-3 py-1 bg-blue-600/90 text-white text-[10px] lg:text-xs font-bold uppercase tracking-widest rounded-lg border border-white/10 shadow-lg backdrop-blur-sm">
                                                     {{ $update->type }}
                                                 </span>
-                                                <div class="text-right bg-black/50 px-2 py-1.5 lg:px-3 lg:py-2 rounded-lg">
+                                                <div class="text-right bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/5">
                                                     <div class="text-white font-bold text-xs lg:text-sm leading-tight">
                                                         {{ $update->date ? \Carbon\Carbon::parse($update->date)->format('d M Y') : '' }}
                                                     </div>
-                                                    <div class="text-blue-200 text-[9px] lg:text-xs">
+                                                    <div class="text-blue-200 text-[10px] lg:text-xs">
                                                         {{ $update->date ? \Carbon\Carbon::parse($update->date)->diffForHumans() : '' }}
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            {{-- Bottom: Text --}}
-                                            <div class="space-y-2 lg:space-y-3">
+                                            {{-- Bottom: Content --}}
+                                            <div class="space-y-3">
                                                 @if (isset($update->category))
-                                                    <p class="text-blue-200 text-xs lg:text-sm font-semibold flex items-center gap-2">
-                                                        <span class="w-5 h-px bg-blue-300 inline-block"></span>
+                                                    <p class="text-blue-300 text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+                                                        <i class="fas fa-hashtag text-[10px]"></i>
                                                         {{ $update->category->name }}
                                                     </p>
                                                 @endif
 
-                                                <h2 class="text-lg sm:text-xl lg:text-3xl font-bold text-white leading-tight line-clamp-2">
+                                                <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white leading-tight line-clamp-2 drop-shadow-lg">
                                                     {{ $update->title ?? $update->judul }}
                                                 </h2>
 
-                                                <p class="text-gray-300 text-xs lg:text-sm line-clamp-2 leading-relaxed">
+                                                <p class="text-gray-200 text-xs sm:text-sm lg:text-base line-clamp-2 leading-relaxed drop-shadow-md">
                                                     {{ \Illuminate\Support\Str::limit(strip_tags($update->excerpt ?? ($update->description ?? ($update->content ?? ''))), 100) }}
                                                 </p>
 
-                                                <a href="{{ route($update->route_name, $update->route_params) }}"
-                                                    class="inline-flex items-center gap-2 px-4 py-2 lg:px-6 lg:py-3 bg-blue-500 hover:bg-blue-400 text-white rounded-lg font-bold transition-all text-xs lg:text-sm border border-blue-400/50">
-                                                    <span>Selengkapnya</span>
-                                                    <i class="fas fa-arrow-right text-xs"></i>
-                                                </a>
+                                                <div class="pt-2">
+                                                    <a href="{{ route($update->route_name, $update->route_params) }}"
+                                                        class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-blue-800 rounded-full font-bold transition-all hover:bg-blue-50 hover:scale-105 shadow-lg text-xs sm:text-sm">
+                                                        <span>Baca Selengkapnya</span>
+                                                        <i class="fas fa-arrow-right"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -211,71 +226,56 @@
     {{-- Swiper & Slider JS --}}
     <script data-cfasync="false" src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script data-cfasync="false">
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        // IG Story Logic
         const AUTOPLAY_MS = 5000;
-        const isMobile = window.innerWidth < 1024;
         let swiper;
-
-        function initSlider() {
-            const bullets = document.querySelectorAll('.bullet-item');
-
-            swiper = new Swiper('.hero-swiper', {
-                // Mobile pakai 'slide' (lebih ringan), desktop tetap 'fade'
-                effect: isMobile ? 'slide' : 'fade',
-                fadeEffect: { crossFade: true },
-                // Transisi lebih cepat di mobile
-                speed: isMobile ? 400 : 700,
-                loop: true,
-                allowTouchMove: true,
-                // Jangan preload semua gambar sekaligus
-                preloadImages: false,
-                lazy: { loadPrevNext: true },
-                autoplay: {
-                    delay: AUTOPLAY_MS,
-                    disableOnInteraction: false,
-                },
-                on: {
-                    slideChangeTransitionStart: function () {
-                        updateBullets(this.realIndex);
-                    }
+        const progressBars = document.querySelectorAll('.story-progress-bar');
+        
+        function updateStoryProgress(activeIndex) {
+            progressBars.forEach((bar, index) => {
+                bar.style.transition = 'none';
+                
+                if (index < activeIndex) {
+                    // Previous bars: Full
+                    bar.style.width = '100%';
+                } else if (index === activeIndex) {
+                    // Current bar: Animate from 0 to 100%
+                    bar.style.width = '0%';
+                    // Force reflow
+                    void bar.offsetWidth;
+                    bar.style.transition = `width ${AUTOPLAY_MS}ms linear`;
+                    bar.style.width = '100%';
+                } else {
+                    // Next bars: Empty
+                    bar.style.width = '0%';
                 }
             });
+        }
 
-            updateBullets(0);
-
-            window.goToSlide = function(idx) {
-                swiper.slideToLoop(idx);
-            };
-
-            function updateBullets(activeIdx) {
-                bullets.forEach((b, i) => {
-                    const fill = b.querySelector('.bullet-fill');
-                    fill.style.transition = 'none';
-                    fill.style.width = '0%';
-                    b.classList.remove('is-active', 'is-done');
-
-                    if (i < activeIdx) {
-                        b.classList.add('is-done');
-                        fill.style.width = '100%';
-                    } else if (i === activeIdx) {
-                        b.classList.add('is-active');
-                        requestAnimationFrame(() => {
-                            requestAnimationFrame(() => {
-                                fill.style.transition = `width ${AUTOPLAY_MS}ms linear`;
-                                fill.style.width = '100%';
-                            });
-                        });
-                    }
-                });
+        swiper = new Swiper('.hero-swiper', {
+            // Use 'fade' for better text readability, or 'slide' if preferred
+            effect: 'fade', 
+            fadeEffect: { crossFade: true },
+            speed: 500,
+            loop: true, // Infinite loop
+            autoplay: {
+                delay: AUTOPLAY_MS,
+                disableOnInteraction: false,
+            },
+            allowTouchMove: true,
+            on: {
+                slideChangeTransitionStart: function() {
+                    console.log('Slide Change:', this.realIndex);
+                    updateStoryProgress(this.realIndex);
+                },
+                init: function() {
+                    console.log('Swiper Init');
+                    updateStoryProgress(0);
+                }
             }
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initSlider);
-        } else {
-            initSlider();
-        }
-    })();
+        });
+    });
     </script>
 
     {{-- ===== ABOUT SECTION ===== --}}
@@ -825,13 +825,18 @@ document.addEventListener('DOMContentLoaded', function() {
             el.style.visibility = '';
         });
     }    function animateCounter(el) {
-        const target = parseInt(el.getAttribute('data-target')) || 0;
-        if (target === 0) { el.textContent = '0'; return; }
-
-        // Mobile: langsung tampilkan angka final, tidak perlu animasi
+        // Gunakan Number() agar lebih aman daripada parseInt
+        const target = Number(el.getAttribute('data-target')) || 0;
+        
+        // Mobile: langsung tampilkan angka final
         if (isMobile) {
-            el.textContent = target;
+            el.innerHTML = target; // Pakai innerHTML untuk memastikan render
             return;
+        }
+
+        if (target === 0) { 
+            el.textContent = '0'; 
+            return; 
         }
 
         const duration = 1500;
@@ -847,17 +852,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }, duration / steps);
     }
 
-    const counters = document.querySelectorAll('.counter');
-    const obs = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                obs.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.3 });
+    const counters = document.querySelectorAll('.stats-counter');
 
-    counters.forEach(c => obs.observe(c));
+    // FORCE RENDER UNTUK MOBILE SEGERA
+    if (isMobile) {
+        setTimeout(() => {
+            counters.forEach(c => {
+                const t = c.getAttribute('data-target');
+                c.innerHTML = t;
+            });
+        }, 100);
+    } else {
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        counters.forEach(c => obs.observe(c));
+    }
 
     // ===== SMOOTH SCROLL =====
     document.querySelectorAll('a[href^="#"]').forEach(a => {

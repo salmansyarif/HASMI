@@ -219,8 +219,11 @@
                     <div class="mb-5">
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Tipe Media</label>
                         <div class="flex flex-col gap-2">
+                            @php
+                                $isNoMedia = $program->media_type == 'image' && !$program->thumbnail && !$program->hasPhotos();
+                            @endphp
                             <label class="inline-flex items-center">
-                                <input type="radio" name="media_type" value="image" {{ old('media_type', $program->media_type) == 'image' ? 'checked' : '' }} 
+                                <input type="radio" name="media_type" value="image" {{ old('media_type', $program->media_type) == 'image' && !$isNoMedia ? 'checked' : '' }} 
                                        class="form-radio text-blue-600" onchange="toggleMediaType()">
                                 <span class="ml-2">Gambar (Galeri)</span>
                             </label>
@@ -228,6 +231,11 @@
                                 <input type="radio" name="media_type" value="video" {{ old('media_type', $program->media_type) == 'video' ? 'checked' : '' }} 
                                        class="form-radio text-blue-600" onchange="toggleMediaType()">
                                 <span class="ml-2">Video</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="media_type" value="none" {{ old('media_type') == 'none' || $isNoMedia ? 'checked' : '' }} 
+                                       class="form-radio text-blue-600" onchange="toggleMediaType()">
+                                <span class="ml-2">Tanpa Media</span>
                             </label>
                         </div>
                     </div>
@@ -339,13 +347,21 @@
         const mediaType = document.querySelector('input[name="media_type"]:checked').value;
         const photosSection = document.getElementById('photos-section');
         const videoSection = document.getElementById('video-section');
-        
+        const thumbnailCard = document.querySelector('input[name="thumbnail"]').closest('.bg-white'); // Find thumbnail card container
+
         if (mediaType === 'image') {
             photosSection.style.display = 'block';
             videoSection.style.display = 'none';
-        } else {
+            if(thumbnailCard) thumbnailCard.style.display = 'block'; 
+        } else if (mediaType === 'video') {
             photosSection.style.display = 'none';
             videoSection.style.display = 'block';
+            if(thumbnailCard) thumbnailCard.style.display = 'block';
+        } else {
+            photosSection.style.display = 'none';
+            videoSection.style.display = 'none';
+            // Do NOT hide thumbnail card for 'none' - User might want Thumbnail Only
+            if(thumbnailCard) thumbnailCard.style.display = 'block';
         }
     }
 

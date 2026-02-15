@@ -1,240 +1,133 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('title', 'Dokumentasi Kegiatan - HASMI')
+@section('title', 'Kelola Kegiatan - Admin HASMI')
+@section('page-title', 'Kelola Kegiatan')
+@section('page-subtitle', 'Daftar semua kegiatan yang telah dipublikasikan atau draft')
 
 @section('content')
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
-
-<style>
-    body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        background: linear-gradient(to bottom, #1d4ed8, #2563eb);
-    }
-
-    .hero-kegiatan {
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #2563eb 100%);
-        position: relative;
-        overflow: hidden;
-        min-height: 500px;
-        display: flex;
-        align-items: center;
-    }
-
-    .hero-kegiatan::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.2);
-        z-index: 1;
-    }
-
-    .hero-pattern {
-        position: absolute;
-        inset: 0;
-        opacity: 0.15;
-        z-index: 2;
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
-
-    .hero-content { position: relative; z-index: 10; }
-
-    .hero-title {
-        font-size: 3.5rem;
-        line-height: 1.1;
-        font-weight: 800;
-        color: #ffffff;
-        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .hero-description {
-        color: #bfdbfe !important;
-        font-size: 1.25rem;
-        line-height: 1.8;
-        font-weight: 500;
-        max-width: 800px;
-        margin: 0 auto;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    /* Card: mobile hanya border transition */
-    .article-card {
-        border: 1px solid rgba(59, 130, 246, 0.4);
-        background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-        transition: border-color 0.25s ease;
-    }
-
-    /* Hover hanya desktop */
-    @media (hover: hover) and (pointer: fine) {
-        .article-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
-        }
-        .article-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.6);
-            border-color: rgba(96, 165, 250, 0.7);
-        }
-    }
-
-    .wave-bottom { position: absolute; bottom: -1px; left: 0; width: 100%; line-height: 0; z-index: 5; }
-    .wave-bottom svg { fill: #1d4ed8; }
-
-    @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-        }
-    }
-
-    /* ===== AOS MOBILE SAFETY NET =====
-       Paksa elemen data-aos selalu visible di mobile
-       sebelum JS sempat jalan (mencegah blank page) */
-    @media (max-width: 1023px) {
-        [data-aos] {
-            opacity: 1 !important;
-            transform: none !important;
-            transition: none !important;
-            visibility: visible !important;
-        }
-    }
-
-</style>
-
-{{-- HERO SECTION --}}
-<section class="hero-kegiatan">
-    <div class="hero-pattern"></div>
-    
-    <div class="container mx-auto px-6 hero-content text-center">
-        <div class="inline-block mb-6" data-aos="fade-down">
-            <span class="px-5 py-2 bg-blue-500/40 backdrop-blur-md border border-blue-400/40 text-blue-50 rounded-full text-xs font-black uppercase tracking-[0.2em]">
-                <i class="fas fa-archive mr-2"></i> Arsip Dokumentasi
-            </span>
+<div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="p-6 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex-1">
+            <form action="{{ route('admin.kegiatan.index') }}" method="GET" class="relative">
+                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input type="text" name="search" value="{{ request('search') }}" 
+                    class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Cari kegiatan...">
+            </form>
         </div>
-        
-        <h1 class="hero-title mb-8" data-aos="zoom-in">
-            Laporan <span class="text-blue-300">Kegiatan</span>
-        </h1>
-        
-        <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
-            "Jejak langkah dakwah, sosial, dan pendidikan HASMI dalam melayani umat di berbagai penjuru Indonesia."
-        </p>
+        <div class="flex gap-2">
+            <a href="{{ route('admin.kegiatan.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition class font-medium flex items-center gap-2">
+                <i class="fas fa-plus"></i> Tambah Kegiatan
+            </a>
+        </div>
     </div>
 
-    <div class="wave-bottom">
-        <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
-        </svg>
-    </div>
-</section>
-
-{{-- LIST SECTION --}}
-<section class="py-20 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800">
-    <div class="container mx-auto px-6 lg:px-12">
-        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
-            @forelse($kegiatans as $index => $kegiatan)
-            <article class="article-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
-                     data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
-                
-                <div class="h-80 relative overflow-hidden m-4 rounded-[2rem]">
-                    @if($kegiatan->thumbnail)
-                        <img src="{{ asset($kegiatan->thumbnail) }}" 
-                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                             alt="{{ $kegiatan->title }}"
-                             loading="lazy">
-                    @else
-                        <div class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                            <i class="fas fa-camera text-white/20 text-6xl"></i>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-gray-50 text-gray-600 text-xs uppercase tracking-wider">
+                    <th class="px-6 py-4 font-semibold border-b">No</th>
+                    <th class="px-6 py-4 font-semibold border-b">Thumbnail</th>
+                    <th class="px-6 py-4 font-semibold border-b">Judul & Deskripsi</th>
+                    <th class="px-6 py-4 font-semibold border-b">Tanggal</th>
+                    <th class="px-6 py-4 font-semibold border-b">Status</th>
+                    <th class="px-6 py-4 font-semibold border-b text-right">Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                @forelse($kegiatans as $index => $kegiatan)
+                <tr class="hover:bg-gray-50/50 transition-colors">
+                    <td class="px-6 py-4 text-gray-500 text-sm">
+                        {{ $kegiatans->firstItem() + $index }}
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="w-16 h-12 rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
+                            @if($kegiatan->thumbnail)
+                                <img src="{{ asset($kegiatan->thumbnail) }}" alt="" class="w-full h-full object-cover">
+                            @else
+                                <div class="w-full h-full flex items-center justify-center text-gray-400">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                            @endif
                         </div>
-                    @endif
-                    
-                    {{-- Hover overlay: hanya desktop --}}
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-end p-6 hidden lg:flex">
-                        <p class="text-white text-xs leading-relaxed italic">
-                            "Klik untuk melihat dokumentasi lengkap."
-                        </p>
-                    </div>
-
-                    <div class="absolute top-4 left-4">
-                        <span class="px-4 py-2 bg-blue-500 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg border border-blue-400/30">
-                            Dokumentasi
-                        </span>
-                    </div>
-                </div>
-
-                <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
-                    <div class="flex items-center gap-2 mb-3">
-                        <i class="far fa-calendar-alt text-blue-100 text-xs"></i>
-                        <span class="text-blue-100 text-[11px] font-bold uppercase tracking-wider">
-                            {{ $kegiatan->event_date ? $kegiatan->event_date->format('D M Y') : $kegiatan->created_at->format('D M Y') }}
-                        </span>
-                    </div>
-
-                    <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-100 transition-colors leading-tight">
-                        {{ $kegiatan->title }}
-                    </h3>
-                    
-                    <p class="text-blue-100 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
-                        {{ \Illuminate\Support\Str::limit(strip_tags($kegiatan->description), 100) }}
-                    </p>
-                    
-                    <div class="mt-auto">
-                        <a href="{{ route('kegiatan.show', $kegiatan->slug) }}" 
-                           class="w-full py-4 bg-blue-500 hover:bg-blue-400 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-colors active:scale-95 shadow-xl shadow-blue-800/50 border-2 border-blue-400/40">
-                            <span>Lihat Dokumentasi</span>
-                            <i class="fas fa-arrow-right text-sm"></i>
-                        </a>
-                    </div>
-                </div>
-            </article>
-            @empty
-            <div class="col-span-full">
-                <div class="max-w-2xl mx-auto text-center py-20 bg-blue-700/60 backdrop-blur-xl rounded-[40px] border-2 border-blue-400/50" data-aos="zoom-in">
-                    <div class="w-24 h-24 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-100 text-4xl">
-                        <i class="fas fa-cloud-moon"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-2">Belum Ada Dokumentasi</h3>
-                    <p class="text-blue-50">Kami akan segera mengupdate laporan kegiatan terbaru dalam waktu dekat.</p>
-                </div>
-            </div>
-            @endforelse
-        </div>
-
-        @if($kegiatans->hasPages())
-            <div class="mt-20 flex justify-center">
-                {{ $kegiatans->links() }}
-            </div>
-        @endif
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="max-w-xs">
+                            <h4 class="font-bold text-gray-800 mb-1 line-clamp-1" title="{{ $kegiatan->title }}">
+                                {{ $kegiatan->title }}
+                            </h4>
+                            <p class="text-xs text-gray-500 line-clamp-2">
+                                {{ Str::limit(strip_tags($kegiatan->description), 100) }}
+                            </p>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="text-sm text-gray-600">
+                            <i class="far fa-calendar-alt mr-1 text-gray-400"></i>
+                            {{ $kegiatan->event_date ? $kegiatan->event_date->format('d M Y') : $kegiatan->created_at->format('d M Y') }}
+                        </div>
+                        <div class="text-xs text-gray-400 mt-1">
+                            {{ $kegiatan->created_at->diffForHumans() }}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        @if($kegiatan->status == 'published')
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
+                                Published
+                            </span>
+                        @else
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                <span class="w-1.5 h-1.5 bg-gray-500 rounded-full mr-1.5"></span>
+                                Draft
+                            </span>
+                        @endif
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <a href="{{ route('kegiatan.show', $kegiatan->slug) }}" target="_blank" 
+                               class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                               title="Lihat di Website">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="{{ route('admin.kegiatan.edit', $kegiatan->id) }}" 
+                               class="w-8 h-8 rounded-lg flex items-center justify-center text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors"
+                               title="Edit">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <form action="{{ route('admin.kegiatan.destroy', $kegiatan->id) }}" method="POST" 
+                                  onsubmit="return confirm('Apakah Anda yakin ingin menghapus kegiatan ini?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" 
+                                    class="w-8 h-8 rounded-lg flex items-center justify-center text-red-600 bg-red-50 hover:bg-red-100 transition-colors"
+                                    title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="6" class="px-6 py-12 text-center text-gray-500">
+                        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-calendar-alt text-2xl text-gray-400"></i>
+                        </div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-1">Belum ada kegiatan</h3>
+                        <p class="text-sm mb-4">Silakan tambahkan kegiatan baru untuk ditampilkan di website.</p>
+                        <a href="{{ route('admin.kegiatan.create') }}" class="text-blue-600 hover:underline font-medium">Buat Kegiatan Pertama</a>
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
-</section>
 
-<script data-cfasync="false" src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script data-cfasync="false">
-    document.addEventListener('DOMContentLoaded', function() {
-        const isMobile = window.innerWidth < 1024 ||
-            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-        
-    // AOS init + fix mobile visibility
-    if (!isMobile) {
-        AOS.init({
-            duration: 800,
-            easing: 'ease-out-cubic',
-            once: true,
-            offset: 60,
-        });
-    } else {
-        // Mobile: AOS tidak diinit, paksa semua elemen data-aos jadi visible
-        document.querySelectorAll('[data-aos]').forEach(el => {
-            el.removeAttribute('data-aos');
-            el.removeAttribute('data-aos-delay');
-            el.removeAttribute('data-aos-duration');
-            el.style.opacity = '';
-            el.style.transform = '';
-            el.style.visibility = '';
-        });
-    }    });
-</script>
+    @if($kegiatans->hasPages())
+    <div class="px-6 py-4 border-t border-gray-100">
+        {{ $kegiatans->links() }}
+    </div>
+    @endif
+</div>
 @endsection

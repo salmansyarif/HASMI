@@ -386,9 +386,11 @@
                         </h1>
 
                         <!-- Media (Image/Video) -->
-                        <div class="media-container mb-10 shadow-2xl animate-scale-in">
+                        @if (($program->media_type == 'video' && $program->video_url) || $program->thumbnail || ($program->photos && count($program->photos) > 0))
+                        <div class="media-container mb-10 shadow-2xl animate-scale-in overflow-hidden">
+                            {{-- Case: Video Present --}}
                             @if ($program->media_type == 'video' && $program->video_url)
-                                <div class="aspect-video w-full relative overflow-hidden rounded-xl">
+                                <div class="aspect-video w-full relative overflow-hidden rounded-xl {{ $program->thumbnail ? 'mb-6' : '' }}">
                                     @if (Str::contains($program->video_url, 'youtube.com') || Str::contains($program->video_url, 'youtu.be'))
                                         <x-lite-youtube :videoId="$program->video_url" :title="$program->title" />
                                     @else
@@ -398,11 +400,30 @@
                                         </video>
                                     @endif
                                 </div>
-                            @elseif($program->thumbnail)
-                                <img src="{{ asset('storage/' . $program->thumbnail) }}" alt="{{ $program->title }}"
-                                    class="w-full h-auto object-cover">
+                            @endif
+
+                            {{-- Case: Thumbnail Present --}}
+                            @if ($program->thumbnail)
+                                <div class="relative rounded-xl overflow-hidden">
+                                    <img src="{{ asset('storage/' . $program->thumbnail) }}" alt="{{ $program->title }}"
+                                        class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700">
+                                </div>
+                            @endif
+
+                            {{-- Case: Gallery Main (Only if NO Thumbnail AND NO Video) --}}
+                            @if (!$program->thumbnail && !($program->media_type == 'video' && $program->video_url) && $program->photos && count($program->photos) > 0)
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                    @foreach ($program->photos as $index => $photo)
+                                        <div class="relative overflow-hidden aspect-square">
+                                            <img src="{{ asset('storage/' . $photo) }}" alt="Gallery {{ $index + 1 }}"
+                                                class="w-full h-full object-cover rounded-xl hover:scale-110 transition-transform duration-500 cursor-pointer"
+                                                onclick="window.open('{{ asset('storage/' . $photo) }}', '_blank')">
+                                        </div>
+                                    @endforeach
+                                </div>
                             @endif
                         </div>
+                        @endif
 
                         <!-- Description/Excerpt -->
                         <div class="mb-10 pb-8 border-b-2 border-blue-400/40 animate-fade-in-up">
@@ -417,8 +438,8 @@
                         <div class="prose prose-base md:prose-lg max-w-none mb-10 whitespace-pre-wrap text-justify animate-fade-in-up">
                             {!! nl2br(e($program->content)) !!}</div>
 
-                        <!-- Photo Gallery (if exists) -->
-                        @if ($program->photos && count($program->photos) > 0)
+                        <!-- Photo Gallery (if exists AND not shown at top) -->
+                        @if ($program->photos && count($program->photos) > 0 && ($program->thumbnail || ($program->media_type == 'video' && $program->video_url)))
                             <div class="mt-12 pt-10 border-t-2 border-blue-400/40 animate-fade-in-up">
                                 <h3 class="text-3xl font-black text-white mb-8 flex items-center gap-4">
                                     <i class="fas fa-images text-blue-300 animate-float"></i>

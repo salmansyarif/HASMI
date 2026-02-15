@@ -141,6 +141,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         ->name('articles.thumbnail.destroy');
     Route::get('articles/sub-categories/{categoryId}', [AdminArticleController::class, 'getSubCategories'])
         ->name('articles.sub-categories');
+    Route::post('articles/{article}/photo/delete', [AdminArticleController::class, 'deletePhoto'])
+        ->name('articles.photo.delete');
 
     /*
     |--------------------------------------------------------------------------
