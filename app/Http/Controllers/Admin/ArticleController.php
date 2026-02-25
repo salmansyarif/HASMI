@@ -82,7 +82,6 @@ class ArticleController extends Controller
 
         // Handle Media Type 'none'
         if ($request->media_type === 'none') {
-            $validated['media_type'] = 'image'; // Default to image in DB to satisfy enum if needed, or null if nullable. Migration is nullable, so we can set null.
             $validated['media_type'] = null; 
             $validated['photos'] = null;
             $validated['video_url'] = null;
