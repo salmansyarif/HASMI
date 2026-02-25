@@ -17,8 +17,10 @@ class Kegiatan extends Model
         'content',
         'thumbnail',
         'photos',
-        'show_thumbnail_in_list',  // ← TAMBAH INI
-        'photo_position',           // ← TAMBAH INI
+        'video_url',                // ← TAMBAH INI
+        'show_thumbnail_in_list',
+        'show_thumbnail_in_detail',
+        'photo_position',
         'event_date',
         'location',
         'status',
@@ -27,7 +29,8 @@ class Kegiatan extends Model
     protected $casts = [
         'event_date' => 'datetime',
         'photos' => 'array',
-        'show_thumbnail_in_list' => 'boolean',  // ← TAMBAH INI
+        'show_thumbnail_in_list' => 'boolean',
+        'show_thumbnail_in_detail' => 'boolean',
     ];
 
     // Auto generate slug dari title

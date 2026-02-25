@@ -71,76 +71,110 @@
 
                 <!-- Media Content Card -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Galeri Foto</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Media Kegiatan</h3>
 
-                    <!-- Current Photos -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-semibold text-gray-700 mb-4">
-                            Foto Saat Ini 
-                            <span class="text-xs font-normal text-gray-500 ml-1">(Foto pertama otomatis menjadi thumbnail)</span>
-                        </label>
+                    <!-- Thumbnail Section -->
+                    <div class="mb-8 p-4 bg-blue-50/50 rounded-xl border border-blue-100">
+                        <label class="block text-sm font-bold text-blue-900 mb-2">Thumbnail (Card List)</label>
+                        <input type="file" name="thumbnail" accept="image/*"
+                               class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-all"
+                               onchange="previewThumbnail(event)">
+                        <p class="mt-2 text-xs text-blue-600 font-medium italic">Thumbnail ini hanya muncul di daftar/grid kegiatan.</p>
                         
-                        @if($kegiatan->photos && count($kegiatan->photos) > 0)
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="photo-gallery">
-                                @foreach($kegiatan->photos as $index => $photo)
-                                <div class="relative group rounded-xl overflow-hidden border-2 {{ $index === 0 ? 'border-green-500 ring-4 ring-green-500/10' : 'border-gray-200' }} shadow-sm transition-all">
-                                    <div class="aspect-square w-full relative">
-                                        <img src="{{ asset($photo) }}" class="w-full h-full object-cover">
-                                        
-                                        {{-- Thumbnail Badge Overlay --}}
-                                        @if($index === 0)
-                                        <div class="absolute inset-0 bg-green-500/10 flex items-center justify-center">
-                                            <span class="bg-green-500 text-white text-xs font-black px-2 py-1 rounded-full shadow-lg border-2 border-white tracking-wider flex items-center gap-1 transform scale-75 md:scale-100">
-                                                <i class="fas fa-check-circle"></i> THUMB
-                                            </span>
-                                        </div>
-                                        @endif
-                                    </div>
-
-                                    {{-- Control Bar --}}
-                                    <div class="bg-white p-2 border-t flex items-center justify-between gap-1">
-                                        @if($index === 0)
-                                            <div class="text-green-600 font-bold text-xs flex items-center gap-1 w-full justify-center py-1">
-                                                <i class="fas fa-image"></i> Utama
-                                            </div>
-                                        @else
-                                            <button type="button" onclick="setThumbnail('{{ $photo }}')" 
-                                                    class="flex-1 bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded text-xs font-bold transition-colors flex items-center justify-center gap-1"
-                                                    title="Jadikan Thumbnail">
-                                                <i class="far fa-check-circle"></i> Set
-                                            </button>
-                                        @endif
-
-                                        <button type="button" onclick="deletePhoto('{{ $photo }}')" 
-                                                class="w-6 h-6 flex items-center justify-center bg-red-50 text-red-500 hover:bg-red-100 rounded transition-colors" 
-                                                title="Hapus Foto">
-                                            <i class="fas fa-trash-alt text-xs"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        @else
-                            <div class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-8 text-center text-gray-500">
-                                <i class="far fa-images text-2xl mb-2"></i>
-                                <p>Belum ada foto yang diupload.</p>
-                            </div>
-                        @endif
+                        <div id="thumbnail-preview" class="mt-3 {{ $kegiatan->thumbnail ? '' : 'hidden' }}">
+                            <img src="{{ $kegiatan->thumbnail ? asset($kegiatan->thumbnail) : '' }}" class="w-32 h-32 object-cover rounded-lg shadow-md border-2 border-white">
+                        </div>
                     </div>
 
-                    <!-- Add New Photos -->
-                    <div id="photos-section">
-                        <div class="mb-4">
-                            <label class="block text-sm text-gray-500 mb-2">Tambah Foto Baru</label>
-                            <input type="file" name="photos[]" id="photos" accept="image/jpeg,image/png,image/jpg,image/webp" multiple
-                                   class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all"
-                                   onchange="previewPhotos(event)">
-                            <p class="mt-2 text-xs text-gray-400">
-                                Format: JPG, PNG, WEBP. Maks 2MB. <br>
-                                <span class="text-blue-600 text-xs">*Foto baru akan ditambahkan di urutan terakhir.</span>
-                            </p>
+                    <!-- Video Section -->
+                    @php
+                        $isExternal = $kegiatan->video_url && Str::startsWith($kegiatan->video_url, 'http');
+                        $isLocal = $kegiatan->video_url && !Str::startsWith($kegiatan->video_url, 'http');
+                        $initialSource = $isLocal ? 'file' : 'url';
+                    @endphp
+                    <div class="mb-8" x-data="{ videoSource: '{{ $initialSource }}' }">
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">Konten Video (Opsional)</label>
+                        
+                        <div class="flex gap-4 mb-4">
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input type="radio" value="url" x-model="videoSource" class="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                                <span class="text-sm font-medium text-gray-600 group-hover:text-blue-600">URL Link</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer group">
+                                <input type="radio" value="file" x-model="videoSource" class="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                                <span class="text-sm font-medium text-gray-600 group-hover:text-blue-600">Upload File</span>
+                            </label>
                         </div>
-                        <div id="photos-preview" class="grid grid-cols-4 gap-4 mt-4"></div>
+
+                        <div x-show="videoSource === 'url'" x-transition>
+                            <input type="url" name="video_url" id="video_url" 
+                                   class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all py-3 px-4 bg-gray-50 focus:bg-white" 
+                                   placeholder="https://www.youtube.com/watch?v=..."
+                                   value="{{ old('video_url', $isExternal ? $kegiatan->video_url : '') }}">
+                            <p class="mt-1 text-xs text-gray-400 italic font-medium">Link YouTube atau link video eksternal.</p>
+                        </div>
+
+                        <div x-show="videoSource === 'file'" x-transition>
+                            <input type="file" name="video_file" id="video_file" accept="video/mp4,video/x-m4v,video/*"
+                                   class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 transition-all">
+                            <p class="mt-1 text-xs text-gray-400 italic font-medium">Maksimal 50MB. Format: MP4, MOV, AVI.</p>
+                            @if($isLocal)
+                                <div class="mt-3 p-3 bg-gray-50 rounded-lg border flex items-center gap-3">
+                                    <i class="fas fa-file-video text-blue-500 text-xl"></i>
+                                    <div class="flex-1">
+                                        <p class="text-xs font-bold text-gray-700">Video Terupload:</p>
+                                        <p class="text-[10px] text-gray-500 truncate">{{ $kegiatan->video_url }}</p>
+                                    </div>
+                                    <a href="{{ asset($kegiatan->video_url) }}" target="_blank" class="text-[10px] bg-blue-100 text-blue-600 px-2 py-1 rounded font-bold hover:bg-blue-200">Lihat</a>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="border-t pt-5">
+                        <h4 class="text-sm font-bold text-gray-700 mb-4">Galeri Foto (Dokumentasi Detail)</h4>
+                        <!-- Current Photos -->
+                        <div class="mb-6">
+                            @if($kegiatan->photos && count($kegiatan->photos) > 0)
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="photo-gallery">
+                                    @foreach($kegiatan->photos as $index => $photo)
+                                    <div class="relative group rounded-xl overflow-hidden border-2 border-gray-200 shadow-sm transition-all hover:border-red-400">
+                                        <div class="aspect-square w-full relative">
+                                            <img src="{{ asset($photo) }}" class="w-full h-full object-cover">
+                                        </div>
+
+                                        {{-- Control Bar --}}
+                                        <div class="bg-white p-2 border-t flex items-center justify-center">
+                                            <button type="button" onclick="deletePhoto('{{ $photo }}')" 
+                                                    class="w-full py-1 flex items-center justify-center bg-red-50 text-red-500 hover:bg-red-500 hover:text-white rounded transition-all" 
+                                                    title="Hapus Foto">
+                                                <i class="fas fa-trash-alt text-xs mr-2"></i> <span class="text-xs font-bold">Hapus</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-8 text-center text-gray-500">
+                                    <i class="far fa-images text-2xl mb-2"></i>
+                                    <p>Belum ada foto yang diupload.</p>
+                                </div>
+                            @endif
+                        </div>
+
+                        <!-- Add New Photos -->
+                        <div id="photos-section">
+                            <div class="mb-4">
+                                <label class="block text-sm text-gray-500 mb-2">Tambah Foto Baru</label>
+                                <input type="file" name="photos[]" id="photos" accept="image/jpeg,image/png,image/jpg,image/webp" multiple
+                                       class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-600 file:text-white hover:file:bg-gray-700 transition-all"
+                                       onchange="previewPhotos(event)">
+                                <p class="mt-2 text-xs text-gray-400">
+                                    Format: JPG, PNG, WEBP. Maks 2MB.
+                                </p>
+                            </div>
+                            <div id="photos-preview" class="grid grid-cols-4 gap-4 mt-4"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -187,12 +221,13 @@
                     
                     <!-- Photo Position -->
                     <div>
-                        <label for="photo_position" class="block text-sm font-semibold text-gray-700 mb-2">Posisi Foto Utama <span class="text-red-500">*</span></label>
+                        <label for="photo_position" class="block text-sm font-semibold text-gray-700 mb-2">Posisi Media Utama <span class="text-red-500">*</span></label>
                         <select id="photo_position" name="photo_position" required
                                 class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all py-3 px-4 text-lg bg-gray-50 focus:bg-white">
-                            <option value="top" {{ old('photo_position', $kegiatan->photo_position) == 'top' ? 'selected' : '' }}>Atas (Top)</option>
-                            <option value="bottom" {{ old('photo_position', $kegiatan->photo_position) == 'bottom' ? 'selected' : '' }}>Bawah (Bottom)</option>
-                            <option value="none" {{ old('photo_position', $kegiatan->photo_position) == 'none' ? 'selected' : '' }}>Tanpa Foto</option>
+                            <option value="top" {{ old('photo_position', $kegiatan->photo_position) == 'top' ? 'selected' : '' }}>Atas (Setelah Judul)</option>
+                            <option value="middle" {{ old('photo_position', $kegiatan->photo_position) == 'middle' ? 'selected' : '' }}>Tengah (Setelah Deskripsi)</option>
+                            <option value="bottom" {{ old('photo_position', $kegiatan->photo_position) == 'bottom' ? 'selected' : '' }}>Bawah (Setelah Konten)</option>
+                            <option value="none" {{ old('photo_position', $kegiatan->photo_position) == 'none' ? 'selected' : '' }}>Tanpa Media di Detail</option>
                         </select>
                     </div>
                 </div>
@@ -203,6 +238,21 @@
 </div>
 
 <script data-cfasync="false">
+    function previewThumbnail(event) {
+        const previewContainer = document.getElementById('thumbnail-preview');
+        const img = previewContainer.querySelector('img');
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                img.src = e.target.result;
+                previewContainer.classList.remove('hidden');
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
     function previewPhotos(event) {
         const previewContainer = document.getElementById('photos-preview');
         previewContainer.innerHTML = '';

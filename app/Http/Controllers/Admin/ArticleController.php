@@ -60,6 +60,7 @@ class ArticleController extends Controller
             'status' => 'required|in:draft,published',
             'media_type' => 'nullable|in:image,video,none',
             'video_url' => 'nullable|url',
+            'media_position' => 'nullable|in:top,middle,bottom',
             // 'photos.*' => 'image|mimes:jpeg,png,jpg,webp|max:2048', // Validasi foto gallery
         ]);
 
@@ -133,6 +134,7 @@ class ArticleController extends Controller
             'status' => 'required|in:draft,published',
             'media_type' => 'nullable|in:image,video,none',
             'video_url' => 'nullable|url',
+            'media_position' => 'nullable|in:top,middle,bottom',
         ]);
 
         // Update slug hanya jika title berubah

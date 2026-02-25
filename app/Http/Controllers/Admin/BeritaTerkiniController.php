@@ -31,6 +31,9 @@ class BeritaTerkiniController extends Controller
             'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'video_file' => 'nullable|file|mimes:mp4,mov,avi,wmv,webm|max:102400',
             'video_url' => 'nullable|url',
+            'photo_position' => 'required|in:top,middle,bottom,none',
+            'show_thumbnail_in_list' => 'nullable|boolean',
+            'show_thumbnail_in_detail' => 'nullable|boolean',
             'is_active' => 'nullable|boolean',
         ]);
 
@@ -43,6 +46,8 @@ class BeritaTerkiniController extends Controller
         }
 
         $validated['is_active'] = $request->has('is_active');
+        $validated['show_thumbnail_in_list'] = $request->has('show_thumbnail_in_list');
+        $validated['show_thumbnail_in_detail'] = $request->has('show_thumbnail_in_detail');
 
         // Upload thumbnail
         if ($request->hasFile('thumbnail')) {
@@ -94,6 +99,9 @@ class BeritaTerkiniController extends Controller
             'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'video_file' => 'nullable|file|mimes:mp4,mov,avi,wmv,webm|max:102400',
             'video_url' => 'nullable|url',
+            'photo_position' => 'required|in:top,middle,bottom,none',
+            'show_thumbnail_in_list' => 'nullable|boolean',
+            'show_thumbnail_in_detail' => 'nullable|boolean',
             'is_active' => 'nullable|boolean',
         ]);
 
@@ -108,6 +116,8 @@ class BeritaTerkiniController extends Controller
         }
 
         $validated['is_active'] = $request->has('is_active');
+        $validated['show_thumbnail_in_list'] = $request->has('show_thumbnail_in_list');
+        $validated['show_thumbnail_in_detail'] = $request->has('show_thumbnail_in_detail');
         
         // Ensure photos array is initialized if not present
         if (!isset($beritaTerkini->photos)) {

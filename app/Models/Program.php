@@ -23,6 +23,9 @@ class Program extends Model
         'photos',
         'video_url',
         'media_position',
+        'photo_position',
+        'show_thumbnail_in_list',
+        'show_thumbnail_in_detail',
         'position',
         'is_active'
     ];
@@ -30,6 +33,8 @@ class Program extends Model
     protected $casts = [
         'photos' => 'array',
         'is_active' => 'boolean',
+        'show_thumbnail_in_list' => 'boolean',
+        'show_thumbnail_in_detail' => 'boolean',
     ];
 
     // ================= RELATIONSHIPS =================

@@ -340,33 +340,9 @@
                         {{ $article->title }}
                     </h1>
 
-                    <!-- Media (Image/Video) -->
-                    @if ($article->media_type && $article->media_type != 'none' && (($article->media_type == 'video' && $article->video_url) || $article->thumbnail || ($article->photos && count($article->photos) > 0)))
-                    <div class="media-container mb-10 shadow-2xl animate-scale-in">
-                        @if ($article->media_type == 'video' && $article->video_url)
-                            <div class="aspect-video w-full relative overflow-hidden rounded-xl">
-                                @if (Str::contains($article->video_url, 'youtube.com') || Str::contains($article->video_url, 'youtu.be'))
-                                    <x-lite-youtube :videoId="$article->video_url" :title="$article->title" />
-                                @else
-                                    <video controls class="w-full h-full object-cover rounded-xl">
-                                        {{-- Remove 'storage/' if it's already in the URL from database or accessors --}}
-                                        <source src="{{ asset($article->video_url) }}" type="video/mp4">
-                                        Browser anda tidak mendukung tag video.
-                                    </video>
-                                @endif
-                            </div>
-                        @elseif($article->photos && count($article->photos) > 0)
-                            <!-- Gallery Slider/Grid -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                @foreach($article->photos as $photo)
-                                    <img src="{{ asset($photo) }}" alt="{{ $article->title }}" class="w-full h-auto object-cover rounded-xl shadow-md">
-                                @endforeach
-                            </div>
-                        @elseif($article->thumbnail)
-                            <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}"
-                                class="w-full h-auto object-cover rounded-xl">
-                        @endif
-                    </div>
+                    {{-- MEDIA POSITION: TOP --}}
+                    @if(($article->media_position ?? 'top') == 'top')
+                        @include('materi._media_block', ['article' => $article])
                     @endif
 
                     <!-- EXCERPT/DESKRIPSI -->
@@ -378,8 +354,18 @@
                     </div>
                     @endif
 
+                    {{-- MEDIA POSITION: MIDDLE --}}
+                    @if(($article->media_position ?? 'top') == 'middle')
+                        @include('materi._media_block', ['article' => $article])
+                    @endif
+
                     <!-- Content -->
                     <div class="prose prose-base md:prose-lg max-w-none mb-10 whitespace-pre-wrap text-justify animate-fade-in-up">{!! nl2br(e($article->content)) !!}</div>
+
+                    {{-- MEDIA POSITION: BOTTOM --}}
+                    @if(($article->media_position ?? 'top') == 'bottom')
+                        @include('materi._media_block', ['article' => $article])
+                    @endif
 
                     <!-- Meta (Dipindah ke bawah artikel) -->
                     <div class="flex flex-wrap items-center gap-6 pt-8 border-t-2 border-blue-400/30 mb-10 animate-slide-in-left">

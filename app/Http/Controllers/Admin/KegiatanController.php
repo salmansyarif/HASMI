@@ -30,7 +30,6 @@ class KegiatanController extends Controller
     {
         return view('admin.kegiatan.create');
     }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -38,8 +37,11 @@ class KegiatanController extends Controller
             'description' => 'nullable',
             'content' => 'nullable',
             'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'video_url' => 'nullable|url',
+            'video_file' => 'nullable|file|mimes:mp4,mov,avi,mkv,webm|max:51200', // 50MB
             'show_thumbnail_in_list' => 'boolean',
-            'photo_position' => 'required|in:top,bottom,none',
+            'photo_position' => 'required|in:top,middle,bottom,none',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             // 'event_date' => 'nullable|date', // Removed
             // 'location' => 'nullable|max:255', // Removed
             'status' => 'required|in:draft,published',
@@ -64,9 +66,21 @@ class KegiatanController extends Controller
             }
         }
         $validated['photos'] = $photoPaths;
-        $validated['thumbnail'] = $photoPaths[0] ?? null;
-        
         $validated['show_thumbnail_in_list'] = $request->has('show_thumbnail_in_list');
+
+        // Handle Video File Upload
+        if ($request->hasFile('video_file')) {
+            $videoName = time() . '_video_' . Str::slug($validated['title']) . '.' . $request->file('video_file')->getClientOriginalExtension();
+            $videoPath = $request->file('video_file')->storeAs('kegiatan/videos', $videoName, 'public');
+            $validated['video_url'] = 'storage/' . $videoPath;
+        }
+
+        // Handle Thumbnail Upload separately if provided
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailName = time() . '_thumb_' . Str::slug($validated['title']) . '.' . $request->file('thumbnail')->getClientOriginalExtension();
+            $thumbnailPath = $request->file('thumbnail')->storeAs('kegiatan/thumbnails', $thumbnailName, 'public');
+            $validated['thumbnail'] = 'storage/' . $thumbnailPath;
+        }
 
         Kegiatan::create($validated);
 
@@ -86,8 +100,11 @@ class KegiatanController extends Controller
             'description' => 'nullable',
             'content' => 'nullable',
             'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'video_url' => 'nullable|url',
+            'video_file' => 'nullable|file|mimes:mp4,mov,avi,mkv,webm|max:51200', // 50MB
             'show_thumbnail_in_list' => 'boolean',
-            'photo_position' => 'required|in:top,bottom,none',
+            'photo_position' => 'required|in:top,middle,bottom,none',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             // 'event_date' => 'nullable|date', // Removed
             // 'location' => 'nullable|max:255', // Removed
             'status' => 'required|in:draft,published',
@@ -115,11 +132,29 @@ class KegiatanController extends Controller
         }
         $validated['photos'] = $existingPhotos;
         
-        if (!empty($existingPhotos)) {
-            $validated['thumbnail'] = $existingPhotos[0];
-        }
-        
         $validated['show_thumbnail_in_list'] = $request->has('show_thumbnail_in_list');
+
+        // Handle Video File Update
+        if ($request->hasFile('video_file')) {
+            // Delete old video file if it exists and is a local file
+            if ($kegiatan->video_url && !Str::startsWith($kegiatan->video_url, 'http') && file_exists(public_path($kegiatan->video_url))) {
+                @unlink(public_path($kegiatan->video_url));
+            }
+            $videoName = time() . '_video_' . Str::slug($validated['title']) . '.' . $request->file('video_file')->getClientOriginalExtension();
+            $videoPath = $request->file('video_file')->storeAs('kegiatan/videos', $videoName, 'public');
+            $validated['video_url'] = 'storage/' . $videoPath;
+        }
+
+        // Handle Thumbnail Update
+        if ($request->hasFile('thumbnail')) {
+            // Delete old thumbnail if it's not part of photos array
+            if ($kegiatan->thumbnail && !in_array($kegiatan->thumbnail, $kegiatan->photos ?? []) && file_exists(public_path($kegiatan->thumbnail))) {
+                 @unlink(public_path($kegiatan->thumbnail));
+            }
+            $thumbnailName = time() . '_thumb_' . Str::slug($validated['title']) . '.' . $request->file('thumbnail')->getClientOriginalExtension();
+            $thumbnailPath = $request->file('thumbnail')->storeAs('kegiatan/thumbnails', $thumbnailName, 'public');
+            $validated['thumbnail'] = 'storage/' . $thumbnailPath;
+        }
 
         $kegiatan->update($validated);
 
@@ -136,6 +171,11 @@ class KegiatanController extends Controller
                     unlink(public_path($photo));
                 }
             }
+        }
+
+        // Hapus video jika local file
+        if ($kegiatan->video_url && !Str::startsWith($kegiatan->video_url, 'http') && file_exists(public_path($kegiatan->video_url))) {
+            unlink(public_path($kegiatan->video_url));
         }
 
         $kegiatan->delete();

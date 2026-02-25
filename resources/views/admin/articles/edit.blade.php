@@ -157,6 +157,16 @@
                         </div>
                     </div>
 
+                    <!-- Media Position -->
+                    <div id="position-section" class="mb-5">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Posisi Media (Detail)</label>
+                        <select name="media_position" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-all">
+                            <option value="top" {{ old('media_position', $article->media_position ?? 'top') == 'top' ? 'selected' : '' }}>Atas (Setelah Judul)</option>
+                            <option value="middle" {{ old('media_position', $article->media_position) == 'middle' ? 'selected' : '' }}>Tengah (Setelah Deskripsi)</option>
+                            <option value="bottom" {{ old('media_position', $article->media_position) == 'bottom' ? 'selected' : '' }}>Bawah (Setelah Konten)</option>
+                        </select>
+                    </div>
+
                     <!-- Photos Section -->
                     <div id="photos-section">
                         <div class="space-y-4">
@@ -305,22 +315,20 @@
         const mediaType = document.querySelector('input[name="media_type"]:checked').value;
         const photosSection = document.getElementById('photos-section');
         const videoSection = document.getElementById('video-section');
-        // Find thumbnail card using a refined selector to avoid selecting other cards
-        const thumbnailInput = document.getElementById('thumbnail');
-        const thumbnailCard = thumbnailInput ? thumbnailInput.closest('.bg-white') : null;
+        const positionSection = document.getElementById('position-section');
 
         if (mediaType === 'image') {
             photosSection.style.display = 'block';
             videoSection.style.display = 'none';
-            if(thumbnailCard) thumbnailCard.style.display = 'block';
+            if(positionSection) positionSection.style.display = 'block';
         } else if (mediaType === 'video') {
             photosSection.style.display = 'none';
             videoSection.style.display = 'block';
-            if(thumbnailCard) thumbnailCard.style.display = 'block';
+            if(positionSection) positionSection.style.display = 'block';
         } else {
             photosSection.style.display = 'none';
             videoSection.style.display = 'none';
-            if(thumbnailCard) thumbnailCard.style.display = 'none';
+            if(positionSection) positionSection.style.display = 'none';
         }
     }
 

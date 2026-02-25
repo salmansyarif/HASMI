@@ -251,11 +251,11 @@
         <div class="max-w-5xl mx-auto">
             <article class="bg-blue-700/60 backdrop-blur-xl rounded-[3rem] shadow-[0_0_80px_rgba(59,130,246,0.4)] overflow-hidden border-2 border-blue-400/50 animate-fade-in-up">
                 
-                @if($kegiatan->photo_position == 'top' && $kegiatan->thumbnail)
-                <div class="hero-image w-full h-[500px] overflow-hidden relative">
-                    <img src="{{ asset($kegiatan->thumbnail) }}" alt="{{ $kegiatan->title }}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-blue-800 via-blue-700/50 to-transparent"></div>
-                </div>
+                {{-- MEDIA POSITION: TOP (Hero Style) --}}
+                @if(($kegiatan->photo_position ?? 'top') == 'top')
+                    <div class="media-container w-full overflow-hidden">
+                        @include('kegiatan._media_block', ['kegiatan' => $kegiatan, 'isHero' => true])
+                    </div>
                 @endif
 
                 <div class="p-8 md:p-16">
@@ -279,16 +279,31 @@
                     </h1>
 
                     <div class="mb-12 border-l-4 border-blue-400 pl-8 bg-gradient-to-r from-blue-500/20 to-transparent py-6 rounded-r-2xl animate-fade-in-up">
-                        <p class="text-xl text-blue-50 font-light leading-relaxed italic">{{ $kegiatan->description }}</p>
+                        <p class="text-xl text-blue-50 font-light leading-relaxed italic whitespace-pre-wrap">{{ $kegiatan->description }}</p>
                     </div>
+
+                    {{-- MEDIA POSITION: MIDDLE --}}
+                    @if(($kegiatan->photo_position ?? 'top') == 'middle')
+                        <div class="media-container mb-12">
+                            @include('kegiatan._media_block', ['kegiatan' => $kegiatan])
+                        </div>
+                    @endif
 
                     @if($kegiatan->content)
                     <div class="prose-custom text-base md:text-lg mb-16 text-justify animate-fade-in-up">
-                        <div class="whitespace-pre-wrap">{{ $kegiatan->content }}</div>
+                        <div class="whitespace-pre-wrap">{!! nl2br(e($kegiatan->content)) !!}</div>
                     </div>
                     @endif
 
-                    @if($kegiatan->photo_position == 'bottom' && $kegiatan->photos && count($kegiatan->photos) > 0)
+                    {{-- MEDIA POSITION: BOTTOM --}}
+                    @if(($kegiatan->photo_position ?? 'top') == 'bottom')
+                        <div class="media-container mb-12">
+                            @include('kegiatan._media_block', ['kegiatan' => $kegiatan])
+                        </div>
+                    @endif
+
+                    {{-- GALLERY (Always at bottom if photos exist) --}}
+                    @if($kegiatan->photos && count($kegiatan->photos) > 0)
                     <div class="mt-20 pt-16 border-t-2 border-blue-400/30">
                         <h3 class="text-3xl font-black text-white mb-8 flex items-center gap-4 animate-slide-in-left">
                             <i class="fas fa-images text-blue-300 animate-float"></i>

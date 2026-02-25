@@ -379,51 +379,17 @@
                             @endif
                         </div>
 
+                        <!-- Media Top Position -->
+                        @include('partials.media_block', ['model' => $program, 'position' => 'top'])
+
                         <!-- Title -->
                         <h1
                             class="title-glow text-3xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-tight tracking-tight animate-fade-in-up break-words py-2">
                             {{ $program->title }}
                         </h1>
 
-                        <!-- Media (Image/Video) -->
-                        @if (($program->media_type == 'video' && $program->video_url) || $program->thumbnail || ($program->photos && count($program->photos) > 0))
-                        <div class="media-container mb-10 shadow-2xl animate-scale-in overflow-hidden">
-                            {{-- Case: Video Present --}}
-                            @if ($program->media_type == 'video' && $program->video_url)
-                                <div class="aspect-video w-full relative overflow-hidden rounded-xl {{ $program->thumbnail ? 'mb-6' : '' }}">
-                                    @if (Str::contains($program->video_url, 'youtube.com') || Str::contains($program->video_url, 'youtu.be'))
-                                        <x-lite-youtube :videoId="$program->video_url" :title="$program->title" />
-                                    @else
-                                        <video controls class="w-full h-full object-cover rounded-xl">
-                                            <source src="{{ asset('storage/' . $program->video_url) }}" type="video/mp4">
-                                            Browser anda tidak mendukung tag video.
-                                        </video>
-                                    @endif
-                                </div>
-                            @endif
-
-                            {{-- Case: Thumbnail Present --}}
-                            @if ($program->thumbnail)
-                                <div class="relative rounded-xl overflow-hidden">
-                                    <img src="{{ asset('storage/' . $program->thumbnail) }}" alt="{{ $program->title }}"
-                                        class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700">
-                                </div>
-                            @endif
-
-                            {{-- Case: Gallery Main (Only if NO Thumbnail AND NO Video) --}}
-                            @if (!$program->thumbnail && !($program->media_type == 'video' && $program->video_url) && $program->photos && count($program->photos) > 0)
-                                <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                                    @foreach ($program->photos as $index => $photo)
-                                        <div class="relative overflow-hidden aspect-square">
-                                            <img src="{{ asset('storage/' . $photo) }}" alt="Gallery {{ $index + 1 }}"
-                                                class="w-full h-full object-cover rounded-xl hover:scale-110 transition-transform duration-500 cursor-pointer"
-                                                onclick="window.open('{{ asset('storage/' . $photo) }}', '_blank')">
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @endif
-                        </div>
-                        @endif
+                        <!-- Media Middle Position -->
+                        @include('partials.media_block', ['model' => $program, 'position' => 'middle'])
 
                         <!-- Description/Excerpt -->
                         <div class="mb-10 pb-8 border-b-2 border-blue-400/40 animate-fade-in-up">
@@ -436,7 +402,11 @@
 
                         <!-- Full Content -->
                         <div class="prose prose-base md:prose-lg max-w-none mb-10 whitespace-pre-wrap text-justify animate-fade-in-up">
-                            {!! nl2br(e($program->content)) !!}</div>
+                            {!! nl2br(e($program->content)) !!}
+                        </div>
+
+                        <!-- Media Bottom Position -->
+                        @include('partials.media_block', ['model' => $program, 'position' => 'bottom'])
 
                         <!-- Photo Gallery (if exists AND not shown at top) -->
                         @if ($program->photos && count($program->photos) > 0 && ($program->thumbnail || ($program->media_type == 'video' && $program->video_url)))

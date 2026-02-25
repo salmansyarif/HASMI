@@ -15,6 +15,9 @@ class BeritaTerkini extends Model
         'thumbnail',
         'video_url',
         'photos',
+        'photo_position',
+        'show_thumbnail_in_list',
+        'show_thumbnail_in_detail',
         'is_active',
         'views'
     ];
@@ -22,6 +25,8 @@ class BeritaTerkini extends Model
     protected $casts = [
         'photos' => 'array',
         'is_active' => 'boolean',
+        'show_thumbnail_in_list' => 'boolean',
+        'show_thumbnail_in_detail' => 'boolean',
         'views' => 'integer'
     ];
 

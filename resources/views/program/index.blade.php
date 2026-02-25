@@ -124,6 +124,7 @@
                          data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
                     
                     {{-- Thumbnail with Glow --}}
+                    @if($program->show_thumbnail_in_list)
                     <div class="h-80 relative overflow-hidden m-4 rounded-[2rem]">
                         @if($program->thumbnail)
                             <img src="{{ asset('storage/' . $program->thumbnail) }}" 
@@ -150,6 +151,7 @@
                             </span>
                         </div>
                     </div>
+                    @endif
 
                     {{-- Card Content --}}
                     <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">

@@ -191,14 +191,18 @@
                 
                 <!-- Status & Action Card -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sticky top-6">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Status Publikasi</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2 flex items-center gap-2">
+                        <i class="fas fa-bullhorn text-blue-500"></i> Publikasi
+                    </h3>
                     
-                    <div class="mb-4">
-                        <label class="flex items-center cursor-pointer">
-                            <input type="checkbox" name="is_active" value="1" class="sr-only peer" {{ old('is_active', $program->is_active) ? 'checked' : '' }}>
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                            <span class="ml-3 text-sm font-medium text-gray-900 peer-checked:text-blue-600">Program Aktif</span>
-                        </label>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium text-gray-700">Status Aktif</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="is_active" value="1" class="sr-only peer" {{ old('is_active', $program->is_active) ? 'checked' : '' }}>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
                     </div>
 
                     <div class="flex flex-col gap-3">
@@ -213,43 +217,66 @@
 
                 <!-- Media Settings Card -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Pengaturan Media</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2 flex items-center gap-2">
+                        <i class="fas fa-cog text-blue-500"></i> Pengaturan Media
+                    </h3>
                     
                     <!-- Media Type -->
                     <div class="mb-5">
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Tipe Media</label>
-                        <div class="flex flex-col gap-2">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Tipe Media Konten</label>
+                        <div class="grid grid-cols-1 gap-2">
                             @php
                                 $isNoMedia = $program->media_type == 'image' && !$program->thumbnail && !$program->hasPhotos();
                             @endphp
-                            <label class="inline-flex items-center">
+                            <label class="flex items-center p-2 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
                                 <input type="radio" name="media_type" value="image" {{ old('media_type', $program->media_type) == 'image' && !$isNoMedia ? 'checked' : '' }} 
                                        class="form-radio text-blue-600" onchange="toggleMediaType()">
-                                <span class="ml-2">Gambar (Galeri)</span>
+                                <span class="ml-2 text-sm">Gambar (Galeri)</span>
                             </label>
-                            <label class="inline-flex items-center">
+                            <label class="flex items-center p-2 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
                                 <input type="radio" name="media_type" value="video" {{ old('media_type', $program->media_type) == 'video' ? 'checked' : '' }} 
                                        class="form-radio text-blue-600" onchange="toggleMediaType()">
-                                <span class="ml-2">Video</span>
+                                <span class="ml-2 text-sm">Video</span>
                             </label>
-                            <label class="inline-flex items-center">
-                                <input type="radio" name="media_type" value="none" {{ old('media_type') == 'none' || $isNoMedia ? 'checked' : '' }} 
+                            <label class="flex items-center p-2 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
+                                <input type="radio" name="media_type" value="none" {{ old('media_type', $program->media_type) == 'none' || $isNoMedia ? 'checked' : '' }} 
                                        class="form-radio text-blue-600" onchange="toggleMediaType()">
-                                <span class="ml-2">Tanpa Media</span>
+                                <span class="ml-2 text-sm">Tanpa Media</span>
                             </label>
                         </div>
                     </div>
 
-                    <!-- Media Position -->
-                    <div>
-                        <label for="media_position" class="block text-sm font-semibold text-gray-700 mb-2">Posisi Media</label>
-                        <select id="media_position" name="media_position" required
-                                class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all py-3 px-4 text-lg bg-gray-50 focus:bg-white">
-                            <option value="top" {{ old('media_position', $program->media_position) == 'top' ? 'selected' : '' }}>Atas (Top)</option>
-                            <option value="left" {{ old('media_position', $program->media_position) == 'left' ? 'selected' : '' }}>Kiri (Left)</option>
-                            <option value="right" {{ old('media_position', $program->media_position) == 'right' ? 'selected' : '' }}>Kanan (Right)</option>
-                            <option value="bottom" {{ old('media_position', $program->media_position) == 'bottom' ? 'selected' : '' }}>Bawah (Bottom)</option>
-                        </select>
+                    <div class="space-y-4">
+                        <!-- Legacy Media Position (Required by Controller) - Keep current value -->
+                        <div class="hidden">
+                            <input type="hidden" name="media_position" value="{{ $program->media_position }}">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Posisi Media di Show</label>
+                            <select name="photo_position" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
+                                <option value="top" {{ old('photo_position', $program->photo_position) == 'top' ? 'selected' : '' }}>Atas (Hero)</option>
+                                <option value="middle" {{ old('photo_position', $program->photo_position) == 'middle' ? 'selected' : '' }}>Tengah (Setelah Judul)</option>
+                                <option value="bottom" {{ old('photo_position', $program->photo_position) == 'bottom' ? 'selected' : '' }}>Bawah (Setelah Konten)</option>
+                                <option value="none" {{ old('photo_position', $program->photo_position) == 'none' ? 'selected' : '' }}>Tidak Ditampilkan</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium text-gray-700">Tampil di List</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="show_thumbnail_in_list" value="1" class="sr-only peer" {{ old('show_thumbnail_in_list', $program->show_thumbnail_in_list) ? 'checked' : '' }}>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium text-gray-700">Tampil di Detail (Show)</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="show_thumbnail_in_detail" value="1" class="sr-only peer" {{ old('show_thumbnail_in_detail', $program->show_thumbnail_in_detail) ? 'checked' : '' }}>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
                     </div>
                 </div>
 

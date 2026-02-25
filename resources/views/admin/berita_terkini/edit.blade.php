@@ -111,20 +111,58 @@
                 
                 <!-- Status & Action Card -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sticky top-6">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Status Publikasi</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2 flex items-center gap-2">
+                        <i class="fas fa-bullhorn text-blue-500"></i> Publikasi
+                    </h3>
                     
-                    <div class="flex items-center justify-between mb-6 p-3 bg-gray-50 rounded-lg">
-                        <span class="text-sm font-medium text-gray-700">Status</span>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" name="is_active" value="1" class="sr-only peer" {{ old('is_active', $beritaTerkini->is_active) ? 'checked' : '' }}>
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                            <span class="ml-3 text-sm font-medium text-gray-900 peer-checked:text-blue-600">Aktif</span>
-                        </label>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium text-gray-700">Status Aktif</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="is_active" value="1" class="sr-only peer" {{ old('is_active', $beritaTerkini->is_active) ? 'checked' : '' }}>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
                     </div>
 
                     <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 hover:shadow-lg transition-all flex items-center justify-center gap-2">
                         <i class="fas fa-save"></i> Simpan Perubahan
                     </button>
+                </div>
+
+                <!-- NEW: Media Settings Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2 flex items-center gap-2">
+                        <i class="fas fa-cog text-blue-500"></i> Pengaturan Media
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Posisi Media di Show</label>
+                            <select name="photo_position" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
+                                <option value="top" {{ old('photo_position', $beritaTerkini->photo_position) == 'top' ? 'selected' : '' }}>Atas (Hero)</option>
+                                <option value="middle" {{ old('photo_position', $beritaTerkini->photo_position) == 'middle' ? 'selected' : '' }}>Tengah (Setelah Judul)</option>
+                                <option value="bottom" {{ old('photo_position', $beritaTerkini->photo_position) == 'bottom' ? 'selected' : '' }}>Bawah (Setelah Konten)</option>
+                                <option value="none" {{ old('photo_position', $beritaTerkini->photo_position) == 'none' ? 'selected' : '' }}>Tidak Ditampilkan</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium text-gray-700">Tampil di List</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="show_thumbnail_in_list" value="1" class="sr-only peer" {{ old('show_thumbnail_in_list', $beritaTerkini->show_thumbnail_in_list) ? 'checked' : '' }}>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <span class="text-sm font-medium text-gray-700">Tampil di Detai (Show)</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="show_thumbnail_in_detail" value="1" class="sr-only peer" {{ old('show_thumbnail_in_detail', $beritaTerkini->show_thumbnail_in_detail) ? 'checked' : '' }}>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Media Thumbnail Card -->

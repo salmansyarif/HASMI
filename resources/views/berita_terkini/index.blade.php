@@ -28,22 +28,18 @@
         }
     }
 
-    /* Card: mobile hanya border transition */
+    /* Card Enhancements: Same as Program */
     .news-card {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         border: 1px solid rgba(59, 130, 246, 0.4);
         background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-        transition: border-color 0.25s ease;
     }
 
-    /* Hover hanya desktop */
+    /* Hover Desktop */
     @media (hover: hover) and (pointer: fine) {
-        .news-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
-        }
         .news-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.6);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.7);
             border-color: rgba(96, 165, 250, 0.7);
         }
     }
@@ -105,38 +101,50 @@
             </div>
 
             @if($todayNews->count() > 0)
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
                     @foreach($todayNews as $index => $news)
-                    <article class="news-card group rounded-3xl overflow-hidden flex flex-col h-full"
+                    <article class="news-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
                              data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                         
-                        <div class="h-60 relative overflow-hidden">
+                        @if($news->show_thumbnail_in_list)
+                        <div class="h-80 relative overflow-hidden m-4 rounded-[2rem]">
                             <img src="{{ $news->getThumbnailUrl() }}" 
-                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                  alt="{{ $news->title }}" loading="lazy">
-                            <div class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full badge-new animate-pulse border-2 border-blue-300/40">
-                                NEW
+                            <div class="absolute top-4 right-4 bg-blue-500 text-white text-[10px] font-extrabold shadow-lg px-3 py-1 rounded-full badge-new animate-pulse border-2 border-blue-300/40 uppercase tracking-widest">
+                                Berita Baru
+                            </div>
+                            
+                            {{-- Overlay Info --}}
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-6">
+                                <p class="text-white text-xs leading-relaxed italic">
+                                    "Klik untuk membaca kabar selengkapnya."
+                                </p>
                             </div>
                         </div>
+                        @endif
 
-                        <div class="p-6 flex flex-col flex-grow">
-                            <div class="flex items-center gap-2 mb-3 text-xs text-blue-100">
-                                <i class="far fa-calendar-alt"></i>
-                                <span>{{ $news->created_at->format('d M Y') }}</span>
+                        <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="p-1 px-3 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center gap-2">
+                                    <i class="far fa-calendar-alt text-blue-200 text-xs"></i>
+                                    <span class="text-blue-100 text-[10px] font-bold uppercase tracking-wider">{{ $news->created_at->format('d M Y') }}</span>
+                                </div>
                             </div>
 
-                            <h3 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-100 transition-colors">
+                            <h3 class="text-2xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-100 transition-colors leading-tight">
                                 {{ $news->title }}
                             </h3>
                             
-                            <p class="text-blue-100 text-sm leading-relaxed mb-6 line-clamp-3 font-light">
-                                {{ Str::limit(strip_tags($news->content), 100) }}
+                            <p class="text-blue-100 text-sm leading-relaxed mb-8 line-clamp-3 font-medium opacity-90 text-justify">
+                                {{ Str::limit(strip_tags($news->content), 150) }}
                             </p>
                             
                             <div class="mt-auto">
                                 <a href="{{ route('berita-terkini.show', $news->slug) }}" 
-                                   class="inline-flex items-center text-blue-200 font-semibold hover:text-blue-100 transition-colors">
-                                    Baca Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                                   class="w-full py-4 bg-blue-500 group-hover:bg-blue-400 text-white rounded-2xl font-bold flex items-center justify-center gap-3 transition-all transform active:scale-95 shadow-xl shadow-blue-800/50 border-2 border-blue-400/40">
+                                    <span>Baca Selengkapnya</span>
+                                    <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
                                 </a>
                             </div>
                         </div>
@@ -158,31 +166,36 @@
             </div>
 
             @if($olderNews->count() > 0)
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
                     @foreach($olderNews as $index => $news)
-                    <article class="news-card group rounded-2xl overflow-hidden flex flex-col h-full"
+                    <article class="news-card group rounded-[2.5rem] overflow-hidden flex flex-col h-full"
                              data-aos="fade-up" data-aos-delay="{{ $index * 50 }}">
                         
-                        <div class="h-48 relative overflow-hidden">
+                        @if($news->show_thumbnail_in_list)
+                        <div class="h-80 relative overflow-hidden m-4 rounded-[2rem]">
                             <img src="{{ $news->getThumbnailUrl() }}" 
-                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                  alt="{{ $news->title }}" loading="lazy">
                         </div>
+                        @endif
 
-                        <div class="p-5 flex flex-col flex-grow">
-                            <div class="flex items-center gap-2 mb-2 text-xs text-blue-100">
-                                <i class="far fa-calendar-alt"></i>
-                                <span>{{ $news->created_at->format('d M Y') }}</span>
+                        <div class="px-8 pb-8 pt-4 flex flex-col flex-grow">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="p-1 px-3 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center gap-2">
+                                    <i class="far fa-calendar-alt text-blue-200 text-xs"></i>
+                                    <span class="text-blue-100 text-[10px] font-bold uppercase tracking-wider">{{ $news->created_at->format('d M Y') }}</span>
+                                </div>
                             </div>
 
-                            <h3 class="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-blue-100 transition-colors">
+                            <h3 class="text-xl font-bold text-white mb-4 line-clamp-2 group-hover:text-blue-100 transition-colors leading-tight">
                                 {{ $news->title }}
                             </h3>
                             
-                            <div class="mt-auto pt-4">
+                            <div class="mt-auto pt-6">
                                 <a href="{{ route('berita-terkini.show', $news->slug) }}" 
-                                   class="text-sm text-blue-200 font-semibold hover:text-white transition-colors">
-                                    Lihat Detail &rarr;
+                                   class="w-full py-3 bg-blue-500/40 hover:bg-blue-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all border border-blue-400/30">
+                                    <span>Detail Berita</span>
+                                    <i class="fas fa-chevron-right text-xs"></i>
                                 </a>
                             </div>
                         </div>

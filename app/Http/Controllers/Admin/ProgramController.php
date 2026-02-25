@@ -85,6 +85,9 @@ class ProgramController extends Controller
             'video_file' => 'nullable|file|mimes:mp4,mov,avi,wmv,webm|max:102400',
             'video_url' => 'nullable|url',
             'media_position' => 'required|in:top,left,right,bottom',
+            'photo_position' => 'required|in:top,middle,bottom,none',
+            'show_thumbnail_in_list' => 'nullable|boolean',
+            'show_thumbnail_in_detail' => 'nullable|boolean',
             'is_active' => 'nullable|boolean',
         ]);
 
@@ -100,6 +103,8 @@ class ProgramController extends Controller
         // Auto set position to 0 (will be handled by model boot)
         $validated['position'] = 0;
         $validated['is_active'] = $request->has('is_active') ? true : false;
+        $validated['show_thumbnail_in_list'] = $request->has('show_thumbnail_in_list') ? true : false;
+        $validated['show_thumbnail_in_detail'] = $request->has('show_thumbnail_in_detail') ? true : false;
 
         // Handle No Media (Only clear internal media, preserve thumbnail)
         if ($validated['media_type'] === 'none') {
@@ -185,6 +190,9 @@ class ProgramController extends Controller
             'video_file' => 'nullable|file|mimes:mp4,mov,avi,wmv,webm|max:102400',
             'video_url' => 'nullable|url',
             'media_position' => 'required|in:top,left,right,bottom',
+            'photo_position' => 'required|in:top,middle,bottom,none',
+            'show_thumbnail_in_list' => 'nullable|boolean',
+            'show_thumbnail_in_detail' => 'nullable|boolean',
             'is_active' => 'nullable|boolean',
         ]);
 
@@ -204,6 +212,8 @@ class ProgramController extends Controller
         }
 
         $validated['is_active'] = $request->has('is_active') ? true : false;
+        $validated['show_thumbnail_in_list'] = $request->has('show_thumbnail_in_list') ? true : false;
+        $validated['show_thumbnail_in_detail'] = $request->has('show_thumbnail_in_detail') ? true : false;
 
         // Handle No Media (Only clear internal media)
         if ($validated['media_type'] === 'none') {

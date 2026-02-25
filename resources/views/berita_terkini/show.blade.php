@@ -54,7 +54,15 @@
                         class="inline-block px-4 py-2 bg-blue-500/50 rounded-full text-blue-50 text-xs md:text-sm font-semibold mb-4 border border-blue-300/50">
                         {{ $berita->created_at->format('l, d F Y') }}
                     </div>
+
+                    <!-- Media Top Position -->
+                    @include('partials.media_block', ['model' => $berita, 'position' => 'top'])
+
                     <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 break-words py-2">{{ $berita->title }}</h1>
+
+                    <!-- Media Middle Position -->
+                    @include('partials.media_block', ['model' => $berita, 'position' => 'middle'])
+
                     <div class="flex justify-center items-center gap-6 text-sm text-blue-100">
                         <div class="flex items-center gap-2">
                             <i class="far fa-eye"></i>
@@ -63,31 +71,14 @@
                     </div>
                 </div>
 
-                {{-- Main Media (Video or Thumbnail) --}}
-                <div class="mb-12 rounded-3xl overflow-hidden shadow-2xl border border-blue-400/30 bg-blue-600/30"
-                    data-aos="zoom-in">
-                    @if ($berita->video_url)
-                        <div class="aspect-video w-full relative">
-                            @if (Str::contains($berita->video_url, 'youtube.com') || Str::contains($berita->video_url, 'youtu.be'))
-                                <x-lite-youtube :videoId="$berita->video_url" :title="$berita->title" />
-                            @else
-                                <video controls class="w-full h-full object-cover">
-                                    <source src="{{ asset('storage/' . $berita->video_url) }}" type="video/mp4">
-                                    Browser anda tidak mendukung tag video.
-                                </video>
-                            @endif
-                        </div>
-                    @elseif($berita->thumbnail)
-                        <img src="{{ $berita->getThumbnailUrl() }}" alt="{{ $berita->title }}"
-                            class="w-full h-auto object-cover">
-                    @endif
-                </div>
-
                 {{-- Content --}}
                 <article class="prose prose-base md:prose-lg max-w-none mb-16 bg-blue-700/30 p-8 rounded-3xl border border-blue-500/30 text-justify"
                     data-aos="fade-up">
                     {!! nl2br(e($berita->content)) !!}
                 </article>
+
+                <!-- Media Bottom Position -->
+                @include('partials.media_block', ['model' => $berita, 'position' => 'bottom'])
 
                 {{-- Photo Gallery --}}
                 @if ($berita->hasPhotos())

@@ -203,12 +203,12 @@
 
                     <div
                         class="absolute right-0 mt-3 w-56 bg-white/95 backdrop-blur-xl rounded-3xl shadow-[0_20px_50px_rgba(59,130,246,0.15)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 border border-blue-100/30 p-2 transform origin-top-right">
-                        @if (Auth::user()->is_admin)
+                        {{-- @if (Auth::user()->is_admin) --}}
                             <a href="{{ route('admin.dashboard') }}"
                                 class="flex items-center gap-3 px-4 py-3 rounded-xl text-blue-700 hover:bg-blue-100 hover:text-blue-600 font-semibold text-sm">
                                 <i class="fas fa-tachometer-alt"></i> Dashboard
                             </a>
-                        @endif
+                        {{-- @endif --}}
                         <a href="{{ route('profile.edit') }}"
                             class="flex items-center gap-3 px-4 py-3 rounded-xl text-blue-700 hover:bg-blue-100 hover:text-blue-600 font-semibold text-sm">
                             <i class="fas fa-user-cog"></i> Edit Profil
