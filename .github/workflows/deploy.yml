@@ -15,7 +15,7 @@ jobs:
           username: hasmiofficial
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/htdocs/hasmiofficial.com
+            cd /home/hasmiofficial/htdocs/www.hasmiofficial.com
 
             php artisan down || true
 
