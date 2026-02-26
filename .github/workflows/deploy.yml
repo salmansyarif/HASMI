@@ -1,0 +1,34 @@
+name: Auto Deploy Hostspot www.hasmiofficial.com
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deployment via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: hasmiofficial
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/htdocs/hasmiofficial.com
+
+            php artisan down || true
+
+            git pull origin main
+
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            php artisan migrate --force
+            php artisan optimize:clear
+            php artisan optimize
+
+            npm ci
+            npm run build
+
+            sudo systemctl reload php8.4-fpm
+
+            php artisan up
