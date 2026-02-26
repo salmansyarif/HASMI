@@ -75,8 +75,11 @@
                     @endif
 
                     <!-- Article Content (Larger Text) -->
+                    @php
+                        $isLong = strlen(strip_tags($berita->content)) > 1500;
+                    @endphp
                     <article
-                        class="prose prose-xl prose-invert prose-headings:font-black prose-headings:text-white prose-p:text-blue-50 prose-a:text-blue-300 prose-a:no-underline hover:prose-a:underline prose-img:rounded-3xl max-w-none leading-loose bg-blue-700/60 backdrop-blur-xl p-12 rounded-[2.5rem] border-2 border-blue-400/40 shadow-[0_0_60px_rgba(59,130,246,0.4)]">
+                        class="prose prose-xl prose-invert prose-headings:font-black prose-headings:text-white prose-p:text-blue-50 prose-a:text-blue-300 prose-a:no-underline hover:prose-a:underline prose-img:rounded-3xl max-w-none bg-blue-700/60 backdrop-blur-xl p-12 rounded-[2.5rem] border-2 border-blue-400/40 shadow-[0_0_60px_rgba(59,130,246,0.4)] prose-tight {{ $isLong ? 'prose-columns' : '' }}">
                         {!! nl2br(e($berita->content)) !!}
                     </article>
 

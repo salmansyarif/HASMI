@@ -91,27 +91,21 @@
                         </a>
                     </div>
 
-                    {{-- ===== STATS ===== --}}
-                    <div class="stats-grid grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-                        <div class="text-center min-w-[80px]">
-                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white stats-counter leading-none mb-1"
-                                data-target="{{ $materiCount }}">0</div>
-                            <div class="text-[10px] sm:text-xs lg:text-sm text-blue-200 font-semibold uppercase tracking-wide">Materi</div>
+                    {{-- ===== MERGED STATS ===== --}}
+                    <div class="flex items-center gap-6 bg-white/10 backdrop-blur-md p-6 rounded-[2rem] border border-white/20 w-fit">
+                        <div class="text-left">
+                            <div class="text-4xl lg:text-7xl font-black text-white stats-counter leading-none mb-2"
+                                data-target="{{ $totalStats }}">0</div>
+                            <div class="text-xs lg:text-base text-blue-200 font-bold uppercase tracking-[0.2em]">Total Aksi & Kontribusi Umat</div>
                         </div>
-                        <div class="text-center min-w-[80px]">
-                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white stats-counter leading-none mb-1"
-                                data-target="{{ $programCount }}">0</div>
-                            <div class="text-[10px] sm:text-xs lg:text-sm text-blue-200 font-semibold uppercase tracking-wide">Program</div>
-                        </div>
-                        <div class="text-center min-w-[80px]">
-                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white stats-counter leading-none mb-1"
-                                data-target="{{ $intisariCount }}">0</div>
-                            <div class="text-[10px] sm:text-xs lg:text-sm text-blue-200 font-semibold uppercase tracking-wide">Intisari</div>
-                        </div>
-                        <div class="text-center min-w-[80px]">
-                            <div class="text-2xl sm:text-3xl lg:text-5xl font-black text-white stats-counter leading-none mb-1"
-                                data-target="{{ $kegiatanCount }}">0</div>
-                            <div class="text-[10px] sm:text-xs lg:text-sm text-blue-200 font-semibold uppercase tracking-wide">Kegiatan</div>
+                        <div class="hidden sm:block w-[2px] h-16 bg-white/20 rounded-full"></div>
+                        <div class="hidden sm:flex flex-col gap-2">
+                            <span class="flex items-center gap-2 text-blue-100 text-[10px] font-bold uppercase tracking-wider">
+                                <i class="fas fa-check-circle text-blue-300"></i> Terverifikasi
+                            </span>
+                            <span class="flex items-center gap-2 text-blue-100 text-[10px] font-bold uppercase tracking-wider">
+                                <i class="fas fa-sync-alt text-blue-300 animate-spin-slow"></i> Real-time
+                            </span>
                         </div>
                     </div>
                 </div>

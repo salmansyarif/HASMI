@@ -167,7 +167,7 @@
                         </h3>
                         
                         <p class="text-blue-100 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
-                            {{ \Illuminate\Support\Str::limit(strip_tags($program->description), 100) }}
+                            {{ \Illuminate\Support\Str::limit(strip_tags($program->content), 120) }}
                         </p>
                         
                         <div class="mt-auto">

@@ -94,6 +94,7 @@ class HomeController extends Controller
         $programCount = Program::where('is_active', true)->count();
         $intisariCount = Intisari::where('status', 'published')->count();
         $kegiatanCount = Kegiatan::where('status', 'published')->count();
+        $totalStats = $materiCount + $programCount + $intisariCount + $kegiatanCount;
 
         return view('home', compact(
             'latestUpdates',
@@ -104,7 +105,8 @@ class HomeController extends Controller
             'materiCount',
             'programCount',
             'intisariCount',
-            'kegiatanCount'
+            'kegiatanCount',
+            'totalStats'
         ));
     }
 

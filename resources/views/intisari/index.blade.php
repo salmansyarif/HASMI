@@ -185,7 +185,7 @@
                         </h3>
                         
                         <p class="text-blue-100 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
-                            {{ $intisari->excerpt }}
+                            {{ Str::limit(strip_tags($intisari->content), 120) }}
                         </p>
                         
                         <div class="mt-auto">

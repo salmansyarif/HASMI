@@ -87,7 +87,7 @@
                             </h3>
                             
                             <p class="text-blue-100 text-lg leading-relaxed mb-8 flex-grow">
-                                {{ $berita->short_description ? Str::limit($berita->short_description, 120) : Str::limit(strip_tags($berita->content), 120) }}
+                                {{ Str::limit(strip_tags($berita->content), 120) }}
                             </p>
                             
                             <div class="pt-8 border-t border-blue-400/30 flex items-center justify-between">

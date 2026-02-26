@@ -401,7 +401,10 @@
                         </div>
 
                         <!-- Full Content -->
-                        <div class="prose prose-base md:prose-lg max-w-none mb-10 whitespace-pre-wrap text-justify animate-fade-in-up">
+                        @php
+                            $isLong = strlen(strip_tags($program->content)) > 1500;
+                        @endphp
+                        <div class="prose prose-base md:prose-lg max-w-none mb-10 whitespace-pre-wrap text-justify animate-fade-in-up prose-tight {{ $isLong ? 'prose-columns' : '' }}">
                             {!! nl2br(e($program->content)) !!}
                         </div>
 
