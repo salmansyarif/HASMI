@@ -116,7 +116,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title fw-bold mb-2">{{ $program->title }}</h5>
                                     <p class="card-text text-muted flex-grow-1">
-                                        {{ Str::limit($program->description, 120) }}
+                                        {{ Str::limit(strip_tags($program->content), 120) }}
                                     </p>
                                     
                                     <a href="{{ route('program.show', $program->slug) }}" 

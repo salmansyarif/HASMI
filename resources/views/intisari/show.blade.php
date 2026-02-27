@@ -180,7 +180,10 @@
                     </div>
                     @endif
 
-                    <div class="prose-reader whitespace-pre-wrap mb-20 text-justify text-base md:text-xl leading-relaxed" data-aos="fade-up" data-aos-delay="800">
+                    @php
+                        $isLong = strlen(strip_tags($intisari->content)) > 1500;
+                    @endphp
+                    <div class="prose-reader whitespace-pre-wrap mb-20 text-justify text-base md:text-xl leading-relaxed prose-tight {{ $isLong ? 'prose-columns' : '' }}" data-aos="fade-up" data-aos-delay="800">
                         {{ $intisari->content }}
                     </div>
 

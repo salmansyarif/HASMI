@@ -137,7 +137,7 @@
                             </h3>
                             
                             <p class="text-blue-100 text-sm leading-relaxed mb-8 line-clamp-3 font-medium opacity-90 text-justify">
-                                {{ Str::limit(strip_tags($news->content), 150) }}
+                                {{ Str::limit(strip_tags($news->content), 120) }}
                             </p>
                             
                             <div class="mt-auto">

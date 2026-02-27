@@ -360,7 +360,10 @@
                     @endif
 
                     <!-- Content -->
-                    <div class="prose prose-base md:prose-lg max-w-none mb-10 whitespace-pre-wrap text-justify animate-fade-in-up">{!! nl2br(e($article->content)) !!}</div>
+                    @php
+                        $isLong = strlen(strip_tags($article->content)) > 1500;
+                    @endphp
+                    <div class="prose prose-base md:prose-lg max-w-none mb-10 whitespace-pre-wrap text-justify animate-fade-in-up prose-tight {{ $isLong ? 'prose-columns' : '' }}">{!! nl2br(e($article->content)) !!}</div>
 
                     {{-- MEDIA POSITION: BOTTOM --}}
                     @if(($article->media_position ?? 'top') == 'bottom')

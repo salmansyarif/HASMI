@@ -140,7 +140,7 @@
                         </h3>
                         
                         <p class="text-blue-100 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
-                            {{ $article->excerpt }}
+                            {{ Str::limit(strip_tags($article->content), 120) }}
                         </p>
                         
                         <div class="mt-auto">

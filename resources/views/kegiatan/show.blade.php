@@ -290,7 +290,10 @@
                     @endif
 
                     @if($kegiatan->content)
-                    <div class="prose-custom text-base md:text-lg mb-16 text-justify animate-fade-in-up">
+                    @php
+                        $isLong = strlen(strip_tags($kegiatan->content)) > 1500;
+                    @endphp
+                    <div class="prose-custom text-base md:text-lg mb-16 text-justify animate-fade-in-up prose-tight {{ $isLong ? 'prose-columns' : '' }}">
                         <div class="whitespace-pre-wrap">{!! nl2br(e($kegiatan->content)) !!}</div>
                     </div>
                     @endif

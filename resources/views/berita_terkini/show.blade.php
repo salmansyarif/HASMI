@@ -72,7 +72,10 @@
                 </div>
 
                 {{-- Content --}}
-                <article class="prose prose-base md:prose-lg max-w-none mb-16 bg-blue-700/30 p-8 rounded-3xl border border-blue-500/30 text-justify"
+                @php
+                    $isLong = strlen(strip_tags($berita->content)) > 1500;
+                @endphp
+                <article class="prose prose-base md:prose-lg max-w-none mb-16 bg-blue-700/30 p-8 rounded-3xl border border-blue-500/30 text-justify animate-fade-in-up prose-tight {{ $isLong ? 'prose-columns' : '' }}"
                     data-aos="fade-up">
                     {!! nl2br(e($berita->content)) !!}
                 </article>
