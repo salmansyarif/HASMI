@@ -32,3 +32,5 @@ jobs:
             sudo systemctl reload php8.4-fpm
 
             php artisan up
+
+            sudo reboot
