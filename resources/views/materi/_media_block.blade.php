@@ -1,14 +1,21 @@
-@if ($article->media_type && $article->media_type != 'none' && (($article->media_type == 'video' && $article->video_url) || ($article->media_type == 'image' && $article->photos && count($article->photos) > 0)))
+@if ($article->media_type && $article->media_type != 'none' && (($article->media_type == 'video' && ($article->video_url || $article->video_file)) || ($article->media_type == 'image' && $article->photos && count($article->photos) > 0)))
 <div class="media-container mb-10 shadow-2xl animate-scale-in">
-    @if ($article->media_type == 'video' && $article->video_url)
+    @if ($article->media_type == 'video' && ($article->video_url || $article->video_file))
         <div class="aspect-video w-full relative overflow-hidden rounded-xl">
-            @if (Str::contains($article->video_url, 'youtube.com') || Str::contains($article->video_url, 'youtu.be'))
-                <x-lite-youtube :videoId="$article->video_url" :title="$article->title" />
-            @else
-                <video controls class="w-full h-full object-cover rounded-xl">
-                    <source src="{{ asset($article->video_url) }}" type="video/mp4">
+            @if ($article->video_file)
+                <video controls class="w-full h-full object-cover rounded-xl shadow-lg border-2 border-blue-400/30">
+                    <source src="{{ asset($article->video_file) }}" type="video/mp4">
                     Browser anda tidak mendukung tag video.
                 </video>
+            @elseif ($article->video_url)
+                @if (Str::contains($article->video_url, 'youtube.com') || Str::contains($article->video_url, 'youtu.be'))
+                    <x-lite-youtube :videoId="$article->video_url" :title="$article->title" />
+                @else
+                    <video controls class="w-full h-full object-cover rounded-xl shadow-lg border-2 border-blue-400/30">
+                        <source src="{{ asset($article->video_url) }}" type="video/mp4">
+                        Browser anda tidak mendukung tag video.
+                    </video>
+                @endif
             @endif
         </div>
     @elseif($article->media_type == 'image' && $article->photos && count($article->photos) > 0)

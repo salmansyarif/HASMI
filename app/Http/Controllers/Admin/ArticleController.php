@@ -60,6 +60,7 @@ class ArticleController extends Controller
             'status' => 'required|in:draft,published',
             'media_type' => 'nullable|in:image,video,none',
             'video_url' => 'nullable|url',
+            'video_file' => 'nullable|file|mimes:mp4,mov,avi,wmv|max:51200', // max 50MB
             'media_position' => 'nullable|in:top,middle,bottom',
             // 'photos.*' => 'image|mimes:jpeg,png,jpg,webp|max:2048', // Validasi foto gallery
         ]);
@@ -100,6 +101,14 @@ class ArticleController extends Controller
             if ($request->filled('video_url')) {
                 $validated['video_url'] = $request->video_url;
             }
+
+            // Handle Video File
+            if ($request->hasFile('video_file')) {
+                $file = $request->file('video_file');
+                $filename = time() . '_' . Str::slug($validated['title']) . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('articles/videos', $filename, 'public');
+                $validated['video_file'] = 'storage/' . $path;
+            }
         }
 
         $validated['user_id'] = Auth::id();
@@ -133,6 +142,7 @@ class ArticleController extends Controller
             'status' => 'required|in:draft,published',
             'media_type' => 'nullable|in:image,video,none',
             'video_url' => 'nullable|url',
+            'video_file' => 'nullable|file|mimes:mp4,mov,avi,wmv|max:51200', // max 50MB
             'media_position' => 'nullable|in:top,middle,bottom',
         ]);
 
@@ -191,6 +201,19 @@ class ArticleController extends Controller
             // Handle Video URL
             if ($request->filled('video_url')) {
                 $validated['video_url'] = $request->video_url;
+            }
+
+            // Handle Video File upload
+            if ($request->hasFile('video_file')) {
+                // Delete old video file if exists
+                if ($article->video_file && file_exists(public_path($article->video_file))) {
+                    @unlink(public_path($article->video_file));
+                }
+
+                $file = $request->file('video_file');
+                $filename = time() . '_' . Str::slug($validated['title']) . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('articles/videos', $filename, 'public');
+                $validated['video_file'] = 'storage/' . $path;
             }
         }
 

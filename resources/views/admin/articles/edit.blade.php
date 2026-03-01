@@ -207,8 +207,34 @@
                             <!-- URL -->
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-2">URL Video (YouTube, dll)</label>
-                                <input type="url" name="video_url" class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all py-3 px-4 text-lg bg-gray-50 focus:bg-white"  
+                                <input type="url" name="video_url" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-all py-2 px-3 bg-gray-50 focus:bg-white"  
                                        placeholder="https://youtube.com/..." value="{{ old('video_url', $article->video_url) }}">
+                            </div>
+
+                            <!-- Current Video File -->
+                            @if($article->video_file)
+                            <div class="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                                <label class="block text-sm font-semibold text-blue-800 mb-2">File Video Saat Ini:</label>
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-blue-600 text-white w-10 h-10 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-video"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-xs font-medium text-blue-900 truncate">{{ basename($article->video_file) }}</p>
+                                        <a href="{{ asset($article->video_file) }}" target="_blank" class="text-[10px] text-blue-600 hover:underline">Lihat Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            <!-- File Upload -->
+                            <div class="mt-4">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                    {{ $article->video_file ? 'Ganti File Video' : 'Atau Upload File Video' }}
+                                </label>
+                                <input type="file" name="video_file" accept="video/mp4,video/x-m4v,video/*"
+                                       class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all">
+                                <p class="mt-1 text-xs text-gray-400">Format: MP4, MOV, AVI. Maks 50MB.</p>
                             </div>
                         </div>
                     </div>

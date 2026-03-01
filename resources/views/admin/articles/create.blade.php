@@ -183,8 +183,16 @@
                             <!-- URL -->
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-2">URL Video (YouTube, dll)</label>
-                                <input type="url" name="video_url" class="w-full rounded-lg border-2 border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-200 transition-all py-3 px-4 text-lg bg-gray-50 focus:bg-white"  
-                                       placeholder="https://youtube.com/..."></input>
+                                <input type="url" name="video_url" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition-all py-2 px-3 bg-gray-50 focus:bg-white"  
+                                       placeholder="https://youtube.com/...">
+                            </div>
+
+                            <!-- File Upload -->
+                            <div class="mt-4">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Atau Upload File Video</label>
+                                <input type="file" name="video_file" accept="video/mp4,video/x-m4v,video/*"
+                                       class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all">
+                                <p class="mt-1 text-xs text-gray-400">Format: MP4, MOV, AVI. Maks 50MB.</p>
                             </div>
                         </div>
                     </div>

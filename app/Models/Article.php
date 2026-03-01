@@ -24,6 +24,7 @@ class Article extends Model
         'media_type', // image, video
         'photos', // json
         'video_url',
+        'video_file',
         'media_position', // top, bottom
     ];
 

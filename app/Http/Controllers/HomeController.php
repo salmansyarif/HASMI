@@ -12,11 +12,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // 1. Articles
+        // 1. Articles (Materi)
         $articles = Article::with('category')
             ->published()
             ->latest('published_at')
-            ->take(5)
+            ->take(20)
             ->get()
             ->map(function ($item) {
                 $item->type = 'Materi';
@@ -33,7 +33,7 @@ class HomeController extends Controller
             })
             ->where('is_active', true)
             ->latest('created_at')
-            ->take(5)
+            ->take(20)
             ->get()
             ->map(function ($item) {
                 $item->type = 'Program';
@@ -46,7 +46,7 @@ class HomeController extends Controller
         // 3. Intisari
         $intisari = Intisari::where('status', 'published')
             ->latest('created_at')
-            ->take(5)
+            ->take(20)
             ->get()
             ->map(function ($item) {
                 $item->type = 'Intisari';
@@ -59,7 +59,7 @@ class HomeController extends Controller
         // 4. Kegiatan
         $kegiatan = Kegiatan::where('status', 'published')
             ->latest('event_date')
-            ->take(5)
+            ->take(20)
             ->get()
             ->map(function ($item) {
                 $item->type = 'Kegiatan';
@@ -69,11 +69,42 @@ class HomeController extends Controller
                 return $item;
             });
 
+        // 5. Berita Terkini
+        $beritaTerkini = \App\Models\BeritaTerkini::active()
+            ->latest('created_at')
+            ->take(20)
+            ->get()
+            ->map(function ($item) {
+                $item->type = 'Berita';
+                $item->route_name = 'berita-terkini.show';
+                $item->route_params = [$item->slug];
+                $item->date = $item->created_at;
+                return $item;
+            });
+
+        // 6. Berita Regular
+        $berita = \App\Models\Berita::active()
+            ->latest('created_at')
+            ->take(20)
+            ->get()
+            ->map(function ($item) {
+                $item->type = 'Berita';
+                $item->route_name = 'berita.show';
+                $item->route_params = [$item->slug];
+                $item->date = $item->created_at;
+                return $item;
+            });
+
         // Merge and Sort
         $latestUpdates = $articles->concat($programs)
             ->concat($intisari)
             ->concat($kegiatan)
-            ->sortByDesc('date')
+            ->concat($beritaTerkini)
+            ->concat($berita)
+            ->sortByDesc(function($item) {
+                return $item->date instanceof \Carbon\Carbon ? $item->date->timestamp : 0;
+            })
+            ->values()
             ->take(10);
 
         // Data for Sections
