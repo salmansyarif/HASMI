@@ -5,8 +5,6 @@
 @section('page-subtitle', 'Buat artikel baru untuk website HASMI')
 
 @section('content')
-
-@section('content')
 <div class="container mx-auto">
     <div class="mb-6">
         <a href="{{ route('admin.articles.index') }}" class="text-gray-500 hover:text-gray-700 flex items-center gap-2 transition-colors">
