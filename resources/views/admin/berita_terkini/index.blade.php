@@ -60,8 +60,13 @@
                     </td>
                     <td class="px-6 py-4">
                         <div class="max-w-xs">
-                            <h4 class="font-bold text-gray-800 mb-1 line-clamp-1" title="{{ $berita->title }}">
+                            <h4 class="font-bold text-gray-800 mb-1 line-clamp-1 flex items-center gap-2" title="{{ $berita->title }}">
                                 {{ $berita->title }}
+                                @if($berita->video_url)
+                                    <span class="inline-flex items-center gap-1 text-[10px] bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full flex-shrink-0" title="Memiliki Video">
+                                        <i class="fas fa-video"></i> Video
+                                    </span>
+                                @endif
                             </h4>
                             <p class="text-xs text-gray-500 line-clamp-2">
                                 {{ $berita->excerpt }}

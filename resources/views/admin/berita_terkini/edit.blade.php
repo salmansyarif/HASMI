@@ -183,22 +183,25 @@
 
                 <!-- Video Card -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Video (Opsional)</h3>
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2 flex items-center gap-2">
+                        <i class="fas fa-video text-blue-500"></i> Video (Opsional)
+                    </h3>
                     
                     <div class="space-y-4">
                         <div class="flex bg-gray-100 rounded-lg p-1">
-                            <button type="button" onclick="toggleVideoInput('file')" id="btn-file" class="flex-1 py-1 px-3 text-sm rounded-md shadow text-blue-600 font-medium transition-all {{ $beritaTerkini->video_url && !filter_var($beritaTerkini->video_url, FILTER_VALIDATE_URL) ? 'bg-white shadow text-blue-600' : 'text-gray-500' }}">Upload</button>
+                            <button type="button" onclick="toggleVideoInput('file')" id="btn-file" class="flex-1 py-1 px-3 text-sm rounded-md shadow text-blue-600 font-medium transition-all {{ $beritaTerkini->video_url && !filter_var($beritaTerkini->video_url, FILTER_VALIDATE_URL) ? 'bg-white shadow text-blue-600' : 'text-gray-500' }}">Upload File</button>
                             <button type="button" onclick="toggleVideoInput('url')" id="btn-url" class="flex-1 py-1 px-3 text-sm rounded-md transition-all {{ $beritaTerkini->video_url && filter_var($beritaTerkini->video_url, FILTER_VALIDATE_URL) ? 'bg-white shadow text-blue-600' : 'text-gray-500' }}">URL Ext.</button>
                         </div>
 
                         <!-- Video File Input -->
                         <div id="video_file_input" class="{{ $beritaTerkini->video_url && filter_var($beritaTerkini->video_url, FILTER_VALIDATE_URL) ? 'hidden' : '' }} transition-all">
                             @if($beritaTerkini->video_url && !filter_var($beritaTerkini->video_url, FILTER_VALIDATE_URL))
-                                <div class="mb-2 p-2 bg-blue-50 rounded text-xs text-blue-700 break-all">
-                                    Current: {{ $beritaTerkini->video_url }}
+                                <div class="mb-2 p-2 bg-blue-50 rounded text-xs text-blue-700 break-all font-semibold">
+                                    <i class="fas fa-check-circle text-green-500 mr-1"></i> File video tersimpan: {{ $beritaTerkini->video_url }}
                                 </div>
                             @endif
-                            <input type="file" name="video_file" accept="video/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all">
+                            <input type="file" name="video_file" accept="video/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all" onchange="previewVideoFile(this)">
+                            <p class="mt-2 text-xs text-gray-400">Max size: 100MB. Format: MP4, WebM, MOV.</p>
                         </div>
 
                         <!-- Video URL Input -->
@@ -207,6 +210,32 @@
                                    class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" 
                                    placeholder="https://youtube.com/..."
                                    value="{{ filter_var($beritaTerkini->video_url, FILTER_VALIDATE_URL) ? $beritaTerkini->video_url : '' }}">
+                            <p class="mt-2 text-xs text-gray-400">Masukkan link YouTube atau direct URL video.</p>
+                        </div>
+
+                        <!-- Video Preview Container -->
+                        <div id="video_preview_box" class="{{ $beritaTerkini->video_url ? '' : 'hidden' }} mt-4 border border-gray-200 rounded-lg overflow-hidden bg-black aspect-video relative shadow-sm">
+                            @if($beritaTerkini->video_url)
+                                @if (filter_var($beritaTerkini->video_url, FILTER_VALIDATE_URL))
+                                    @if (Str::contains($beritaTerkini->video_url, 'youtube.com') || Str::contains($beritaTerkini->video_url, 'youtu.be'))
+                                        @php
+                                            preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $beritaTerkini->video_url, $match);
+                                            $ytId = $match[1] ?? '';
+                                        @endphp
+                                        @if($ytId)
+                                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/{{ $ytId }}" frameborder="0" allowfullscreen></iframe>
+                                        @endif
+                                    @else
+                                        <video controls class="w-full h-full object-contain">
+                                            <source src="{{ $beritaTerkini->video_url }}" type="video/mp4">
+                                        </video>
+                                    @endif
+                                @else
+                                    <video controls class="w-full h-full object-contain">
+                                        <source src="{{ asset('storage/' . $beritaTerkini->video_url) }}" type="video/mp4">
+                                    </video>
+                                @endif
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -217,6 +246,15 @@
 </div>
 
 <script data-cfasync="false">
+    function previewVideoFile(input) {
+        const previewBox = document.getElementById('video_preview_box');
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            const fileUrl = URL.createObjectURL(file);
+            previewBox.classList.remove('hidden');
+            previewBox.innerHTML = `<video controls class="w-full h-full object-contain"><source src="${fileUrl}" type="${file.type || 'video/mp4'}"></video>`;
+        }
+    }
     function toggleVideoInput(type) {
         const fileInput = document.getElementById('video_file_input');
         const urlInput = document.getElementById('video_url_input');

@@ -170,8 +170,8 @@
 
                         <!-- Video File Input -->
                         <div id="video_file_input" class="transition-all">
-                            <input type="file" name="video_file" accept="video/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all">
-                            <p class="mt-2 text-xs text-gray-400">Max size: 100MB. Format: MP4.</p>
+                            <input type="file" name="video_file" accept="video/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all" onchange="previewVideoFile(this)">
+                            <p class="mt-2 text-xs text-gray-400">Max size: 100MB. Format: MP4, WebM, MOV.</p>
                         </div>
 
                         <!-- Video URL Input -->
@@ -179,6 +179,9 @@
                             <input type="url" name="video_url" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200" placeholder="https://youtube.com/...">
                             <p class="mt-2 text-xs text-gray-400">Masukkan link YouTube atau direct URL video.</p>
                         </div>
+
+                        <!-- Video Preview Container -->
+                        <div id="video_preview_box" class="hidden mt-4 border border-gray-200 rounded-lg overflow-hidden bg-black aspect-video relative shadow-sm"></div>
                     </div>
                 </div>
 
@@ -188,6 +191,15 @@
 </div>
 
 <script data-cfasync="false">
+    function previewVideoFile(input) {
+        const previewBox = document.getElementById('video_preview_box');
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            const fileUrl = URL.createObjectURL(file);
+            previewBox.classList.remove('hidden');
+            previewBox.innerHTML = `<video controls class="w-full h-full object-contain"><source src="${fileUrl}" type="${file.type || 'video/mp4'}"></video>`;
+        }
+    }
     function toggleVideoInput(type) {
         const fileInput = document.getElementById('video_file_input');
         const urlInput = document.getElementById('video_url_input');
